@@ -48,7 +48,7 @@ class AuthRepository {
       );
       await _firebaseAuth.signInWithCredential(credential);
     } catch (e) {
-      throw Exception('Failed to sign in with Google: $e');
+      throw Exception('Failed to sign in with Google');
     }
   }
 

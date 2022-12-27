@@ -13,7 +13,6 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
-          print('LoginScreen: $state');
           if (state is Authenticated) {
             Navigator.of(context).pushNamed('/home');
           } else if (state is AuthError) {

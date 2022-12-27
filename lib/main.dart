@@ -5,6 +5,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:lit_code/app/app.dart';
 import 'package:lit_code/bootstrap.dart';
 import 'package:lit_code/business_logic/blocs/bloc/auth_bloc.dart';
+import 'package:lit_code/business_logic/cubits/cubit/on_boarding_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/theme_cubit.dart';
 import 'package:lit_code/data/repositories/auth_repository.dart';
 import 'package:lit_code/firebase_options.dart';
@@ -31,6 +32,9 @@ Future<void> main() async {
         ),
         BlocProvider<ThemeCubit>(
           create: (context) => ThemeCubit(),
+        ),
+        BlocProvider<OnBoardingCubit>(
+          create: (context) => OnBoardingCubit(),
         ),
       ],
       child: LitCodeApp(

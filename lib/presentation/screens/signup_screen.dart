@@ -13,7 +13,6 @@ class SignUpScreen extends StatelessWidget {
     return Scaffold(
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
-          print('SignUpScreen: $state');
           if (state is Authenticated) {
             Navigator.of(context).pushNamed('/home');
           } else if (state is AuthError) {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/theme_cubit.dart';
-import 'package:lit_code/data/repositories/auth_repository.dart';
 import 'package:lit_code/presentation/router/app_router.dart';
 import 'package:lit_code/theme/theme.dart';
 
