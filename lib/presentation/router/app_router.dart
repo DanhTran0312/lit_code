@@ -13,7 +13,7 @@ class AppRouter {
         );
       case '/login':
         return MaterialPageRoute(
-          builder: (_) => LoginScreen(),
+          builder: (_) => SignInScreen(),
         );
       case '/signup':
         return MaterialPageRoute(

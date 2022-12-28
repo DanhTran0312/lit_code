@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:lit_code/business_logic/cubits/cubit/on_boarding_cubit.dart';
+import 'package:lit_code/constants/constant.dart';
 import 'package:lit_code/data/models/models.dart';
 
 class OnBoardingScreen extends StatelessWidget {
@@ -29,44 +31,64 @@ class OnBoardingScreen extends StatelessWidget {
         ),
         body: BlocBuilder<OnBoardingCubit, OnBoardingState>(
           builder: (context, state) {
-            return PageView.builder(
-              controller:
-                  BlocProvider.of<OnBoardingCubit>(context).pageController,
-              itemCount: onBoardingData.length,
-              itemBuilder: (context, index) {
-                return DecoratedBox(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(onBoardingData[index].backgroundImage),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        onBoardingData[index].image,
-                        height: 250,
-                        width: 250,
-                      ),
-                      const SizedBox(height: 20),
-                      Text(
-                        onBoardingData[index].title,
-                        style: Theme.of(context).textTheme.headline5,
-                      ),
-                      const SizedBox(height: 20),
-                      Text(
-                        onBoardingData[index].description,
-                        style: Theme.of(context).textTheme.bodyText1,
-                      ),
-                    ],
-                  ),
-                );
-              },
-            );
+            return const OnBoardingPageView();
           },
         ),
       ),
+    );
+  }
+}
+
+class OnBoardingPageView extends StatelessWidget {
+  const OnBoardingPageView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return PageView.builder(
+      controller: BlocProvider.of<OnBoardingCubit>(context).pageController,
+      itemCount: onBoardingData.length,
+      physics: const NeverScrollableScrollPhysics(),
+      itemBuilder: (context, index) {
+        return Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * 0.1,
+          ),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                theme.brightness == Brightness.light
+                    ? onBoardingData[index].lightBackgroundImage
+                    : onBoardingData[index].darkbackgroundImage,
+              ),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.15,
+              ),
+              SvgPicture.asset(
+                onBoardingData[index].illustration,
+                height: 300,
+              ),
+              const SizedBox(height: sizeBoxHeightMedium),
+              Text(
+                onBoardingData[index].title,
+                style: Theme.of(context).textTheme.headline5,
+              ),
+              const SizedBox(height: sizeBoxHeightMedium),
+              Text(
+                onBoardingData[index].description,
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

@@ -6,7 +6,7 @@ part 'on_boarding_state.dart';
 part 'on_boarding_cubit.g.dart';
 part 'on_boarding_cubit.freezed.dart';
 
-class OnBoardingCubit extends Cubit<OnBoardingState> {
+class OnBoardingCubit extends Cubit<OnBoardingState> with HydratedMixin {
   OnBoardingCubit() : super(const OnBoardingState.onBoardingNotCompleted());
 
   void onBoarded() => emit(const OnBoardingState.onBoarded());
@@ -35,21 +35,21 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
         emit(const OnBoardingState.onBoarded());
       }
       _pageController.nextPage(
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.ease,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeIn,
       );
     } catch (e) {
       emit(OnBoardingState.onBoardingError(e.toString()));
     }
   }
 
-  // @override
-  // OnBoardingState? fromJson(Map<String, dynamic> json) {
-  //   return OnBoardingState.fromJson(json);
-  // }
+  @override
+  OnBoardingState? fromJson(Map<String, dynamic> json) {
+    return OnBoardingState.fromJson(json);
+  }
 
-  // @override
-  // Map<String, dynamic>? toJson(OnBoardingState state) {
-  //   return state.toJson();
-  // }
+  @override
+  Map<String, dynamic>? toJson(OnBoardingState state) {
+    return state.toJson();
+  }
 }

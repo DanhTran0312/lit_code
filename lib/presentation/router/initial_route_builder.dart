@@ -14,7 +14,7 @@ class InitialRouteBuilder extends StatelessWidget {
         if (state is Authenticated) {
           return const HomeScreen();
         } else if (state is Unauthenticated) {
-          return LoginScreen();
+          return SignInScreen();
         } else if (state is AuthError) {
           return const Scaffold(
             body: Center(

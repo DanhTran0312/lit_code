@@ -1,20 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/auth_bloc.dart';
+import 'package:lit_code/data/models/models.dart';
+import 'package:lit_code/presentation/widgets/widgets.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
 
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-
+  final _formKey = GlobalKey<FormState>();
+  final SignUp signUp = SignUp(
+    email: '',
+    password: '',
+    comfirmPassword: '',
+  );
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is Authenticated) {
             Navigator.of(context).pushNamed('/home');
+          } else if (state is Loading) {
+            const CircularProgressIndicator();
           } else if (state is AuthError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -23,54 +32,19 @@ class SignUpScreen extends StatelessWidget {
             );
           }
         },
-        child: BlocBuilder<AuthBloc, AuthState>(
-          builder: (context, state) {
-            if (state is Loading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('Sign Up Screen'),
-                  TextField(
-                    controller: _emailController,
-                    decoration: const InputDecoration(
-                      hintText: 'Email',
-                    ),
-                  ),
-                  TextField(
-                    controller: _passwordController,
-                    decoration: const InputDecoration(
-                      hintText: 'Password',
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      BlocProvider.of<AuthBloc>(context).add(
-                        SignUpRequested(
-                          email: _emailController.text,
-                          password: _passwordController.text,
-                        ),
-                      );
-                    },
-                    child: const Text('Sign Up'),
-                  ),
-                  const Divider(),
-                  const Text('Already have an account?'),
-                  const Divider(),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pushReplacementNamed('/login');
-                    },
-                    child: const Text('Login'),
-                  ),
-                ],
-              ),
-            );
-          },
+        child: SingleChildScrollView(
+          child: ImageContainer(
+            theme: theme,
+            size: size,
+            darkBackgroundImage:
+                'assets/images/dark_auth_screen_background.png',
+            lightBackgroundImage:
+                'assets/images/light_auth_screen_background.png',
+            padding: EdgeInsets.symmetric(
+              horizontal: size.width * 0.1,
+            ),
+            child: SignUpForm(formKey: _formKey, theme: theme, signUp: signUp),
+          ),
         ),
       ),
     );
