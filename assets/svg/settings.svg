@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg1602"
+   xml:space="preserve"
+   width="682.66669"
+   height="682.66669"
+   viewBox="0 0 682.66669 682.66669"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+     id="defs1606"><clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath1616"><path
+         d="M 0,512 H 512 V 0 H 0 Z"
+         id="path1614" /></clipPath></defs><g
+     id="g1608"
+     transform="matrix(1.3333333,0,0,-1.3333333,0,682.66667)"><g
+       id="g1610"><g
+         id="g1612"
+         clip-path="url(#clipPath1616)"><g
+           id="g1618"
+           transform="translate(221.3203,10)"><path
+             d="m 0,0 -16.87,67.46 c -13.38,3.86 -26.231,9.17 -38.28,15.82 l -59.59,-35.75 -49.05,49.05 35.75,59.59 c -6.66,12.05 -11.96,24.9 -15.82,38.28 l -67.46,16.87 v 69.36 l 67.46,16.87 c 3.86,13.38 9.16,26.23 15.82,38.28 l -35.75,59.59 49.05,49.05 59.59,-35.75 c 12.06,6.66 24.9,11.97 38.28,15.82 L 0,492 h 69.359 l 16.87,-67.46 c 13.38,-3.85 26.22,-9.16 38.281,-15.82 l 59.59,35.75 49.049,-49.05 -35.75,-59.59 c 6.661,-12.05 11.96,-24.9 15.821,-38.28 l 67.46,-16.87 v -69.36 l -67.46,-16.87 c -3.861,-13.38 -9.16,-26.23 -15.821,-38.28 L 233.149,96.58 184.1,47.53 124.51,83.28 C 112.46,76.63 99.609,71.32 86.229,67.46 L 69.359,0 Z"
+             style="fill:none;stroke:#000000;stroke-width:20;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+             id="path1620" /></g><g
+           id="g1622"
+           transform="translate(360,172)"><path
+             d="m 0,0 c 0,-5.523 -4.478,-10 -10,-10 -5.522,0 -10,4.477 -10,10 0,5.523 4.478,10 10,10 C -4.478,10 0,5.523 0,0"
+             style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             id="path1624" /></g><g
+           id="g1626"
+           transform="translate(314.4746,144.4072)"><path
+             d="m 0,0 c -17.484,-9.199 -37.383,-14.407 -58.475,-14.407 -69.48,0 -126,56.52 -126,126 0,69.48 56.52,126 126,126 69.481,0 126,-56.52 126,-126 0,-16.078 -3.026,-31.462 -8.54,-45.612"
+             style="fill:none;stroke:#000000;stroke-width:20;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+             id="path1628" /></g></g></g></g></svg>

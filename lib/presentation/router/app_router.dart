@@ -23,6 +23,22 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const HomeScreen(),
         );
+      case '/progress':
+        return MaterialPageRoute(
+          builder: (_) => const ProgressScreen(),
+        );
+      case '/study':
+        return MaterialPageRoute(
+          builder: (_) => const StudyScreen(),
+        );
+      case '/review':
+        return MaterialPageRoute(
+          builder: (_) => const ReviewScreen(),
+        );
+      case '/settings':
+        return MaterialPageRoute(
+          builder: (_) => const SettingsScreen(),
+        );
       default:
         return MaterialPageRoute(
           builder: (_) => Container(),

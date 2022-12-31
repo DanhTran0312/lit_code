@@ -16,10 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 ThemeState _$ThemeStateFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
-    case 'light':
-      return _Light.fromJson(json);
     case 'dark':
       return _Dark.fromJson(json);
+    case 'light':
+      return _Light.fromJson(json);
 
     default:
       throw CheckedFromJsonException(json, 'runtimeType', 'ThemeState',
@@ -31,39 +31,39 @@ ThemeState _$ThemeStateFromJson(Map<String, dynamic> json) {
 mixin _$ThemeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() light,
     required TResult Function() dark,
+    required TResult Function() light,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? light,
     TResult? Function()? dark,
+    TResult? Function()? light,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? light,
     TResult Function()? dark,
+    TResult Function()? light,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Light value) light,
     required TResult Function(_Dark value) dark,
+    required TResult Function(_Light value) light,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Light value)? light,
     TResult? Function(_Dark value)? dark,
+    TResult? Function(_Light value)? light,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Light value)? light,
     TResult Function(_Dark value)? dark,
+    TResult Function(_Light value)? light,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -89,6 +89,124 @@ class _$ThemeStateCopyWithImpl<$Res, $Val extends ThemeState>
 }
 
 /// @nodoc
+abstract class _$$_DarkCopyWith<$Res> {
+  factory _$$_DarkCopyWith(_$_Dark value, $Res Function(_$_Dark) then) =
+      __$$_DarkCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_DarkCopyWithImpl<$Res>
+    extends _$ThemeStateCopyWithImpl<$Res, _$_Dark>
+    implements _$$_DarkCopyWith<$Res> {
+  __$$_DarkCopyWithImpl(_$_Dark _value, $Res Function(_$_Dark) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Dark extends _Dark {
+  const _$_Dark({final String? $type})
+      : $type = $type ?? 'dark',
+        super._();
+
+  factory _$_Dark.fromJson(Map<String, dynamic> json) => _$$_DarkFromJson(json);
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'ThemeState.dark()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Dark);
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() dark,
+    required TResult Function() light,
+  }) {
+    return dark();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? dark,
+    TResult? Function()? light,
+  }) {
+    return dark?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? dark,
+    TResult Function()? light,
+    required TResult orElse(),
+  }) {
+    if (dark != null) {
+      return dark();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Dark value) dark,
+    required TResult Function(_Light value) light,
+  }) {
+    return dark(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Dark value)? dark,
+    TResult? Function(_Light value)? light,
+  }) {
+    return dark?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Dark value)? dark,
+    TResult Function(_Light value)? light,
+    required TResult orElse(),
+  }) {
+    if (dark != null) {
+      return dark(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_DarkToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Dark extends ThemeState {
+  const factory _Dark() = _$_Dark;
+  const _Dark._() : super._();
+
+  factory _Dark.fromJson(Map<String, dynamic> json) = _$_Dark.fromJson;
+}
+
+/// @nodoc
 abstract class _$$_LightCopyWith<$Res> {
   factory _$$_LightCopyWith(_$_Light value, $Res Function(_$_Light) then) =
       __$$_LightCopyWithImpl<$Res>;
@@ -104,8 +222,10 @@ class __$$_LightCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Light implements _Light {
-  const _$_Light({final String? $type}) : $type = $type ?? 'light';
+class _$_Light extends _Light {
+  const _$_Light({final String? $type})
+      : $type = $type ?? 'light',
+        super._();
 
   factory _$_Light.fromJson(Map<String, dynamic> json) =>
       _$$_LightFromJson(json);
@@ -131,8 +251,8 @@ class _$_Light implements _Light {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() light,
     required TResult Function() dark,
+    required TResult Function() light,
   }) {
     return light();
   }
@@ -140,8 +260,8 @@ class _$_Light implements _Light {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? light,
     TResult? Function()? dark,
+    TResult? Function()? light,
   }) {
     return light?.call();
   }
@@ -149,8 +269,8 @@ class _$_Light implements _Light {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? light,
     TResult Function()? dark,
+    TResult Function()? light,
     required TResult orElse(),
   }) {
     if (light != null) {
@@ -162,8 +282,8 @@ class _$_Light implements _Light {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Light value) light,
     required TResult Function(_Dark value) dark,
+    required TResult Function(_Light value) light,
   }) {
     return light(this);
   }
@@ -171,8 +291,8 @@ class _$_Light implements _Light {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Light value)? light,
     TResult? Function(_Dark value)? dark,
+    TResult? Function(_Light value)? light,
   }) {
     return light?.call(this);
   }
@@ -180,8 +300,8 @@ class _$_Light implements _Light {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Light value)? light,
     TResult Function(_Dark value)? dark,
+    TResult Function(_Light value)? light,
     required TResult orElse(),
   }) {
     if (light != null) {
@@ -198,123 +318,9 @@ class _$_Light implements _Light {
   }
 }
 
-abstract class _Light implements ThemeState {
+abstract class _Light extends ThemeState {
   const factory _Light() = _$_Light;
+  const _Light._() : super._();
 
   factory _Light.fromJson(Map<String, dynamic> json) = _$_Light.fromJson;
-}
-
-/// @nodoc
-abstract class _$$_DarkCopyWith<$Res> {
-  factory _$$_DarkCopyWith(_$_Dark value, $Res Function(_$_Dark) then) =
-      __$$_DarkCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_DarkCopyWithImpl<$Res>
-    extends _$ThemeStateCopyWithImpl<$Res, _$_Dark>
-    implements _$$_DarkCopyWith<$Res> {
-  __$$_DarkCopyWithImpl(_$_Dark _value, $Res Function(_$_Dark) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$_Dark implements _Dark {
-  const _$_Dark({final String? $type}) : $type = $type ?? 'dark';
-
-  factory _$_Dark.fromJson(Map<String, dynamic> json) => _$$_DarkFromJson(json);
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
-
-  @override
-  String toString() {
-    return 'ThemeState.dark()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Dark);
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() light,
-    required TResult Function() dark,
-  }) {
-    return dark();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? light,
-    TResult? Function()? dark,
-  }) {
-    return dark?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? light,
-    TResult Function()? dark,
-    required TResult orElse(),
-  }) {
-    if (dark != null) {
-      return dark();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Light value) light,
-    required TResult Function(_Dark value) dark,
-  }) {
-    return dark(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Light value)? light,
-    TResult? Function(_Dark value)? dark,
-  }) {
-    return dark?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Light value)? light,
-    TResult Function(_Dark value)? dark,
-    required TResult orElse(),
-  }) {
-    if (dark != null) {
-      return dark(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_DarkToJson(
-      this,
-    );
-  }
-}
-
-abstract class _Dark implements ThemeState {
-  const factory _Dark() = _$_Dark;
-
-  factory _Dark.fromJson(Map<String, dynamic> json) = _$_Dark.fromJson;
 }

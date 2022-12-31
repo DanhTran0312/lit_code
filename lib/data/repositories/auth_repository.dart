@@ -61,6 +61,14 @@ class AuthRepository {
     }
   }
 
+  Future<User?> getCurrenUser() async {
+    try {
+      return _firebaseAuth.currentUser;
+    } on Exception catch (e) {
+      throw Exception('Failed to get user: $e');
+    }
+  }
+
   Future<void> signOut() async {
     try {
       await _firebaseAuth.signOut();

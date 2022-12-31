@@ -21,7 +21,7 @@ class SignUpScreen extends StatelessWidget {
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is Authenticated) {
-            Navigator.of(context).pushNamed('/home');
+            Navigator.of(context).pushReplacementNamed('/home');
           } else if (state is Loading) {
             const CircularProgressIndicator();
           } else if (state is AuthError) {

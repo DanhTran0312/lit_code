@@ -5,6 +5,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:lit_code/app/app.dart';
 import 'package:lit_code/bootstrap.dart';
 import 'package:lit_code/business_logic/blocs/bloc/auth_bloc.dart';
+import 'package:lit_code/business_logic/cubits/cubit/bottom_nav_bar_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/on_boarding_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/theme_cubit.dart';
 import 'package:lit_code/data/repositories/auth_repository.dart';
@@ -35,6 +36,9 @@ Future<void> main() async {
         ),
         BlocProvider<OnBoardingCubit>(
           create: (context) => OnBoardingCubit(),
+        ),
+        BlocProvider<BottomNavBarCubit>(
+          create: (context) => BottomNavBarCubit(),
         ),
       ],
       child: LitCodeApp(

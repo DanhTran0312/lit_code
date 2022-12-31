@@ -34,7 +34,7 @@ final ElevatedButtonThemeData lightElevatedButtonThemeData =
         horizontal: elevatedButtonHorizontalPadding,
       ),
     ),
-    backgroundColor: MaterialStateProperty.all<Color>(elevatedButtonColor),
+    backgroundColor: MaterialStateProperty.all<Color>(darkPrimaryColor),
   ),
 );
 
@@ -48,7 +48,7 @@ final ElevatedButtonThemeData darkElevatedButtonThemeData =
         horizontal: elevatedButtonHorizontalPadding,
       ),
     ),
-    backgroundColor: MaterialStateProperty.all<Color>(elevatedButtonColor),
+    backgroundColor: MaterialStateProperty.all<Color>(darkPrimaryColor),
   ),
 );
 
@@ -76,18 +76,48 @@ final TextTheme lightTextTheme = TextTheme(
   headline1: GoogleFonts.poppins(
     fontSize: headline1Size,
     fontWeight: FontWeight.w900,
-    color: lightHeadLine1,
+    color: lightPrimaryColor,
   ),
   headline2: GoogleFonts.poppins(
     fontSize: headline2Size,
     fontWeight: FontWeight.w700,
-    color: lightHeadLine1,
+    color: lightPrimaryColor,
   ),
   labelMedium: GoogleFonts.openSans(
     fontSize: labelMediumSize,
     fontWeight: FontWeight.w700,
-    color: lightHeadLine1,
+    color: lightPrimaryColor,
   ),
+);
+
+const BottomNavigationBarThemeData lightBottomNavigationBarThemeData =
+    BottomNavigationBarThemeData(
+  backgroundColor: lightPrimaryColor,
+  selectedItemColor: Colors.white,
+  unselectedItemColor: Colors.black,
+  selectedIconTheme: IconThemeData(
+    size: bottomNavigationBarItemIconSizeSelected,
+  ),
+  unselectedIconTheme: IconThemeData(
+    size: bottomNavigationBarItemIconSize,
+  ),
+  showSelectedLabels: false,
+  showUnselectedLabels: false,
+);
+
+const BottomNavigationBarThemeData darkBottomNavigationBarThemeData =
+    BottomNavigationBarThemeData(
+  backgroundColor: darkPrimaryColor,
+  selectedItemColor: Colors.white,
+  unselectedItemColor: Colors.black,
+  selectedIconTheme: IconThemeData(
+    size: bottomNavigationBarItemIconSizeSelected,
+  ),
+  unselectedIconTheme: IconThemeData(
+    size: bottomNavigationBarItemIconSize,
+  ),
+  showSelectedLabels: false,
+  showUnselectedLabels: false,
 );
 
 // ---------------------------- Light Theme ----------------------------
@@ -95,6 +125,9 @@ final ThemeData lightAppTheme = ThemeData(
   brightness: Brightness.light,
   textTheme: lightTextTheme,
   elevatedButtonTheme: lightElevatedButtonThemeData,
+  bottomAppBarColor: lightPrimaryColor,
+  primaryColor: lightPrimaryColor,
+  bottomNavigationBarTheme: lightBottomNavigationBarThemeData,
   useMaterial3: true,
 );
 // ---------------------------- Dark Theme ----------------------------
@@ -102,5 +135,8 @@ final ThemeData darkAppTheme = ThemeData(
   brightness: Brightness.dark,
   textTheme: darkTextTheme,
   elevatedButtonTheme: darkElevatedButtonThemeData,
+  bottomAppBarColor: darkPrimaryColor,
+  primaryColor: darkPrimaryColor,
+  bottomNavigationBarTheme: darkBottomNavigationBarThemeData,
   useMaterial3: true,
 );

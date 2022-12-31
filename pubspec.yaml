@@ -8,6 +8,7 @@ environment:
   flutter: 3.3.8
 
 dependencies:
+  animated_toggle_switch: ^0.6.1
   bloc: ^8.1.0
   firebase_auth: ^4.2.1
   firebase_core: ^2.4.0
@@ -21,6 +22,7 @@ dependencies:
   hydrated_bloc: ^9.0.0
   json_annotation: ^4.7.0
   path_provider: ^2.0.11
+  shimmer: ^2.0.0
 
 dev_dependencies:
   build_runner: ^2.3.3

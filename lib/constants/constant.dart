@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 // Colors
 const Color inputBorderColor = Color(0xffe3c7a1);
 const Color darkHeadLine1 = Color(0xffdd3d4e);
-const Color lightHeadLine1 = Color(0xffa825cc);
-const Color elevatedButtonColor = Color(0xfff5873b);
+const Color lightPrimaryColor = Color(0xffa825cc);
+const Color darkPrimaryColor = Color(0xfff5873b);
 
 // Border
 const double inputBorderWidth = 2;
@@ -19,6 +19,8 @@ const double elevatedButtonVerticalPadding = 12;
 const double elevatedButtonHorizontalPadding = 20;
 const double inputVerticalPadding = 17;
 const double inputHorizontalPadding = 20;
+const double bottomNavigationBarItemIconSize = 27;
+const double bottomNavigationBarItemIconSizeSelected = 35;
 
 // ------------------- Fonts Size -------------------
 const double headline1Size = 50;
