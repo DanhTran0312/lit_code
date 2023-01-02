@@ -1,6 +1,3 @@
-import 'dart:math';
-
-import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/theme_cubit.dart';
@@ -38,33 +35,31 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             child: Column(
               children: [
-                Container(
-                  child: Row(
-                    children: [
-                      const CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Colors.white,
-                      ),
-                      const SizedBox(width: 10),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Welcome back,',
-                            style: theme.textTheme.headline6,
-                          ),
-                          Text(
-                            'John Doe',
-                            style: theme.textTheme.headline5,
-                          ),
-                        ],
-                      ),
-                      const Spacer(),
-                      AnimatedThemeToggleSwitch(
-                        state: state,
-                      ),
-                    ],
-                  ),
+                Row(
+                  children: [
+                    const CircleAvatar(
+                      radius: 30,
+                      backgroundColor: Colors.white,
+                    ),
+                    const SizedBox(width: 10),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Welcome back,',
+                          style: theme.textTheme.headline6,
+                        ),
+                        Text(
+                          'John Doe',
+                          style: theme.textTheme.headline5,
+                        ),
+                      ],
+                    ),
+                    const Spacer(),
+                    AnimatedThemeToggleSwitch(
+                      state: state,
+                    ),
+                  ],
                 ),
               ],
             ),

@@ -2,27 +2,36 @@ import 'package:lit_code/data/models/user.dart';
 import 'package:lit_code/data/repositories/user_interface.dart';
 
 class UserRepository implements IUserRepository {
+  User? _user;
+
   @override
-  Future<void> deleteUser(int id) {
-    // TODO: implement deleteUser
-    throw UnimplementedError();
+  Future<User> getUser(String id) async {
+    try {
+      if (_user != null) {
+        return _user!;
+      } else {
+        return User.empty;
+      }
+    } catch (e) {
+      throw Exception('Error while fetching user');
+    }
   }
 
   @override
-  Future<User> getUser(int id) {
-    // TODO: implement getUser
-    throw UnimplementedError();
+  Future<void> saveUser(User user) async {
+    try {
+      _user = user;
+    } catch (e) {
+      throw Exception('Error while saving user');
+    }
   }
 
   @override
-  Future<void> saveUser(User user) {
-    // TODO: implement saveUser
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> updateUser(User user) {
-    // TODO: implement updateUser
-    throw UnimplementedError();
+  Future<void> updateUser(User user) async {
+    try {
+      _user = user;
+    } catch (e) {
+      throw Exception('Error while updating user');
+    }
   }
 }
