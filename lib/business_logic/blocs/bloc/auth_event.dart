@@ -13,6 +13,4 @@ class AuthEvent with _$AuthEvent {
   const factory AuthEvent.signOutRequested() = SignOutRequested;
   const factory AuthEvent.googleSignInRequested() = GoogleSignInRequested;
   const factory AuthEvent.authCheckRequested() = AuthCheckRequested;
-  const factory AuthEvent.authStatusChanged(AuthStatus status) =
-      AuthStatusChanged;
 }

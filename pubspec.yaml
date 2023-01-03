@@ -10,12 +10,14 @@ environment:
 dependencies:
   animated_toggle_switch: ^0.6.1
   bloc: ^8.1.0
+  email_validator: ^2.1.17
   firebase_auth: ^4.2.1
   firebase_core: ^2.4.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
   flutter_svg: ^1.1.6
+  formz: ^0.4.1
   freezed_annotation: ^2.2.0
   google_fonts: ^3.0.1
   google_sign_in: ^5.4.2

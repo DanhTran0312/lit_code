@@ -23,7 +23,6 @@ mixin _$AuthEvent {
     required TResult Function() signOutRequested,
     required TResult Function() googleSignInRequested,
     required TResult Function() authCheckRequested,
-    required TResult Function(AuthStatus status) authStatusChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -33,7 +32,6 @@ mixin _$AuthEvent {
     TResult? Function()? signOutRequested,
     TResult? Function()? googleSignInRequested,
     TResult? Function()? authCheckRequested,
-    TResult? Function(AuthStatus status)? authStatusChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,7 +41,6 @@ mixin _$AuthEvent {
     TResult Function()? signOutRequested,
     TResult Function()? googleSignInRequested,
     TResult Function()? authCheckRequested,
-    TResult Function(AuthStatus status)? authStatusChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -55,7 +52,6 @@ mixin _$AuthEvent {
     required TResult Function(GoogleSignInRequested value)
         googleSignInRequested,
     required TResult Function(AuthCheckRequested value) authCheckRequested,
-    required TResult Function(AuthStatusChanged value) authStatusChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,7 +61,6 @@ mixin _$AuthEvent {
     TResult? Function(SignOutRequested value)? signOutRequested,
     TResult? Function(GoogleSignInRequested value)? googleSignInRequested,
     TResult? Function(AuthCheckRequested value)? authCheckRequested,
-    TResult? Function(AuthStatusChanged value)? authStatusChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,7 +70,6 @@ mixin _$AuthEvent {
     TResult Function(SignOutRequested value)? signOutRequested,
     TResult Function(GoogleSignInRequested value)? googleSignInRequested,
     TResult Function(AuthCheckRequested value)? authCheckRequested,
-    TResult Function(AuthStatusChanged value)? authStatusChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -176,7 +170,6 @@ class _$SignInRequested implements SignInRequested {
     required TResult Function() signOutRequested,
     required TResult Function() googleSignInRequested,
     required TResult Function() authCheckRequested,
-    required TResult Function(AuthStatus status) authStatusChanged,
   }) {
     return signInRequested(email, password);
   }
@@ -189,7 +182,6 @@ class _$SignInRequested implements SignInRequested {
     TResult? Function()? signOutRequested,
     TResult? Function()? googleSignInRequested,
     TResult? Function()? authCheckRequested,
-    TResult? Function(AuthStatus status)? authStatusChanged,
   }) {
     return signInRequested?.call(email, password);
   }
@@ -202,7 +194,6 @@ class _$SignInRequested implements SignInRequested {
     TResult Function()? signOutRequested,
     TResult Function()? googleSignInRequested,
     TResult Function()? authCheckRequested,
-    TResult Function(AuthStatus status)? authStatusChanged,
     required TResult orElse(),
   }) {
     if (signInRequested != null) {
@@ -220,7 +211,6 @@ class _$SignInRequested implements SignInRequested {
     required TResult Function(GoogleSignInRequested value)
         googleSignInRequested,
     required TResult Function(AuthCheckRequested value) authCheckRequested,
-    required TResult Function(AuthStatusChanged value) authStatusChanged,
   }) {
     return signInRequested(this);
   }
@@ -233,7 +223,6 @@ class _$SignInRequested implements SignInRequested {
     TResult? Function(SignOutRequested value)? signOutRequested,
     TResult? Function(GoogleSignInRequested value)? googleSignInRequested,
     TResult? Function(AuthCheckRequested value)? authCheckRequested,
-    TResult? Function(AuthStatusChanged value)? authStatusChanged,
   }) {
     return signInRequested?.call(this);
   }
@@ -246,7 +235,6 @@ class _$SignInRequested implements SignInRequested {
     TResult Function(SignOutRequested value)? signOutRequested,
     TResult Function(GoogleSignInRequested value)? googleSignInRequested,
     TResult Function(AuthCheckRequested value)? authCheckRequested,
-    TResult Function(AuthStatusChanged value)? authStatusChanged,
     required TResult orElse(),
   }) {
     if (signInRequested != null) {
@@ -346,7 +334,6 @@ class _$SignUpRequested implements SignUpRequested {
     required TResult Function() signOutRequested,
     required TResult Function() googleSignInRequested,
     required TResult Function() authCheckRequested,
-    required TResult Function(AuthStatus status) authStatusChanged,
   }) {
     return signUpRequested(email, password);
   }
@@ -359,7 +346,6 @@ class _$SignUpRequested implements SignUpRequested {
     TResult? Function()? signOutRequested,
     TResult? Function()? googleSignInRequested,
     TResult? Function()? authCheckRequested,
-    TResult? Function(AuthStatus status)? authStatusChanged,
   }) {
     return signUpRequested?.call(email, password);
   }
@@ -372,7 +358,6 @@ class _$SignUpRequested implements SignUpRequested {
     TResult Function()? signOutRequested,
     TResult Function()? googleSignInRequested,
     TResult Function()? authCheckRequested,
-    TResult Function(AuthStatus status)? authStatusChanged,
     required TResult orElse(),
   }) {
     if (signUpRequested != null) {
@@ -390,7 +375,6 @@ class _$SignUpRequested implements SignUpRequested {
     required TResult Function(GoogleSignInRequested value)
         googleSignInRequested,
     required TResult Function(AuthCheckRequested value) authCheckRequested,
-    required TResult Function(AuthStatusChanged value) authStatusChanged,
   }) {
     return signUpRequested(this);
   }
@@ -403,7 +387,6 @@ class _$SignUpRequested implements SignUpRequested {
     TResult? Function(SignOutRequested value)? signOutRequested,
     TResult? Function(GoogleSignInRequested value)? googleSignInRequested,
     TResult? Function(AuthCheckRequested value)? authCheckRequested,
-    TResult? Function(AuthStatusChanged value)? authStatusChanged,
   }) {
     return signUpRequested?.call(this);
   }
@@ -416,7 +399,6 @@ class _$SignUpRequested implements SignUpRequested {
     TResult Function(SignOutRequested value)? signOutRequested,
     TResult Function(GoogleSignInRequested value)? googleSignInRequested,
     TResult Function(AuthCheckRequested value)? authCheckRequested,
-    TResult Function(AuthStatusChanged value)? authStatusChanged,
     required TResult orElse(),
   }) {
     if (signUpRequested != null) {
@@ -481,7 +463,6 @@ class _$SignOutRequested implements SignOutRequested {
     required TResult Function() signOutRequested,
     required TResult Function() googleSignInRequested,
     required TResult Function() authCheckRequested,
-    required TResult Function(AuthStatus status) authStatusChanged,
   }) {
     return signOutRequested();
   }
@@ -494,7 +475,6 @@ class _$SignOutRequested implements SignOutRequested {
     TResult? Function()? signOutRequested,
     TResult? Function()? googleSignInRequested,
     TResult? Function()? authCheckRequested,
-    TResult? Function(AuthStatus status)? authStatusChanged,
   }) {
     return signOutRequested?.call();
   }
@@ -507,7 +487,6 @@ class _$SignOutRequested implements SignOutRequested {
     TResult Function()? signOutRequested,
     TResult Function()? googleSignInRequested,
     TResult Function()? authCheckRequested,
-    TResult Function(AuthStatus status)? authStatusChanged,
     required TResult orElse(),
   }) {
     if (signOutRequested != null) {
@@ -525,7 +504,6 @@ class _$SignOutRequested implements SignOutRequested {
     required TResult Function(GoogleSignInRequested value)
         googleSignInRequested,
     required TResult Function(AuthCheckRequested value) authCheckRequested,
-    required TResult Function(AuthStatusChanged value) authStatusChanged,
   }) {
     return signOutRequested(this);
   }
@@ -538,7 +516,6 @@ class _$SignOutRequested implements SignOutRequested {
     TResult? Function(SignOutRequested value)? signOutRequested,
     TResult? Function(GoogleSignInRequested value)? googleSignInRequested,
     TResult? Function(AuthCheckRequested value)? authCheckRequested,
-    TResult? Function(AuthStatusChanged value)? authStatusChanged,
   }) {
     return signOutRequested?.call(this);
   }
@@ -551,7 +528,6 @@ class _$SignOutRequested implements SignOutRequested {
     TResult Function(SignOutRequested value)? signOutRequested,
     TResult Function(GoogleSignInRequested value)? googleSignInRequested,
     TResult Function(AuthCheckRequested value)? authCheckRequested,
-    TResult Function(AuthStatusChanged value)? authStatusChanged,
     required TResult orElse(),
   }) {
     if (signOutRequested != null) {
@@ -608,7 +584,6 @@ class _$GoogleSignInRequested implements GoogleSignInRequested {
     required TResult Function() signOutRequested,
     required TResult Function() googleSignInRequested,
     required TResult Function() authCheckRequested,
-    required TResult Function(AuthStatus status) authStatusChanged,
   }) {
     return googleSignInRequested();
   }
@@ -621,7 +596,6 @@ class _$GoogleSignInRequested implements GoogleSignInRequested {
     TResult? Function()? signOutRequested,
     TResult? Function()? googleSignInRequested,
     TResult? Function()? authCheckRequested,
-    TResult? Function(AuthStatus status)? authStatusChanged,
   }) {
     return googleSignInRequested?.call();
   }
@@ -634,7 +608,6 @@ class _$GoogleSignInRequested implements GoogleSignInRequested {
     TResult Function()? signOutRequested,
     TResult Function()? googleSignInRequested,
     TResult Function()? authCheckRequested,
-    TResult Function(AuthStatus status)? authStatusChanged,
     required TResult orElse(),
   }) {
     if (googleSignInRequested != null) {
@@ -652,7 +625,6 @@ class _$GoogleSignInRequested implements GoogleSignInRequested {
     required TResult Function(GoogleSignInRequested value)
         googleSignInRequested,
     required TResult Function(AuthCheckRequested value) authCheckRequested,
-    required TResult Function(AuthStatusChanged value) authStatusChanged,
   }) {
     return googleSignInRequested(this);
   }
@@ -665,7 +637,6 @@ class _$GoogleSignInRequested implements GoogleSignInRequested {
     TResult? Function(SignOutRequested value)? signOutRequested,
     TResult? Function(GoogleSignInRequested value)? googleSignInRequested,
     TResult? Function(AuthCheckRequested value)? authCheckRequested,
-    TResult? Function(AuthStatusChanged value)? authStatusChanged,
   }) {
     return googleSignInRequested?.call(this);
   }
@@ -678,7 +649,6 @@ class _$GoogleSignInRequested implements GoogleSignInRequested {
     TResult Function(SignOutRequested value)? signOutRequested,
     TResult Function(GoogleSignInRequested value)? googleSignInRequested,
     TResult Function(AuthCheckRequested value)? authCheckRequested,
-    TResult Function(AuthStatusChanged value)? authStatusChanged,
     required TResult orElse(),
   }) {
     if (googleSignInRequested != null) {
@@ -735,7 +705,6 @@ class _$AuthCheckRequested implements AuthCheckRequested {
     required TResult Function() signOutRequested,
     required TResult Function() googleSignInRequested,
     required TResult Function() authCheckRequested,
-    required TResult Function(AuthStatus status) authStatusChanged,
   }) {
     return authCheckRequested();
   }
@@ -748,7 +717,6 @@ class _$AuthCheckRequested implements AuthCheckRequested {
     TResult? Function()? signOutRequested,
     TResult? Function()? googleSignInRequested,
     TResult? Function()? authCheckRequested,
-    TResult? Function(AuthStatus status)? authStatusChanged,
   }) {
     return authCheckRequested?.call();
   }
@@ -761,7 +729,6 @@ class _$AuthCheckRequested implements AuthCheckRequested {
     TResult Function()? signOutRequested,
     TResult Function()? googleSignInRequested,
     TResult Function()? authCheckRequested,
-    TResult Function(AuthStatus status)? authStatusChanged,
     required TResult orElse(),
   }) {
     if (authCheckRequested != null) {
@@ -779,7 +746,6 @@ class _$AuthCheckRequested implements AuthCheckRequested {
     required TResult Function(GoogleSignInRequested value)
         googleSignInRequested,
     required TResult Function(AuthCheckRequested value) authCheckRequested,
-    required TResult Function(AuthStatusChanged value) authStatusChanged,
   }) {
     return authCheckRequested(this);
   }
@@ -792,7 +758,6 @@ class _$AuthCheckRequested implements AuthCheckRequested {
     TResult? Function(SignOutRequested value)? signOutRequested,
     TResult? Function(GoogleSignInRequested value)? googleSignInRequested,
     TResult? Function(AuthCheckRequested value)? authCheckRequested,
-    TResult? Function(AuthStatusChanged value)? authStatusChanged,
   }) {
     return authCheckRequested?.call(this);
   }
@@ -805,7 +770,6 @@ class _$AuthCheckRequested implements AuthCheckRequested {
     TResult Function(SignOutRequested value)? signOutRequested,
     TResult Function(GoogleSignInRequested value)? googleSignInRequested,
     TResult Function(AuthCheckRequested value)? authCheckRequested,
-    TResult Function(AuthStatusChanged value)? authStatusChanged,
     required TResult orElse(),
   }) {
     if (authCheckRequested != null) {
@@ -820,171 +784,12 @@ abstract class AuthCheckRequested implements AuthEvent {
 }
 
 /// @nodoc
-abstract class _$$AuthStatusChangedCopyWith<$Res> {
-  factory _$$AuthStatusChangedCopyWith(
-          _$AuthStatusChanged value, $Res Function(_$AuthStatusChanged) then) =
-      __$$AuthStatusChangedCopyWithImpl<$Res>;
-  @useResult
-  $Res call({AuthStatus status});
-}
-
-/// @nodoc
-class __$$AuthStatusChangedCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$AuthStatusChanged>
-    implements _$$AuthStatusChangedCopyWith<$Res> {
-  __$$AuthStatusChangedCopyWithImpl(
-      _$AuthStatusChanged _value, $Res Function(_$AuthStatusChanged) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? status = null,
-  }) {
-    return _then(_$AuthStatusChanged(
-      null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as AuthStatus,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$AuthStatusChanged implements AuthStatusChanged {
-  const _$AuthStatusChanged(this.status);
-
-  @override
-  final AuthStatus status;
-
-  @override
-  String toString() {
-    return 'AuthEvent.authStatusChanged(status: $status)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AuthStatusChanged &&
-            (identical(other.status, status) || other.status == status));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, status);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AuthStatusChangedCopyWith<_$AuthStatusChanged> get copyWith =>
-      __$$AuthStatusChangedCopyWithImpl<_$AuthStatusChanged>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) signInRequested,
-    required TResult Function(String email, String password) signUpRequested,
-    required TResult Function() signOutRequested,
-    required TResult Function() googleSignInRequested,
-    required TResult Function() authCheckRequested,
-    required TResult Function(AuthStatus status) authStatusChanged,
-  }) {
-    return authStatusChanged(status);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? signInRequested,
-    TResult? Function(String email, String password)? signUpRequested,
-    TResult? Function()? signOutRequested,
-    TResult? Function()? googleSignInRequested,
-    TResult? Function()? authCheckRequested,
-    TResult? Function(AuthStatus status)? authStatusChanged,
-  }) {
-    return authStatusChanged?.call(status);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? signInRequested,
-    TResult Function(String email, String password)? signUpRequested,
-    TResult Function()? signOutRequested,
-    TResult Function()? googleSignInRequested,
-    TResult Function()? authCheckRequested,
-    TResult Function(AuthStatus status)? authStatusChanged,
-    required TResult orElse(),
-  }) {
-    if (authStatusChanged != null) {
-      return authStatusChanged(status);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(SignInRequested value) signInRequested,
-    required TResult Function(SignUpRequested value) signUpRequested,
-    required TResult Function(SignOutRequested value) signOutRequested,
-    required TResult Function(GoogleSignInRequested value)
-        googleSignInRequested,
-    required TResult Function(AuthCheckRequested value) authCheckRequested,
-    required TResult Function(AuthStatusChanged value) authStatusChanged,
-  }) {
-    return authStatusChanged(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SignInRequested value)? signInRequested,
-    TResult? Function(SignUpRequested value)? signUpRequested,
-    TResult? Function(SignOutRequested value)? signOutRequested,
-    TResult? Function(GoogleSignInRequested value)? googleSignInRequested,
-    TResult? Function(AuthCheckRequested value)? authCheckRequested,
-    TResult? Function(AuthStatusChanged value)? authStatusChanged,
-  }) {
-    return authStatusChanged?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(SignInRequested value)? signInRequested,
-    TResult Function(SignUpRequested value)? signUpRequested,
-    TResult Function(SignOutRequested value)? signOutRequested,
-    TResult Function(GoogleSignInRequested value)? googleSignInRequested,
-    TResult Function(AuthCheckRequested value)? authCheckRequested,
-    TResult Function(AuthStatusChanged value)? authStatusChanged,
-    required TResult orElse(),
-  }) {
-    if (authStatusChanged != null) {
-      return authStatusChanged(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class AuthStatusChanged implements AuthEvent {
-  const factory AuthStatusChanged(final AuthStatus status) =
-      _$AuthStatusChanged;
-
-  AuthStatus get status;
-  @JsonKey(ignore: true)
-  _$$AuthStatusChangedCopyWith<_$AuthStatusChanged> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
 mixin _$AuthState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(User? user, AuthStatus status) authenticated,
-    required TResult Function(AuthStatus status) unauthenticated,
+    required TResult Function(User? user) authenticated,
+    required TResult Function() unauthenticated,
     required TResult Function(String error) authError,
     required TResult Function() unknown,
   }) =>
@@ -992,8 +797,8 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(User? user, AuthStatus status)? authenticated,
-    TResult? Function(AuthStatus status)? unauthenticated,
+    TResult? Function(User? user)? authenticated,
+    TResult? Function()? unauthenticated,
     TResult? Function(String error)? authError,
     TResult? Function()? unknown,
   }) =>
@@ -1001,8 +806,8 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(User? user, AuthStatus status)? authenticated,
-    TResult Function(AuthStatus status)? unauthenticated,
+    TResult Function(User? user)? authenticated,
+    TResult Function()? unauthenticated,
     TResult Function(String error)? authError,
     TResult Function()? unknown,
     required TResult orElse(),
@@ -1092,8 +897,8 @@ class _$Loading extends Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(User? user, AuthStatus status) authenticated,
-    required TResult Function(AuthStatus status) unauthenticated,
+    required TResult Function(User? user) authenticated,
+    required TResult Function() unauthenticated,
     required TResult Function(String error) authError,
     required TResult Function() unknown,
   }) {
@@ -1104,8 +909,8 @@ class _$Loading extends Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(User? user, AuthStatus status)? authenticated,
-    TResult? Function(AuthStatus status)? unauthenticated,
+    TResult? Function(User? user)? authenticated,
+    TResult? Function()? unauthenticated,
     TResult? Function(String error)? authError,
     TResult? Function()? unknown,
   }) {
@@ -1116,8 +921,8 @@ class _$Loading extends Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(User? user, AuthStatus status)? authenticated,
-    TResult Function(AuthStatus status)? unauthenticated,
+    TResult Function(User? user)? authenticated,
+    TResult Function()? unauthenticated,
     TResult Function(String error)? authError,
     TResult Function()? unknown,
     required TResult orElse(),
@@ -1180,7 +985,7 @@ abstract class _$$AuthenticatedCopyWith<$Res> {
           _$Authenticated value, $Res Function(_$Authenticated) then) =
       __$$AuthenticatedCopyWithImpl<$Res>;
   @useResult
-  $Res call({User? user, AuthStatus status});
+  $Res call({User? user});
 
   $UserCopyWith<$Res>? get user;
 }
@@ -1197,17 +1002,12 @@ class __$$AuthenticatedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? user = freezed,
-    Object? status = null,
   }) {
     return _then(_$Authenticated(
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as AuthStatus,
     ));
   }
 
@@ -1227,16 +1027,14 @@ class __$$AuthenticatedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$Authenticated extends Authenticated {
-  const _$Authenticated({required this.user, required this.status}) : super._();
+  const _$Authenticated({required this.user}) : super._();
 
   @override
   final User? user;
-  @override
-  final AuthStatus status;
 
   @override
   String toString() {
-    return 'AuthState.authenticated(user: $user, status: $status)';
+    return 'AuthState.authenticated(user: $user)';
   }
 
   @override
@@ -1244,12 +1042,11 @@ class _$Authenticated extends Authenticated {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Authenticated &&
-            (identical(other.user, user) || other.user == user) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user, status);
+  int get hashCode => Object.hash(runtimeType, user);
 
   @JsonKey(ignore: true)
   @override
@@ -1261,38 +1058,38 @@ class _$Authenticated extends Authenticated {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(User? user, AuthStatus status) authenticated,
-    required TResult Function(AuthStatus status) unauthenticated,
+    required TResult Function(User? user) authenticated,
+    required TResult Function() unauthenticated,
     required TResult Function(String error) authError,
     required TResult Function() unknown,
   }) {
-    return authenticated(user, status);
+    return authenticated(user);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(User? user, AuthStatus status)? authenticated,
-    TResult? Function(AuthStatus status)? unauthenticated,
+    TResult? Function(User? user)? authenticated,
+    TResult? Function()? unauthenticated,
     TResult? Function(String error)? authError,
     TResult? Function()? unknown,
   }) {
-    return authenticated?.call(user, status);
+    return authenticated?.call(user);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(User? user, AuthStatus status)? authenticated,
-    TResult Function(AuthStatus status)? unauthenticated,
+    TResult Function(User? user)? authenticated,
+    TResult Function()? unauthenticated,
     TResult Function(String error)? authError,
     TResult Function()? unknown,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
-      return authenticated(user, status);
+      return authenticated(user);
     }
     return orElse();
   }
@@ -1339,13 +1136,10 @@ class _$Authenticated extends Authenticated {
 }
 
 abstract class Authenticated extends AuthState {
-  const factory Authenticated(
-      {required final User? user,
-      required final AuthStatus status}) = _$Authenticated;
+  const factory Authenticated({required final User? user}) = _$Authenticated;
   const Authenticated._() : super._();
 
   User? get user;
-  AuthStatus get status;
   @JsonKey(ignore: true)
   _$$AuthenticatedCopyWith<_$Authenticated> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1356,8 +1150,6 @@ abstract class _$$UnauthenticatedCopyWith<$Res> {
   factory _$$UnauthenticatedCopyWith(
           _$Unauthenticated value, $Res Function(_$Unauthenticated) then) =
       __$$UnauthenticatedCopyWithImpl<$Res>;
-  @useResult
-  $Res call({AuthStatus status});
 }
 
 /// @nodoc
@@ -1367,87 +1159,63 @@ class __$$UnauthenticatedCopyWithImpl<$Res>
   __$$UnauthenticatedCopyWithImpl(
       _$Unauthenticated _value, $Res Function(_$Unauthenticated) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? status = null,
-  }) {
-    return _then(_$Unauthenticated(
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as AuthStatus,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$Unauthenticated extends Unauthenticated {
-  const _$Unauthenticated({required this.status}) : super._();
-
-  @override
-  final AuthStatus status;
+  const _$Unauthenticated() : super._();
 
   @override
   String toString() {
-    return 'AuthState.unauthenticated(status: $status)';
+    return 'AuthState.unauthenticated()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$Unauthenticated &&
-            (identical(other.status, status) || other.status == status));
+        (other.runtimeType == runtimeType && other is _$Unauthenticated);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UnauthenticatedCopyWith<_$Unauthenticated> get copyWith =>
-      __$$UnauthenticatedCopyWithImpl<_$Unauthenticated>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(User? user, AuthStatus status) authenticated,
-    required TResult Function(AuthStatus status) unauthenticated,
+    required TResult Function(User? user) authenticated,
+    required TResult Function() unauthenticated,
     required TResult Function(String error) authError,
     required TResult Function() unknown,
   }) {
-    return unauthenticated(status);
+    return unauthenticated();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(User? user, AuthStatus status)? authenticated,
-    TResult? Function(AuthStatus status)? unauthenticated,
+    TResult? Function(User? user)? authenticated,
+    TResult? Function()? unauthenticated,
     TResult? Function(String error)? authError,
     TResult? Function()? unknown,
   }) {
-    return unauthenticated?.call(status);
+    return unauthenticated?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(User? user, AuthStatus status)? authenticated,
-    TResult Function(AuthStatus status)? unauthenticated,
+    TResult Function(User? user)? authenticated,
+    TResult Function()? unauthenticated,
     TResult Function(String error)? authError,
     TResult Function()? unknown,
     required TResult orElse(),
   }) {
     if (unauthenticated != null) {
-      return unauthenticated(status);
+      return unauthenticated();
     }
     return orElse();
   }
@@ -1494,14 +1262,8 @@ class _$Unauthenticated extends Unauthenticated {
 }
 
 abstract class Unauthenticated extends AuthState {
-  const factory Unauthenticated({required final AuthStatus status}) =
-      _$Unauthenticated;
+  const factory Unauthenticated() = _$Unauthenticated;
   const Unauthenticated._() : super._();
-
-  AuthStatus get status;
-  @JsonKey(ignore: true)
-  _$$UnauthenticatedCopyWith<_$Unauthenticated> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1569,8 +1331,8 @@ class _$AuthError extends AuthError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(User? user, AuthStatus status) authenticated,
-    required TResult Function(AuthStatus status) unauthenticated,
+    required TResult Function(User? user) authenticated,
+    required TResult Function() unauthenticated,
     required TResult Function(String error) authError,
     required TResult Function() unknown,
   }) {
@@ -1581,8 +1343,8 @@ class _$AuthError extends AuthError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(User? user, AuthStatus status)? authenticated,
-    TResult? Function(AuthStatus status)? unauthenticated,
+    TResult? Function(User? user)? authenticated,
+    TResult? Function()? unauthenticated,
     TResult? Function(String error)? authError,
     TResult? Function()? unknown,
   }) {
@@ -1593,8 +1355,8 @@ class _$AuthError extends AuthError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(User? user, AuthStatus status)? authenticated,
-    TResult Function(AuthStatus status)? unauthenticated,
+    TResult Function(User? user)? authenticated,
+    TResult Function()? unauthenticated,
     TResult Function(String error)? authError,
     TResult Function()? unknown,
     required TResult orElse(),
@@ -1693,8 +1455,8 @@ class _$Unknown extends Unknown {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(User? user, AuthStatus status) authenticated,
-    required TResult Function(AuthStatus status) unauthenticated,
+    required TResult Function(User? user) authenticated,
+    required TResult Function() unauthenticated,
     required TResult Function(String error) authError,
     required TResult Function() unknown,
   }) {
@@ -1705,8 +1467,8 @@ class _$Unknown extends Unknown {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(User? user, AuthStatus status)? authenticated,
-    TResult? Function(AuthStatus status)? unauthenticated,
+    TResult? Function(User? user)? authenticated,
+    TResult? Function()? unauthenticated,
     TResult? Function(String error)? authError,
     TResult? Function()? unknown,
   }) {
@@ -1717,8 +1479,8 @@ class _$Unknown extends Unknown {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(User? user, AuthStatus status)? authenticated,
-    TResult Function(AuthStatus status)? unauthenticated,
+    TResult Function(User? user)? authenticated,
+    TResult Function()? unauthenticated,
     TResult Function(String error)? authError,
     TResult Function()? unknown,
     required TResult orElse(),

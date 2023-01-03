@@ -7,16 +7,15 @@ part 'user.g.dart';
 abstract class User with _$User {
   const factory User({
     required String id,
-    required String name,
-    required String email,
-    required String photoUrl,
+    String? name,
+    String? email,
+    String? photoUrl,
   }) = _User;
+  const User._();
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
-  static const empty = User(
-    id: '',
-    name: '',
-    email: '',
-    photoUrl: '',
-  );
+  static const empty = User(id: '');
+
+  bool get isEmpty => this == User.empty;
+  bool get isNotEmpty => this != User.empty;
 }

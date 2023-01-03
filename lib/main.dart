@@ -8,7 +8,7 @@ import 'package:lit_code/business_logic/blocs/bloc/auth_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/bottom_nav_bar_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/on_boarding_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/theme_cubit.dart';
-import 'package:lit_code/data/repositories/auth_repository.dart';
+import 'package:lit_code/data/repositories/repositories.dart';
 import 'package:lit_code/firebase_options.dart';
 import 'package:lit_code/presentation/router/app_router.dart';
 import 'package:path_provider/path_provider.dart';
@@ -22,6 +22,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   final authRepository = AuthRepository();
+  final userReposiory = UserRepository();
   final appRouter = AppRouter();
   await bootstrap(
     () => MultiBlocProvider(
@@ -29,6 +30,7 @@ Future<void> main() async {
         BlocProvider<AuthBloc>(
           create: (context) => AuthBloc(
             authRepository: authRepository,
+            userRepository: userReposiory,
           ),
         ),
         BlocProvider<ThemeCubit>(

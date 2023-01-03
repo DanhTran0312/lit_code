@@ -22,16 +22,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         );
         emit(
           Authenticated(
-            status: AuthStatus.authenticated,
             user: await _tryGetUser(),
           ),
         );
       } catch (e) {
         emit(AuthError(e.toString()));
         emit(
-          const Unauthenticated(
-            status: AuthStatus.unauthenticated,
-          ),
+          const Unauthenticated(),
         );
       }
     });
@@ -42,25 +39,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         if (isAuthenticated) {
           emit(
             Authenticated(
-              status: AuthStatus.authenticated,
-              user: await userRepository.getUser(
-                authRepository.currentUser!.uid,
-              ),
+              user: await authRepository.currentUser,
             ),
           );
         } else {
           emit(
-            const Unauthenticated(
-              status: AuthStatus.unauthenticated,
-            ),
+            const Unauthenticated(),
           );
         }
       } catch (e) {
         emit(AuthError(e.toString()));
         emit(
-          const Unauthenticated(
-            status: AuthStatus.unauthenticated,
-          ),
+          const Unauthenticated(),
         );
       }
     });
@@ -74,15 +64,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(
           Authenticated(
             user: await _tryGetUser(),
-            status: AuthStatus.authenticated,
           ),
         );
       } catch (e) {
         emit(AuthError(e.toString()));
         emit(
-          const Unauthenticated(
-            status: AuthStatus.unauthenticated,
-          ),
+          const Unauthenticated(),
         );
       }
     });
@@ -91,16 +78,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         await authRepository.signOut();
         emit(
-          const Unauthenticated(
-            status: AuthStatus.unauthenticated,
-          ),
+          const Unauthenticated(),
         );
       } catch (e) {
         emit(AuthError(e.toString()));
         emit(
           Authenticated(
             user: await _tryGetUser(),
-            status: AuthStatus.authenticated,
           ),
         );
       }
@@ -112,63 +96,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(
           Authenticated(
             user: await _tryGetUser(),
-            status: AuthStatus.authenticated,
           ),
         );
       } catch (e) {
         emit(AuthError(e.toString()));
         emit(
-          const Unauthenticated(
-            status: AuthStatus.unauthenticated,
-          ),
+          const Unauthenticated(),
         );
-      }
-    });
-
-    _authStatusSubscription = authRepository.authStatus.listen((status) {
-      add(AuthStatusChanged(status));
-    });
-
-    on<AuthStatusChanged>((event, emit) async {
-      if (event.status == AuthStatus.authenticated) {
-        emit(
-          Authenticated(
-            user: await _tryGetUser(),
-            status: AuthStatus.authenticated,
-          ),
-        );
-      } else if (event.status == AuthStatus.unauthenticated) {
-        emit(
-          const Unauthenticated(
-            status: AuthStatus.unauthenticated,
-          ),
-        );
-      } else if (event.status == AuthStatus.authError) {
-        emit(
-          const AuthError(
-            'An error occured while authenticating.',
-          ),
-        );
-      } else if (event.status == AuthStatus.unknown) {
-        emit(const Unknown());
       }
     });
   }
 
   final AuthRepository authRepository;
   final UserRepository userRepository;
-  late StreamSubscription<AuthStatus> _authStatusSubscription;
-
-  @override
-  Future<void> close() {
-    _authStatusSubscription.cancel();
-    authRepository.dispose();
-    return super.close();
-  }
 
   Future<User?> _tryGetUser() async {
     try {
-      return await userRepository.getUser(authRepository.currentUser!.uid);
+      return await authRepository.currentUser;
     } catch (e) {
       return null;
     }

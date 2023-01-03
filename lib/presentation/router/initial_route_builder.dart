@@ -9,7 +9,23 @@ class InitialRouteBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthBloc, AuthState>(
+    return BlocConsumer<AuthBloc, AuthState>(
+      builder: (context, state) {
+        // Check if on-boarding has been completed
+        if (BlocProvider.of<OnBoardingCubit>(context).state is! OnBoarded) {
+          BlocProvider.of<OnBoardingCubit>(context).showOnBoarding();
+          return const OnBoardingScreen();
+        } else {
+          if (state is Unknown) {
+            BlocProvider.of<AuthBloc>(context).add(const AuthCheckRequested());
+          }
+          return const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+      },
       listener: (context, state) {
         if (state is Authenticated) {
           Navigator.of(context).pushReplacementNamed('/home');
@@ -17,25 +33,6 @@ class InitialRouteBuilder extends StatelessWidget {
           Navigator.of(context).pushReplacementNamed('/login');
         }
       },
-      child: BlocBuilder<AuthBloc, AuthState>(
-        builder: (context, state) {
-          // Check if on-boarding has been completed
-          if (BlocProvider.of<OnBoardingCubit>(context).state is! OnBoarded) {
-            BlocProvider.of<OnBoardingCubit>(context).showOnBoarding();
-            return const OnBoardingScreen();
-          } else {
-            if (state is Unknown) {
-              BlocProvider.of<AuthBloc>(context)
-                  .add(const AuthCheckRequested());
-            }
-            return const Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          }
-        },
-      ),
     );
   }
 }
