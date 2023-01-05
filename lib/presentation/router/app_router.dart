@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:lit_code/data/repositories/repositories.dart';
 import 'package:lit_code/presentation/router/initial_route_builder.dart';
 import 'package:lit_code/presentation/screens/screens.dart';
 
 class AppRouter {
-  AppRouter();
+  AppRouter({
+    required this.userRepository,
+  });
+
+  final UserRepository userRepository;
 
   Route<dynamic> onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
@@ -38,6 +43,10 @@ class AppRouter {
       case '/settings':
         return MaterialPageRoute(
           builder: (_) => const SettingsScreen(),
+        );
+      case '/onboarding':
+        return MaterialPageRoute(
+          builder: (_) => const OnBoardingScreen(),
         );
       default:
         return MaterialPageRoute(

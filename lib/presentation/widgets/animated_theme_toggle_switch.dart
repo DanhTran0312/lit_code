@@ -20,7 +20,7 @@ class AnimatedThemeToggleSwitch extends StatelessWidget {
         1,
       ],
       iconOpacity: 0.2,
-      indicatorSize: const Size.fromWidth(60),
+      indicatorSize: const Size.fromWidth(40),
       iconBuilder: (value, size) {
         if (value.isEven) {
           return const Icon(Icons.wb_sunny_rounded);
@@ -28,8 +28,9 @@ class AnimatedThemeToggleSwitch extends StatelessWidget {
         return const Icon(Icons.nightlight_round);
       },
       borderWidth: 0,
+      height: 42,
       borderColor: Colors.transparent,
-      colorBuilder: (i) => i.isEven ? Colors.amber : Colors.red,
+      colorBuilder: (i) => i.isEven ? Colors.amberAccent : Colors.black,
       onChanged: (i) {
         BlocProvider.of<ThemeCubit>(context).toggleTheme();
       },

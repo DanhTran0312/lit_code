@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lit_code/business_logic/blocs/bloc/auth_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/theme_cubit.dart';
+import 'package:lit_code/constants/constant.dart';
+import 'package:lit_code/presentation/widgets/custom_circular_progress_bar.dart';
 import 'package:lit_code/presentation/widgets/widgets.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({
+    super.key,
+  });
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int value = 0;
-  bool positive = false;
-  bool loading = false;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -33,35 +30,71 @@ class _HomeScreenState extends State<HomeScreen> {
               horizontal: size.width * 0.08,
               vertical: size.height * 0.07,
             ),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    const CircleAvatar(
-                      radius: 30,
-                      backgroundColor: Colors.white,
-                    ),
-                    const SizedBox(width: 10),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Welcome back,',
-                          style: theme.textTheme.headline6,
+            child: BlocBuilder<AuthBloc, AuthState>(
+              builder: (context, state) {
+                if (state is Authenticated) {
+                  final url = state.user!.photoUrl!;
+                  final name = state.user!.name!;
+                  return Column(
+                    children: [
+                      CustomAppBar(url: url, theme: theme),
+                      const SizedBox(height: 20),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Text(
+                              'Hi ${name.split(' ').first}, Today you have 2 questions to complete 🔥',
+                              style: theme.textTheme.headline4,
+                            ),
+                            const SizedBox(height: 20),
+                            CustomCirCularProgressBar(
+                              size: size.width * 0.37,
+                              initialValue: 14,
+                              total: 20,
+                              theme: theme,
+                            ),
+                            const SizedBox(height: sizeBoxHeightMedium),
+                            Text('14/20', style: theme.textTheme.headline4),
+                            Text(
+                              'Questions',
+                              style: theme.textTheme.headline4!
+                                  .copyWith(fontWeight: FontWeight.w600),
+                            ),
+                            const SizedBox(height: sizeBoxHeightSmall),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    height: 130,
+                                    decoration: BoxDecoration(
+                                      color:
+                                          theme.primaryColor.withOpacity(0.6),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: sizeBoxHeightMedium),
+                                Expanded(
+                                  child: Container(
+                                    height: 130,
+                                    decoration: BoxDecoration(
+                                      color:
+                                          theme.primaryColor.withOpacity(0.6),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
                         ),
-                        Text(
-                          'John Doe',
-                          style: theme.textTheme.headline5,
-                        ),
-                      ],
-                    ),
-                    const Spacer(),
-                    AnimatedThemeToggleSwitch(
-                      state: state,
-                    ),
-                  ],
-                ),
-              ],
+                      ),
+                    ],
+                  );
+                }
+                return const CircularProgressIndicator();
+              },
             ),
           ),
         );

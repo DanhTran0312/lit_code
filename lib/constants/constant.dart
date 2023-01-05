@@ -5,6 +5,8 @@ const Color inputBorderColor = Color(0xffe3c7a1);
 const Color darkHeadLine1 = Color(0xffdd3d4e);
 const Color lightPrimaryColor = Color(0xffa825cc);
 const Color darkPrimaryColor = Color(0xfff5873b);
+const Color lightCircularProgressBarTrackColor = Color(0xffffd8c9);
+const Color lightCircularProgressBarColor = Color(0xfff5873b);
 
 // Border
 const double inputBorderWidth = 2;
@@ -26,7 +28,7 @@ const double bottomNavigationBarItemIconSizeSelected = 35;
 const double headline1Size = 50;
 const double headline2Size = 40;
 const double headline3Size = 30;
-const double headline4Size = 25;
+const double headline4Size = 23;
 const double labelMediumSize = 15;
 const double labelSmallSize = 12;
 const double elevatedButtonTextSize = 24;

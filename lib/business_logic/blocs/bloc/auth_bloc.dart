@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:lit_code/business_logic/cubits/cubit/bottom_nav_bar_cubit.dart';
 import 'package:lit_code/data/models/models.dart';
 import 'package:lit_code/data/repositories/auth_repository.dart';
 import 'package:lit_code/data/repositories/user_repository.dart';
@@ -20,9 +22,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           email: event.email,
           password: event.password,
         );
+        final user = await _tryGetUser();
+        await _trySaveUser(user);
         emit(
           Authenticated(
-            user: await _tryGetUser(),
+            user: user,
           ),
         );
       } catch (e) {
@@ -35,11 +39,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthCheckRequested>((event, emit) async {
       emit(const Loading());
       try {
-        final isAuthenticated = await authRepository.isAuthenticated();
-        if (isAuthenticated) {
+        final user = await userRepository.getUser();
+        if (user.isNotEmpty) {
+          final user = await _tryGetUser();
+          await _trySaveUser(user);
           emit(
             Authenticated(
-              user: await authRepository.currentUser,
+              user: user,
             ),
           );
         } else {
@@ -61,9 +67,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           email: event.email,
           password: event.password,
         );
+        final user = await _tryGetUser();
+        await _trySaveUser(user);
         emit(
           Authenticated(
-            user: await _tryGetUser(),
+            user: user,
           ),
         );
       } catch (e) {
@@ -76,15 +84,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignOutRequested>((event, emit) async {
       emit(const Loading());
       try {
+        BlocProvider.of<BottomNavBarCubit>(event.context).reset();
+        await userRepository.deleteUser();
         await authRepository.signOut();
-        emit(
-          const Unauthenticated(),
-        );
+        emit(const Unauthenticated());
       } catch (e) {
         emit(AuthError(e.toString()));
+        final user = await _tryGetUser();
         emit(
           Authenticated(
-            user: await _tryGetUser(),
+            user: user,
           ),
         );
       }
@@ -93,9 +102,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(const Loading());
       try {
         await authRepository.signInWithGoogle();
+        final user = await _tryGetUser();
+        await _trySaveUser(user);
         emit(
           Authenticated(
-            user: await _tryGetUser(),
+            user: user,
           ),
         );
       } catch (e) {
@@ -112,9 +123,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<User?> _tryGetUser() async {
     try {
+      final cachedUser = await userRepository.getUser();
+      if (cachedUser.isNotEmpty) {
+        return cachedUser;
+      }
       return await authRepository.currentUser;
     } catch (e) {
       return null;
+    }
+  }
+
+  Future<void> _trySaveUser(User? user) async {
+    try {
+      await userRepository.saveUser(user!);
+    } catch (e) {
+      throw Exception('Error while saving user: $e');
     }
   }
 }

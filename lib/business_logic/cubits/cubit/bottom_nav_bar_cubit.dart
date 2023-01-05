@@ -10,4 +10,8 @@ class BottomNavBarCubit extends Cubit<BottomNavBarState> {
   void updateSelectedIndex(int index) {
     emit(state.copyWith(currentIndex: index));
   }
+
+  void reset() {
+    emit(BottomNavBarState.initial());
+  }
 }

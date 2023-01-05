@@ -18,6 +18,10 @@ class InitialRouteBuilder extends StatelessWidget {
         } else {
           if (state is Unknown) {
             BlocProvider.of<AuthBloc>(context).add(const AuthCheckRequested());
+          } else if (state is Authenticated) {
+            return const HomeScreen();
+          } else if (state is Unauthenticated) {
+            return SignInScreen();
           }
           return const Scaffold(
             body: Center(
@@ -31,6 +35,14 @@ class InitialRouteBuilder extends StatelessWidget {
           Navigator.of(context).pushReplacementNamed('/home');
         } else if (state is Unauthenticated) {
           Navigator.of(context).pushReplacementNamed('/login');
+        } else if (state is AuthError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.error),
+            ),
+          );
+        } else if (state is Loading) {
+          const CircularProgressIndicator();
         }
       },
     );

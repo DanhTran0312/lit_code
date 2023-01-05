@@ -10,7 +10,9 @@ class AuthEvent with _$AuthEvent {
     required String email,
     required String password,
   }) = SignUpRequested;
-  const factory AuthEvent.signOutRequested() = SignOutRequested;
+  const factory AuthEvent.signOutRequested({
+    required BuildContext context,
+  }) = SignOutRequested;
   const factory AuthEvent.googleSignInRequested() = GoogleSignInRequested;
   const factory AuthEvent.authCheckRequested() = AuthCheckRequested;
 }

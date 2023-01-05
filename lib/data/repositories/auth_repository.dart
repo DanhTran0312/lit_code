@@ -55,15 +55,6 @@ class AuthRepository {
     }
   }
 
-  Future<bool> isAuthenticated() async {
-    try {
-      final user = _firebaseAuth.currentUser;
-      return user != null;
-    } on Exception catch (e) {
-      throw Exception('Failed to check authentication: $e');
-    }
-  }
-
   Future<User> get currentUser async {
     final firebaseUser = _firebaseAuth.currentUser;
     final user = firebaseUser == null ? User.empty : firebaseUser.toUser;

@@ -1,37 +1,54 @@
+// ignore_for_file: join_return_with_assignment
+
+import 'package:hive/hive.dart';
 import 'package:lit_code/data/models/user.dart';
-import 'package:lit_code/data/repositories/user_interface.dart';
 
-class UserRepository implements IUserRepository {
-  User? _user;
+class UserRepository {
+  UserRepository({
+    required this.userBox,
+  });
 
-  @override
-  Future<User> getUser(String id) async {
+  User _user = User.empty;
+  final Box<User> userBox;
+
+  Future<User> getUser() async {
     try {
-      if (_user != null) {
-        return _user!;
-      } else {
-        return User.empty;
-      }
+      return _user;
     } catch (e) {
-      throw Exception('Error while fetching user');
+      throw Exception('Error while getting user');
     }
   }
 
-  @override
   Future<void> saveUser(User user) async {
     try {
-      _user = user;
+      if (user.isEmpty) {
+        throw Exception('The User does not exist');
+      } else {
+        _user = user;
+        await userBox.put(user.id, user);
+      }
     } catch (e) {
-      throw Exception('Error while saving user');
+      throw Exception('$e');
     }
   }
 
-  @override
-  Future<void> updateUser(User user) async {
+  Future<void> deleteUser() async {
     try {
-      _user = user;
+      if (_user.isEmpty) {
+        throw Exception('Cannot delete user because it does not exist');
+      }
+      await userBox.delete(_user.id);
+      _user = User.empty;
     } catch (e) {
-      throw Exception('Error while updating user');
+      throw Exception(e);
+    }
+  }
+
+  Future<bool> isUserSaved(String id) async {
+    try {
+      return userBox.containsKey(id);
+    } catch (e) {
+      throw Exception('Error while checking if user is saved');
     }
   }
 }

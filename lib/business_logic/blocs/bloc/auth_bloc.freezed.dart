@@ -20,7 +20,7 @@ mixin _$AuthEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) signInRequested,
     required TResult Function(String email, String password) signUpRequested,
-    required TResult Function() signOutRequested,
+    required TResult Function(BuildContext context) signOutRequested,
     required TResult Function() googleSignInRequested,
     required TResult Function() authCheckRequested,
   }) =>
@@ -29,7 +29,7 @@ mixin _$AuthEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String password)? signInRequested,
     TResult? Function(String email, String password)? signUpRequested,
-    TResult? Function()? signOutRequested,
+    TResult? Function(BuildContext context)? signOutRequested,
     TResult? Function()? googleSignInRequested,
     TResult? Function()? authCheckRequested,
   }) =>
@@ -38,7 +38,7 @@ mixin _$AuthEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? signInRequested,
     TResult Function(String email, String password)? signUpRequested,
-    TResult Function()? signOutRequested,
+    TResult Function(BuildContext context)? signOutRequested,
     TResult Function()? googleSignInRequested,
     TResult Function()? authCheckRequested,
     required TResult orElse(),
@@ -167,7 +167,7 @@ class _$SignInRequested implements SignInRequested {
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) signInRequested,
     required TResult Function(String email, String password) signUpRequested,
-    required TResult Function() signOutRequested,
+    required TResult Function(BuildContext context) signOutRequested,
     required TResult Function() googleSignInRequested,
     required TResult Function() authCheckRequested,
   }) {
@@ -179,7 +179,7 @@ class _$SignInRequested implements SignInRequested {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String password)? signInRequested,
     TResult? Function(String email, String password)? signUpRequested,
-    TResult? Function()? signOutRequested,
+    TResult? Function(BuildContext context)? signOutRequested,
     TResult? Function()? googleSignInRequested,
     TResult? Function()? authCheckRequested,
   }) {
@@ -191,7 +191,7 @@ class _$SignInRequested implements SignInRequested {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? signInRequested,
     TResult Function(String email, String password)? signUpRequested,
-    TResult Function()? signOutRequested,
+    TResult Function(BuildContext context)? signOutRequested,
     TResult Function()? googleSignInRequested,
     TResult Function()? authCheckRequested,
     required TResult orElse(),
@@ -331,7 +331,7 @@ class _$SignUpRequested implements SignUpRequested {
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) signInRequested,
     required TResult Function(String email, String password) signUpRequested,
-    required TResult Function() signOutRequested,
+    required TResult Function(BuildContext context) signOutRequested,
     required TResult Function() googleSignInRequested,
     required TResult Function() authCheckRequested,
   }) {
@@ -343,7 +343,7 @@ class _$SignUpRequested implements SignUpRequested {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String password)? signInRequested,
     TResult? Function(String email, String password)? signUpRequested,
-    TResult? Function()? signOutRequested,
+    TResult? Function(BuildContext context)? signOutRequested,
     TResult? Function()? googleSignInRequested,
     TResult? Function()? authCheckRequested,
   }) {
@@ -355,7 +355,7 @@ class _$SignUpRequested implements SignUpRequested {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? signInRequested,
     TResult Function(String email, String password)? signUpRequested,
-    TResult Function()? signOutRequested,
+    TResult Function(BuildContext context)? signOutRequested,
     TResult Function()? googleSignInRequested,
     TResult Function()? authCheckRequested,
     required TResult orElse(),
@@ -425,6 +425,8 @@ abstract class _$$SignOutRequestedCopyWith<$Res> {
   factory _$$SignOutRequestedCopyWith(
           _$SignOutRequested value, $Res Function(_$SignOutRequested) then) =
       __$$SignOutRequestedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({BuildContext context});
 }
 
 /// @nodoc
@@ -434,37 +436,61 @@ class __$$SignOutRequestedCopyWithImpl<$Res>
   __$$SignOutRequestedCopyWithImpl(
       _$SignOutRequested _value, $Res Function(_$SignOutRequested) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? context = null,
+  }) {
+    return _then(_$SignOutRequested(
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$SignOutRequested implements SignOutRequested {
-  const _$SignOutRequested();
+  const _$SignOutRequested({required this.context});
+
+  @override
+  final BuildContext context;
 
   @override
   String toString() {
-    return 'AuthEvent.signOutRequested()';
+    return 'AuthEvent.signOutRequested(context: $context)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SignOutRequested);
+        (other.runtimeType == runtimeType &&
+            other is _$SignOutRequested &&
+            (identical(other.context, context) || other.context == context));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, context);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SignOutRequestedCopyWith<_$SignOutRequested> get copyWith =>
+      __$$SignOutRequestedCopyWithImpl<_$SignOutRequested>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) signInRequested,
     required TResult Function(String email, String password) signUpRequested,
-    required TResult Function() signOutRequested,
+    required TResult Function(BuildContext context) signOutRequested,
     required TResult Function() googleSignInRequested,
     required TResult Function() authCheckRequested,
   }) {
-    return signOutRequested();
+    return signOutRequested(context);
   }
 
   @override
@@ -472,11 +498,11 @@ class _$SignOutRequested implements SignOutRequested {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String password)? signInRequested,
     TResult? Function(String email, String password)? signUpRequested,
-    TResult? Function()? signOutRequested,
+    TResult? Function(BuildContext context)? signOutRequested,
     TResult? Function()? googleSignInRequested,
     TResult? Function()? authCheckRequested,
   }) {
-    return signOutRequested?.call();
+    return signOutRequested?.call(context);
   }
 
   @override
@@ -484,13 +510,13 @@ class _$SignOutRequested implements SignOutRequested {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? signInRequested,
     TResult Function(String email, String password)? signUpRequested,
-    TResult Function()? signOutRequested,
+    TResult Function(BuildContext context)? signOutRequested,
     TResult Function()? googleSignInRequested,
     TResult Function()? authCheckRequested,
     required TResult orElse(),
   }) {
     if (signOutRequested != null) {
-      return signOutRequested();
+      return signOutRequested(context);
     }
     return orElse();
   }
@@ -538,7 +564,13 @@ class _$SignOutRequested implements SignOutRequested {
 }
 
 abstract class SignOutRequested implements AuthEvent {
-  const factory SignOutRequested() = _$SignOutRequested;
+  const factory SignOutRequested({required final BuildContext context}) =
+      _$SignOutRequested;
+
+  BuildContext get context;
+  @JsonKey(ignore: true)
+  _$$SignOutRequestedCopyWith<_$SignOutRequested> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -581,7 +613,7 @@ class _$GoogleSignInRequested implements GoogleSignInRequested {
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) signInRequested,
     required TResult Function(String email, String password) signUpRequested,
-    required TResult Function() signOutRequested,
+    required TResult Function(BuildContext context) signOutRequested,
     required TResult Function() googleSignInRequested,
     required TResult Function() authCheckRequested,
   }) {
@@ -593,7 +625,7 @@ class _$GoogleSignInRequested implements GoogleSignInRequested {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String password)? signInRequested,
     TResult? Function(String email, String password)? signUpRequested,
-    TResult? Function()? signOutRequested,
+    TResult? Function(BuildContext context)? signOutRequested,
     TResult? Function()? googleSignInRequested,
     TResult? Function()? authCheckRequested,
   }) {
@@ -605,7 +637,7 @@ class _$GoogleSignInRequested implements GoogleSignInRequested {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? signInRequested,
     TResult Function(String email, String password)? signUpRequested,
-    TResult Function()? signOutRequested,
+    TResult Function(BuildContext context)? signOutRequested,
     TResult Function()? googleSignInRequested,
     TResult Function()? authCheckRequested,
     required TResult orElse(),
@@ -702,7 +734,7 @@ class _$AuthCheckRequested implements AuthCheckRequested {
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) signInRequested,
     required TResult Function(String email, String password) signUpRequested,
-    required TResult Function() signOutRequested,
+    required TResult Function(BuildContext context) signOutRequested,
     required TResult Function() googleSignInRequested,
     required TResult Function() authCheckRequested,
   }) {
@@ -714,7 +746,7 @@ class _$AuthCheckRequested implements AuthCheckRequested {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String password)? signInRequested,
     TResult? Function(String email, String password)? signUpRequested,
-    TResult? Function()? signOutRequested,
+    TResult? Function(BuildContext context)? signOutRequested,
     TResult? Function()? googleSignInRequested,
     TResult? Function()? authCheckRequested,
   }) {
@@ -726,7 +758,7 @@ class _$AuthCheckRequested implements AuthCheckRequested {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? signInRequested,
     TResult Function(String email, String password)? signUpRequested,
-    TResult Function()? signOutRequested,
+    TResult Function(BuildContext context)? signOutRequested,
     TResult Function()? googleSignInRequested,
     TResult Function()? authCheckRequested,
     required TResult orElse(),

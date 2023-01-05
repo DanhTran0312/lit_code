@@ -64,6 +64,16 @@ final TextTheme darkTextTheme = TextTheme(
     fontWeight: FontWeight.w700,
     color: darkHeadLine1,
   ),
+  headline3: GoogleFonts.poppins(
+    fontSize: headline3Size,
+    fontWeight: FontWeight.w500,
+    color: Colors.white,
+  ),
+  headline4: GoogleFonts.poppins(
+    fontSize: headline4Size,
+    fontWeight: FontWeight.w500,
+    color: Colors.white,
+  ),
   labelMedium: GoogleFonts.openSans(
     fontSize: labelMediumSize,
     fontWeight: FontWeight.w700,
@@ -82,6 +92,16 @@ final TextTheme lightTextTheme = TextTheme(
     fontSize: headline2Size,
     fontWeight: FontWeight.w700,
     color: lightPrimaryColor,
+  ),
+  headline3: GoogleFonts.poppins(
+    fontSize: headline3Size,
+    fontWeight: FontWeight.w500,
+    color: Colors.black,
+  ),
+  headline4: GoogleFonts.poppins(
+    fontSize: headline4Size,
+    fontWeight: FontWeight.w500,
+    color: Colors.black,
   ),
   labelMedium: GoogleFonts.openSans(
     fontSize: labelMediumSize,
