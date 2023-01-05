@@ -13,6 +13,10 @@ class UserRepository {
 
   Future<User> getUser() async {
     try {
+      if (userBox.isEmpty) {
+        return User.empty;
+      }
+      _user = userBox.values.first;
       return _user;
     } catch (e) {
       throw Exception('Error while getting user');
