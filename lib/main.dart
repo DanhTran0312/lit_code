@@ -1,12 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:lit_code/app/app.dart';
 import 'package:lit_code/bootstrap.dart';
 import 'package:lit_code/business_logic/blocs/bloc/auth_bloc.dart';
+import 'package:lit_code/business_logic/blocs/bloc/question_bloc.dart';
+import 'package:lit_code/business_logic/blocs/bloc/question_list_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/bottom_nav_bar_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/on_boarding_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/theme_cubit.dart';
@@ -22,8 +23,11 @@ Future<void> main() async {
     storageDirectory: await getApplicationDocumentsDirectory(),
   );
   await Hive.initFlutter();
-  Hive.registerAdapter(UserAdapter());
+  Hive
+    ..registerAdapter(UserAdapter())
+    ..registerAdapter(QuestionAdapter());
   final userBox = await Hive.openBox<User>('userBox');
+  final questionBox = await Hive.openBox<Question>('questionBox');
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -31,6 +35,10 @@ Future<void> main() async {
     userBox: userBox,
   );
   final authRepository = AuthRepository();
+  final questionRepository = QuestionRepository(
+    questionBox: questionBox,
+    userBox: userBox,
+  );
 
   final appRouter = AppRouter(
     userRepository: userReposiory,
@@ -53,10 +61,21 @@ Future<void> main() async {
         BlocProvider<BottomNavBarCubit>(
           create: (context) => BottomNavBarCubit(),
         ),
+        BlocProvider<QuestionBloc>(
+          create: (context) => QuestionBloc(
+            questionRepository: questionRepository,
+          ),
+        ),
+        BlocProvider<QuestionListBloc>(
+          create: (context) => QuestionListBloc(
+            questionRepository: questionRepository,
+          ),
+        ),
       ],
       child: LitCodeApp(
         appRouter: appRouter,
         userBox: userBox,
+        questionBox: questionBox,
       ),
     ),
   );

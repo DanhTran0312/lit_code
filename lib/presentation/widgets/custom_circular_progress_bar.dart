@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lit_code/constants/constant.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 

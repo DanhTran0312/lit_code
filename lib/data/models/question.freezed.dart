@@ -20,11 +20,17 @@ Question _$QuestionFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Question {
+  @HiveField(0)
   String get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   String get title => throw _privateConstructorUsedError;
+  @HiveField(2)
   Difficulty get difficulty => throw _privateConstructorUsedError;
+  @HiveField(3)
   Category get category => throw _privateConstructorUsedError;
+  @HiveField(4)
   DateTime get completedAt => throw _privateConstructorUsedError;
+  @HiveField(5)
   bool get isCompleted => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,12 +45,12 @@ abstract class $QuestionCopyWith<$Res> {
       _$QuestionCopyWithImpl<$Res, Question>;
   @useResult
   $Res call(
-      {String id,
-      String title,
-      Difficulty difficulty,
-      Category category,
-      DateTime completedAt,
-      bool isCompleted});
+      {@HiveField(0) String id,
+      @HiveField(1) String title,
+      @HiveField(2) Difficulty difficulty,
+      @HiveField(3) Category category,
+      @HiveField(4) DateTime completedAt,
+      @HiveField(5) bool isCompleted});
 }
 
 /// @nodoc
@@ -104,12 +110,12 @@ abstract class _$$_QuestionCopyWith<$Res> implements $QuestionCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id,
-      String title,
-      Difficulty difficulty,
-      Category category,
-      DateTime completedAt,
-      bool isCompleted});
+      {@HiveField(0) String id,
+      @HiveField(1) String title,
+      @HiveField(2) Difficulty difficulty,
+      @HiveField(3) Category category,
+      @HiveField(4) DateTime completedAt,
+      @HiveField(5) bool isCompleted});
 }
 
 /// @nodoc
@@ -163,28 +169,34 @@ class __$$_QuestionCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Question implements _Question {
   const _$_Question(
-      {required this.id,
-      required this.title,
-      required this.difficulty,
-      required this.category,
-      required this.completedAt,
-      this.isCompleted = false});
+      {@HiveField(0) required this.id,
+      @HiveField(1) required this.title,
+      @HiveField(2) required this.difficulty,
+      @HiveField(3) required this.category,
+      @HiveField(4) required this.completedAt,
+      @HiveField(5) this.isCompleted = false});
 
   factory _$_Question.fromJson(Map<String, dynamic> json) =>
       _$$_QuestionFromJson(json);
 
   @override
+  @HiveField(0)
   final String id;
   @override
+  @HiveField(1)
   final String title;
   @override
+  @HiveField(2)
   final Difficulty difficulty;
   @override
+  @HiveField(3)
   final Category category;
   @override
+  @HiveField(4)
   final DateTime completedAt;
   @override
   @JsonKey()
+  @HiveField(5)
   final bool isCompleted;
 
   @override
@@ -230,26 +242,32 @@ class _$_Question implements _Question {
 
 abstract class _Question implements Question {
   const factory _Question(
-      {required final String id,
-      required final String title,
-      required final Difficulty difficulty,
-      required final Category category,
-      required final DateTime completedAt,
-      final bool isCompleted}) = _$_Question;
+      {@HiveField(0) required final String id,
+      @HiveField(1) required final String title,
+      @HiveField(2) required final Difficulty difficulty,
+      @HiveField(3) required final Category category,
+      @HiveField(4) required final DateTime completedAt,
+      @HiveField(5) final bool isCompleted}) = _$_Question;
 
   factory _Question.fromJson(Map<String, dynamic> json) = _$_Question.fromJson;
 
   @override
+  @HiveField(0)
   String get id;
   @override
+  @HiveField(1)
   String get title;
   @override
+  @HiveField(2)
   Difficulty get difficulty;
   @override
+  @HiveField(3)
   Category get category;
   @override
+  @HiveField(4)
   DateTime get completedAt;
   @override
+  @HiveField(5)
   bool get isCompleted;
   @override
   @JsonKey(ignore: true)

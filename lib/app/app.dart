@@ -11,10 +11,12 @@ class LitCodeApp extends StatefulWidget {
     super.key,
     required this.appRouter,
     required this.userBox,
+    required this.questionBox,
   });
 
   final AppRouter appRouter;
   final Box<User> userBox;
+  final Box<Question> questionBox;
 
   Future<void> closeBoxes() async {
     if (userBox.isOpen) {

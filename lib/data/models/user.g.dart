@@ -17,25 +17,34 @@ class UserAdapter extends TypeAdapter<User> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return User(
-      id: fields[0] as String,
-      name: fields[1] as String?,
-      email: fields[2] as String?,
-      photoUrl: fields[3] as String?,
+      id: fields[1] as String,
+      name: fields[2] as String?,
+      email: fields[3] as String?,
+      photoUrl: fields[4] as String?,
+      settings: fields[5] as Settings,
+      completedQuestions: (fields[6] as List).cast<String>(),
+      questionsVersion: fields[7] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, User obj) {
     writer
-      ..writeByte(4)
-      ..writeByte(0)
-      ..write(obj.id)
+      ..writeByte(7)
       ..writeByte(1)
-      ..write(obj.name)
+      ..write(obj.id)
       ..writeByte(2)
-      ..write(obj.email)
+      ..write(obj.name)
       ..writeByte(3)
-      ..write(obj.photoUrl);
+      ..write(obj.email)
+      ..writeByte(4)
+      ..write(obj.photoUrl)
+      ..writeByte(5)
+      ..write(obj.settings)
+      ..writeByte(6)
+      ..write(obj.completedQuestions)
+      ..writeByte(7)
+      ..write(obj.questionsVersion);
   }
 
   @override
@@ -58,6 +67,14 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       name: json['name'] as String?,
       email: json['email'] as String?,
       photoUrl: json['photoUrl'] as String?,
+      settings: json['settings'] == null
+          ? const Settings()
+          : Settings.fromJson(json['settings'] as Map<String, dynamic>),
+      completedQuestions: (json['completedQuestions'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      questionsVersion: json['questionsVersion'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
@@ -65,4 +82,7 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'name': instance.name,
       'email': instance.email,
       'photoUrl': instance.photoUrl,
+      'settings': instance.settings,
+      'completedQuestions': instance.completedQuestions,
+      'questionsVersion': instance.questionsVersion,
     };

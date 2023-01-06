@@ -20,17 +20,11 @@ Settings _$SettingsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Settings {
-  @HiveField(0)
   bool get isDarkMode => throw _privateConstructorUsedError;
-  @HiveField(1)
   bool get isNotificationsEnabled => throw _privateConstructorUsedError;
-  @HiveField(2)
   List<Difficulty> get difficulties => throw _privateConstructorUsedError;
-  @HiveField(3)
   List<Category> get categories => throw _privateConstructorUsedError;
-  @HiveField(4)
   DateTime? get goalDate => throw _privateConstructorUsedError;
-  @HiveField(5)
   int? get goalQuestions => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,12 +39,12 @@ abstract class $SettingsCopyWith<$Res> {
       _$SettingsCopyWithImpl<$Res, Settings>;
   @useResult
   $Res call(
-      {@HiveField(0) bool isDarkMode,
-      @HiveField(1) bool isNotificationsEnabled,
-      @HiveField(2) List<Difficulty> difficulties,
-      @HiveField(3) List<Category> categories,
-      @HiveField(4) DateTime? goalDate,
-      @HiveField(5) int? goalQuestions});
+      {bool isDarkMode,
+      bool isNotificationsEnabled,
+      List<Difficulty> difficulties,
+      List<Category> categories,
+      DateTime? goalDate,
+      int? goalQuestions});
 }
 
 /// @nodoc
@@ -110,12 +104,12 @@ abstract class _$$_SettingsCopyWith<$Res> implements $SettingsCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@HiveField(0) bool isDarkMode,
-      @HiveField(1) bool isNotificationsEnabled,
-      @HiveField(2) List<Difficulty> difficulties,
-      @HiveField(3) List<Category> categories,
-      @HiveField(4) DateTime? goalDate,
-      @HiveField(5) int? goalQuestions});
+      {bool isDarkMode,
+      bool isNotificationsEnabled,
+      List<Difficulty> difficulties,
+      List<Category> categories,
+      DateTime? goalDate,
+      int? goalQuestions});
 }
 
 /// @nodoc
@@ -169,14 +163,14 @@ class __$$_SettingsCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Settings extends _Settings {
   const _$_Settings(
-      {@HiveField(0) this.isDarkMode = false,
-      @HiveField(1) this.isNotificationsEnabled = false,
-      @HiveField(2) final List<Difficulty> difficulties = const [
+      {this.isDarkMode = false,
+      this.isNotificationsEnabled = false,
+      final List<Difficulty> difficulties = const [
         Difficulty.easy,
         Difficulty.medium,
         Difficulty.hard
       ],
-      @HiveField(3) final List<Category> categories = const [
+      final List<Category> categories = const [
         Category.arrayAndHashing,
         Category.twoPointers,
         Category.slidingWindow,
@@ -196,8 +190,8 @@ class _$_Settings extends _Settings {
         Category.bitManipulation,
         Category.mathAndGeometry
       ],
-      @HiveField(4) this.goalDate,
-      @HiveField(5) this.goalQuestions})
+      this.goalDate,
+      this.goalQuestions})
       : _difficulties = difficulties,
         _categories = categories,
         super._();
@@ -207,16 +201,13 @@ class _$_Settings extends _Settings {
 
   @override
   @JsonKey()
-  @HiveField(0)
   final bool isDarkMode;
   @override
   @JsonKey()
-  @HiveField(1)
   final bool isNotificationsEnabled;
   final List<Difficulty> _difficulties;
   @override
   @JsonKey()
-  @HiveField(2)
   List<Difficulty> get difficulties {
     if (_difficulties is EqualUnmodifiableListView) return _difficulties;
     // ignore: implicit_dynamic_type
@@ -226,7 +217,6 @@ class _$_Settings extends _Settings {
   final List<Category> _categories;
   @override
   @JsonKey()
-  @HiveField(3)
   List<Category> get categories {
     if (_categories is EqualUnmodifiableListView) return _categories;
     // ignore: implicit_dynamic_type
@@ -234,10 +224,8 @@ class _$_Settings extends _Settings {
   }
 
   @override
-  @HiveField(4)
   final DateTime? goalDate;
   @override
-  @HiveField(5)
   final int? goalQuestions;
 
   @override
@@ -291,33 +279,27 @@ class _$_Settings extends _Settings {
 
 abstract class _Settings extends Settings {
   const factory _Settings(
-      {@HiveField(0) final bool isDarkMode,
-      @HiveField(1) final bool isNotificationsEnabled,
-      @HiveField(2) final List<Difficulty> difficulties,
-      @HiveField(3) final List<Category> categories,
-      @HiveField(4) final DateTime? goalDate,
-      @HiveField(5) final int? goalQuestions}) = _$_Settings;
+      {final bool isDarkMode,
+      final bool isNotificationsEnabled,
+      final List<Difficulty> difficulties,
+      final List<Category> categories,
+      final DateTime? goalDate,
+      final int? goalQuestions}) = _$_Settings;
   const _Settings._() : super._();
 
   factory _Settings.fromJson(Map<String, dynamic> json) = _$_Settings.fromJson;
 
   @override
-  @HiveField(0)
   bool get isDarkMode;
   @override
-  @HiveField(1)
   bool get isNotificationsEnabled;
   @override
-  @HiveField(2)
   List<Difficulty> get difficulties;
   @override
-  @HiveField(3)
   List<Category> get categories;
   @override
-  @HiveField(4)
   DateTime? get goalDate;
   @override
-  @HiveField(5)
   int? get goalQuestions;
   @override
   @JsonKey(ignore: true)
