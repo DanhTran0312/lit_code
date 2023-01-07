@@ -20,25 +20,25 @@ class QuestionRepository {
     try {
       final version = userBox.getAt(0)!.questionsVersion;
       final versionData = await databaseVersionReference.once();
-      if (version.compareTo(versionData.snapshot.value! as String) != 0) {
+      if (version?.compareTo(versionData.snapshot.value! as String) != 0) {
         final data = await databaseReference.once();
         final questionList = <Question>[];
         if (data.snapshot.value != null) {
-          final rawData = data.snapshot.value! as Map<dynamic, dynamic>;
-          rawData.forEach((key, value) {
-            questionList.add(
-              Question.fromJson(value as Map<String, dynamic>),
-            );
-          });
+          final rawData = data.snapshot.value! as List<dynamic>;
+          for (final question in rawData) {
+            final q =
+                Map<String, dynamic>.from(question as Map<Object?, Object?>);
+            questionList.add(Question.fromJson(q));
+          }
         }
 
-        await updateQuestions(questionList);
-        await userBox.putAt(
-          0,
-          userBox.getAt(0)!.copyWith(
-                questionsVersion: versionData.snapshot.value! as String,
-              ),
-        );
+        // await updateQuestions(questionList);
+        // await userBox.putAt(
+        //   0,
+        //   userBox.getAt(0)!.copyWith(
+        //         questionsVersion: versionData.snapshot.value! as String,
+        //       ),
+        // );
         return questionList;
       } else {
         return questionBox.values.toList();

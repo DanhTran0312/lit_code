@@ -13,9 +13,9 @@ abstract class User with _$User {
     @HiveField(2) String? name,
     @HiveField(3) String? email,
     @HiveField(4) String? photoUrl,
-    @HiveField(5) @Default(Settings()) Settings settings,
-    @HiveField(6) @Default([]) List<String> completedQuestions,
-    @HiveField(7) @Default('') String questionsVersion,
+    @HiveField(5) @Default(Settings()) Settings? settings,
+    @HiveField(6) @Default([]) List<String>? completedQuestions,
+    @HiveField(7) @Default('') String? questionsVersion,
   }) = _User;
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   const User._();

@@ -29,11 +29,11 @@ mixin _$User {
   @HiveField(4)
   String? get photoUrl => throw _privateConstructorUsedError;
   @HiveField(5)
-  Settings get settings => throw _privateConstructorUsedError;
+  Settings? get settings => throw _privateConstructorUsedError;
   @HiveField(6)
-  List<String> get completedQuestions => throw _privateConstructorUsedError;
+  List<String>? get completedQuestions => throw _privateConstructorUsedError;
   @HiveField(7)
-  String get questionsVersion => throw _privateConstructorUsedError;
+  String? get questionsVersion => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,11 +50,11 @@ abstract class $UserCopyWith<$Res> {
       @HiveField(2) String? name,
       @HiveField(3) String? email,
       @HiveField(4) String? photoUrl,
-      @HiveField(5) Settings settings,
-      @HiveField(6) List<String> completedQuestions,
-      @HiveField(7) String questionsVersion});
+      @HiveField(5) Settings? settings,
+      @HiveField(6) List<String>? completedQuestions,
+      @HiveField(7) String? questionsVersion});
 
-  $SettingsCopyWith<$Res> get settings;
+  $SettingsCopyWith<$Res>? get settings;
 }
 
 /// @nodoc
@@ -74,9 +74,9 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? name = freezed,
     Object? email = freezed,
     Object? photoUrl = freezed,
-    Object? settings = null,
-    Object? completedQuestions = null,
-    Object? questionsVersion = null,
+    Object? settings = freezed,
+    Object? completedQuestions = freezed,
+    Object? questionsVersion = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -95,25 +95,29 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      settings: null == settings
+      settings: freezed == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
-              as Settings,
-      completedQuestions: null == completedQuestions
+              as Settings?,
+      completedQuestions: freezed == completedQuestions
           ? _value.completedQuestions
           : completedQuestions // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      questionsVersion: null == questionsVersion
+              as List<String>?,
+      questionsVersion: freezed == questionsVersion
           ? _value.questionsVersion
           : questionsVersion // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $SettingsCopyWith<$Res> get settings {
-    return $SettingsCopyWith<$Res>(_value.settings, (value) {
+  $SettingsCopyWith<$Res>? get settings {
+    if (_value.settings == null) {
+      return null;
+    }
+
+    return $SettingsCopyWith<$Res>(_value.settings!, (value) {
       return _then(_value.copyWith(settings: value) as $Val);
     });
   }
@@ -130,12 +134,12 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       @HiveField(2) String? name,
       @HiveField(3) String? email,
       @HiveField(4) String? photoUrl,
-      @HiveField(5) Settings settings,
-      @HiveField(6) List<String> completedQuestions,
-      @HiveField(7) String questionsVersion});
+      @HiveField(5) Settings? settings,
+      @HiveField(6) List<String>? completedQuestions,
+      @HiveField(7) String? questionsVersion});
 
   @override
-  $SettingsCopyWith<$Res> get settings;
+  $SettingsCopyWith<$Res>? get settings;
 }
 
 /// @nodoc
@@ -151,9 +155,9 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? name = freezed,
     Object? email = freezed,
     Object? photoUrl = freezed,
-    Object? settings = null,
-    Object? completedQuestions = null,
-    Object? questionsVersion = null,
+    Object? settings = freezed,
+    Object? completedQuestions = freezed,
+    Object? questionsVersion = freezed,
   }) {
     return _then(_$_User(
       id: null == id
@@ -172,18 +176,18 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      settings: null == settings
+      settings: freezed == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
-              as Settings,
-      completedQuestions: null == completedQuestions
+              as Settings?,
+      completedQuestions: freezed == completedQuestions
           ? _value._completedQuestions
           : completedQuestions // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      questionsVersion: null == questionsVersion
+              as List<String>?,
+      questionsVersion: freezed == questionsVersion
           ? _value.questionsVersion
           : questionsVersion // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -197,7 +201,7 @@ class _$_User extends _User {
       @HiveField(3) this.email,
       @HiveField(4) this.photoUrl,
       @HiveField(5) this.settings = const Settings(),
-      @HiveField(6) final List<String> completedQuestions = const [],
+      @HiveField(6) final List<String>? completedQuestions = const [],
       @HiveField(7) this.questionsVersion = ''})
       : _completedQuestions = completedQuestions,
         super._();
@@ -219,22 +223,24 @@ class _$_User extends _User {
   @override
   @JsonKey()
   @HiveField(5)
-  final Settings settings;
-  final List<String> _completedQuestions;
+  final Settings? settings;
+  final List<String>? _completedQuestions;
   @override
   @JsonKey()
   @HiveField(6)
-  List<String> get completedQuestions {
+  List<String>? get completedQuestions {
+    final value = _completedQuestions;
+    if (value == null) return null;
     if (_completedQuestions is EqualUnmodifiableListView)
       return _completedQuestions;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_completedQuestions);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
   @JsonKey()
   @HiveField(7)
-  final String questionsVersion;
+  final String? questionsVersion;
 
   @override
   String toString() {
@@ -291,9 +297,9 @@ abstract class _User extends User {
       @HiveField(2) final String? name,
       @HiveField(3) final String? email,
       @HiveField(4) final String? photoUrl,
-      @HiveField(5) final Settings settings,
-      @HiveField(6) final List<String> completedQuestions,
-      @HiveField(7) final String questionsVersion}) = _$_User;
+      @HiveField(5) final Settings? settings,
+      @HiveField(6) final List<String>? completedQuestions,
+      @HiveField(7) final String? questionsVersion}) = _$_User;
   const _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
@@ -312,13 +318,13 @@ abstract class _User extends User {
   String? get photoUrl;
   @override
   @HiveField(5)
-  Settings get settings;
+  Settings? get settings;
   @override
   @HiveField(6)
-  List<String> get completedQuestions;
+  List<String>? get completedQuestions;
   @override
   @HiveField(7)
-  String get questionsVersion;
+  String? get questionsVersion;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

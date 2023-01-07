@@ -21,9 +21,9 @@ class UserAdapter extends TypeAdapter<User> {
       name: fields[2] as String?,
       email: fields[3] as String?,
       photoUrl: fields[4] as String?,
-      settings: fields[5] as Settings,
-      completedQuestions: (fields[6] as List).cast<String>(),
-      questionsVersion: fields[7] as String,
+      settings: fields[5] as Settings?,
+      completedQuestions: (fields[6] as List?)?.cast<String>(),
+      questionsVersion: fields[7] as String?,
     );
   }
 

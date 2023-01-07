@@ -11,6 +11,7 @@ import 'package:lit_code/business_logic/blocs/bloc/question_list_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/bottom_nav_bar_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/on_boarding_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/theme_cubit.dart';
+import 'package:lit_code/constants/enums.dart';
 import 'package:lit_code/data/models/models.dart';
 import 'package:lit_code/data/repositories/repositories.dart';
 import 'package:lit_code/firebase_options.dart';
@@ -25,7 +26,11 @@ Future<void> main() async {
   await Hive.initFlutter();
   Hive
     ..registerAdapter(UserAdapter())
-    ..registerAdapter(QuestionAdapter());
+    ..registerAdapter(QuestionAdapter())
+    ..registerAdapter(SettingsAdapter())
+    ..registerAdapter(DifficultyAdapter())
+    ..registerAdapter(CategoryAdapter());
+
   final userBox = await Hive.openBox<User>('userBox');
   final questionBox = await Hive.openBox<Question>('questionBox');
   await Firebase.initializeApp(

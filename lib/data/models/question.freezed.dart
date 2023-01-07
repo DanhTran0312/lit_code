@@ -25,12 +25,16 @@ mixin _$Question {
   @HiveField(1)
   String get title => throw _privateConstructorUsedError;
   @HiveField(2)
+  @JsonEnum()
   Difficulty get difficulty => throw _privateConstructorUsedError;
   @HiveField(3)
+  @JsonEnum()
   Category get category => throw _privateConstructorUsedError;
   @HiveField(4)
-  DateTime get completedAt => throw _privateConstructorUsedError;
+  String get link => throw _privateConstructorUsedError;
   @HiveField(5)
+  DateTime? get completedAt => throw _privateConstructorUsedError;
+  @HiveField(6)
   bool get isCompleted => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,10 +51,11 @@ abstract class $QuestionCopyWith<$Res> {
   $Res call(
       {@HiveField(0) String id,
       @HiveField(1) String title,
-      @HiveField(2) Difficulty difficulty,
-      @HiveField(3) Category category,
-      @HiveField(4) DateTime completedAt,
-      @HiveField(5) bool isCompleted});
+      @HiveField(2) @JsonEnum() Difficulty difficulty,
+      @HiveField(3) @JsonEnum() Category category,
+      @HiveField(4) String link,
+      @HiveField(5) DateTime? completedAt,
+      @HiveField(6) bool isCompleted});
 }
 
 /// @nodoc
@@ -70,7 +75,8 @@ class _$QuestionCopyWithImpl<$Res, $Val extends Question>
     Object? title = null,
     Object? difficulty = null,
     Object? category = null,
-    Object? completedAt = null,
+    Object? link = null,
+    Object? completedAt = freezed,
     Object? isCompleted = null,
   }) {
     return _then(_value.copyWith(
@@ -90,10 +96,14 @@ class _$QuestionCopyWithImpl<$Res, $Val extends Question>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as Category,
-      completedAt: null == completedAt
+      link: null == link
+          ? _value.link
+          : link // ignore: cast_nullable_to_non_nullable
+              as String,
+      completedAt: freezed == completedAt
           ? _value.completedAt
           : completedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       isCompleted: null == isCompleted
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
@@ -112,10 +122,11 @@ abstract class _$$_QuestionCopyWith<$Res> implements $QuestionCopyWith<$Res> {
   $Res call(
       {@HiveField(0) String id,
       @HiveField(1) String title,
-      @HiveField(2) Difficulty difficulty,
-      @HiveField(3) Category category,
-      @HiveField(4) DateTime completedAt,
-      @HiveField(5) bool isCompleted});
+      @HiveField(2) @JsonEnum() Difficulty difficulty,
+      @HiveField(3) @JsonEnum() Category category,
+      @HiveField(4) String link,
+      @HiveField(5) DateTime? completedAt,
+      @HiveField(6) bool isCompleted});
 }
 
 /// @nodoc
@@ -133,7 +144,8 @@ class __$$_QuestionCopyWithImpl<$Res>
     Object? title = null,
     Object? difficulty = null,
     Object? category = null,
-    Object? completedAt = null,
+    Object? link = null,
+    Object? completedAt = freezed,
     Object? isCompleted = null,
   }) {
     return _then(_$_Question(
@@ -153,10 +165,14 @@ class __$$_QuestionCopyWithImpl<$Res>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as Category,
-      completedAt: null == completedAt
+      link: null == link
+          ? _value.link
+          : link // ignore: cast_nullable_to_non_nullable
+              as String,
+      completedAt: freezed == completedAt
           ? _value.completedAt
           : completedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       isCompleted: null == isCompleted
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
@@ -171,10 +187,11 @@ class _$_Question implements _Question {
   const _$_Question(
       {@HiveField(0) required this.id,
       @HiveField(1) required this.title,
-      @HiveField(2) required this.difficulty,
-      @HiveField(3) required this.category,
-      @HiveField(4) required this.completedAt,
-      @HiveField(5) this.isCompleted = false});
+      @HiveField(2) @JsonEnum() required this.difficulty,
+      @HiveField(3) @JsonEnum() required this.category,
+      @HiveField(4) required this.link,
+      @HiveField(5) this.completedAt,
+      @HiveField(6) this.isCompleted = false});
 
   factory _$_Question.fromJson(Map<String, dynamic> json) =>
       _$$_QuestionFromJson(json);
@@ -187,21 +204,26 @@ class _$_Question implements _Question {
   final String title;
   @override
   @HiveField(2)
+  @JsonEnum()
   final Difficulty difficulty;
   @override
   @HiveField(3)
+  @JsonEnum()
   final Category category;
   @override
   @HiveField(4)
-  final DateTime completedAt;
+  final String link;
+  @override
+  @HiveField(5)
+  final DateTime? completedAt;
   @override
   @JsonKey()
-  @HiveField(5)
+  @HiveField(6)
   final bool isCompleted;
 
   @override
   String toString() {
-    return 'Question(id: $id, title: $title, difficulty: $difficulty, category: $category, completedAt: $completedAt, isCompleted: $isCompleted)';
+    return 'Question(id: $id, title: $title, difficulty: $difficulty, category: $category, link: $link, completedAt: $completedAt, isCompleted: $isCompleted)';
   }
 
   @override
@@ -215,6 +237,7 @@ class _$_Question implements _Question {
                 other.difficulty == difficulty) &&
             (identical(other.category, category) ||
                 other.category == category) &&
+            (identical(other.link, link) || other.link == link) &&
             (identical(other.completedAt, completedAt) ||
                 other.completedAt == completedAt) &&
             (identical(other.isCompleted, isCompleted) ||
@@ -223,8 +246,8 @@ class _$_Question implements _Question {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, title, difficulty, category, completedAt, isCompleted);
+  int get hashCode => Object.hash(runtimeType, id, title, difficulty, category,
+      link, completedAt, isCompleted);
 
   @JsonKey(ignore: true)
   @override
@@ -244,10 +267,11 @@ abstract class _Question implements Question {
   const factory _Question(
       {@HiveField(0) required final String id,
       @HiveField(1) required final String title,
-      @HiveField(2) required final Difficulty difficulty,
-      @HiveField(3) required final Category category,
-      @HiveField(4) required final DateTime completedAt,
-      @HiveField(5) final bool isCompleted}) = _$_Question;
+      @HiveField(2) @JsonEnum() required final Difficulty difficulty,
+      @HiveField(3) @JsonEnum() required final Category category,
+      @HiveField(4) required final String link,
+      @HiveField(5) final DateTime? completedAt,
+      @HiveField(6) final bool isCompleted}) = _$_Question;
 
   factory _Question.fromJson(Map<String, dynamic> json) = _$_Question.fromJson;
 
@@ -259,15 +283,20 @@ abstract class _Question implements Question {
   String get title;
   @override
   @HiveField(2)
+  @JsonEnum()
   Difficulty get difficulty;
   @override
   @HiveField(3)
+  @JsonEnum()
   Category get category;
   @override
   @HiveField(4)
-  DateTime get completedAt;
+  String get link;
   @override
   @HiveField(5)
+  DateTime? get completedAt;
+  @override
+  @HiveField(6)
   bool get isCompleted;
   @override
   @JsonKey(ignore: true)
