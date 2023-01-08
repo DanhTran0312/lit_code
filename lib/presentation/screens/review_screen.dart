@@ -9,6 +9,7 @@ class ReviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       bottomNavigationBar: const PersistedBottomNavBar(),
       body: BlocConsumer<QuestionListBloc, QuestionListState>(
         builder: (context, state) {
@@ -24,7 +25,9 @@ class ReviewScreen extends StatelessWidget {
               itemCount: state.questions.length,
               itemBuilder: (context, index) {
                 final question = state.questions[index];
-                return Text(question.title);
+                return CollapsableQuestionCard(
+                  question: question,
+                );
               },
             );
           } else {

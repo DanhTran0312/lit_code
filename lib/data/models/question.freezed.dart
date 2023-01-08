@@ -25,10 +25,8 @@ mixin _$Question {
   @HiveField(1)
   String get title => throw _privateConstructorUsedError;
   @HiveField(2)
-  @JsonEnum()
   Difficulty get difficulty => throw _privateConstructorUsedError;
   @HiveField(3)
-  @JsonEnum()
   Category get category => throw _privateConstructorUsedError;
   @HiveField(4)
   String get link => throw _privateConstructorUsedError;
@@ -36,6 +34,8 @@ mixin _$Question {
   DateTime? get completedAt => throw _privateConstructorUsedError;
   @HiveField(6)
   bool get isCompleted => throw _privateConstructorUsedError;
+  @HiveField(7)
+  Confidence? get confidence => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,11 +51,12 @@ abstract class $QuestionCopyWith<$Res> {
   $Res call(
       {@HiveField(0) String id,
       @HiveField(1) String title,
-      @HiveField(2) @JsonEnum() Difficulty difficulty,
-      @HiveField(3) @JsonEnum() Category category,
+      @HiveField(2) Difficulty difficulty,
+      @HiveField(3) Category category,
       @HiveField(4) String link,
       @HiveField(5) DateTime? completedAt,
-      @HiveField(6) bool isCompleted});
+      @HiveField(6) bool isCompleted,
+      @HiveField(7) Confidence? confidence});
 }
 
 /// @nodoc
@@ -78,6 +79,7 @@ class _$QuestionCopyWithImpl<$Res, $Val extends Question>
     Object? link = null,
     Object? completedAt = freezed,
     Object? isCompleted = null,
+    Object? confidence = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -108,6 +110,10 @@ class _$QuestionCopyWithImpl<$Res, $Val extends Question>
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
               as bool,
+      confidence: freezed == confidence
+          ? _value.confidence
+          : confidence // ignore: cast_nullable_to_non_nullable
+              as Confidence?,
     ) as $Val);
   }
 }
@@ -122,11 +128,12 @@ abstract class _$$_QuestionCopyWith<$Res> implements $QuestionCopyWith<$Res> {
   $Res call(
       {@HiveField(0) String id,
       @HiveField(1) String title,
-      @HiveField(2) @JsonEnum() Difficulty difficulty,
-      @HiveField(3) @JsonEnum() Category category,
+      @HiveField(2) Difficulty difficulty,
+      @HiveField(3) Category category,
       @HiveField(4) String link,
       @HiveField(5) DateTime? completedAt,
-      @HiveField(6) bool isCompleted});
+      @HiveField(6) bool isCompleted,
+      @HiveField(7) Confidence? confidence});
 }
 
 /// @nodoc
@@ -147,6 +154,7 @@ class __$$_QuestionCopyWithImpl<$Res>
     Object? link = null,
     Object? completedAt = freezed,
     Object? isCompleted = null,
+    Object? confidence = freezed,
   }) {
     return _then(_$_Question(
       id: null == id
@@ -177,6 +185,10 @@ class __$$_QuestionCopyWithImpl<$Res>
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
               as bool,
+      confidence: freezed == confidence
+          ? _value.confidence
+          : confidence // ignore: cast_nullable_to_non_nullable
+              as Confidence?,
     ));
   }
 }
@@ -187,11 +199,12 @@ class _$_Question implements _Question {
   const _$_Question(
       {@HiveField(0) required this.id,
       @HiveField(1) required this.title,
-      @HiveField(2) @JsonEnum() required this.difficulty,
-      @HiveField(3) @JsonEnum() required this.category,
+      @HiveField(2) required this.difficulty,
+      @HiveField(3) required this.category,
       @HiveField(4) required this.link,
       @HiveField(5) this.completedAt,
-      @HiveField(6) this.isCompleted = false});
+      @HiveField(6) this.isCompleted = false,
+      @HiveField(7) this.confidence});
 
   factory _$_Question.fromJson(Map<String, dynamic> json) =>
       _$$_QuestionFromJson(json);
@@ -204,11 +217,9 @@ class _$_Question implements _Question {
   final String title;
   @override
   @HiveField(2)
-  @JsonEnum()
   final Difficulty difficulty;
   @override
   @HiveField(3)
-  @JsonEnum()
   final Category category;
   @override
   @HiveField(4)
@@ -220,10 +231,13 @@ class _$_Question implements _Question {
   @JsonKey()
   @HiveField(6)
   final bool isCompleted;
+  @override
+  @HiveField(7)
+  final Confidence? confidence;
 
   @override
   String toString() {
-    return 'Question(id: $id, title: $title, difficulty: $difficulty, category: $category, link: $link, completedAt: $completedAt, isCompleted: $isCompleted)';
+    return 'Question(id: $id, title: $title, difficulty: $difficulty, category: $category, link: $link, completedAt: $completedAt, isCompleted: $isCompleted, confidence: $confidence)';
   }
 
   @override
@@ -241,13 +255,15 @@ class _$_Question implements _Question {
             (identical(other.completedAt, completedAt) ||
                 other.completedAt == completedAt) &&
             (identical(other.isCompleted, isCompleted) ||
-                other.isCompleted == isCompleted));
+                other.isCompleted == isCompleted) &&
+            (identical(other.confidence, confidence) ||
+                other.confidence == confidence));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, title, difficulty, category,
-      link, completedAt, isCompleted);
+      link, completedAt, isCompleted, confidence);
 
   @JsonKey(ignore: true)
   @override
@@ -267,11 +283,12 @@ abstract class _Question implements Question {
   const factory _Question(
       {@HiveField(0) required final String id,
       @HiveField(1) required final String title,
-      @HiveField(2) @JsonEnum() required final Difficulty difficulty,
-      @HiveField(3) @JsonEnum() required final Category category,
+      @HiveField(2) required final Difficulty difficulty,
+      @HiveField(3) required final Category category,
       @HiveField(4) required final String link,
       @HiveField(5) final DateTime? completedAt,
-      @HiveField(6) final bool isCompleted}) = _$_Question;
+      @HiveField(6) final bool isCompleted,
+      @HiveField(7) final Confidence? confidence}) = _$_Question;
 
   factory _Question.fromJson(Map<String, dynamic> json) = _$_Question.fromJson;
 
@@ -283,11 +300,9 @@ abstract class _Question implements Question {
   String get title;
   @override
   @HiveField(2)
-  @JsonEnum()
   Difficulty get difficulty;
   @override
   @HiveField(3)
-  @JsonEnum()
   Category get category;
   @override
   @HiveField(4)
@@ -298,6 +313,9 @@ abstract class _Question implements Question {
   @override
   @HiveField(6)
   bool get isCompleted;
+  @override
+  @HiveField(7)
+  Confidence? get confidence;
   @override
   @JsonKey(ignore: true)
   _$$_QuestionCopyWith<_$_Question> get copyWith =>

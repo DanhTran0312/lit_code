@@ -11,11 +11,12 @@ abstract class Question with _$Question {
   const factory Question({
     @HiveField(0) required String id,
     @HiveField(1) required String title,
-    @HiveField(2) @JsonEnum() required Difficulty difficulty,
-    @HiveField(3) @JsonEnum() required Category category,
+    @HiveField(2) required Difficulty difficulty,
+    @HiveField(3) required Category category,
     @HiveField(4) required String link,
     @HiveField(5) DateTime? completedAt,
     @HiveField(6) @Default(false) bool isCompleted,
+    @HiveField(7) Confidence? confidence,
   }) = _Question;
 
   factory Question.fromJson(Map<String, dynamic> json) =>

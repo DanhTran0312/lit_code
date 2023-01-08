@@ -74,10 +74,25 @@ final TextTheme darkTextTheme = TextTheme(
     fontWeight: FontWeight.w500,
     color: Colors.white,
   ),
-  labelMedium: GoogleFonts.openSans(
-    fontSize: labelMediumSize,
-    fontWeight: FontWeight.w700,
-    color: darkHeadLine1,
+  headline5: GoogleFonts.poppins(
+    fontSize: headline5Size,
+    fontWeight: FontWeight.w500,
+    color: Colors.white,
+  ),
+  headline6: GoogleFonts.poppins(
+    fontSize: headline6Size,
+    fontWeight: FontWeight.w500,
+    color: Colors.white,
+  ),
+  subtitle1: GoogleFonts.openSans(
+    fontSize: subtitle1Size,
+    fontWeight: FontWeight.w500,
+    color: Colors.white,
+  ),
+  subtitle2: GoogleFonts.openSans(
+    fontSize: subtitle2Size,
+    fontWeight: FontWeight.w500,
+    color: Colors.white,
   ),
 );
 
@@ -103,10 +118,15 @@ final TextTheme lightTextTheme = TextTheme(
     fontWeight: FontWeight.w500,
     color: Colors.black,
   ),
-  labelMedium: GoogleFonts.openSans(
-    fontSize: labelMediumSize,
-    fontWeight: FontWeight.w700,
-    color: lightPrimaryColor,
+  subtitle1: GoogleFonts.openSans(
+    fontSize: subtitle1Size,
+    fontWeight: FontWeight.w500,
+    color: Colors.white,
+  ),
+  subtitle2: GoogleFonts.openSans(
+    fontSize: subtitle2Size,
+    fontWeight: FontWeight.w500,
+    color: Colors.white,
   ),
 );
 

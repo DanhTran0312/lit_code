@@ -32,13 +32,13 @@ class QuestionRepository {
           }
         }
 
-        // await updateQuestions(questionList);
-        // await userBox.putAt(
-        //   0,
-        //   userBox.getAt(0)!.copyWith(
-        //         questionsVersion: versionData.snapshot.value! as String,
-        //       ),
-        // );
+        await updateQuestions(questionList);
+        await userBox.putAt(
+          0,
+          userBox.getAt(0)!.copyWith(
+                questionsVersion: versionData.snapshot.value! as String,
+              ),
+        );
         return questionList;
       } else {
         return questionBox.values.toList();

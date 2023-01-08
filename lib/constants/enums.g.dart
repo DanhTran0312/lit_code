@@ -50,6 +50,50 @@ class DifficultyAdapter extends TypeAdapter<Difficulty> {
           typeId == other.typeId;
 }
 
+class ConfidenceAdapter extends TypeAdapter<Confidence> {
+  @override
+  final int typeId = 5;
+
+  @override
+  Confidence read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return Confidence.low;
+      case 1:
+        return Confidence.medium;
+      case 2:
+        return Confidence.high;
+      default:
+        return Confidence.low;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, Confidence obj) {
+    switch (obj) {
+      case Confidence.low:
+        writer.writeByte(0);
+        break;
+      case Confidence.medium:
+        writer.writeByte(1);
+        break;
+      case Confidence.high:
+        writer.writeByte(2);
+        break;
+    }
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ConfidenceAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
 class CategoryAdapter extends TypeAdapter<Category> {
   @override
   final int typeId = 4;

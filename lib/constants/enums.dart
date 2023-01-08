@@ -17,6 +17,20 @@ enum Difficulty {
   hard,
 }
 
+@JsonEnum(valueField: 'confidence')
+@HiveType(typeId: 5)
+enum Confidence {
+  @HiveField(0)
+  @JsonValue('Low')
+  low,
+  @HiveField(1)
+  @JsonValue('Medium')
+  medium,
+  @HiveField(2)
+  @JsonValue('High')
+  high,
+}
+
 @JsonEnum(valueField: 'category')
 @HiveType(typeId: 4)
 enum Category {

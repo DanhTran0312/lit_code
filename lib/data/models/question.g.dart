@@ -24,13 +24,14 @@ class QuestionAdapter extends TypeAdapter<Question> {
       link: fields[4] as String,
       completedAt: fields[5] as DateTime?,
       isCompleted: fields[6] as bool,
+      confidence: fields[7] as Confidence?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Question obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -44,7 +45,9 @@ class QuestionAdapter extends TypeAdapter<Question> {
       ..writeByte(5)
       ..write(obj.completedAt)
       ..writeByte(6)
-      ..write(obj.isCompleted);
+      ..write(obj.isCompleted)
+      ..writeByte(7)
+      ..write(obj.confidence);
   }
 
   @override
@@ -72,6 +75,7 @@ _$_Question _$$_QuestionFromJson(Map<String, dynamic> json) => _$_Question(
           ? null
           : DateTime.parse(json['completedAt'] as String),
       isCompleted: json['isCompleted'] as bool? ?? false,
+      confidence: $enumDecodeNullable(_$ConfidenceEnumMap, json['confidence']),
     );
 
 Map<String, dynamic> _$$_QuestionToJson(_$_Question instance) =>
@@ -83,6 +87,7 @@ Map<String, dynamic> _$$_QuestionToJson(_$_Question instance) =>
       'link': instance.link,
       'completedAt': instance.completedAt?.toIso8601String(),
       'isCompleted': instance.isCompleted,
+      'confidence': _$ConfidenceEnumMap[instance.confidence],
     };
 
 const _$DifficultyEnumMap = {
@@ -110,4 +115,10 @@ const _$CategoryEnumMap = {
   Category.intervals: 'Intervals',
   Category.bitManipulation: 'Bit Manipulation',
   Category.mathAndGeometry: 'Math & Geometry',
+};
+
+const _$ConfidenceEnumMap = {
+  Confidence.low: 'Low',
+  Confidence.medium: 'Medium',
+  Confidence.high: 'High',
 };
