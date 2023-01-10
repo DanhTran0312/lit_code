@@ -10,29 +10,32 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<OnBoardingCubit, OnBoardingState>(
-      listener: (context, state) {
-        if (state is OnBoarded) {
-          Navigator.of(context).pushReplacementNamed('/');
-        } else if (state is OnBoardingError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.message),
+    return BlocProvider(
+      create: (context) => OnBoardingCubit(),
+      child: BlocConsumer<OnBoardingCubit, OnBoardingState>(
+        listener: (context, state) {
+          if (state is OnBoarded) {
+            Navigator.of(context).pushReplacementNamed('/');
+          } else if (state is OnBoardingError) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+              ),
+            );
+          }
+        },
+        builder: (context, state) {
+          return Scaffold(
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                BlocProvider.of<OnBoardingCubit>(context).nextStep();
+              },
+              child: const Icon(Icons.arrow_forward),
             ),
+            body: const OnBoardingPageView(),
           );
-        }
-      },
-      builder: (context, state) {
-        return Scaffold(
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              BlocProvider.of<OnBoardingCubit>(context).nextStep();
-            },
-            child: const Icon(Icons.arrow_forward),
-          ),
-          body: const OnBoardingPageView(),
-        );
-      },
+        },
+      ),
     );
   }
 }

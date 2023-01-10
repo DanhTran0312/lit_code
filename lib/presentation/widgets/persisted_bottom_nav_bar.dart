@@ -30,6 +30,7 @@ class PersistedBottomNavBar extends StatelessWidget {
             child: BottomNavigationBar(
               currentIndex: state.selectedIndex,
               onTap: (index) {
+                if (state.selectedIndex == index) return;
                 _onBottomNavBarItemTapped(context, index);
               },
               // backgroundColor: Colors.transparent,

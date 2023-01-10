@@ -31,7 +31,7 @@ mixin _$User {
   @HiveField(5)
   Settings? get settings => throw _privateConstructorUsedError;
   @HiveField(6)
-  List<String>? get completedQuestions => throw _privateConstructorUsedError;
+  List<Question?> get completedQuestions => throw _privateConstructorUsedError;
   @HiveField(7)
   String? get questionsVersion => throw _privateConstructorUsedError;
 
@@ -51,7 +51,7 @@ abstract class $UserCopyWith<$Res> {
       @HiveField(3) String? email,
       @HiveField(4) String? photoUrl,
       @HiveField(5) Settings? settings,
-      @HiveField(6) List<String>? completedQuestions,
+      @HiveField(6) List<Question?> completedQuestions,
       @HiveField(7) String? questionsVersion});
 
   $SettingsCopyWith<$Res>? get settings;
@@ -75,7 +75,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? email = freezed,
     Object? photoUrl = freezed,
     Object? settings = freezed,
-    Object? completedQuestions = freezed,
+    Object? completedQuestions = null,
     Object? questionsVersion = freezed,
   }) {
     return _then(_value.copyWith(
@@ -99,10 +99,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
               as Settings?,
-      completedQuestions: freezed == completedQuestions
+      completedQuestions: null == completedQuestions
           ? _value.completedQuestions
           : completedQuestions // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<Question?>,
       questionsVersion: freezed == questionsVersion
           ? _value.questionsVersion
           : questionsVersion // ignore: cast_nullable_to_non_nullable
@@ -135,7 +135,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       @HiveField(3) String? email,
       @HiveField(4) String? photoUrl,
       @HiveField(5) Settings? settings,
-      @HiveField(6) List<String>? completedQuestions,
+      @HiveField(6) List<Question?> completedQuestions,
       @HiveField(7) String? questionsVersion});
 
   @override
@@ -156,7 +156,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? email = freezed,
     Object? photoUrl = freezed,
     Object? settings = freezed,
-    Object? completedQuestions = freezed,
+    Object? completedQuestions = null,
     Object? questionsVersion = freezed,
   }) {
     return _then(_$_User(
@@ -180,10 +180,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
               as Settings?,
-      completedQuestions: freezed == completedQuestions
+      completedQuestions: null == completedQuestions
           ? _value._completedQuestions
           : completedQuestions // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<Question?>,
       questionsVersion: freezed == questionsVersion
           ? _value.questionsVersion
           : questionsVersion // ignore: cast_nullable_to_non_nullable
@@ -201,7 +201,7 @@ class _$_User extends _User {
       @HiveField(3) this.email,
       @HiveField(4) this.photoUrl,
       @HiveField(5) this.settings = const Settings(),
-      @HiveField(6) final List<String>? completedQuestions = const [],
+      @HiveField(6) final List<Question?> completedQuestions = const [],
       @HiveField(7) this.questionsVersion = ''})
       : _completedQuestions = completedQuestions,
         super._();
@@ -224,17 +224,15 @@ class _$_User extends _User {
   @JsonKey()
   @HiveField(5)
   final Settings? settings;
-  final List<String>? _completedQuestions;
+  final List<Question?> _completedQuestions;
   @override
   @JsonKey()
   @HiveField(6)
-  List<String>? get completedQuestions {
-    final value = _completedQuestions;
-    if (value == null) return null;
+  List<Question?> get completedQuestions {
     if (_completedQuestions is EqualUnmodifiableListView)
       return _completedQuestions;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_completedQuestions);
   }
 
   @override
@@ -298,7 +296,7 @@ abstract class _User extends User {
       @HiveField(3) final String? email,
       @HiveField(4) final String? photoUrl,
       @HiveField(5) final Settings? settings,
-      @HiveField(6) final List<String>? completedQuestions,
+      @HiveField(6) final List<Question?> completedQuestions,
       @HiveField(7) final String? questionsVersion}) = _$_User;
   const _User._() : super._();
 
@@ -321,7 +319,7 @@ abstract class _User extends User {
   Settings? get settings;
   @override
   @HiveField(6)
-  List<String>? get completedQuestions;
+  List<Question?> get completedQuestions;
   @override
   @HiveField(7)
   String? get questionsVersion;

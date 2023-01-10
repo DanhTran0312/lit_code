@@ -57,12 +57,12 @@ final TextTheme darkTextTheme = TextTheme(
   headline1: GoogleFonts.poppins(
     fontSize: headline1Size,
     fontWeight: FontWeight.w900,
-    color: darkHeadLine1,
+    color: darkSecondaryColor,
   ),
   headline2: GoogleFonts.poppins(
     fontSize: headline2Size,
     fontWeight: FontWeight.w700,
-    color: darkHeadLine1,
+    color: darkSecondaryColor,
   ),
   headline3: GoogleFonts.poppins(
     fontSize: headline3Size,
@@ -118,6 +118,16 @@ final TextTheme lightTextTheme = TextTheme(
     fontWeight: FontWeight.w500,
     color: Colors.black,
   ),
+  headline5: GoogleFonts.poppins(
+    fontSize: headline5Size,
+    fontWeight: FontWeight.w500,
+    color: Colors.black,
+  ),
+  headline6: GoogleFonts.poppins(
+    fontSize: headline6Size,
+    fontWeight: FontWeight.w500,
+    color: Colors.black,
+  ),
   subtitle1: GoogleFonts.openSans(
     fontSize: subtitle1Size,
     fontWeight: FontWeight.w500,
@@ -129,6 +139,8 @@ final TextTheme lightTextTheme = TextTheme(
     color: Colors.white,
   ),
 );
+
+// ---------------------------- BottomNavigationBarThemeData ----------------------------
 
 const BottomNavigationBarThemeData lightBottomNavigationBarThemeData =
     BottomNavigationBarThemeData(
@@ -160,6 +172,31 @@ const BottomNavigationBarThemeData darkBottomNavigationBarThemeData =
   showUnselectedLabels: false,
 );
 
+// ---------------------------- Chip Theme ----------------------------
+final ChipThemeData lightChipTheme = ChipThemeData(
+  labelStyle: lightTextTheme.subtitle2,
+  backgroundColor: lightChipColor,
+  padding: EdgeInsets.symmetric(
+    horizontal: 10,
+    vertical: 2,
+  ),
+);
+
+final ChipThemeData darkChipTheme = ChipThemeData(
+  labelStyle: darkTextTheme.subtitle2,
+  backgroundColor: Colors.pinkAccent,
+);
+
+// ---------------------------- Card ----------------------------
+const CardTheme lightCardTheme = CardTheme(
+  elevation: 0,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(
+      Radius.circular(questionCardBorder),
+    ),
+  ),
+);
+
 // ---------------------------- Light Theme ----------------------------
 final ThemeData lightAppTheme = ThemeData(
   brightness: Brightness.light,
@@ -167,6 +204,11 @@ final ThemeData lightAppTheme = ThemeData(
   elevatedButtonTheme: lightElevatedButtonThemeData,
   bottomAppBarColor: lightPrimaryColor,
   primaryColor: lightPrimaryColor,
+  backgroundColor: Colors.white,
+  scaffoldBackgroundColor: Colors.white,
+  chipTheme: lightChipTheme,
+  cardColor: lightQuestionCardColor,
+  cardTheme: lightCardTheme,
   bottomNavigationBarTheme: lightBottomNavigationBarThemeData,
   useMaterial3: true,
 );
@@ -177,6 +219,10 @@ final ThemeData darkAppTheme = ThemeData(
   elevatedButtonTheme: darkElevatedButtonThemeData,
   bottomAppBarColor: darkPrimaryColor,
   primaryColor: darkPrimaryColor,
+  backgroundColor: Colors.black,
+  chipTheme: darkChipTheme,
+  scaffoldBackgroundColor: Colors.black,
+  cardColor: darkQuestionCardColor,
   bottomNavigationBarTheme: darkBottomNavigationBarThemeData,
   useMaterial3: true,
 );

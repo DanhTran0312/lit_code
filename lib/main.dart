@@ -9,7 +9,7 @@ import 'package:lit_code/business_logic/blocs/bloc/auth_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/question_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/question_list_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/bottom_nav_bar_cubit.dart';
-import 'package:lit_code/business_logic/cubits/cubit/on_boarding_cubit.dart';
+import 'package:lit_code/business_logic/cubits/cubit/question_completed_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/theme_cubit.dart';
 import 'package:lit_code/constants/enums.dart';
 import 'package:lit_code/data/models/models.dart';
@@ -60,9 +60,6 @@ Future<void> main() async {
         BlocProvider<ThemeCubit>(
           create: (context) => ThemeCubit(),
         ),
-        BlocProvider<OnBoardingCubit>(
-          create: (context) => OnBoardingCubit(),
-        ),
         BlocProvider<BottomNavBarCubit>(
           create: (context) => BottomNavBarCubit(),
         ),
@@ -74,6 +71,11 @@ Future<void> main() async {
         BlocProvider<QuestionListBloc>(
           create: (context) => QuestionListBloc(
             questionRepository: questionRepository,
+          ),
+        ),
+        BlocProvider<QuestionCompletedCubit>(
+          create: (context) => QuestionCompletedCubit(
+            userRepository: userReposiory,
           ),
         ),
       ],

@@ -22,7 +22,7 @@ class UserAdapter extends TypeAdapter<User> {
       email: fields[3] as String?,
       photoUrl: fields[4] as String?,
       settings: fields[5] as Settings?,
-      completedQuestions: (fields[6] as List?)?.cast<String>(),
+      completedQuestions: (fields[6] as List).cast<Question?>(),
       questionsVersion: fields[7] as String?,
     );
   }
@@ -71,7 +71,9 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
           ? const Settings()
           : Settings.fromJson(json['settings'] as Map<String, dynamic>),
       completedQuestions: (json['completedQuestions'] as List<dynamic>?)
-              ?.map((e) => e as String)
+              ?.map((e) => e == null
+                  ? null
+                  : Question.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       questionsVersion: json['questionsVersion'] as String? ?? '',

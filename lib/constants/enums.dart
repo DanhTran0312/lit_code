@@ -17,6 +17,19 @@ enum Difficulty {
   hard,
 }
 
+extension DifficultyString on Difficulty {
+  String get label {
+    switch (this) {
+      case Difficulty.easy:
+        return 'Easy';
+      case Difficulty.medium:
+        return 'Medium';
+      case Difficulty.hard:
+        return 'Hard';
+    }
+  }
+}
+
 @JsonEnum(valueField: 'confidence')
 @HiveType(typeId: 5)
 enum Confidence {
@@ -29,6 +42,19 @@ enum Confidence {
   @HiveField(2)
   @JsonValue('High')
   high,
+}
+
+extension ConfidenceString on Confidence {
+  String get label {
+    switch (this) {
+      case Confidence.low:
+        return 'Low';
+      case Confidence.medium:
+        return 'Medium';
+      case Confidence.high:
+        return 'High';
+    }
+  }
 }
 
 @JsonEnum(valueField: 'category')
@@ -88,4 +114,47 @@ enum Category {
   @HiveField(17)
   @JsonValue('Math & Geometry')
   mathAndGeometry,
+}
+
+extension CategoryString on Category {
+  String get name {
+    switch (this) {
+      case Category.arrayAndHashing:
+        return 'Arrays & Hashing';
+      case Category.twoPointers:
+        return 'Two Pointers';
+      case Category.slidingWindow:
+        return 'Sliding Window';
+      case Category.stack:
+        return 'Stack';
+      case Category.binarySearch:
+        return 'Binary Search';
+      case Category.trees:
+        return 'Trees';
+      case Category.tries:
+        return 'Tries';
+      case Category.linkedList:
+        return 'Linked List';
+      case Category.heapAndPriorityQueue:
+        return 'Heap & Priority Queue';
+      case Category.backtracking:
+        return 'Backtracking';
+      case Category.graphs:
+        return 'Graphs';
+      case Category.advancedGraphs:
+        return 'Advanced Graphs';
+      case Category.dynamicProgramming:
+        return 'Dynamic Programming';
+      case Category.advancedDynamicProgramming:
+        return 'Advanced Dynamic Programming';
+      case Category.greedy:
+        return 'Greedy';
+      case Category.intervals:
+        return 'Intervals';
+      case Category.bitManipulation:
+        return 'Bit Manipulation';
+      case Category.mathAndGeometry:
+        return 'Math & Geometry';
+    }
+  }
 }

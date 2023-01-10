@@ -1,9 +1,10 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/auth_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/theme_cubit.dart';
 import 'package:lit_code/constants/constant.dart';
-import 'package:lit_code/presentation/widgets/custom_circular_progress_bar.dart';
 import 'package:lit_code/presentation/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {

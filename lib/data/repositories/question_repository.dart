@@ -18,9 +18,12 @@ class QuestionRepository {
 
   Future<List<Question>> getQuestions() async {
     try {
-      final version = userBox.getAt(0)!.questionsVersion;
+      // Get the version of the questions from the database
+      final version = userBox.getAt(0)?.questionsVersion;
       final versionData = await databaseVersionReference.once();
+      // Compare the current version with the one in the database
       if (version?.compareTo(versionData.snapshot.value! as String) != 0) {
+        // If they are different, get the new questions and update the database
         final data = await databaseReference.once();
         final questionList = <Question>[];
         if (data.snapshot.value != null) {
@@ -32,15 +35,14 @@ class QuestionRepository {
           }
         }
 
+        // Fetch the questions from the database
         await updateQuestions(questionList);
-        await userBox.putAt(
-          0,
-          userBox.getAt(0)!.copyWith(
-                questionsVersion: versionData.snapshot.value! as String,
-              ),
-        );
+
+        // Update the user's questionsVersion to the current value
+        await updateQuestionsVersion(versionData.snapshot.value! as String);
         return questionList;
       } else {
+        // Otherwise, get the questions from the local database
         return questionBox.values.toList();
       }
     } catch (e) {
@@ -56,25 +58,43 @@ class QuestionRepository {
     }
   }
 
-  Future<void> updateQuestions(List<Question> questions) async {
+  Future<void> updateQuestionsVersion(String version) async {
     try {
-      await questionBox.clear();
-      await questionBox.addAll(questions);
+      await userBox.putAt(
+        0,
+        userBox.getAt(0)!.copyWith(
+              questionsVersion: version,
+            ),
+      );
     } catch (e) {
       throw Exception(e);
     }
   }
 
+  Future<void> updateQuestions(List<Question> questions) async {
+    try {
+      await questionBox.clear();
+      for (final question in questions) {
+        await questionBox.put(question.id, question);
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  // Get a question from the box by its ID
   Future<Question> getQuestion(String id) async {
     try {
       final question = questionBox.get(id);
       if (question != null) {
         return question;
       } else {
+        // If the question is not in the box, get it from the database
         final data = await databaseReference.child(id).once();
         if (data.snapshot.value != null) {
           final question =
               Question.fromJson(data.snapshot.value! as Map<String, dynamic>);
+          // Update the box with the question from the database
           await updateQuestion(question);
           return question;
         } else {

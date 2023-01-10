@@ -1,7 +1,7 @@
 // ignore_for_file: join_return_with_assignment
 
 import 'package:hive/hive.dart';
-import 'package:lit_code/data/models/user.dart';
+import 'package:lit_code/data/models/models.dart';
 
 class UserRepository {
   UserRepository({
@@ -20,6 +20,49 @@ class UserRepository {
       return _user;
     } catch (e) {
       throw Exception('Error while getting user');
+    }
+  }
+
+  Future<List<Question?>> getCompletedQuestions() async {
+    try {
+      if (_user.isEmpty) {
+        throw Exception(
+          'Cannot get completed questions because user does not exist',
+        );
+      }
+      return _user.completedQuestions;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<void> markQuestionAsCompleted(Question question) async {
+    try {
+      if (_user.isEmpty) {
+        throw Exception('Cannot update user because it does not exist');
+      }
+      _user = _user.copyWith(
+        completedQuestions: [..._user.completedQuestions, question],
+      );
+      await userBox.put(_user.id, _user);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<void> markQuestionAsUncompleted(Question question) async {
+    try {
+      if (_user.isEmpty) {
+        throw Exception('Cannot update user because it does not exist');
+      }
+      _user = _user.copyWith(
+        completedQuestions: _user.completedQuestions
+            .where((element) => element?.id != question.id)
+            .toList(),
+      );
+      await userBox.put(_user.id, _user);
+    } catch (e) {
+      throw Exception(e);
     }
   }
 

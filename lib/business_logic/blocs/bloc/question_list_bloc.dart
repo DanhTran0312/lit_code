@@ -9,23 +9,24 @@ part 'question_list_bloc.freezed.dart';
 
 class QuestionListBloc extends Bloc<QuestionListEvent, QuestionListState> {
   QuestionListBloc({required this.questionRepository})
-      : super(const Initial()) {
+      : super(const QuestionListInitial()) {
     on<FetchQuestions>((event, emit) async {
-      emit(const Loading());
+      emit(const QuestionListLoading());
       try {
         final questions = await questionRepository.getQuestions();
-        emit(Loaded(questions));
+        emit(QuestionListLoaded(questions));
       } catch (e) {
-        emit(Error(e.toString()));
+        emit(QuestionListError(e.toString()));
       }
     });
+
     on<UpdateQuestions>((event, emit) async {
-      emit(const Loading());
+      emit(const QuestionListLoading());
       try {
         await questionRepository.updateQuestions(event.questions);
-        emit(Loaded(event.questions));
+        emit(QuestionListLoaded(event.questions));
       } catch (e) {
-        emit(Error(e.toString()));
+        emit(QuestionListError(e.toString()));
       }
     });
   }

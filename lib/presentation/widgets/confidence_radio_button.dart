@@ -1,30 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:lit_code/constants/enums.dart';
 import 'package:lit_code/data/models/models.dart';
 
-class TextRadioButton extends StatelessWidget {
-  const TextRadioButton({
+class ConfidenceRadioButton extends StatelessWidget {
+  const ConfidenceRadioButton({
     super.key,
     required this.question,
     required this.onChanged,
-    required this.label,
-    required this.value,
+    required this.confidence,
   });
 
-  final Enum? value;
+  final Confidence confidence;
   final Question question;
-  final String label;
   final void Function(Enum?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Radio<Enum?>(
-          value: value,
+        Radio<Confidence?>(
+          value: confidence,
           groupValue: question.confidence,
           onChanged: onChanged,
         ),
-        Text(label, style: Theme.of(context).textTheme.subtitle2),
+        Text(
+          confidence.label,
+          style: Theme.of(context).textTheme.subtitle2,
+        ),
       ],
     );
   }
