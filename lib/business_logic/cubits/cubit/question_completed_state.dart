@@ -5,6 +5,7 @@ class QuestionCompletedState with _$QuestionCompletedState {
   const factory QuestionCompletedState.initial() = Initial;
   const factory QuestionCompletedState.loading() = Loading;
   const factory QuestionCompletedState.loaded(
-      List<Question?> completedQuestions) = Loaded;
+    Map<String, Question> completedQuestions,
+  ) = Loaded;
   const factory QuestionCompletedState.error(String message) = Error;
 }

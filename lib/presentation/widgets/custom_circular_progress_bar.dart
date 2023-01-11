@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lit_code/constants/constant.dart';
+import 'package:lit_code/theme/theme_utils.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 class CustomCirCularProgressBar extends StatelessWidget {
@@ -39,12 +40,16 @@ class CustomCirCularProgressBar extends StatelessWidget {
         angleRange: 360,
         customColors: CustomSliderColors(
           dotColor: Colors.transparent,
-          trackColor: theme.brightness == Brightness.light
-              ? lightCircularProgressBarTrackColor
-              : darkCircularProgressBarTrackColor,
-          progressBarColor: theme.brightness == Brightness.light
-              ? lightCircularProgressBarColor
-              : darkCircularProgressBarColor,
+          trackColor: ThemeUtils.getThemeColor(
+            theme,
+            lightCircularProgressBarTrackColor,
+            darkCircularProgressBarTrackColor,
+          ),
+          progressBarColor: ThemeUtils.getThemeColor(
+            theme,
+            lightCircularProgressBarColor,
+            darkCircularProgressBarColor,
+          ),
           hideShadow: true,
         ),
       ),

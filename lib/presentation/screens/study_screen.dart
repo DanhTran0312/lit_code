@@ -8,6 +8,7 @@ import 'package:lit_code/business_logic/cubits/cubit/question_expansion_cubit.da
 import 'package:lit_code/constants/constants.dart';
 import 'package:lit_code/data/models/question.dart';
 import 'package:lit_code/presentation/widgets/widgets.dart';
+import 'package:lit_code/theme/theme_utils.dart';
 
 class StudyScreen extends StatelessWidget {
   const StudyScreen({super.key});
@@ -27,19 +28,19 @@ class StudyScreen extends StatelessWidget {
               ),
             );
           } else if (state is QuestionListLoading) {
-            //If the state is QuestionListLoading, then show a circular progress indicator
+            // If the state is QuestionListLoading, then show a circular progress indicator.
             const CircularProgressIndicator();
           }
         },
         builder: (context, state) {
           if (state is QuestionListInitial) {
-            //If the state is QuestionListInitial, then fetch the questions
+            // If the state is QuestionListInitial, then fetch the questions.
             BlocProvider.of<QuestionListBloc>(context).add(
               const FetchQuestions(),
             );
             return const Center(child: CircularProgressIndicator());
           } else if (state is QuestionListLoaded) {
-            //If the state is QuestionListLoaded, then show the list of questions
+            // If the state is QuestionListLoaded, then show the list of questions.
             final stateQuestion = state.questions;
             return Padding(
               padding: const EdgeInsets.symmetric(
@@ -48,12 +49,8 @@ class StudyScreen extends StatelessWidget {
               child:
                   _StudyScreenBody(stateQuestion: stateQuestion, theme: theme),
             );
-          } else {
-            //If the state is none of the above, then show an error message
-            return const Center(
-              child: Text('Something went wrong'),
-            );
           }
+          return const Center(child: CircularProgressIndicator());
         },
       ),
     );
@@ -74,18 +71,14 @@ class _StudyScreenBody extends StatelessWidget {
     return ListView(
       children: [
         const SizedBox(height: sizeBoxHeightSmall),
-        const SectionHeading(
-          title: 'Your Progress:',
-        ),
+        const SectionHeading(title: 'Your Progress:'),
         const SizedBox(height: sizeBoxHeightSmall),
         BlocBuilder<QuestionCompletedCubit, QuestionCompletedState>(
           builder: (context, state) {
             if (state is Initial) {
               BlocProvider.of<QuestionCompletedCubit>(context)
                   .getCompletedQuestions();
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return const Center(child: CircularProgressIndicator());
             } else if (state is Loaded) {
               return _ProgressSection(
                 completedQuestions: state.completedQuestions,
@@ -93,19 +86,13 @@ class _StudyScreenBody extends StatelessWidget {
                 theme: theme,
               );
             } else if (state is Loading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return const Center(child: CircularProgressIndicator());
             } else {
-              return const Center(
-                child: Text('Something went wrong'),
-              );
+              return const Center(child: Text('Something went wrong'));
             }
           },
         ),
-        const SectionHeading(
-          title: 'Categories',
-        ),
+        const SectionHeading(title: 'Categories'),
         const SizedBox(height: sizeBoxHeightSmall),
         _CategoryList(
           stateQuestion: stateQuestion,
@@ -160,7 +147,7 @@ class _ProgressSection extends StatelessWidget {
     required this.total,
   });
 
-  final List<Question?> completedQuestions;
+  final Map<String, Question> completedQuestions;
   final int total;
   final ThemeData theme;
 
@@ -175,19 +162,19 @@ class _ProgressSection extends StatelessWidget {
       medium = 0;
       hard = 0;
     } else {
-      easy = completedQuestions
+      easy = completedQuestions.values
           .where(
-            (question) => question!.difficulty == Difficulty.easy,
+            (question) => question.difficulty == Difficulty.easy,
           )
           .length;
-      medium = completedQuestions
+      medium = completedQuestions.values
           .where(
-            (question) => question!.difficulty == Difficulty.medium,
+            (question) => question.difficulty == Difficulty.medium,
           )
           .length;
-      hard = completedQuestions
+      hard = completedQuestions.values
           .where(
-            (question) => question!.difficulty == Difficulty.hard,
+            (question) => question.difficulty == Difficulty.hard,
           )
           .length;
     }
@@ -195,28 +182,24 @@ class _ProgressSection extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: Card(
-            color: theme.brightness == Brightness.light
-                ? Color(0xffa2ddf5).withOpacity(0.57)
-                : darkSecondaryColor.withOpacity(0.5),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 10,
-              ),
-              child: PieChartProgress(
-                easy: easy.toDouble(),
-                medium: medium.toDouble(),
-                hard: hard.toDouble(),
-              ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 12,
+            ),
+            child: PieChartProgress(
+              easy: easy.toDouble(),
+              medium: medium.toDouble(),
+              hard: hard.toDouble(),
             ),
           ),
         ),
         Expanded(
           child: Card(
-            color: theme.brightness == Brightness.light
-                ? lightProgressCardColor.withOpacity(0.57)
-                : darkSecondaryColor.withOpacity(0.5),
+            color: ThemeUtils.getThemeColor(
+              theme,
+              lightProgressCardColor.withOpacity(0.57),
+              darkSecondaryColor.withOpacity(0.5),
+            ),
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 16,

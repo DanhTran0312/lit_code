@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lit_code/theme/theme_utils.dart';
 
 class ImageContainer extends StatelessWidget {
   const ImageContainer({
@@ -27,9 +28,11 @@ class ImageContainer extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(
-            theme.brightness == Brightness.dark
-                ? darkBackgroundImage
-                : lightBackgroundImage,
+            ThemeUtils.getBackgroundUrlFromTheme(
+              theme,
+              lightBackgroundImage,
+              darkBackgroundImage,
+            ),
           ),
           fit: BoxFit.fill,
         ),

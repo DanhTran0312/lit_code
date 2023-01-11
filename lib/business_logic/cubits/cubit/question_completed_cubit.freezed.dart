@@ -20,7 +20,7 @@ mixin _$QuestionCompletedState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Question?> completedQuestions) loaded,
+    required TResult Function(Map<String, Question> completedQuestions) loaded,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$QuestionCompletedState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Question?> completedQuestions)? loaded,
+    TResult? Function(Map<String, Question> completedQuestions)? loaded,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$QuestionCompletedState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Question?> completedQuestions)? loaded,
+    TResult Function(Map<String, Question> completedQuestions)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -125,7 +125,7 @@ class _$Initial implements Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Question?> completedQuestions) loaded,
+    required TResult Function(Map<String, Question> completedQuestions) loaded,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -136,7 +136,7 @@ class _$Initial implements Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Question?> completedQuestions)? loaded,
+    TResult? Function(Map<String, Question> completedQuestions)? loaded,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -147,7 +147,7 @@ class _$Initial implements Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Question?> completedQuestions)? loaded,
+    TResult Function(Map<String, Question> completedQuestions)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -237,7 +237,7 @@ class _$Loading implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Question?> completedQuestions) loaded,
+    required TResult Function(Map<String, Question> completedQuestions) loaded,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -248,7 +248,7 @@ class _$Loading implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Question?> completedQuestions)? loaded,
+    TResult? Function(Map<String, Question> completedQuestions)? loaded,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -259,7 +259,7 @@ class _$Loading implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Question?> completedQuestions)? loaded,
+    TResult Function(Map<String, Question> completedQuestions)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -316,7 +316,7 @@ abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Question?> completedQuestions});
+  $Res call({Map<String, Question> completedQuestions});
 }
 
 /// @nodoc
@@ -335,7 +335,7 @@ class __$$LoadedCopyWithImpl<$Res>
       null == completedQuestions
           ? _value._completedQuestions
           : completedQuestions // ignore: cast_nullable_to_non_nullable
-              as List<Question?>,
+              as Map<String, Question>,
     ));
   }
 }
@@ -343,16 +343,16 @@ class __$$LoadedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$Loaded implements Loaded {
-  const _$Loaded(final List<Question?> completedQuestions)
+  const _$Loaded(final Map<String, Question> completedQuestions)
       : _completedQuestions = completedQuestions;
 
-  final List<Question?> _completedQuestions;
+  final Map<String, Question> _completedQuestions;
   @override
-  List<Question?> get completedQuestions {
-    if (_completedQuestions is EqualUnmodifiableListView)
+  Map<String, Question> get completedQuestions {
+    if (_completedQuestions is EqualUnmodifiableMapView)
       return _completedQuestions;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_completedQuestions);
+    return EqualUnmodifiableMapView(_completedQuestions);
   }
 
   @override
@@ -384,7 +384,7 @@ class _$Loaded implements Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Question?> completedQuestions) loaded,
+    required TResult Function(Map<String, Question> completedQuestions) loaded,
     required TResult Function(String message) error,
   }) {
     return loaded(completedQuestions);
@@ -395,7 +395,7 @@ class _$Loaded implements Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Question?> completedQuestions)? loaded,
+    TResult? Function(Map<String, Question> completedQuestions)? loaded,
     TResult? Function(String message)? error,
   }) {
     return loaded?.call(completedQuestions);
@@ -406,7 +406,7 @@ class _$Loaded implements Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Question?> completedQuestions)? loaded,
+    TResult Function(Map<String, Question> completedQuestions)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -455,9 +455,10 @@ class _$Loaded implements Loaded {
 }
 
 abstract class Loaded implements QuestionCompletedState {
-  const factory Loaded(final List<Question?> completedQuestions) = _$Loaded;
+  const factory Loaded(final Map<String, Question> completedQuestions) =
+      _$Loaded;
 
-  List<Question?> get completedQuestions;
+  Map<String, Question> get completedQuestions;
   @JsonKey(ignore: true)
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -527,7 +528,7 @@ class _$Error implements Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Question?> completedQuestions) loaded,
+    required TResult Function(Map<String, Question> completedQuestions) loaded,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -538,7 +539,7 @@ class _$Error implements Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Question?> completedQuestions)? loaded,
+    TResult? Function(Map<String, Question> completedQuestions)? loaded,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -549,7 +550,7 @@ class _$Error implements Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Question?> completedQuestions)? loaded,
+    TResult Function(Map<String, Question> completedQuestions)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {

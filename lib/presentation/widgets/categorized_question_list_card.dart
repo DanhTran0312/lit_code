@@ -24,7 +24,6 @@ class CategorizedQuestionListCard extends StatelessWidget {
     final theme = Theme.of(context);
     return Card(
       color: theme.cardColor.withOpacity(0.57),
-      elevation: 0,
       clipBehavior: Clip.hardEdge,
       margin: const EdgeInsets.symmetric(
         vertical: 3,

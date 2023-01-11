@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/pie_chart_touch_data_cubit.dart';
+import 'package:lit_code/theme/theme_utils.dart';
 
 class PieChartProgress extends StatelessWidget {
   const PieChartProgress({
@@ -17,6 +18,7 @@ class PieChartProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return AspectRatio(
       aspectRatio: 3 / 4,
       child: BlocProvider(
@@ -49,6 +51,7 @@ class PieChartProgress extends StatelessWidget {
                   },
                 ),
                 sections: _sectionBuilder(
+                  theme,
                   easy,
                   medium,
                   hard,
@@ -64,6 +67,7 @@ class PieChartProgress extends StatelessWidget {
 }
 
 List<PieChartSectionData> _sectionBuilder(
+  ThemeData theme,
   double easy,
   double medium,
   double hard,
@@ -74,6 +78,11 @@ List<PieChartSectionData> _sectionBuilder(
   if (easy == 0 && medium == 0 && hard == 0) {
     return [
       PieChartSectionData(
+        color: ThemeUtils.getThemeColor(
+          theme,
+          Colors.blue.shade200,
+          Colors.pink.shade200,
+        ),
         value: 1,
         showTitle: false,
         radius: touchedSectionRadius,

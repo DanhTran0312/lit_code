@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:lit_code/business_logic/cubits/cubit/on_boarding_cubit.dart';
 import 'package:lit_code/constants/constant.dart';
 import 'package:lit_code/data/models/models.dart';
+import 'package:lit_code/theme/theme_utils.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});
@@ -60,9 +61,11 @@ class OnBoardingPageView extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage(
-                theme.brightness == Brightness.light
-                    ? onBoardingData[index].lightBackgroundImage
-                    : onBoardingData[index].darkbackgroundImage,
+                ThemeUtils.getBackgroundUrlFromTheme(
+                  theme,
+                  onBoardingData[index].lightBackgroundImage,
+                  onBoardingData[index].darkbackgroundImage,
+                ),
               ),
               fit: BoxFit.cover,
             ),

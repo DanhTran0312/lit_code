@@ -7,6 +7,7 @@ import 'package:lit_code/constants/constant.dart';
 import 'package:lit_code/constants/enums.dart';
 import 'package:lit_code/data/models/models.dart';
 import 'package:lit_code/presentation/widgets/widgets.dart';
+import 'package:lit_code/theme/theme_utils.dart';
 
 class CollapsableQuestionCard extends StatelessWidget {
   const CollapsableQuestionCard({
@@ -55,7 +56,6 @@ class _BuildExpansionTile extends StatelessWidget {
     return Card(
       color:
           isTranparent ? Colors.transparent : theme.cardColor.withOpacity(0.57),
-      elevation: 0,
       borderOnForeground: false,
       shape: const RoundedRectangleBorder(),
       margin: const EdgeInsets.all(0),
@@ -70,7 +70,8 @@ class _BuildExpansionTile extends StatelessWidget {
               questionCompletedCubit.getCompletedQuestions();
               return const CircularProgressIndicator();
             } else if (state is Loaded) {
-              final completed = state.completedQuestions.contains(question);
+              final completed =
+                  state.completedQuestions.containsKey(question.id);
               return ExpansionTile(
                 initiallyExpanded: expansionCubit.state[question.id] ?? false,
                 onExpansionChanged: (isExpanded) {
@@ -147,9 +148,11 @@ class RateConfidenceWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(questionCardBorder),
-        color: theme.brightness == Brightness.light
-            ? lightExpandedQuestionCardColor.withOpacity(0.4)
-            : darkExpandedQuestionCardColor.withOpacity(0.8),
+        color: ThemeUtils.getThemeColor(
+          theme,
+          lightExpandedQuestionCardColor.withOpacity(0.4),
+          darkExpandedQuestionCardColor.withOpacity(0.8),
+        ),
       ),
       child: Column(
         children: [

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lit_code/business_logic/blocs/bloc/question_bloc.dart';
-
-import 'package:lit_code/business_logic/blocs/bloc/question_list_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/question_completed_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/question_expansion_cubit.dart';
 import 'package:lit_code/constants/constants.dart';
@@ -34,7 +31,7 @@ class ReviewScreen extends StatelessWidget {
           } else if (state is Loading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is Loaded) {
-            final completedQuestions = state.completedQuestions;
+            final completedQuestions = state.completedQuestions.values.toList();
             return Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: defaultPageHorizontalPadding,
@@ -49,7 +46,7 @@ class ReviewScreen extends StatelessWidget {
                       expansionCubit:
                           BlocProvider.of<QuestionExpansionCubit>(context),
                       isTranparent: false,
-                      question: question!,
+                      question: question,
                       questionCompletedCubit:
                           BlocProvider.of<QuestionCompletedCubit>(context),
                     );

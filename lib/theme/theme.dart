@@ -201,6 +201,15 @@ const CardTheme lightCardTheme = CardTheme(
   ),
 );
 
+const CardTheme darkCardTheme = CardTheme(
+  elevation: 0,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(
+      Radius.circular(questionCardBorder),
+    ),
+  ),
+);
+
 // ---------------------------- Light Theme ----------------------------
 final ThemeData lightAppTheme = ThemeData(
   brightness: Brightness.light,
@@ -225,7 +234,8 @@ final ThemeData darkAppTheme = ThemeData(
   primaryColor: darkPrimaryColor,
   backgroundColor: Colors.black,
   chipTheme: darkChipTheme,
-  scaffoldBackgroundColor: Colors.black,
+  cardTheme: darkCardTheme,
+  scaffoldBackgroundColor: Colors.black87,
   cardColor: darkQuestionCardColor,
   bottomNavigationBarTheme: darkBottomNavigationBarThemeData,
   useMaterial3: true,

@@ -14,7 +14,7 @@ abstract class Question with _$Question {
     @HiveField(2) required Difficulty difficulty,
     @HiveField(3) required Category category,
     @HiveField(4) required String link,
-    @HiveField(5) DateTime? completedAt,
+    @HiveField(5) int? completedAt,
     @HiveField(6) @Default(false) bool isCompleted,
     @HiveField(7) Confidence? confidence,
   }) = _Question;

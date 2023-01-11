@@ -22,7 +22,7 @@ class QuestionAdapter extends TypeAdapter<Question> {
       difficulty: fields[2] as Difficulty,
       category: fields[3] as Category,
       link: fields[4] as String,
-      completedAt: fields[5] as DateTime?,
+      completedAt: fields[5] as int?,
       isCompleted: fields[6] as bool,
       confidence: fields[7] as Confidence?,
     );
@@ -71,9 +71,7 @@ _$_Question _$$_QuestionFromJson(Map<String, dynamic> json) => _$_Question(
       difficulty: $enumDecode(_$DifficultyEnumMap, json['difficulty']),
       category: $enumDecode(_$CategoryEnumMap, json['category']),
       link: json['link'] as String,
-      completedAt: json['completedAt'] == null
-          ? null
-          : DateTime.parse(json['completedAt'] as String),
+      completedAt: json['completedAt'] as int?,
       isCompleted: json['isCompleted'] as bool? ?? false,
       confidence: $enumDecodeNullable(_$ConfidenceEnumMap, json['confidence']),
     );
@@ -85,7 +83,7 @@ Map<String, dynamic> _$$_QuestionToJson(_$_Question instance) =>
       'difficulty': _$DifficultyEnumMap[instance.difficulty]!,
       'category': _$CategoryEnumMap[instance.category]!,
       'link': instance.link,
-      'completedAt': instance.completedAt?.toIso8601String(),
+      'completedAt': instance.completedAt,
       'isCompleted': instance.isCompleted,
       'confidence': _$ConfidenceEnumMap[instance.confidence],
     };

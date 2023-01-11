@@ -23,17 +23,16 @@ class UserRepository {
     }
   }
 
-  Future<List<Question?>> getCompletedQuestions() async {
-    try {
-      if (_user.isEmpty) {
-        throw Exception(
-          'Cannot get completed questions because user does not exist',
-        );
-      }
-      return _user.completedQuestions;
-    } catch (e) {
-      throw Exception(e);
+  Future<Map<String, Question>> getCompletedQuestions() async {
+    if (_user.isEmpty) {
+      throw Exception(
+        'Cannot get completed questions because user does not exist',
+      );
     }
+    if (_user.completedQuestions.isEmpty) {
+      return <String, Question>{};
+    }
+    return {for (var e in _user.completedQuestions) e!.id: e};
   }
 
   Future<void> markQuestionAsCompleted(Question question) async {
@@ -41,8 +40,17 @@ class UserRepository {
       if (_user.isEmpty) {
         throw Exception('Cannot update user because it does not exist');
       }
+      if (_user.completedQuestions.any((q) => q!.id == question.id)) {
+        throw Exception('Question ${question.id} has already been completed');
+      }
       _user = _user.copyWith(
-        completedQuestions: [..._user.completedQuestions, question],
+        completedQuestions: [
+          ..._user.completedQuestions,
+          question.copyWith(
+            isCompleted: true,
+            completedAt: DateTime.now().millisecondsSinceEpoch,
+          )
+        ],
       );
       await userBox.put(_user.id, _user);
     } catch (e) {
@@ -62,7 +70,7 @@ class UserRepository {
       );
       await userBox.put(_user.id, _user);
     } catch (e) {
-      throw Exception(e);
+      rethrow;
     }
   }
 

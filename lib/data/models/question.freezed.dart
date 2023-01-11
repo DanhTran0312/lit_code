@@ -31,7 +31,7 @@ mixin _$Question {
   @HiveField(4)
   String get link => throw _privateConstructorUsedError;
   @HiveField(5)
-  DateTime? get completedAt => throw _privateConstructorUsedError;
+  int? get completedAt => throw _privateConstructorUsedError;
   @HiveField(6)
   bool get isCompleted => throw _privateConstructorUsedError;
   @HiveField(7)
@@ -54,7 +54,7 @@ abstract class $QuestionCopyWith<$Res> {
       @HiveField(2) Difficulty difficulty,
       @HiveField(3) Category category,
       @HiveField(4) String link,
-      @HiveField(5) DateTime? completedAt,
+      @HiveField(5) int? completedAt,
       @HiveField(6) bool isCompleted,
       @HiveField(7) Confidence? confidence});
 }
@@ -105,7 +105,7 @@ class _$QuestionCopyWithImpl<$Res, $Val extends Question>
       completedAt: freezed == completedAt
           ? _value.completedAt
           : completedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as int?,
       isCompleted: null == isCompleted
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
@@ -131,7 +131,7 @@ abstract class _$$_QuestionCopyWith<$Res> implements $QuestionCopyWith<$Res> {
       @HiveField(2) Difficulty difficulty,
       @HiveField(3) Category category,
       @HiveField(4) String link,
-      @HiveField(5) DateTime? completedAt,
+      @HiveField(5) int? completedAt,
       @HiveField(6) bool isCompleted,
       @HiveField(7) Confidence? confidence});
 }
@@ -180,7 +180,7 @@ class __$$_QuestionCopyWithImpl<$Res>
       completedAt: freezed == completedAt
           ? _value.completedAt
           : completedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as int?,
       isCompleted: null == isCompleted
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
@@ -226,7 +226,7 @@ class _$_Question implements _Question {
   final String link;
   @override
   @HiveField(5)
-  final DateTime? completedAt;
+  final int? completedAt;
   @override
   @JsonKey()
   @HiveField(6)
@@ -286,7 +286,7 @@ abstract class _Question implements Question {
       @HiveField(2) required final Difficulty difficulty,
       @HiveField(3) required final Category category,
       @HiveField(4) required final String link,
-      @HiveField(5) final DateTime? completedAt,
+      @HiveField(5) final int? completedAt,
       @HiveField(6) final bool isCompleted,
       @HiveField(7) final Confidence? confidence}) = _$_Question;
 
@@ -309,7 +309,7 @@ abstract class _Question implements Question {
   String get link;
   @override
   @HiveField(5)
-  DateTime? get completedAt;
+  int? get completedAt;
   @override
   @HiveField(6)
   bool get isCompleted;

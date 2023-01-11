@@ -5,6 +5,7 @@ import 'package:lit_code/business_logic/blocs/bloc/auth_bloc.dart';
 import 'package:lit_code/constants/constants.dart';
 import 'package:lit_code/data/models/models.dart';
 import 'package:lit_code/presentation/widgets/widgets.dart';
+import 'package:lit_code/theme/theme_utils.dart';
 
 class SignInForm extends StatelessWidget {
   const SignInForm({
@@ -80,15 +81,14 @@ class SignInForm extends StatelessWidget {
           const SizedBox(height: sizeBoxHeightMedium),
           CustomElevatedButtonWithImage(
             text: 'Sign In with Apple',
-            image: theme.brightness == Brightness.light
-                ? SvgPicture.asset(
-                    'assets/svg/apple_logo_light.svg',
-                    fit: BoxFit.cover,
-                  )
-                : SvgPicture.asset(
-                    'assets/svg/apple_logo_dark.svg',
-                    fit: BoxFit.cover,
-                  ),
+            image: SvgPicture.asset(
+              ThemeUtils.getBackgroundUrlFromTheme(
+                theme,
+                'assets/svg/apple_logo_light.svg',
+                'assets/svg/apple_logo_dark.svg',
+              ),
+              fit: BoxFit.cover,
+            ),
             onPressed: () {},
           ),
           const SizedBox(height: sizeBoxHeightSmall),
