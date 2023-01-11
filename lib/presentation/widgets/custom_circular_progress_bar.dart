@@ -22,22 +22,11 @@ class CustomCirCularProgressBar extends StatelessWidget {
       max: total,
       initialValue: initialValue,
       innerWidget: (value) {
-        return Container(
-          margin: EdgeInsets.all(size * 0.165),
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            color: lightCircularProgressBarColor,
-          ),
-          child: Center(
-            child: Text(
-              '${(value / total * 100).toStringAsFixed(0)}%',
-              style: theme.textTheme.headline3!.copyWith(
-                color: Colors.white,
-                fontSize: size * 0.18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
+        return _CustomInnerWidget(
+          size: size,
+          total: total,
+          theme: theme,
+          value: value,
         );
       },
       appearance: CircularSliderAppearance(
@@ -50,9 +39,48 @@ class CustomCirCularProgressBar extends StatelessWidget {
         angleRange: 360,
         customColors: CustomSliderColors(
           dotColor: Colors.transparent,
-          trackColor: lightCircularProgressBarTrackColor,
-          progressBarColor: lightCircularProgressBarColor,
+          trackColor: theme.brightness == Brightness.light
+              ? lightCircularProgressBarTrackColor
+              : darkCircularProgressBarTrackColor,
+          progressBarColor: theme.brightness == Brightness.light
+              ? lightCircularProgressBarColor
+              : darkCircularProgressBarColor,
           hideShadow: true,
+        ),
+      ),
+    );
+  }
+}
+
+class _CustomInnerWidget extends StatelessWidget {
+  const _CustomInnerWidget({
+    required this.size,
+    required this.total,
+    required this.theme,
+    required this.value,
+  });
+
+  final double size;
+  final double total;
+  final ThemeData theme;
+  final double value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(size * 0.165),
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+        color: lightCircularProgressBarColor,
+      ),
+      child: Center(
+        child: Text(
+          '${(value / total * 100).toStringAsFixed(0)}%',
+          style: theme.textTheme.headline3!.copyWith(
+            color: Colors.white,
+            fontSize: size * 0.18,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );

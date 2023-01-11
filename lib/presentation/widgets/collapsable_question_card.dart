@@ -25,7 +25,7 @@ class CollapsableQuestionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return _buildExpansionTile(
+    return _BuildExpansionTile(
       isTranparent: isTranparent,
       theme: theme,
       expansionCubit: expansionCubit,
@@ -35,8 +35,8 @@ class CollapsableQuestionCard extends StatelessWidget {
   }
 }
 
-class _buildExpansionTile extends StatelessWidget {
-  const _buildExpansionTile({
+class _BuildExpansionTile extends StatelessWidget {
+  const _BuildExpansionTile({
     required this.isTranparent,
     required this.theme,
     required this.expansionCubit,

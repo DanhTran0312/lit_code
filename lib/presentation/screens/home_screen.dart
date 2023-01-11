@@ -6,6 +6,7 @@ import 'package:lit_code/business_logic/blocs/bloc/auth_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/theme_cubit.dart';
 import 'package:lit_code/constants/constant.dart';
 import 'package:lit_code/presentation/widgets/widgets.dart';
+import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -66,12 +67,45 @@ class HomeScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Expanded(
-                                  child: Container(
-                                    height: 130,
-                                    decoration: BoxDecoration(
-                                      color:
-                                          theme.primaryColor.withOpacity(0.6),
-                                      borderRadius: BorderRadius.circular(10),
+                                  child: Card(
+                                    elevation: 0,
+                                    color: darkSecondaryColor.withOpacity(0.8),
+                                    child: AspectRatio(
+                                      aspectRatio: 4.3 / 4,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(10),
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              'Today',
+                                              style: theme.textTheme.headline4!
+                                                  .copyWith(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            Container(
+                                              padding: const EdgeInsets.all(4),
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                  color: Colors.white,
+                                                  width: 2,
+                                                ),
+                                              ),
+                                              child: StepProgressIndicator(
+                                                totalSteps: 10,
+                                                currentStep: 6,
+                                                size: 10,
+                                                selectedColor:
+                                                    theme.brightness ==
+                                                            Brightness.dark
+                                                        ? darkSecondaryColor
+                                                        : Colors.black,
+                                                unselectedColor: Colors.white54,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),

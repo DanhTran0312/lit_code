@@ -176,15 +176,19 @@ const BottomNavigationBarThemeData darkBottomNavigationBarThemeData =
 final ChipThemeData lightChipTheme = ChipThemeData(
   labelStyle: lightTextTheme.subtitle2,
   backgroundColor: lightChipColor,
-  padding: EdgeInsets.symmetric(
-    horizontal: 10,
-    vertical: 2,
+  padding: const EdgeInsets.symmetric(
+    horizontal: chipHorizontalPadding,
+    vertical: chipVerticalPadding,
   ),
 );
 
 final ChipThemeData darkChipTheme = ChipThemeData(
   labelStyle: darkTextTheme.subtitle2,
   backgroundColor: Colors.pinkAccent,
+  padding: const EdgeInsets.symmetric(
+    horizontal: chipHorizontalPadding,
+    vertical: chipVerticalPadding,
+  ),
 );
 
 // ---------------------------- Card ----------------------------

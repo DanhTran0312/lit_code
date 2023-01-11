@@ -8,6 +8,8 @@ const Color lightPrimaryColor = Color(0xffa825cc);
 const Color darkPrimaryColor = Color(0xfff5873b);
 const Color lightCircularProgressBarTrackColor = Color(0xffffd8c9);
 const Color lightCircularProgressBarColor = darkPrimaryColor;
+const Color darkCircularProgressBarTrackColor = Color(0xffef3a5d);
+const Color darkCircularProgressBarColor = Color(0xfffa9151);
 const Color difficultyChipColorEasy = Colors.green;
 const Color difficultyChipColorMedium = Colors.orange;
 const Color difficultyChipColorHard = Colors.red;
@@ -42,6 +44,8 @@ const double expansionTileVerticalPadding = 15;
 const double expansionTileHorizontalPadding = 18;
 const double defaultPageHorizontalPadding = 18;
 const double defaultPageVerticalPadding = 20;
+const double chipHorizontalPadding = 10;
+const double chipVerticalPadding = 2;
 
 // ------------------- Fonts Size -------------------
 const double headline1Size = 50;
