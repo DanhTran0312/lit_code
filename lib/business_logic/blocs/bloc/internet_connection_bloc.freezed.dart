@@ -18,38 +18,38 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$InternetConnectionEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() checkConnection,
+    required TResult Function() observeConnection,
     required TResult Function(bool isConnected) connectionChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? checkConnection,
+    TResult? Function()? observeConnection,
     TResult? Function(bool isConnected)? connectionChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? checkConnection,
+    TResult Function()? observeConnection,
     TResult Function(bool isConnected)? connectionChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CheckConnection value) checkConnection,
+    required TResult Function(ObserveConnection value) observeConnection,
     required TResult Function(ConnectionChanged value) connectionChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(CheckConnection value)? checkConnection,
+    TResult? Function(ObserveConnection value)? observeConnection,
     TResult? Function(ConnectionChanged value)? connectionChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CheckConnection value)? checkConnection,
+    TResult Function(ObserveConnection value)? observeConnection,
     TResult Function(ConnectionChanged value)? connectionChanged,
     required TResult orElse(),
   }) =>
@@ -76,35 +76,35 @@ class _$InternetConnectionEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$CheckConnectionCopyWith<$Res> {
-  factory _$$CheckConnectionCopyWith(
-          _$CheckConnection value, $Res Function(_$CheckConnection) then) =
-      __$$CheckConnectionCopyWithImpl<$Res>;
+abstract class _$$ObserveConnectionCopyWith<$Res> {
+  factory _$$ObserveConnectionCopyWith(
+          _$ObserveConnection value, $Res Function(_$ObserveConnection) then) =
+      __$$ObserveConnectionCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$CheckConnectionCopyWithImpl<$Res>
-    extends _$InternetConnectionEventCopyWithImpl<$Res, _$CheckConnection>
-    implements _$$CheckConnectionCopyWith<$Res> {
-  __$$CheckConnectionCopyWithImpl(
-      _$CheckConnection _value, $Res Function(_$CheckConnection) _then)
+class __$$ObserveConnectionCopyWithImpl<$Res>
+    extends _$InternetConnectionEventCopyWithImpl<$Res, _$ObserveConnection>
+    implements _$$ObserveConnectionCopyWith<$Res> {
+  __$$ObserveConnectionCopyWithImpl(
+      _$ObserveConnection _value, $Res Function(_$ObserveConnection) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$CheckConnection implements CheckConnection {
-  const _$CheckConnection();
+class _$ObserveConnection implements ObserveConnection {
+  const _$ObserveConnection();
 
   @override
   String toString() {
-    return 'InternetConnectionEvent.checkConnection()';
+    return 'InternetConnectionEvent.observeConnection()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$CheckConnection);
+        (other.runtimeType == runtimeType && other is _$ObserveConnection);
   }
 
   @override
@@ -113,30 +113,30 @@ class _$CheckConnection implements CheckConnection {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() checkConnection,
+    required TResult Function() observeConnection,
     required TResult Function(bool isConnected) connectionChanged,
   }) {
-    return checkConnection();
+    return observeConnection();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? checkConnection,
+    TResult? Function()? observeConnection,
     TResult? Function(bool isConnected)? connectionChanged,
   }) {
-    return checkConnection?.call();
+    return observeConnection?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? checkConnection,
+    TResult Function()? observeConnection,
     TResult Function(bool isConnected)? connectionChanged,
     required TResult orElse(),
   }) {
-    if (checkConnection != null) {
-      return checkConnection();
+    if (observeConnection != null) {
+      return observeConnection();
     }
     return orElse();
   }
@@ -144,37 +144,37 @@ class _$CheckConnection implements CheckConnection {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CheckConnection value) checkConnection,
+    required TResult Function(ObserveConnection value) observeConnection,
     required TResult Function(ConnectionChanged value) connectionChanged,
   }) {
-    return checkConnection(this);
+    return observeConnection(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(CheckConnection value)? checkConnection,
+    TResult? Function(ObserveConnection value)? observeConnection,
     TResult? Function(ConnectionChanged value)? connectionChanged,
   }) {
-    return checkConnection?.call(this);
+    return observeConnection?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CheckConnection value)? checkConnection,
+    TResult Function(ObserveConnection value)? observeConnection,
     TResult Function(ConnectionChanged value)? connectionChanged,
     required TResult orElse(),
   }) {
-    if (checkConnection != null) {
-      return checkConnection(this);
+    if (observeConnection != null) {
+      return observeConnection(this);
     }
     return orElse();
   }
 }
 
-abstract class CheckConnection implements InternetConnectionEvent {
-  const factory CheckConnection() = _$CheckConnection;
+abstract class ObserveConnection implements InternetConnectionEvent {
+  const factory ObserveConnection() = _$ObserveConnection;
 }
 
 /// @nodoc
@@ -242,7 +242,7 @@ class _$ConnectionChanged implements ConnectionChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() checkConnection,
+    required TResult Function() observeConnection,
     required TResult Function(bool isConnected) connectionChanged,
   }) {
     return connectionChanged(isConnected);
@@ -251,7 +251,7 @@ class _$ConnectionChanged implements ConnectionChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? checkConnection,
+    TResult? Function()? observeConnection,
     TResult? Function(bool isConnected)? connectionChanged,
   }) {
     return connectionChanged?.call(isConnected);
@@ -260,7 +260,7 @@ class _$ConnectionChanged implements ConnectionChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? checkConnection,
+    TResult Function()? observeConnection,
     TResult Function(bool isConnected)? connectionChanged,
     required TResult orElse(),
   }) {
@@ -273,7 +273,7 @@ class _$ConnectionChanged implements ConnectionChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CheckConnection value) checkConnection,
+    required TResult Function(ObserveConnection value) observeConnection,
     required TResult Function(ConnectionChanged value) connectionChanged,
   }) {
     return connectionChanged(this);
@@ -282,7 +282,7 @@ class _$ConnectionChanged implements ConnectionChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(CheckConnection value)? checkConnection,
+    TResult? Function(ObserveConnection value)? observeConnection,
     TResult? Function(ConnectionChanged value)? connectionChanged,
   }) {
     return connectionChanged?.call(this);
@@ -291,7 +291,7 @@ class _$ConnectionChanged implements ConnectionChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CheckConnection value)? checkConnection,
+    TResult Function(ObserveConnection value)? observeConnection,
     TResult Function(ConnectionChanged value)? connectionChanged,
     required TResult orElse(),
   }) {

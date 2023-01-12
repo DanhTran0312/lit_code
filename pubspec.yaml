@@ -11,6 +11,7 @@ dependencies:
   animated_toggle_switch: ^0.6.1
   bloc: ^8.1.0
   cached_network_image: ^3.2.3
+  connectivity_plus: ^3.0.2
   email_validator: ^2.1.17
   firebase_auth: ^4.2.1
   firebase_core: ^2.4.0
