@@ -24,13 +24,14 @@ class UserAdapter extends TypeAdapter<User> {
       settings: fields[5] as Settings?,
       completedQuestions: (fields[6] as List).cast<Question?>(),
       questionsVersion: fields[7] as String?,
+      lastSynced: fields[8] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, User obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(1)
       ..write(obj.id)
       ..writeByte(2)
@@ -44,7 +45,9 @@ class UserAdapter extends TypeAdapter<User> {
       ..writeByte(6)
       ..write(obj.completedQuestions)
       ..writeByte(7)
-      ..write(obj.questionsVersion);
+      ..write(obj.questionsVersion)
+      ..writeByte(8)
+      ..write(obj.lastSynced);
   }
 
   @override
@@ -77,6 +80,7 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
               .toList() ??
           const [],
       questionsVersion: json['questionsVersion'] as String? ?? '',
+      lastSynced: json['lastSynced'] as int?,
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
@@ -87,4 +91,5 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'settings': instance.settings,
       'completedQuestions': instance.completedQuestions,
       'questionsVersion': instance.questionsVersion,
+      'lastSynced': instance.lastSynced,
     };

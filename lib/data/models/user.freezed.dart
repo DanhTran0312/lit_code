@@ -34,6 +34,8 @@ mixin _$User {
   List<Question?> get completedQuestions => throw _privateConstructorUsedError;
   @HiveField(7)
   String? get questionsVersion => throw _privateConstructorUsedError;
+  @HiveField(8)
+  int? get lastSynced => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -52,7 +54,8 @@ abstract class $UserCopyWith<$Res> {
       @HiveField(4) String? photoUrl,
       @HiveField(5) Settings? settings,
       @HiveField(6) List<Question?> completedQuestions,
-      @HiveField(7) String? questionsVersion});
+      @HiveField(7) String? questionsVersion,
+      @HiveField(8) int? lastSynced});
 
   $SettingsCopyWith<$Res>? get settings;
 }
@@ -77,6 +80,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? settings = freezed,
     Object? completedQuestions = null,
     Object? questionsVersion = freezed,
+    Object? lastSynced = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -107,6 +111,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.questionsVersion
           : questionsVersion // ignore: cast_nullable_to_non_nullable
               as String?,
+      lastSynced: freezed == lastSynced
+          ? _value.lastSynced
+          : lastSynced // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 
@@ -136,7 +144,8 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       @HiveField(4) String? photoUrl,
       @HiveField(5) Settings? settings,
       @HiveField(6) List<Question?> completedQuestions,
-      @HiveField(7) String? questionsVersion});
+      @HiveField(7) String? questionsVersion,
+      @HiveField(8) int? lastSynced});
 
   @override
   $SettingsCopyWith<$Res>? get settings;
@@ -158,6 +167,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? settings = freezed,
     Object? completedQuestions = null,
     Object? questionsVersion = freezed,
+    Object? lastSynced = freezed,
   }) {
     return _then(_$_User(
       id: null == id
@@ -188,6 +198,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.questionsVersion
           : questionsVersion // ignore: cast_nullable_to_non_nullable
               as String?,
+      lastSynced: freezed == lastSynced
+          ? _value.lastSynced
+          : lastSynced // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -202,7 +216,8 @@ class _$_User extends _User {
       @HiveField(4) this.photoUrl,
       @HiveField(5) this.settings = const Settings(),
       @HiveField(6) final List<Question?> completedQuestions = const [],
-      @HiveField(7) this.questionsVersion = ''})
+      @HiveField(7) this.questionsVersion = '',
+      @HiveField(8) this.lastSynced})
       : _completedQuestions = completedQuestions,
         super._();
 
@@ -239,10 +254,13 @@ class _$_User extends _User {
   @JsonKey()
   @HiveField(7)
   final String? questionsVersion;
+  @override
+  @HiveField(8)
+  final int? lastSynced;
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, email: $email, photoUrl: $photoUrl, settings: $settings, completedQuestions: $completedQuestions, questionsVersion: $questionsVersion)';
+    return 'User(id: $id, name: $name, email: $email, photoUrl: $photoUrl, settings: $settings, completedQuestions: $completedQuestions, questionsVersion: $questionsVersion, lastSynced: $lastSynced)';
   }
 
   @override
@@ -260,7 +278,9 @@ class _$_User extends _User {
             const DeepCollectionEquality()
                 .equals(other._completedQuestions, _completedQuestions) &&
             (identical(other.questionsVersion, questionsVersion) ||
-                other.questionsVersion == questionsVersion));
+                other.questionsVersion == questionsVersion) &&
+            (identical(other.lastSynced, lastSynced) ||
+                other.lastSynced == lastSynced));
   }
 
   @JsonKey(ignore: true)
@@ -273,7 +293,8 @@ class _$_User extends _User {
       photoUrl,
       settings,
       const DeepCollectionEquality().hash(_completedQuestions),
-      questionsVersion);
+      questionsVersion,
+      lastSynced);
 
   @JsonKey(ignore: true)
   @override
@@ -297,7 +318,8 @@ abstract class _User extends User {
       @HiveField(4) final String? photoUrl,
       @HiveField(5) final Settings? settings,
       @HiveField(6) final List<Question?> completedQuestions,
-      @HiveField(7) final String? questionsVersion}) = _$_User;
+      @HiveField(7) final String? questionsVersion,
+      @HiveField(8) final int? lastSynced}) = _$_User;
   const _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
@@ -323,6 +345,9 @@ abstract class _User extends User {
   @override
   @HiveField(7)
   String? get questionsVersion;
+  @override
+  @HiveField(8)
+  int? get lastSynced;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

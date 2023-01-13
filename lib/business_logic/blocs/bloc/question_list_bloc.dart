@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:lit_code/business_logic/cubits/cubit/network_connection_cubit.dart';
 import 'package:lit_code/data/models/models.dart';
 import 'package:lit_code/data/repositories/repositories.dart';
 
@@ -8,8 +11,16 @@ part 'question_list_state.dart';
 part 'question_list_bloc.freezed.dart';
 
 class QuestionListBloc extends Bloc<QuestionListEvent, QuestionListState> {
-  QuestionListBloc({required this.questionRepository})
-      : super(const QuestionListInitial()) {
+  QuestionListBloc({
+    required this.questionRepository,
+    required this.networkConnectionCubit,
+  }) : super(const QuestionListInitial()) {
+    networkConnectionSubscription = networkConnectionCubit.stream.listen(
+      (state) {
+        if (state is Connected) {
+        } else {}
+      },
+    );
     on<FetchQuestions>((event, emit) async {
       emit(const QuestionListLoading());
       try {
@@ -31,4 +42,12 @@ class QuestionListBloc extends Bloc<QuestionListEvent, QuestionListState> {
     });
   }
   final QuestionRepository questionRepository;
+  final NetworkConnectionCubit networkConnectionCubit;
+  late final StreamSubscription networkConnectionSubscription;
+
+  @override
+  Future<void> close() {
+    networkConnectionSubscription.cancel();
+    return super.close();
+  }
 }

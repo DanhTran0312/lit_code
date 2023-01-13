@@ -1,4 +1,6 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -6,11 +8,11 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:lit_code/app/app.dart';
 import 'package:lit_code/bootstrap.dart';
 import 'package:lit_code/business_logic/blocs/bloc/auth_bloc.dart';
-import 'package:lit_code/business_logic/blocs/bloc/internet_connection_bloc.dart';
+
 import 'package:lit_code/business_logic/blocs/bloc/question_list_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/bottom_nav_bar_cubit.dart';
+import 'package:lit_code/business_logic/cubits/cubit/network_connection_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/question_completed_cubit.dart';
-import 'package:lit_code/business_logic/cubits/cubit/theme_cubit.dart';
 import 'package:lit_code/constants/enums.dart';
 import 'package:lit_code/data/models/models.dart';
 import 'package:lit_code/data/repositories/repositories.dart';
@@ -26,42 +28,56 @@ Future<void> main() async {
   final boxes = await initializeHive();
   await initializeFirebase();
 
-  final userReposiory = createUserRepository(boxes.userBox);
+  final databaseReference = FirebaseDatabase.instance.ref();
+  final userReposiory = createUserRepository(boxes.userBox, databaseReference);
   final authRepository = createAuthRepository();
-  final questionRepository =
-      createQuestionRepository(boxes.questionBox, boxes.userBox);
+  final questionRepository = createQuestionRepository(
+    boxes.questionBox,
+    boxes.userBox,
+    databaseReference,
+  );
+  final appRouter = createAppRouter(userReposiory);
 
-  final appRouter = AppRouter(
+  final connectivity = Connectivity();
+
+  final networkConnectionCubit = NetworkConnectionCubit(
+    connectivity: connectivity,
+  );
+
+  final authBloc = AuthBloc(
+    authRepository: authRepository,
     userRepository: userReposiory,
+  );
+
+  final bottomNavBarCubit = BottomNavBarCubit();
+
+  final questionCompletedCubit = QuestionCompletedCubit(
+    userRepository: userReposiory,
+    networkConnectionCubit: networkConnectionCubit,
+  );
+
+  final questionListBloc = QuestionListBloc(
+    questionRepository: questionRepository,
+    networkConnectionCubit: networkConnectionCubit,
   );
 
   await bootstrap(
     () => MultiBlocProvider(
       providers: [
-        BlocProvider<InternetConnectionBloc>(
-          create: (context) => InternetConnectionBloc(),
+        BlocProvider<NetworkConnectionCubit>(
+          create: (context) => networkConnectionCubit,
         ),
         BlocProvider<AuthBloc>(
-          create: (context) => AuthBloc(
-            authRepository: authRepository,
-            userRepository: userReposiory,
-          ),
-        ),
-        BlocProvider<ThemeCubit>(
-          create: (context) => ThemeCubit(),
+          create: (context) => authBloc,
         ),
         BlocProvider<BottomNavBarCubit>(
-          create: (context) => BottomNavBarCubit(),
+          create: (context) => bottomNavBarCubit,
         ),
         BlocProvider<QuestionListBloc>(
-          create: (context) => QuestionListBloc(
-            questionRepository: questionRepository,
-          ),
+          create: (context) => questionListBloc,
         ),
         BlocProvider<QuestionCompletedCubit>(
-          create: (context) => QuestionCompletedCubit(
-            userRepository: userReposiory,
-          ),
+          create: (context) => questionCompletedCubit,
         ),
       ],
       child: LitCodeApp(
@@ -92,6 +108,7 @@ Future<Boxes> initializeHive() async {
 
 Future<void> initializeFirebase() async {
   await Firebase.initializeApp(
+    name: 'Main',
     options: DefaultFirebaseOptions.currentPlatform,
   );
 }
@@ -105,19 +122,25 @@ class Boxes {
   final Box<User> userBox;
 }
 
-UserRepository createUserRepository(Box<User> userBox) {
+UserRepository createUserRepository(
+  Box<User> userBox,
+  DatabaseReference databaseReference,
+) {
   return UserRepository(
     userBox: userBox,
+    firebaseDatabase: databaseReference,
   );
 }
 
 QuestionRepository createQuestionRepository(
   Box<Question> questionBox,
   Box<User> userBox,
+  DatabaseReference databaseReference,
 ) {
   return QuestionRepository(
     questionBox: questionBox,
     userBox: userBox,
+    firebaseDatabase: databaseReference,
   );
 }
 

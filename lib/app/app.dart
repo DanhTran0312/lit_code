@@ -37,18 +37,21 @@ class _LitCodeAppState extends State<LitCodeApp> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeCubit, ThemeState>(
-      builder: (context, state) {
-        return MaterialApp(
-          title: 'Flutter Demo',
-          debugShowCheckedModeBanner: false,
-          theme: BlocProvider.of<ThemeCubit>(context).isDark
-              ? darkAppTheme
-              : lightAppTheme,
-          onGenerateRoute: widget.appRouter.onGenerateRoute,
-          initialRoute: '/',
-        );
-      },
+    return BlocProvider(
+      create: (context) => ThemeCubit(),
+      child: BlocBuilder<ThemeCubit, ThemeState>(
+        builder: (context, state) {
+          return MaterialApp(
+            title: 'Flutter Demo',
+            debugShowCheckedModeBanner: false,
+            theme: BlocProvider.of<ThemeCubit>(context).isDark
+                ? darkAppTheme
+                : lightAppTheme,
+            onGenerateRoute: widget.appRouter.onGenerateRoute,
+            initialRoute: '/',
+          );
+        },
+      ),
     );
   }
 }
