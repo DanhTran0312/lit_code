@@ -1,25 +1,36 @@
 // ignore_for_file: join_return_with_assignment
 
+import 'dart:async';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:hive/hive.dart';
 import 'package:lit_code/data/models/models.dart';
+import 'package:lit_code/data/repositories/auth_repository.dart';
 
 class UserRepository {
   UserRepository({
-    required this.userBox,
-    required this.firebaseDatabase,
-  });
+    required Box<User> userBox,
+    required DatabaseReference firebaseDatabase,
+    required AuthRepository authRepository,
+  })  : _userBox = userBox,
+        _firebaseDatabase = firebaseDatabase,
+        _authRepository = authRepository {
+    userStream = _authRepository.user.listen((user) {
+      if (user.isNotEmpty) {
+        _user = user;
+      } else {
+        _user = User.empty;
+      }
+    });
+  }
 
   User _user = User.empty;
-  bool isSynced = false;
-  final Box<User> userBox;
-  final DatabaseReference firebaseDatabase;
+  final Box<User> _userBox;
+  final DatabaseReference _firebaseDatabase;
+  final AuthRepository _authRepository;
+  late final StreamSubscription<User> userStream;
 
-  late final usersDatabaseReference = firebaseDatabase.child('users');
-
-  void setIsSynced(bool value) {
-    isSynced = value;
-  }
+  late final usersDatabaseReference = _firebaseDatabase.child('users');
 
   /// Syncs the completed questions of the user with the cloud database.
   ///
@@ -76,7 +87,7 @@ class UserRepository {
           completedQuestions: completedQuestions,
           lastSynced: cloudLastSynced,
         );
-        await userBox.put(_user.id, _user);
+        await _userBox.put(_user.id, _user);
       } else {
         // Get the questions from the local database
         final completedQuestions = _user.completedQuestions;
@@ -97,14 +108,9 @@ class UserRepository {
 
   Future<User> getUser() async {
     try {
-      if (isSynced) {
-      } else {
-        if (userBox.isEmpty) {
-          return User.empty;
-        }
-        _user = userBox.values.first;
+      if (_user.isEmpty) {
+        throw Exception('Cannot get user because it does not exist');
       }
-
       return _user;
     } catch (e) {
       throw Exception('Error while getting user');
@@ -140,7 +146,7 @@ class UserRepository {
           )
         ],
       );
-      await userBox.put(_user.id, _user);
+      await _userBox.put(_user.id, _user);
     } catch (e) {
       throw Exception(e);
     }
@@ -156,42 +162,13 @@ class UserRepository {
             .where((element) => element?.id != question.id)
             .toList(),
       );
-      await userBox.put(_user.id, _user);
+      await _userBox.put(_user.id, _user);
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<void> saveUser(User user) async {
-    try {
-      if (user.isEmpty) {
-        throw Exception('The User does not exist');
-      } else {
-        _user = user;
-        await userBox.put(user.id, _user);
-      }
-    } catch (e) {
-      throw Exception('$e');
-    }
-  }
-
-  Future<void> deleteUser() async {
-    try {
-      if (_user.isEmpty) {
-        throw Exception('Cannot delete user because it does not exist');
-      }
-      await userBox.delete(_user.id);
-      _user = User.empty;
-    } catch (e) {
-      throw Exception(e);
-    }
-  }
-
-  Future<bool> isUserSaved(String id) async {
-    try {
-      return userBox.containsKey(id);
-    } catch (e) {
-      throw Exception('Error while checking if user is saved');
-    }
+  void dispose() {
+    userStream.cancel();
   }
 }

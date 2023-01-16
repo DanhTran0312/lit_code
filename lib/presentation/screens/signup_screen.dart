@@ -1,51 +1,71 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lit_code/business_logic/blocs/bloc/auth_bloc.dart';
-import 'package:lit_code/data/models/models.dart';
+import 'package:formz/formz.dart';
+import 'package:lit_code/business_logic/cubits/cubit/sign_up_cubit.dart';
+import 'package:lit_code/data/repositories/repositories.dart';
 import 'package:lit_code/presentation/widgets/widgets.dart';
 
 class SignUpScreen extends StatelessWidget {
-  SignUpScreen({super.key});
+  const SignUpScreen({super.key});
 
-  final _formKey = GlobalKey<FormState>();
-  final SignUp signUp = SignUp(
-    email: '',
-    password: '',
-    comfirmPassword: '',
-  );
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      body: BlocListener<AuthBloc, AuthState>(
-        listener: (context, state) {
-          if (state is Authenticated) {
-            Navigator.of(context).pushReplacementNamed('/home');
-          } else if (state is Loading) {
-            const CircularProgressIndicator();
-          } else if (state is AuthError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.error),
-              ),
-            );
-          }
-        },
-        child: SingleChildScrollView(
-          child: ImageContainer(
-            theme: theme,
+      body: BlocProvider(
+        create: (context) => SignUpCubit(
+          authRepository: context.read<AuthRepository>(),
+        ),
+        child: BlocListener<SignUpCubit, SignUpState>(
+          listener: (context, state) {
+            if (state.status.isSubmissionInProgress) {
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  const SnackBar(content: Text('Signing Up...')),
+                );
+            } else if (state.status.isSubmissionFailure) {
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  SnackBar(
+                    content: Text(state.errorMessages ?? 'Sign Up Failure'),
+                  ),
+                );
+            }
+          },
+          child: _SignUpPage(
             size: size,
-            darkBackgroundImage:
-                'assets/images/dark_auth_screen_background.png',
-            lightBackgroundImage:
-                'assets/images/light_auth_screen_background.png',
-            padding: EdgeInsets.symmetric(
-              horizontal: size.width * 0.1,
-            ),
-            child: SignUpForm(formKey: _formKey, theme: theme, signUp: signUp),
+            theme: theme,
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _SignUpPage extends StatelessWidget {
+  const _SignUpPage({
+    required this.theme,
+    required this.size,
+  });
+
+  final ThemeData theme;
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: ImageContainer(
+        theme: theme,
+        size: size,
+        darkBackgroundImage: 'assets/images/dark_auth_screen_background.png',
+        lightBackgroundImage: 'assets/images/light_auth_screen_background.png',
+        padding: EdgeInsets.symmetric(
+          horizontal: size.width * 0.1,
+        ),
+        child: SignUpForm(theme: theme),
       ),
     );
   }

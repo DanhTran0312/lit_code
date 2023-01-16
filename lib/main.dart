@@ -1,23 +1,23 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:lit_code/app/app.dart';
 import 'package:lit_code/bootstrap.dart';
-import 'package:lit_code/business_logic/blocs/bloc/auth_bloc.dart';
-
+import 'package:lit_code/business_logic/blocs/bloc/app_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/question_list_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/bottom_nav_bar_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/network_connection_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/question_completed_cubit.dart';
+import 'package:lit_code/business_logic/cubits/cubit/theme_cubit.dart';
 import 'package:lit_code/constants/enums.dart';
 import 'package:lit_code/data/models/models.dart';
 import 'package:lit_code/data/repositories/repositories.dart';
 import 'package:lit_code/firebase_options.dart';
-import 'package:lit_code/presentation/router/app_router.dart';
 import 'package:path_provider/path_provider.dart';
 
 Future<void> main() async {
@@ -28,63 +28,60 @@ Future<void> main() async {
   final boxes = await initializeHive();
   await initializeFirebase();
 
+  final firebaseAuth = FirebaseAuth.instance;
+  final googleSignIn = GoogleSignIn();
   final databaseReference = FirebaseDatabase.instance.ref();
-  final userReposiory = createUserRepository(boxes.userBox, databaseReference);
-  final authRepository = createAuthRepository();
-  final questionRepository = createQuestionRepository(
-    boxes.questionBox,
-    boxes.userBox,
-    databaseReference,
+
+  final authRepository = AuthRepository(
+    userBox: boxes.userBox,
+    firebaseAuth: firebaseAuth,
+    googleSignIn: googleSignIn,
   );
-  final appRouter = createAppRouter(userReposiory);
+
+  await authRepository.user.first;
+  final userReposiory = UserRepository(
+    userBox: boxes.userBox,
+    firebaseDatabase: databaseReference,
+    authRepository: authRepository,
+  );
+  final questionRepository = QuestionRepository(
+    firebaseDatabase: databaseReference,
+    questionBox: boxes.questionBox,
+    userBox: boxes.userBox,
+  );
 
   final connectivity = Connectivity();
 
-  final networkConnectionCubit = NetworkConnectionCubit(
-    connectivity: connectivity,
+  late final appBloc = AppBloc(
+    authRepository: authRepository,
   );
 
-  final authBloc = AuthBloc(
-    authRepository: authRepository,
-    userRepository: userReposiory,
+  final themeCubit = ThemeCubit();
+
+  late final networkConnectionCubit = NetworkConnectionCubit(
+    connectivity: connectivity,
   );
 
   final bottomNavBarCubit = BottomNavBarCubit();
 
-  final questionCompletedCubit = QuestionCompletedCubit(
+  late final questionCompletedCubit = QuestionCompletedCubit(
     userRepository: userReposiory,
-    networkConnectionCubit: networkConnectionCubit,
   );
 
-  final questionListBloc = QuestionListBloc(
+  late final questionListBloc = QuestionListBloc(
     questionRepository: questionRepository,
-    networkConnectionCubit: networkConnectionCubit,
   );
 
   await bootstrap(
-    () => MultiBlocProvider(
-      providers: [
-        BlocProvider<NetworkConnectionCubit>(
-          create: (context) => networkConnectionCubit,
-        ),
-        BlocProvider<AuthBloc>(
-          create: (context) => authBloc,
-        ),
-        BlocProvider<BottomNavBarCubit>(
-          create: (context) => bottomNavBarCubit,
-        ),
-        BlocProvider<QuestionListBloc>(
-          create: (context) => questionListBloc,
-        ),
-        BlocProvider<QuestionCompletedCubit>(
-          create: (context) => questionCompletedCubit,
-        ),
-      ],
-      child: LitCodeApp(
-        appRouter: appRouter,
-        userBox: boxes.userBox,
-        questionBox: boxes.questionBox,
-      ),
+    () => LitCodeApp(
+      appBloc: appBloc,
+      themeCubit: themeCubit,
+      networkConnectionCubit: networkConnectionCubit,
+      bottomNavBarCubit: bottomNavBarCubit,
+      questionCompletedCubit: questionCompletedCubit,
+      questionListBloc: questionListBloc,
+      authRepository: authRepository,
+      userRepository: userReposiory,
     ),
   );
 }
@@ -120,36 +117,4 @@ class Boxes {
   });
   final Box<Question> questionBox;
   final Box<User> userBox;
-}
-
-UserRepository createUserRepository(
-  Box<User> userBox,
-  DatabaseReference databaseReference,
-) {
-  return UserRepository(
-    userBox: userBox,
-    firebaseDatabase: databaseReference,
-  );
-}
-
-QuestionRepository createQuestionRepository(
-  Box<Question> questionBox,
-  Box<User> userBox,
-  DatabaseReference databaseReference,
-) {
-  return QuestionRepository(
-    questionBox: questionBox,
-    userBox: userBox,
-    firebaseDatabase: databaseReference,
-  );
-}
-
-AuthRepository createAuthRepository() {
-  return AuthRepository();
-}
-
-AppRouter createAppRouter(UserRepository userRepository) {
-  return AppRouter(
-    userRepository: userRepository,
-  );
 }

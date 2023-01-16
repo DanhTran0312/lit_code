@@ -17,8 +17,6 @@ class StudyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      extendBody: true,
-      bottomNavigationBar: const PersistedBottomNavBar(),
       body: BlocConsumer<QuestionListBloc, QuestionListState>(
         listener: (context, state) {
           if (state is QuestionListError) {

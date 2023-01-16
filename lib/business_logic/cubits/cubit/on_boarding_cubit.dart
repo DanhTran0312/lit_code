@@ -7,39 +7,27 @@ part 'on_boarding_cubit.g.dart';
 part 'on_boarding_cubit.freezed.dart';
 
 class OnBoardingCubit extends Cubit<OnBoardingState> with HydratedMixin {
-  OnBoardingCubit() : super(const OnBoardingState.onBoardingNotCompleted());
-
-  void onBoarded() => emit(const OnBoardingState.onBoarded());
-
-  void showOnBoarding() {
-    try {
-      if (state is OnBoardingNotCompleted) {
-        emit(const OnBoardingState.onBoardingStepOne());
-      }
-    } catch (e) {
-      emit(OnBoardingState.onBoardingError(e.toString()));
-    }
-  }
+  OnBoardingCubit() : super(const OnBoardingState.onBoardingNotCompleted(0));
 
   final PageController _pageController = PageController();
 
   PageController? get pageController => _pageController;
 
+  void onBoardingCompleted() =>
+      emit(const OnBoardingState.onBoardingCompleted());
+
   void nextStep() {
-    try {
-      if (state is OnBoardingStepOne) {
-        emit(const OnBoardingState.onBoardingStepTwo());
-      } else if (state is OnBoardingStepTwo) {
-        emit(const OnBoardingState.onBoardingStepThree());
-      } else if (state is OnBoardingStepThree) {
-        emit(const OnBoardingState.onBoarded());
+    if (state is OnBoardingNotCompleted) {
+      if ((state as OnBoardingNotCompleted).currentStep == 2) {
+        onBoardingCompleted();
+        return;
       }
+      final currentStep = (state as OnBoardingNotCompleted).currentStep;
+      emit(OnBoardingState.onBoardingNotCompleted(currentStep + 1));
       _pageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeIn,
       );
-    } catch (e) {
-      emit(OnBoardingState.onBoardingError(e.toString()));
     }
   }
 

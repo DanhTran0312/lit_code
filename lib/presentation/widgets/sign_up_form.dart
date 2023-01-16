@@ -1,116 +1,145 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lit_code/business_logic/blocs/bloc/auth_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:lit_code/business_logic/cubits/cubit/sign_up_cubit.dart';
 import 'package:lit_code/constants/constants.dart';
-import 'package:lit_code/data/models/models.dart';
 import 'package:lit_code/presentation/widgets/widgets.dart';
 
 class SignUpForm extends StatelessWidget {
   const SignUpForm({
     super.key,
-    required GlobalKey<FormState> formKey,
     required this.theme,
-    required this.signUp,
-  }) : _formKey = formKey;
-
-  final GlobalKey<FormState> _formKey;
+  });
   final ThemeData theme;
-  final SignUp signUp;
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Sign Up',
-            style: theme.textTheme.headline2,
-            textAlign: TextAlign.start,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'Sign Up',
+          style: theme.textTheme.headline2,
+          textAlign: TextAlign.start,
+        ),
+        const SizedBox(height: sizeBoxHeightLarge),
+        _EmailInput(),
+        const SizedBox(height: sizeBoxHeightMedium),
+        _PasswordInput(),
+        const SizedBox(height: sizeBoxHeightMedium),
+        _ConfirmPasswordInput(),
+        const SizedBox(height: sizeBoxHeightLarge),
+        CustomElevatedButton(
+          text: 'Sign Up',
+          onPressed: () {
+            context.read<SignUpCubit>().signUpWithEmailAndPassword();
+          },
+        ),
+        const SizedBox(height: sizeBoxHeightMedium),
+        _SignInOption(theme: theme),
+      ],
+    );
+  }
+}
+
+class _SignInOption extends StatelessWidget {
+  const _SignInOption({
+    required this.theme,
+  });
+
+  final ThemeData theme;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'Already have an account?',
+          style: theme.textTheme.bodyText1,
+        ),
+        TextButton(
+          onPressed: () {
+            context.pop();
+          },
+          child: Text(
+            'Sign In',
+            style: theme.textTheme.bodyText1!.copyWith(
+              decoration: TextDecoration.underline,
+            ),
           ),
-          const SizedBox(height: sizeBoxHeightLarge),
-          CustomTextFormField(
-            onSaved: (value) {
-              signUp.email = value!;
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'Please enter your email address';
-              }
-              return null;
-            },
-            labelText: 'Email Address',
-            hintText: 'Enter your email adress',
+        ),
+      ],
+    );
+  }
+}
+
+class _EmailInput extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SignUpCubit, SignUpState>(
+      buildWhen: (previous, current) => previous.email != current.email,
+      builder: (context, state) {
+        return CustomTextFormField(
+          labelText: 'Email Address',
+          hintText: 'Enter your email adress',
+          fieldKey: const Key('signUpForm_emailInput_textField'),
+          onChanged: (value) => context.read<SignUpCubit>().emailChanged(value),
+          errorText: context.select(
+            (SignUpCubit cubit) =>
+                cubit.state.email.invalid ? 'Invalid Email' : null,
           ),
-          const SizedBox(height: sizeBoxHeightMedium),
-          CustomTextFormField(
-            onSaved: (value) {
-              signUp.password = value!;
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'Please enter your password';
-              }
-              return null;
-            },
-            labelText: 'Password',
-            hintText: 'Enter your password',
-            obscureText: true,
+        );
+      },
+    );
+  }
+}
+
+class _PasswordInput extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SignUpCubit, SignUpState>(
+      buildWhen: (previous, current) => previous.password != current.password,
+      builder: (context, state) {
+        return CustomTextFormField(
+          labelText: 'Password',
+          hintText: 'Enter your password',
+          fieldKey: const Key('signUpForm_passwordInput_textField'),
+          onChanged: (value) =>
+              context.read<SignUpCubit>().passwordChanged(value),
+          obscureText: true,
+          errorText: context.select(
+            (SignUpCubit cubit) =>
+                cubit.state.password.invalid ? 'Invalid Password' : null,
           ),
-          const SizedBox(height: sizeBoxHeightMedium),
-          CustomTextFormField(
-            onSaved: (value) {
-              signUp.comfirmPassword = value!;
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'Please enter your password';
-              }
-              return null;
-            },
-            labelText: 'Comfirm Password',
-            hintText: 'Enter your password',
-            obscureText: true,
+        );
+      },
+    );
+  }
+}
+
+class _ConfirmPasswordInput extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SignUpCubit, SignUpState>(
+      buildWhen: (previous, current) =>
+          previous.confirmPassword != current.confirmPassword ||
+          previous.password != current.password,
+      builder: (context, state) {
+        return CustomTextFormField(
+          labelText: 'Confirm Password',
+          hintText: 'Confirm your password',
+          fieldKey: const Key('signUpForm_confirmPasswordInput_textField'),
+          obscureText: true,
+          onChanged: (value) =>
+              context.read<SignUpCubit>().confirmPasswordChanged(value),
+          errorText: context.select(
+            (SignUpCubit cubit) => cubit.state.confirmPassword.invalid
+                ? 'Passwords do not match'
+                : null,
           ),
-          const SizedBox(height: sizeBoxHeightLarge),
-          CustomElevatedButton(
-            text: 'Sign Up',
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                _formKey.currentState!.save();
-                BlocProvider.of<AuthBloc>(context).add(
-                  SignUpRequested(
-                    email: signUp.email,
-                    password: signUp.password,
-                  ),
-                );
-              }
-            },
-          ),
-          const SizedBox(height: sizeBoxHeightMedium),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Already have an account?',
-                style: theme.textTheme.bodyText1,
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pushReplacementNamed('/login');
-                },
-                child: Text(
-                  'Login',
-                  style: theme.textTheme.bodyText1!.copyWith(
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

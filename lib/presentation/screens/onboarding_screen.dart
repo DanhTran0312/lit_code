@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lit_code/business_logic/cubits/cubit/on_boarding_cubit.dart';
 import 'package:lit_code/constants/constant.dart';
 import 'package:lit_code/data/models/models.dart';
@@ -15,21 +16,15 @@ class OnBoardingScreen extends StatelessWidget {
       create: (context) => OnBoardingCubit(),
       child: BlocConsumer<OnBoardingCubit, OnBoardingState>(
         listener: (context, state) {
-          if (state is OnBoarded) {
-            Navigator.of(context).pushReplacementNamed('/');
-          } else if (state is OnBoardingError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.message),
-              ),
-            );
+          if (state is OnBoardingCompleted) {
+            context.goNamed('signIn');
           }
         },
         builder: (context, state) {
           return Scaffold(
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-                BlocProvider.of<OnBoardingCubit>(context).nextStep();
+                context.read<OnBoardingCubit>().nextStep();
               },
               child: const Icon(Icons.arrow_forward),
             ),
@@ -50,7 +45,7 @@ class OnBoardingPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return PageView.builder(
-      controller: BlocProvider.of<OnBoardingCubit>(context).pageController,
+      controller: context.watch<OnBoardingCubit>().pageController,
       itemCount: onBoardingData.length,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {

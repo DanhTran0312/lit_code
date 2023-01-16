@@ -3,6 +3,31 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'enums.g.dart';
 
+enum AppStatus {
+  authenticated,
+  unauthenticated,
+}
+
+enum NetworkStatus {
+  connected,
+  disconnected,
+}
+
+enum EmailValidationErrors {
+  empty,
+  invalid,
+}
+
+enum PasswordValidationErrors {
+  empty,
+  tooShort,
+  tooLong,
+  noUppercase,
+  noLowercase,
+  noNumber,
+  noSpecialCharacter,
+}
+
 @JsonEnum(valueField: 'difficulty')
 @HiveType(typeId: 3)
 enum Difficulty {

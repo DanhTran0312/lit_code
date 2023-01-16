@@ -11,8 +11,6 @@ class ReviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
-      bottomNavigationBar: const PersistedBottomNavBar(),
       body: BlocConsumer<QuestionCompletedCubit, QuestionCompletedState>(
         listener: (context, state) {
           if (state is Error) {

@@ -5,6 +5,9 @@ import 'package:lit_code/data/models/models.dart';
 part 'user.freezed.dart';
 part 'user.g.dart';
 
+// User is a class that stores information about a user of the app.
+// It is used to store information about the user locally in Hive.
+
 @HiveType(typeId: 0)
 @freezed
 abstract class User with _$User {
@@ -25,4 +28,14 @@ abstract class User with _$User {
 
   bool get isEmpty => this == User.empty;
   bool get isNotEmpty => this != User.empty;
+  User get defaultUser => User(
+        id: id,
+        name: name ?? 'Anonymous',
+        email: email ?? '',
+        photoUrl: photoUrl ?? '',
+        settings: settings ?? const Settings(),
+        completedQuestions: completedQuestions,
+        questionsVersion: questionsVersion ?? '',
+        lastSynced: lastSynced ?? 0,
+      );
 }

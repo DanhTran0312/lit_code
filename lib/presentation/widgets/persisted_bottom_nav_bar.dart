@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lit_code/business_logic/cubits/cubit/bottom_nav_bar_cubit.dart';
 import 'package:lit_code/presentation/widgets/custom_bottom_navigation_bar_item.dart';
 
@@ -73,19 +74,21 @@ void _onBottomNavBarItemTapped(BuildContext context, int index) {
 
   switch (index) {
     case 0:
-      Navigator.of(context).pushReplacementNamed('/progress');
+      context.goNamed('progress');
       break;
     case 1:
-      Navigator.of(context).pushReplacementNamed('/study');
+      context.goNamed('study');
       break;
     case 2:
-      Navigator.of(context).pushReplacementNamed('/home');
+      context.goNamed('home');
       break;
     case 3:
-      Navigator.of(context).pushReplacementNamed('/review');
+      context.goNamed('review');
       break;
     case 4:
-      Navigator.of(context).pushReplacementNamed('/settings');
+      context.goNamed('settings');
       break;
+    default:
+      context.goNamed('home');
   }
 }

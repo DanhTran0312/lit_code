@@ -1,5 +1,6 @@
 export 'home_screen.dart';
 export 'onboarding_screen.dart';
+export 'profile_screen.dart';
 export 'progress_screen.dart';
 export 'review_screen.dart';
 export 'settings_screen.dart';

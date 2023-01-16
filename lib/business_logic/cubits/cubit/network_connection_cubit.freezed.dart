@@ -40,23 +40,23 @@ mixin _$NetworkConnectionState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Connected value) connected,
-    required TResult Function(Disconnected value) disconnected,
+    required TResult Function(NetworkInitial value) initial,
+    required TResult Function(NetworkConnected value) connected,
+    required TResult Function(NetworkDisconnected value) disconnected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(Connected value)? connected,
-    TResult? Function(Disconnected value)? disconnected,
+    TResult? Function(NetworkInitial value)? initial,
+    TResult? Function(NetworkConnected value)? connected,
+    TResult? Function(NetworkDisconnected value)? disconnected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Connected value)? connected,
-    TResult Function(Disconnected value)? disconnected,
+    TResult Function(NetworkInitial value)? initial,
+    TResult Function(NetworkConnected value)? connected,
+    TResult Function(NetworkDisconnected value)? disconnected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -82,23 +82,25 @@ class _$NetworkConnectionStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$InitialCopyWith<$Res> {
-  factory _$$InitialCopyWith(_$Initial value, $Res Function(_$Initial) then) =
-      __$$InitialCopyWithImpl<$Res>;
+abstract class _$$NetworkInitialCopyWith<$Res> {
+  factory _$$NetworkInitialCopyWith(
+          _$NetworkInitial value, $Res Function(_$NetworkInitial) then) =
+      __$$NetworkInitialCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InitialCopyWithImpl<$Res>
-    extends _$NetworkConnectionStateCopyWithImpl<$Res, _$Initial>
-    implements _$$InitialCopyWith<$Res> {
-  __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
+class __$$NetworkInitialCopyWithImpl<$Res>
+    extends _$NetworkConnectionStateCopyWithImpl<$Res, _$NetworkInitial>
+    implements _$$NetworkInitialCopyWith<$Res> {
+  __$$NetworkInitialCopyWithImpl(
+      _$NetworkInitial _value, $Res Function(_$NetworkInitial) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$Initial implements Initial {
-  const _$Initial();
+class _$NetworkInitial implements NetworkInitial {
+  const _$NetworkInitial();
 
   @override
   String toString() {
@@ -108,7 +110,7 @@ class _$Initial implements Initial {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Initial);
+        (other.runtimeType == runtimeType && other is _$NetworkInitial);
   }
 
   @override
@@ -151,9 +153,9 @@ class _$Initial implements Initial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Connected value) connected,
-    required TResult Function(Disconnected value) disconnected,
+    required TResult Function(NetworkInitial value) initial,
+    required TResult Function(NetworkConnected value) connected,
+    required TResult Function(NetworkDisconnected value) disconnected,
   }) {
     return initial(this);
   }
@@ -161,9 +163,9 @@ class _$Initial implements Initial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(Connected value)? connected,
-    TResult? Function(Disconnected value)? disconnected,
+    TResult? Function(NetworkInitial value)? initial,
+    TResult? Function(NetworkConnected value)? connected,
+    TResult? Function(NetworkDisconnected value)? disconnected,
   }) {
     return initial?.call(this);
   }
@@ -171,9 +173,9 @@ class _$Initial implements Initial {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Connected value)? connected,
-    TResult Function(Disconnected value)? disconnected,
+    TResult Function(NetworkInitial value)? initial,
+    TResult Function(NetworkConnected value)? connected,
+    TResult Function(NetworkDisconnected value)? disconnected,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -183,30 +185,30 @@ class _$Initial implements Initial {
   }
 }
 
-abstract class Initial implements NetworkConnectionState {
-  const factory Initial() = _$Initial;
+abstract class NetworkInitial implements NetworkConnectionState {
+  const factory NetworkInitial() = _$NetworkInitial;
 }
 
 /// @nodoc
-abstract class _$$ConnectedCopyWith<$Res> {
-  factory _$$ConnectedCopyWith(
-          _$Connected value, $Res Function(_$Connected) then) =
-      __$$ConnectedCopyWithImpl<$Res>;
+abstract class _$$NetworkConnectedCopyWith<$Res> {
+  factory _$$NetworkConnectedCopyWith(
+          _$NetworkConnected value, $Res Function(_$NetworkConnected) then) =
+      __$$NetworkConnectedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ConnectedCopyWithImpl<$Res>
-    extends _$NetworkConnectionStateCopyWithImpl<$Res, _$Connected>
-    implements _$$ConnectedCopyWith<$Res> {
-  __$$ConnectedCopyWithImpl(
-      _$Connected _value, $Res Function(_$Connected) _then)
+class __$$NetworkConnectedCopyWithImpl<$Res>
+    extends _$NetworkConnectionStateCopyWithImpl<$Res, _$NetworkConnected>
+    implements _$$NetworkConnectedCopyWith<$Res> {
+  __$$NetworkConnectedCopyWithImpl(
+      _$NetworkConnected _value, $Res Function(_$NetworkConnected) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$Connected implements Connected {
-  const _$Connected();
+class _$NetworkConnected implements NetworkConnected {
+  const _$NetworkConnected();
 
   @override
   String toString() {
@@ -216,7 +218,7 @@ class _$Connected implements Connected {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Connected);
+        (other.runtimeType == runtimeType && other is _$NetworkConnected);
   }
 
   @override
@@ -259,9 +261,9 @@ class _$Connected implements Connected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Connected value) connected,
-    required TResult Function(Disconnected value) disconnected,
+    required TResult Function(NetworkInitial value) initial,
+    required TResult Function(NetworkConnected value) connected,
+    required TResult Function(NetworkDisconnected value) disconnected,
   }) {
     return connected(this);
   }
@@ -269,9 +271,9 @@ class _$Connected implements Connected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(Connected value)? connected,
-    TResult? Function(Disconnected value)? disconnected,
+    TResult? Function(NetworkInitial value)? initial,
+    TResult? Function(NetworkConnected value)? connected,
+    TResult? Function(NetworkDisconnected value)? disconnected,
   }) {
     return connected?.call(this);
   }
@@ -279,9 +281,9 @@ class _$Connected implements Connected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Connected value)? connected,
-    TResult Function(Disconnected value)? disconnected,
+    TResult Function(NetworkInitial value)? initial,
+    TResult Function(NetworkConnected value)? connected,
+    TResult Function(NetworkDisconnected value)? disconnected,
     required TResult orElse(),
   }) {
     if (connected != null) {
@@ -291,30 +293,30 @@ class _$Connected implements Connected {
   }
 }
 
-abstract class Connected implements NetworkConnectionState {
-  const factory Connected() = _$Connected;
+abstract class NetworkConnected implements NetworkConnectionState {
+  const factory NetworkConnected() = _$NetworkConnected;
 }
 
 /// @nodoc
-abstract class _$$DisconnectedCopyWith<$Res> {
-  factory _$$DisconnectedCopyWith(
-          _$Disconnected value, $Res Function(_$Disconnected) then) =
-      __$$DisconnectedCopyWithImpl<$Res>;
+abstract class _$$NetworkDisconnectedCopyWith<$Res> {
+  factory _$$NetworkDisconnectedCopyWith(_$NetworkDisconnected value,
+          $Res Function(_$NetworkDisconnected) then) =
+      __$$NetworkDisconnectedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$DisconnectedCopyWithImpl<$Res>
-    extends _$NetworkConnectionStateCopyWithImpl<$Res, _$Disconnected>
-    implements _$$DisconnectedCopyWith<$Res> {
-  __$$DisconnectedCopyWithImpl(
-      _$Disconnected _value, $Res Function(_$Disconnected) _then)
+class __$$NetworkDisconnectedCopyWithImpl<$Res>
+    extends _$NetworkConnectionStateCopyWithImpl<$Res, _$NetworkDisconnected>
+    implements _$$NetworkDisconnectedCopyWith<$Res> {
+  __$$NetworkDisconnectedCopyWithImpl(
+      _$NetworkDisconnected _value, $Res Function(_$NetworkDisconnected) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$Disconnected implements Disconnected {
-  const _$Disconnected();
+class _$NetworkDisconnected implements NetworkDisconnected {
+  const _$NetworkDisconnected();
 
   @override
   String toString() {
@@ -324,7 +326,7 @@ class _$Disconnected implements Disconnected {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Disconnected);
+        (other.runtimeType == runtimeType && other is _$NetworkDisconnected);
   }
 
   @override
@@ -367,9 +369,9 @@ class _$Disconnected implements Disconnected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Connected value) connected,
-    required TResult Function(Disconnected value) disconnected,
+    required TResult Function(NetworkInitial value) initial,
+    required TResult Function(NetworkConnected value) connected,
+    required TResult Function(NetworkDisconnected value) disconnected,
   }) {
     return disconnected(this);
   }
@@ -377,9 +379,9 @@ class _$Disconnected implements Disconnected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(Connected value)? connected,
-    TResult? Function(Disconnected value)? disconnected,
+    TResult? Function(NetworkInitial value)? initial,
+    TResult? Function(NetworkConnected value)? connected,
+    TResult? Function(NetworkDisconnected value)? disconnected,
   }) {
     return disconnected?.call(this);
   }
@@ -387,9 +389,9 @@ class _$Disconnected implements Disconnected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Connected value)? connected,
-    TResult Function(Disconnected value)? disconnected,
+    TResult Function(NetworkInitial value)? initial,
+    TResult Function(NetworkConnected value)? connected,
+    TResult Function(NetworkDisconnected value)? disconnected,
     required TResult orElse(),
   }) {
     if (disconnected != null) {
@@ -399,6 +401,6 @@ class _$Disconnected implements Disconnected {
   }
 }
 
-abstract class Disconnected implements NetworkConnectionState {
-  const factory Disconnected() = _$Disconnected;
+abstract class NetworkDisconnected implements NetworkConnectionState {
+  const factory NetworkDisconnected() = _$NetworkDisconnected;
 }

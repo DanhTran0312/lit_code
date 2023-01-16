@@ -7,16 +7,20 @@ class CustomTextFormField extends StatelessWidget {
     super.key,
     this.hintText,
     required this.labelText,
-    this.validator,
-    this.onSaved,
     this.obscureText,
+    required this.fieldKey,
+    required this.onChanged,
+    this.keyboardType,
+    this.errorText,
   });
 
   final String? hintText;
   final String labelText;
-  final String? Function(String?)? validator;
-  final dynamic Function(String?)? onSaved;
   final bool? obscureText;
+  final Key fieldKey;
+  final void Function(String)? onChanged;
+  final TextInputType? keyboardType;
+  final String? errorText;
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +36,13 @@ class CustomTextFormField extends StatelessWidget {
           ),
         ),
         const SizedBox(height: sizeBoxHeightSmall),
-        TextFormField(
+        TextField(
+          key: fieldKey,
+          onChanged: onChanged,
+          keyboardType: keyboardType,
           decoration: InputDecoration(
             hintText: hintText,
+            errorText: errorText,
             contentPadding: const EdgeInsets.symmetric(
               horizontal: inputHorizontalPadding,
               vertical: inputVerticalPadding,
@@ -68,8 +76,6 @@ class CustomTextFormField extends StatelessWidget {
               ),
             ),
           ),
-          validator: validator,
-          onSaved: onSaved,
           obscureText: obscureText ?? false,
           style: theme.brightness == Brightness.light
               ? lightInputTextTheme
