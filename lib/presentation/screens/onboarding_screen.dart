@@ -82,12 +82,13 @@ class OnBoardingPageView extends StatelessWidget {
               const SizedBox(height: sizeBoxHeightMedium),
               Text(
                 onBoardingData[index].title,
-                style: Theme.of(context).textTheme.headline5,
+                style: Theme.of(context).textTheme.headline2,
+                textAlign: TextAlign.center,
               ),
               const SizedBox(height: sizeBoxHeightMedium),
               Text(
                 onBoardingData[index].description,
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context).textTheme.headline5,
               ),
             ],
           ),

@@ -5,6 +5,15 @@ import 'package:lit_code/business_logic/cubits/cubit/on_boarding_cubit.dart';
 import 'package:lit_code/presentation/screens/screens.dart';
 import 'package:lit_code/presentation/widgets/persisted_bottom_nav_bar.dart';
 
+/// The [GoRouter] that is used to navigate through the app.
+///
+/// The [GoRouter] is used to navigate through the app. It uses the
+/// routes defined in the [routes] property to determine how to navigate
+/// through the app.
+///
+/// The [GoRouter] is also used to determine the initial location of the app
+/// as well as the initial route to display.
+
 class AppRouter {
   AppRouter({
     required AppBloc appBloc,
@@ -35,7 +44,11 @@ class AppRouter {
     initialLocation: initialRoute,
     routerNeglect: true,
     navigatorKey: _rootNavigatorKey,
-    routes: [
+    routes: routes,
+  );
+
+  List<RouteBase> get routes {
+    return [
       GoRoute(
         path: initialRoute,
         pageBuilder: (context, state) {
@@ -128,6 +141,6 @@ class AppRouter {
           ),
         ],
       ),
-    ],
-  );
+    ];
+  }
 }

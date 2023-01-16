@@ -18,25 +18,25 @@ class OnBoardingData {
 List<OnBoardingData> onBoardingData = [
   OnBoardingData(
     illustration: 'assets/svg/onboarding_1.svg',
-    title: 'Welcome to LitCode',
+    title: 'Welcome to\nLit Code 🔥',
     description:
-        'LitCode is a code editor that allows you to write code in a fun and interactive way.',
+        'Lit Code is a learning platform for coders to learn and keep track coding interview questions in a fun way.',
     darkbackgroundImage: 'assets/images/dark_onboarding_background_1.png',
     lightBackgroundImage: 'assets/images/light_onboarding_background_1.png',
   ),
   OnBoardingData(
     illustration: 'assets/svg/onboarding_2.svg',
-    title: 'Write code in a fun way',
+    title: 'Achive your goals',
     description:
-        'Write code in a fun and interactive way. You can write code in a fun way.',
+        'Set you goals and start learning. You can achive your goals with Lit Code.',
     darkbackgroundImage: 'assets/images/dark_onboarding_background_2.png',
     lightBackgroundImage: 'assets/images/light_onboarding_background_2.png',
   ),
   OnBoardingData(
     illustration: 'assets/svg/onboarding_3.svg',
-    title: 'Write code in a fun way',
+    title: 'Advance your 💻 interview skills',
     description:
-        'Write code in a fun and interactive way. You can write code in a fun way.',
+        'Reach your goals and advance your coding interview skills with Lit Code.',
     darkbackgroundImage: 'assets/images/dark_onboarding_background_3.png',
     lightBackgroundImage: 'assets/images/light_onboarding_background_3.png',
   ),
