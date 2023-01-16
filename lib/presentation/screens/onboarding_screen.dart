@@ -17,7 +17,12 @@ class OnBoardingScreen extends StatelessWidget {
       child: BlocConsumer<OnBoardingCubit, OnBoardingState>(
         listener: (context, state) {
           if (state is OnBoardingCompleted) {
-            context.goNamed('signIn');
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('OnBoarding Completed'),
+              ),
+            );
+            context.goNamed('/');
           }
         },
         builder: (context, state) {

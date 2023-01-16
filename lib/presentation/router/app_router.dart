@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lit_code/business_logic/blocs/bloc/app_bloc.dart';
-import 'package:lit_code/presentation/router/initial_route_builder.dart';
+import 'package:lit_code/business_logic/cubits/cubit/on_boarding_cubit.dart';
 import 'package:lit_code/presentation/screens/screens.dart';
 import 'package:lit_code/presentation/widgets/persisted_bottom_nav_bar.dart';
 
 class AppRouter {
+  AppRouter({
+    required AppBloc appBloc,
+    required OnBoardingCubit onboardingCubit,
+  })  : _appBloc = appBloc,
+        _onboardingCubit = onboardingCubit;
+
   static const String initialRoute = '/';
   static const String settingsRoute = '/settings';
   static const String homeRoute = '/home';
@@ -15,11 +21,14 @@ class AppRouter {
   static const String profileRoute = 'profile';
   static const String signInRoute = '/signIn';
   static const String signUpRoute = '/signUp';
+  static const String onboardingRoute = '/onBoarding';
 
   final _shellNavigatorKey = GlobalKey<NavigatorState>();
   final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
   GoRouter get router => _router;
+  final AppBloc _appBloc;
+  final OnBoardingCubit _onboardingCubit;
 
   late final GoRouter _router = GoRouter(
     debugLogDiagnostics: true,
@@ -31,6 +40,15 @@ class AppRouter {
         path: initialRoute,
         pageBuilder: (context, state) {
           return const MaterialPage(child: SignInScreen());
+        },
+        redirect: (context, state) {
+          if (_onboardingCubit.state is OnBoardingNotCompleted) {
+            return onboardingRoute;
+          }
+          if (_appBloc.state is Authenticated) {
+            return homeRoute;
+          }
+          return null;
         },
       ),
       GoRoute(
@@ -45,6 +63,13 @@ class AppRouter {
         path: signUpRoute,
         pageBuilder: (context, state) {
           return const MaterialPage(child: SignUpScreen());
+        },
+      ),
+      GoRoute(
+        name: 'onBoarding',
+        path: onboardingRoute,
+        pageBuilder: (context, state) {
+          return const MaterialPage(child: OnBoardingScreen());
         },
       ),
       ShellRoute(

@@ -144,7 +144,7 @@ final TextTheme lightTextTheme = TextTheme(
 
 const BottomNavigationBarThemeData lightBottomNavigationBarThemeData =
     BottomNavigationBarThemeData(
-  backgroundColor: lightPrimaryColor,
+  backgroundColor: Colors.white,
   selectedItemColor: Colors.white,
   unselectedItemColor: Colors.black,
   selectedIconTheme: IconThemeData(
@@ -155,6 +155,7 @@ const BottomNavigationBarThemeData lightBottomNavigationBarThemeData =
   ),
   showSelectedLabels: false,
   showUnselectedLabels: false,
+  elevation: 1,
 );
 
 const BottomNavigationBarThemeData darkBottomNavigationBarThemeData =
@@ -170,6 +171,7 @@ const BottomNavigationBarThemeData darkBottomNavigationBarThemeData =
   ),
   showSelectedLabels: false,
   showUnselectedLabels: false,
+  elevation: 1,
 );
 
 // ---------------------------- Chip Theme ----------------------------

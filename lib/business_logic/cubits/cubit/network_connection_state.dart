@@ -1,3 +1,5 @@
+// ignore_for_file: comment_references
+
 part of 'network_connection_cubit.dart';
 
 /// Returns the number of elements in the collection.

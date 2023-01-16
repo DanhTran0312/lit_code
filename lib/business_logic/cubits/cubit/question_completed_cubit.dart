@@ -21,6 +21,7 @@ class QuestionCompletedCubit extends Cubit<QuestionCompletedState> {
       await userRepository.markQuestionAsCompleted(question);
       final questions = await userRepository.getCompletedQuestions();
       emit(QuestionCompletedState.loaded(questions));
+      await userRepository.syncCompletedQuestions();
     } catch (e) {
       emit(QuestionCompletedState.error(e.toString()));
     }
@@ -32,6 +33,7 @@ class QuestionCompletedCubit extends Cubit<QuestionCompletedState> {
       await userRepository.markQuestionAsUncompleted(question);
       final questions = await userRepository.getCompletedQuestions();
       emit(QuestionCompletedState.loaded(questions));
+      await userRepository.syncCompletedQuestions();
     } catch (e) {
       emit(QuestionCompletedState.error(e.toString()));
     }

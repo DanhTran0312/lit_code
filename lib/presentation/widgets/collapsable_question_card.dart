@@ -8,6 +8,7 @@ import 'package:lit_code/constants/enums.dart';
 import 'package:lit_code/data/models/models.dart';
 import 'package:lit_code/presentation/widgets/widgets.dart';
 import 'package:lit_code/theme/theme_utils.dart';
+import 'package:shimmer/shimmer.dart';
 
 class CollapsableQuestionCard extends StatelessWidget {
   const CollapsableQuestionCard({
@@ -56,7 +57,6 @@ class _BuildExpansionTile extends StatelessWidget {
     return Card(
       color:
           isTranparent ? Colors.transparent : theme.cardColor.withOpacity(0.57),
-      borderOnForeground: false,
       shape: const RoundedRectangleBorder(),
       margin: const EdgeInsets.all(0),
       clipBehavior: Clip.hardEdge,

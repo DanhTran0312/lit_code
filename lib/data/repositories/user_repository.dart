@@ -1,4 +1,4 @@
-// ignore_for_file: join_return_with_assignment
+// ignore_for_file: join_return_with_assignment, lines_longer_than_80_chars
 
 import 'dart:async';
 
@@ -59,48 +59,19 @@ class UserRepository {
       if (_user.completedQuestions.isEmpty) {
         return;
       }
-      final cloudLastSynced = await usersDatabaseReference
-              .child(_user.id)
-              .child('last_synced')
-              .once()
-              .then((value) => value.snapshot.value as int?) ??
-          0;
       final localLastSynced = _user.lastSynced ?? 0;
 
-      if (cloudLastSynced > localLastSynced) {
-        // Get the questions from the cloud
-        final data = await usersDatabaseReference
-            .child(_user.id)
-            .child('completed_questions')
-            .once();
-        final completedQuestions = <Question>[];
-        if (data.snapshot.value != null) {
-          final rawData = data.snapshot.value! as List<dynamic>;
-          for (final question in rawData) {
-            final q =
-                Map<String, dynamic>.from(question as Map<Object?, Object?>);
-            completedQuestions.add(Question.fromJson(q));
-          }
-        }
-        // Update the local database
-        _user = _user.copyWith(
-          completedQuestions: completedQuestions,
-          lastSynced: cloudLastSynced,
-        );
-        await _userBox.put(_user.id, _user);
-      } else {
-        // Get the questions from the local database
-        final completedQuestions = _user.completedQuestions;
-        // Update the cloud database
-        await usersDatabaseReference
-            .child(_user.id)
-            .child('completed_questions')
-            .set(completedQuestions.map((e) => e!.toJson()).toList());
-        await usersDatabaseReference
-            .child(_user.id)
-            .child('last_synced')
-            .set(localLastSynced);
-      }
+      // Get the questions from the local database
+      final completedQuestions = _user.completedQuestions;
+      // Update the cloud database
+      await usersDatabaseReference
+          .child(_user.id)
+          .child('completed_questions')
+          .set(completedQuestions.map((e) => e!.toJson()).toList());
+      await usersDatabaseReference
+          .child(_user.id)
+          .child('last_synced')
+          .set(localLastSynced);
     } catch (e) {
       throw Exception(e);
     }

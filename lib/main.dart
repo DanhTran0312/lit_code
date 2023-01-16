@@ -10,14 +10,15 @@ import 'package:lit_code/app/app.dart';
 import 'package:lit_code/bootstrap.dart';
 import 'package:lit_code/business_logic/blocs/bloc/app_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/question_list_bloc.dart';
-import 'package:lit_code/business_logic/cubits/cubit/bottom_nav_bar_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/network_connection_cubit.dart';
+import 'package:lit_code/business_logic/cubits/cubit/on_boarding_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/question_completed_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/theme_cubit.dart';
 import 'package:lit_code/constants/enums.dart';
 import 'package:lit_code/data/models/models.dart';
 import 'package:lit_code/data/repositories/repositories.dart';
 import 'package:lit_code/firebase_options.dart';
+import 'package:lit_code/presentation/router/app_router.dart';
 import 'package:path_provider/path_provider.dart';
 
 Future<void> main() async {
@@ -52,24 +53,29 @@ Future<void> main() async {
 
   final connectivity = Connectivity();
 
-  late final appBloc = AppBloc(
+  final appBloc = AppBloc(
     authRepository: authRepository,
   );
 
   final themeCubit = ThemeCubit();
 
-  late final networkConnectionCubit = NetworkConnectionCubit(
+  final networkConnectionCubit = NetworkConnectionCubit(
     connectivity: connectivity,
   );
 
-  final bottomNavBarCubit = BottomNavBarCubit();
-
-  late final questionCompletedCubit = QuestionCompletedCubit(
+  final questionCompletedCubit = QuestionCompletedCubit(
     userRepository: userReposiory,
   );
 
-  late final questionListBloc = QuestionListBloc(
+  final questionListBloc = QuestionListBloc(
     questionRepository: questionRepository,
+  );
+
+  final onboardingCubit = OnBoardingCubit();
+
+  final appRouter = AppRouter(
+    appBloc: appBloc,
+    onboardingCubit: onboardingCubit,
   );
 
   await bootstrap(
@@ -77,11 +83,11 @@ Future<void> main() async {
       appBloc: appBloc,
       themeCubit: themeCubit,
       networkConnectionCubit: networkConnectionCubit,
-      bottomNavBarCubit: bottomNavBarCubit,
       questionCompletedCubit: questionCompletedCubit,
       questionListBloc: questionListBloc,
       authRepository: authRepository,
       userRepository: userReposiory,
+      appRouter: appRouter,
     ),
   );
 }
@@ -94,7 +100,6 @@ Future<Boxes> initializeHive() async {
     ..registerAdapter(SettingsAdapter())
     ..registerAdapter(DifficultyAdapter())
     ..registerAdapter(CategoryAdapter());
-
   final userBox = await Hive.openBox<User>('userBox');
   final questionBox = await Hive.openBox<Question>('questionBox');
   return Boxes(

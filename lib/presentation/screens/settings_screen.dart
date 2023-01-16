@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:lit_code/business_logic/blocs/bloc/app_bloc.dart';
 
 class SettingsScreen extends StatelessWidget {

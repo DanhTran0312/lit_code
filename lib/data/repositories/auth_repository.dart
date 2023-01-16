@@ -1,3 +1,5 @@
+// ignore_for_file: comment_references, lines_longer_than_80_chars
+
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
