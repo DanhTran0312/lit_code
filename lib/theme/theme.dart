@@ -237,7 +237,7 @@ final ThemeData darkAppTheme = ThemeData(
   backgroundColor: Colors.black,
   chipTheme: darkChipTheme,
   cardTheme: darkCardTheme,
-  scaffoldBackgroundColor: Colors.black87,
+  scaffoldBackgroundColor: const Color(0xff121212),
   cardColor: darkQuestionCardColor,
   bottomNavigationBarTheme: darkBottomNavigationBarThemeData,
   useMaterial3: true,

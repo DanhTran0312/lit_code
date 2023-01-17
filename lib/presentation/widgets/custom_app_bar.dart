@@ -8,11 +8,11 @@ import 'package:shimmer/shimmer.dart';
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
     super.key,
-    required this.url,
+    this.url,
     required this.theme,
   });
 
-  final String url;
+  final String? url;
   final ThemeData theme;
 
   @override
@@ -24,24 +24,27 @@ class CustomAppBar extends StatelessWidget {
             CircleAvatar(
               radius: 30,
               backgroundColor: Colors.white,
-              child: ClipOval(
-                child: CachedNetworkImage(
-                  imageUrl: url,
-                  width: 60,
-                  height: 60,
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) => Shimmer.fromColors(
-                    baseColor: Colors.grey[300]!,
-                    highlightColor: Colors.grey[100]!,
-                    child: Container(
-                      width: 60,
-                      height: 60,
-                      color: Colors.white,
-                    ),
-                  ),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                ),
-              ),
+              child: url != null
+                  ? ClipOval(
+                      child: CachedNetworkImage(
+                        imageUrl: url!,
+                        width: 60,
+                        height: 60,
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) => Shimmer.fromColors(
+                          baseColor: Colors.grey[300]!,
+                          highlightColor: Colors.grey[100]!,
+                          child: Container(
+                            width: 60,
+                            height: 60,
+                            color: Colors.white,
+                          ),
+                        ),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                      ),
+                    )
+                  : const Icon(Icons.person),
             ),
             const SizedBox(width: 10),
             Column(

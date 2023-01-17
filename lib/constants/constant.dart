@@ -13,12 +13,13 @@ const Color darkCircularProgressBarColor = Color(0xfffa9151);
 const Color difficultyChipColorEasy = Colors.green;
 const Color difficultyChipColorMedium = Colors.orange;
 const Color difficultyChipColorHard = Colors.red;
-const Color darkQuestionCardColor = Color(0xff1B1B1B);
+const Color darkQuestionCardColor = Color(0xff181818);
 const Color darkExpandedQuestionCardColor = darkSecondaryColor;
 const Color lightExpandedQuestionCardColor = lightPrimaryColor;
 const Color lightQuestionCardColor = Color(0xffffdecf);
 const Color lightProgressCardColor = Color(0xffa16ce6);
 const Color lightChipColor = Color(0xffba9df2);
+const Color darkCalendarBackgroundColor = Color(0xff202020);
 
 // Border
 const double inputBorderWidth = 2;
