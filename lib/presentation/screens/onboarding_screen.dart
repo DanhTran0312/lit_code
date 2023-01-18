@@ -22,7 +22,7 @@ class OnBoardingScreen extends StatelessWidget {
                 content: Text('OnBoarding Completed'),
               ),
             );
-            context.goNamed('/');
+            context.go('/');
           }
         },
         builder: (context, state) {

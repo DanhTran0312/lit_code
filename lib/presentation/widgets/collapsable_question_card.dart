@@ -8,7 +8,6 @@ import 'package:lit_code/constants/enums.dart';
 import 'package:lit_code/data/models/models.dart';
 import 'package:lit_code/presentation/widgets/widgets.dart';
 import 'package:lit_code/theme/theme_utils.dart';
-import 'package:shimmer/shimmer.dart';
 
 class CollapsableQuestionCard extends StatelessWidget {
   const CollapsableQuestionCard({
@@ -64,69 +63,85 @@ class _BuildExpansionTile extends StatelessWidget {
         data: theme.copyWith(
           dividerColor: Colors.transparent,
         ),
-        child: BlocBuilder<QuestionCompletedCubit, QuestionCompletedState>(
-          builder: (context, state) {
-            if (state is Initial) {
-              questionCompletedCubit.getCompletedQuestions();
-              return const CircularProgressIndicator();
-            } else if (state is Loaded) {
-              final completed =
-                  state.completedQuestions.containsKey(question.id);
-              return ExpansionTile(
-                initiallyExpanded: expansionCubit.state[question.id] ?? false,
-                onExpansionChanged: (isExpanded) {
-                  expansionCubit.toggleQuestion(question.id);
-                },
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Row(
-                        children: [
-                          Checkbox(
-                            value: completed,
-                            onChanged: (bool? value) {
-                              if (!completed) {
-                                questionCompletedCubit
-                                    .markQuestionAsCompleted(question);
-                              } else {
-                                questionCompletedCubit
-                                    .markQuestionAsUncompleted(question);
-                              }
-                            },
-                          ),
-                          Expanded(
-                            child: Text(
-                              question.title,
-                              style: Theme.of(context).textTheme.headline6,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: sizeBoxHeightSmall,
-                          ),
-                        ],
-                      ),
-                    ),
-                    DifficultyChip(difficulty: question.difficulty),
-                  ],
-                ),
-                children: [
-                  const SizedBox(height: sizeBoxHeightSmall),
-                  RateConfidenceWidget(
-                    theme: theme,
-                    question: question,
-                  ),
-                  const SizedBox(height: sizeBoxHeightSmall),
-                ],
-              );
-            } else if (state is Loading) {
-              return const CircularProgressIndicator();
+        child:
+            BlocSelector<QuestionCompletedCubit, QuestionCompletedState, bool>(
+          selector: (state) {
+            if (state is Loaded) {
+              return state.completedQuestions.containsKey(question.id);
             } else {
-              return const Text('Error');
+              return false;
             }
+          },
+          builder: (context, isSelected) {
+            return ExpansionTile(
+              initiallyExpanded: expansionCubit.state[question.id] ?? false,
+              onExpansionChanged: (isExpanded) {
+                expansionCubit.toggleQuestion(question.id);
+              },
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Row(
+                      children: [
+                        _CheckBox(
+                          questionCompletedCubit: questionCompletedCubit,
+                          isSelected: isTranparent,
+                          question: question,
+                        ),
+                        Expanded(
+                          child: Text(
+                            question.title,
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: sizeBoxHeightSmall,
+                        ),
+                      ],
+                    ),
+                  ),
+                  DifficultyChip(difficulty: question.difficulty),
+                ],
+              ),
+              children: [
+                const SizedBox(height: sizeBoxHeightSmall),
+                RateConfidenceWidget(
+                  theme: theme,
+                  question: question,
+                ),
+                const SizedBox(height: sizeBoxHeightSmall),
+              ],
+            );
           },
         ),
       ),
+    );
+  }
+}
+
+class _CheckBox extends StatelessWidget {
+  const _CheckBox({
+    required this.questionCompletedCubit,
+    required this.question,
+    required this.isSelected,
+  });
+
+  final QuestionCompletedCubit questionCompletedCubit;
+  final Question question;
+  final bool isSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    return Checkbox(
+      value: isSelected,
+      onChanged: (bool? value) {
+        if (!isSelected) {
+          questionCompletedCubit.markQuestionAsCompleted(question);
+        } else {
+          questionCompletedCubit.markQuestionAsUncompleted(question);
+        }
+      },
     );
   }
 }

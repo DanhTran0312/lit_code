@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/question_completed_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/question_expansion_cubit.dart';
 import 'package:lit_code/constants/constants.dart';
+import 'package:lit_code/data/models/models.dart';
 import 'package:lit_code/presentation/widgets/widgets.dart';
 
 class ReviewScreen extends StatelessWidget {
@@ -11,52 +12,46 @@ class ReviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<QuestionCompletedCubit, QuestionCompletedState>(
-        listener: (context, state) {
-          if (state is Error) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.message),
-              ),
-            );
+      body: BlocSelector<QuestionCompletedCubit, QuestionCompletedState,
+          List<Question>>(
+        selector: (state) {
+          if (state is Loaded) {
+            return state.completedQuestions.values.toList();
+          } else {
+            return [];
           }
         },
-        builder: (context, state) {
-          if (state is Initial) {
-            BlocProvider.of<QuestionCompletedCubit>(context)
-                .getCompletedQuestions();
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is Loading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is Loaded) {
-            final completedQuestions = state.completedQuestions.values.toList();
-            return Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: defaultPageHorizontalPadding,
+        builder: (context, completedQuestions) {
+          if (completedQuestions.isEmpty) {
+            return Center(
+              child: Text(
+                'No questions completed yet',
+                style: Theme.of(context).textTheme.headline6,
               ),
-              child: BlocProvider(
-                create: (context) => QuestionExpansionCubit(),
-                child: ListView.builder(
-                  itemCount: completedQuestions.length,
-                  itemBuilder: (context, index) {
-                    final question = completedQuestions[index];
-                    return CollapsableQuestionCard(
-                      expansionCubit:
-                          BlocProvider.of<QuestionExpansionCubit>(context),
-                      isTranparent: false,
-                      question: question,
-                      questionCompletedCubit:
-                          BlocProvider.of<QuestionCompletedCubit>(context),
-                    );
-                  },
-                ),
-              ),
-            );
-          } else {
-            return const Center(
-              child: Text('Something went wrong'),
             );
           }
+          return Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: defaultPageHorizontalPadding,
+            ),
+            child: BlocProvider(
+              create: (context) => QuestionExpansionCubit(),
+              child: ListView.builder(
+                itemCount: completedQuestions.length,
+                itemBuilder: (context, index) {
+                  final question = completedQuestions[index];
+                  return CollapsableQuestionCard(
+                    expansionCubit:
+                        BlocProvider.of<QuestionExpansionCubit>(context),
+                    isTranparent: false,
+                    question: question,
+                    questionCompletedCubit:
+                        BlocProvider.of<QuestionCompletedCubit>(context),
+                  );
+                },
+              ),
+            ),
+          );
         },
       ),
     );
