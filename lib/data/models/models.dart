@@ -1,3 +1,4 @@
+export 'boxes.dart';
 export 'email.dart';
 export 'on_boarding_data.dart';
 export 'password.dart';

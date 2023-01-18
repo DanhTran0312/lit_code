@@ -88,6 +88,7 @@ Future<void> main() async {
       authRepository: authRepository,
       userRepository: userReposiory,
       appRouter: appRouter,
+      boxes: boxes,
     ),
   );
 }
@@ -113,13 +114,4 @@ Future<void> initializeFirebase() async {
     name: 'Main',
     options: DefaultFirebaseOptions.currentPlatform,
   );
-}
-
-class Boxes {
-  Boxes({
-    required this.questionBox,
-    required this.userBox,
-  });
-  final Box<Question> questionBox;
-  final Box<User> userBox;
 }

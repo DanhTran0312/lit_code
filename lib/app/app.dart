@@ -5,6 +5,7 @@ import 'package:lit_code/business_logic/blocs/bloc/question_list_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/network_connection_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/question_completed_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/theme_cubit.dart';
+import 'package:lit_code/data/models/models.dart';
 import 'package:lit_code/data/repositories/repositories.dart';
 import 'package:lit_code/presentation/router/app_router.dart';
 import 'package:lit_code/theme/theme.dart';
@@ -20,6 +21,7 @@ class LitCodeApp extends StatefulWidget {
     required QuestionCompletedCubit questionCompletedCubit,
     required UserRepository userRepository,
     required AppRouter appRouter,
+    required Boxes boxes,
   })  : _authRepository = authRepository,
         _appBloc = appBloc,
         _themeCubit = themeCubit,
@@ -27,7 +29,8 @@ class LitCodeApp extends StatefulWidget {
         _questionListBloc = questionListBloc,
         _questionCompletedCubit = questionCompletedCubit,
         _userRepository = userRepository,
-        _appRouter = appRouter;
+        _appRouter = appRouter,
+        _boxes = boxes;
   final AuthRepository _authRepository;
   final UserRepository _userRepository;
   final AppBloc _appBloc;
@@ -36,6 +39,7 @@ class LitCodeApp extends StatefulWidget {
   final QuestionListBloc _questionListBloc;
   final QuestionCompletedCubit _questionCompletedCubit;
   final AppRouter _appRouter;
+  final Boxes _boxes;
 
   @override
   State<LitCodeApp> createState() => _LitCodeAppState();
@@ -45,6 +49,7 @@ class _LitCodeAppState extends State<LitCodeApp> {
   @override
   void dispose() {
     widget._userRepository.dispose();
+    widget._boxes.close();
     super.dispose();
   }
 
