@@ -32,35 +32,57 @@ class CategorizedQuestionListCard extends StatelessWidget {
         data: theme.copyWith(
           dividerColor: Colors.transparent,
         ),
-        child: ExpansionTile(
-          key: key,
-          childrenPadding: const EdgeInsets.symmetric(
-            horizontal: 15,
-            vertical: 10,
-          ),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Text(
-                  category.name,
-                  style: Theme.of(context).textTheme.headline5,
-                ),
-              ),
-            ],
-          ),
-          children: [
-            ...questions.map(
-              (question) => CollapsableQuestionCard(
-                isTranparent: true,
-                question: question,
-                expansionCubit: expansionCubit,
-                questionCompletedCubit: questionCompletedCubit,
-              ),
-            ),
-          ],
+        child: _CategorizedQuestionTile(
+          category: category,
+          generateCategorizedQuestionList: _generateCategorizedQuestionList,
         ),
       ),
+    );
+  }
+
+  List<Widget> get _generateCategorizedQuestionList {
+    return [
+      ...questions.map(
+        (question) => CollapsableQuestionCard(
+          key: Key(question.id),
+          isTranparent: true,
+          question: question,
+          expansionCubit: expansionCubit,
+          questionCompletedCubit: questionCompletedCubit,
+        ),
+      ),
+    ];
+  }
+}
+
+class _CategorizedQuestionTile extends StatelessWidget {
+  const _CategorizedQuestionTile({
+    required this.category,
+    required List<Widget> generateCategorizedQuestionList,
+  }) : _generateCategorizedQuestionList = generateCategorizedQuestionList;
+
+  final Category category;
+  final List<Widget> _generateCategorizedQuestionList;
+
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionTile(
+      childrenPadding: const EdgeInsets.symmetric(
+        horizontal: 15,
+        vertical: 10,
+      ),
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Text(
+              category.name,
+              style: Theme.of(context).textTheme.headline5,
+            ),
+          ),
+        ],
+      ),
+      children: _generateCategorizedQuestionList,
     );
   }
 }

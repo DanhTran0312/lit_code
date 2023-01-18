@@ -63,59 +63,98 @@ class _BuildExpansionTile extends StatelessWidget {
         data: theme.copyWith(
           dividerColor: Colors.transparent,
         ),
-        child:
-            BlocSelector<QuestionCompletedCubit, QuestionCompletedState, bool>(
-          selector: (state) {
-            if (state is Loaded) {
-              return state.completedQuestions.containsKey(question.id);
-            } else {
-              return false;
+        child: BlocListener<QuestionCompletedCubit, QuestionCompletedState>(
+          listener: (context, state) {
+            if (state is Error) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(state.message),
+                ),
+              );
             }
           },
-          builder: (context, isSelected) {
-            return ExpansionTile(
-              initiallyExpanded: expansionCubit.state[question.id] ?? false,
-              onExpansionChanged: (isExpanded) {
-                expansionCubit.toggleQuestion(question.id);
-              },
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Row(
-                      children: [
-                        _CheckBox(
-                          questionCompletedCubit: questionCompletedCubit,
-                          isSelected: isTranparent,
-                          question: question,
-                        ),
-                        Expanded(
-                          child: Text(
-                            question.title,
-                            style: Theme.of(context).textTheme.headline6,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: sizeBoxHeightSmall,
-                        ),
-                      ],
-                    ),
-                  ),
-                  DifficultyChip(difficulty: question.difficulty),
-                ],
-              ),
-              children: [
-                const SizedBox(height: sizeBoxHeightSmall),
-                RateConfidenceWidget(
-                  theme: theme,
-                  question: question,
-                ),
-                const SizedBox(height: sizeBoxHeightSmall),
-              ],
-            );
-          },
+          child: BlocSelector<QuestionCompletedCubit, QuestionCompletedState,
+              bool>(
+            selector: (state) {
+              if (state is Loaded) {
+                return state.completedQuestions.containsKey(question.id);
+              } else {
+                return false;
+              }
+            },
+            bloc: questionCompletedCubit,
+            builder: (context, isSelected) {
+              return _ExpansionQuestionTile(
+                expansionCubit: expansionCubit,
+                question: question,
+                questionCompletedCubit: questionCompletedCubit,
+                isSelected: isSelected,
+                theme: theme,
+              );
+            },
+          ),
         ),
       ),
+    );
+  }
+}
+
+class _ExpansionQuestionTile extends StatelessWidget {
+  const _ExpansionQuestionTile({
+    required this.expansionCubit,
+    required this.question,
+    required this.questionCompletedCubit,
+    required this.theme,
+    required this.isSelected,
+  });
+
+  final QuestionExpansionCubit expansionCubit;
+  final Question question;
+  final QuestionCompletedCubit questionCompletedCubit;
+  final ThemeData theme;
+  final bool isSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionTile(
+      initiallyExpanded: expansionCubit.state[question.id] ?? false,
+      onExpansionChanged: (isExpanded) {
+        expansionCubit.toggleQuestion(question.id);
+      },
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Row(
+              children: [
+                _CheckBox(
+                  questionCompletedCubit: questionCompletedCubit,
+                  isSelected: isSelected,
+                  question: question,
+                ),
+                Expanded(
+                  child: Text(
+                    question.title,
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                ),
+                const SizedBox(
+                  width: sizeBoxHeightSmall,
+                ),
+              ],
+            ),
+          ),
+          DifficultyChip(difficulty: question.difficulty),
+        ],
+      ),
+      children: [
+        const SizedBox(height: sizeBoxHeightSmall),
+        _RateConfidenceWidget(
+          theme: theme,
+          question: question,
+        ),
+        const SizedBox(height: sizeBoxHeightSmall),
+      ],
     );
   }
 }
@@ -134,6 +173,7 @@ class _CheckBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Checkbox(
+      key: key,
       value: isSelected,
       onChanged: (bool? value) {
         if (!isSelected) {
@@ -146,9 +186,8 @@ class _CheckBox extends StatelessWidget {
   }
 }
 
-class RateConfidenceWidget extends StatelessWidget {
-  const RateConfidenceWidget({
-    super.key,
+class _RateConfidenceWidget extends StatelessWidget {
+  const _RateConfidenceWidget({
     required this.theme,
     required this.question,
   });
