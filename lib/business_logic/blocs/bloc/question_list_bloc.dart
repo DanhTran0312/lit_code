@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:lit_code/business_logic/blocs/bloc/statistics_bloc.dart';
 import 'package:lit_code/data/models/models.dart';
 import 'package:lit_code/data/repositories/repositories.dart';
 
@@ -22,27 +23,22 @@ part 'question_list_bloc.freezed.dart';
 
 class QuestionListBloc extends Bloc<QuestionListEvent, QuestionListState> {
   QuestionListBloc({
-    required this.questionRepository,
-  }) : super(const QuestionListInitial()) {
+    required QuestionRepository questionRepository,
+    required StatisticsBloc statisticsBloc,
+  })  : _questionRepository = questionRepository,
+        _statisticsBloc = statisticsBloc,
+        super(const QuestionListInitial()) {
     on<FetchQuestions>((event, emit) async {
       emit(const QuestionListLoading());
       try {
-        final questions = await questionRepository.getQuestions();
+        final questions = await _questionRepository.getAllQuestions();
+        _statisticsBloc.add(UpdateTotalQuestions(totalQuestions: questions));
         emit(QuestionListLoaded(questions));
       } catch (e) {
         emit(QuestionListError(e.toString()));
       }
     });
-
-    on<UpdateQuestions>((event, emit) async {
-      emit(const QuestionListLoading());
-      try {
-        await questionRepository.updateQuestions(event.questions);
-        emit(QuestionListLoaded(event.questions));
-      } catch (e) {
-        emit(QuestionListError(e.toString()));
-      }
-    });
   }
-  final QuestionRepository questionRepository;
+  final QuestionRepository _questionRepository;
+  final StatisticsBloc _statisticsBloc;
 }

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/question_list_bloc.dart';
+import 'package:lit_code/business_logic/blocs/bloc/statistics_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/question_completed_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/question_expansion_cubit.dart';
 import 'package:lit_code/constants/constants.dart';
@@ -71,23 +72,13 @@ class _StudyScreenBody extends StatelessWidget {
         const SizedBox(height: sizeBoxHeightSmall),
         const SectionHeading(title: 'Your Progress:'),
         const SizedBox(height: sizeBoxHeightSmall),
-        BlocBuilder<QuestionCompletedCubit, QuestionCompletedState>(
+        BlocBuilder<StatisticsBloc, StatisticsState>(
           builder: (context, state) {
-            if (state is Initial) {
-              BlocProvider.of<QuestionCompletedCubit>(context)
-                  .getCompletedQuestions();
-              return const Center(child: CircularProgressIndicator());
-            } else if (state is Loaded) {
-              return _ProgressSection(
-                completedQuestions: state.completedQuestions,
-                total: stateQuestion.length,
-                theme: theme,
-              );
-            } else if (state is Loading) {
-              return const Center(child: CircularProgressIndicator());
-            } else {
-              return const Center(child: Text('Something went wrong'));
-            }
+            return _ProgressSection(
+              completedQuestions: state.completedQuestions,
+              total: state.totalQuestions.length,
+              theme: theme,
+            );
           },
         ),
         const SectionHeading(title: 'Categories'),

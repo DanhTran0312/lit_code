@@ -19,7 +19,7 @@ class QuestionRepository {
   late final databaseVersionReference =
       firebaseDatabase.child('questions_version');
 
-  Future<List<Question>> getQuestions() async {
+  Future<List<Question>> getAllQuestions() async {
     try {
       // Get the version of the questions from the database
       final version = userBox.getAt(0)?.questionsVersion;
@@ -39,7 +39,7 @@ class QuestionRepository {
         }
 
         // Fetch the questions from the database
-        await updateQuestions(questionList);
+        await updateAllQuestions(questionList);
 
         // Update the user's questionsVersion to the current value
         await updateQuestionsVersion(versionData.snapshot.value! as String);
@@ -74,7 +74,7 @@ class QuestionRepository {
     }
   }
 
-  Future<void> updateQuestions(List<Question> questions) async {
+  Future<void> updateAllQuestions(List<Question> questions) async {
     try {
       await questionBox.clear();
       for (final question in questions) {

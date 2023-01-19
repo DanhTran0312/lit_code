@@ -10,6 +10,7 @@ import 'package:lit_code/app/app.dart';
 import 'package:lit_code/bootstrap.dart';
 import 'package:lit_code/business_logic/blocs/bloc/app_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/question_list_bloc.dart';
+import 'package:lit_code/business_logic/blocs/bloc/statistics_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/network_connection_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/on_boarding_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/question_completed_cubit.dart';
@@ -50,6 +51,7 @@ Future<void> main() async {
     questionBox: boxes.questionBox,
     userBox: boxes.userBox,
   );
+  final statisticsBloc = StatisticsBloc();
 
   final connectivity = Connectivity();
 
@@ -63,12 +65,9 @@ Future<void> main() async {
     connectivity: connectivity,
   );
 
-  final questionCompletedCubit = QuestionCompletedCubit(
-    userRepository: userReposiory,
-  );
-
   final questionListBloc = QuestionListBloc(
     questionRepository: questionRepository,
+    statisticsBloc: statisticsBloc,
   );
 
   final onboardingCubit = OnBoardingCubit();
@@ -76,6 +75,11 @@ Future<void> main() async {
   final appRouter = AppRouter(
     appBloc: appBloc,
     onboardingCubit: onboardingCubit,
+  );
+
+  final questionCompletedCubit = QuestionCompletedCubit(
+    userRepository: userReposiory,
+    statisticsBloc: statisticsBloc,
   );
 
   await bootstrap(
@@ -89,6 +93,7 @@ Future<void> main() async {
       userRepository: userReposiory,
       appRouter: appRouter,
       boxes: boxes,
+      statisticsBloc: statisticsBloc,
     ),
   );
 }

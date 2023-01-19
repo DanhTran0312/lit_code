@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lit_code/business_logic/blocs/bloc/statistics_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/question_completed_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/question_expansion_cubit.dart';
 import 'package:lit_code/constants/constants.dart';
@@ -11,9 +12,9 @@ class ReviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<QuestionCompletedCubit, QuestionCompletedState>(
+      body: BlocListener<QuestionCompletedCubit, QuestionCompletedState>(
         listener: (context, state) {
-          if (state is Error) {
+          if (state is QuestionCompletedError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(state.message),
@@ -21,13 +22,8 @@ class ReviewScreen extends StatelessWidget {
             );
           }
         },
-        builder: (context, state) {
-          if (state is Initial) {
-            context.read<QuestionCompletedCubit>().getCompletedQuestions();
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (state is Loaded && state.completedQuestions.isNotEmpty) {
+        child: BlocBuilder<StatisticsBloc, StatisticsState>(
+          builder: (context, state) {
             final completedQuestions = state.completedQuestions.values.toSet();
             final questionCompletedCubit =
                 BlocProvider.of<QuestionCompletedCubit>(context);
@@ -53,16 +49,8 @@ class ReviewScreen extends StatelessWidget {
                 ),
               ),
             );
-          } else if (state is Loading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else {
-            return const Center(
-              child: Text('No questions completed yet.'),
-            );
-          }
-        },
+          },
+        ),
       ),
     );
   }

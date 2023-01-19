@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/app_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/question_list_bloc.dart';
+import 'package:lit_code/business_logic/blocs/bloc/statistics_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/network_connection_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/question_completed_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/theme_cubit.dart';
@@ -22,6 +23,7 @@ class LitCodeApp extends StatefulWidget {
     required UserRepository userRepository,
     required AppRouter appRouter,
     required Boxes boxes,
+    required StatisticsBloc statisticsBloc,
   })  : _authRepository = authRepository,
         _appBloc = appBloc,
         _themeCubit = themeCubit,
@@ -30,6 +32,7 @@ class LitCodeApp extends StatefulWidget {
         _questionCompletedCubit = questionCompletedCubit,
         _userRepository = userRepository,
         _appRouter = appRouter,
+        _statisticsBloc = statisticsBloc,
         _boxes = boxes;
   final AuthRepository _authRepository;
   final UserRepository _userRepository;
@@ -40,6 +43,7 @@ class LitCodeApp extends StatefulWidget {
   final QuestionCompletedCubit _questionCompletedCubit;
   final AppRouter _appRouter;
   final Boxes _boxes;
+  final StatisticsBloc _statisticsBloc;
 
   @override
   State<LitCodeApp> createState() => _LitCodeAppState();
@@ -67,6 +71,9 @@ class _LitCodeAppState extends State<LitCodeApp> {
           ),
           BlocProvider<NetworkConnectionCubit>(
             create: (context) => widget._networkConnectionCubit,
+          ),
+          BlocProvider<StatisticsBloc>(
+            create: (context) => widget._statisticsBloc,
           ),
           BlocProvider<QuestionListBloc>(
             create: (context) => widget._questionListBloc,

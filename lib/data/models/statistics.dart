@@ -7,14 +7,16 @@ part 'statistics.freezed.dart';
 @freezed
 abstract class Statistics with _$Statistics {
   const factory Statistics({
-    required List<Question> completedQuestions,
-    required List<Question> totalQuestions,
+    List<Question>? completedQuestions,
+    List<Question>? totalQuestions,
   }) = _Statistics;
   const Statistics._();
 
-  int get completedQuestionsCount => completedQuestions.length;
+  int get completedQuestionsCount =>
+      completedQuestions == null ? 0 : completedQuestions!.length;
 
-  int get totalQuestionsCount => totalQuestions.length;
+  int get totalQuestionsCount =>
+      totalQuestions == null ? 0 : totalQuestions!.length;
 
   int get remainingQuestionsCount =>
       totalQuestionsCount - completedQuestionsCount;
@@ -23,7 +25,7 @@ abstract class Statistics with _$Statistics {
 
   Map<Category, List<Question>> get completedQuestionsByCategory {
     final completedQuestionsByCategory = <Category, List<Question>>{};
-    for (final question in completedQuestions) {
+    for (final question in completedQuestions ?? <Question>[]) {
       if (completedQuestionsByCategory.containsKey(question.category)) {
         completedQuestionsByCategory[question.category]!.add(question);
       } else {
@@ -35,7 +37,7 @@ abstract class Statistics with _$Statistics {
 
   Map<Category, int> get totalQuestionsByCategory {
     final totalQuestionsByCategory = <Category, int>{};
-    for (final question in totalQuestions) {
+    for (final question in totalQuestions ?? <Question>[]) {
       if (totalQuestionsByCategory.containsKey(question.category)) {
         totalQuestionsByCategory[question.category] =
             totalQuestionsByCategory[question.category]! + 1;
