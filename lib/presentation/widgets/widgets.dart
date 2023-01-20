@@ -1,5 +1,6 @@
 export 'animated_theme_toggle_switch.dart';
 export 'categorized_question_list_card.dart';
+export 'category_progress_card.dart';
 export 'collapsable_question_card.dart';
 export 'confidence_radio_button.dart';
 export 'custom_app_bar.dart';
@@ -11,6 +12,7 @@ export 'custom_elevated_button_with_image.dart';
 export 'custom_progress_card.dart';
 export 'custom_text_form_field.dart';
 export 'difficulty_chip.dart';
+export 'hightlighted_text.dart';
 export 'image_container.dart';
 export 'persisted_bottom_nav_bar.dart';
 export 'pie_chart_progress.dart';

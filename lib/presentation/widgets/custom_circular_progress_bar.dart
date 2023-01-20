@@ -20,7 +20,7 @@ class CustomCirCularProgressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SleekCircularSlider(
-      max: total,
+      max: total == 0 ? 1 : total,
       initialValue: initialValue,
       innerWidget: (value) {
         return _CustomInnerWidget(
@@ -72,6 +72,8 @@ class _CustomInnerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final total = this.total == 0 ? 1 : this.total;
+    final percentage = (value / total * 100).toStringAsFixed(0);
     return Container(
       margin: EdgeInsets.all(size * 0.165),
       decoration: const BoxDecoration(
@@ -80,7 +82,7 @@ class _CustomInnerWidget extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          '${(value / total * 100).toStringAsFixed(0)}%',
+          '$percentage%',
           style: theme.textTheme.headline3!.copyWith(
             color: Colors.white,
             fontSize: size * 0.18,

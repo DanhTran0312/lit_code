@@ -24,8 +24,9 @@ class ProgressScreen extends StatelessWidget {
             const SectionHeading(title: 'Activity Calendar'),
             const SizedBox(height: sizeBoxHeightMedium),
             _HeatMapCalendarDecoratedContainer(theme: theme),
-            const SizedBox(height: sizeBoxHeightMedium),
+            const SizedBox(height: sizeBoxHeightSmall),
             const SectionHeading(title: 'Category Progress'),
+            const SizedBox(height: sizeBoxHeightSmall),
             BlocSelector<StatisticsBloc, StatisticsState, Statistics>(
               selector: (state) {
                 if (state.statistics.completedQuestions != null &&
@@ -35,13 +36,17 @@ class ProgressScreen extends StatelessWidget {
                 return const Statistics();
               },
               builder: (context, statistics) {
-                return Column(
-                  children: [
-                    for (final category in Category.values)
-                      Text(
-                        '${category.name}: ${statistics.completedQuestionsByCategory[category] != null ? statistics.completedQuestionsByCategory[category]!.length : 0}',
-                      )
-                  ],
+                return ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: Category.values.length,
+                  itemBuilder: (context, index) {
+                    final category = Category.values[index];
+                    return CategoryProgressCard(
+                      category: category,
+                      statistics: statistics,
+                    );
+                  },
                 );
               },
             ),
@@ -70,7 +75,7 @@ class _HeatMapCalendarDecoratedContainer extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(20),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 18),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       child: _HeatMapCalendar(theme: theme),
     );
   }

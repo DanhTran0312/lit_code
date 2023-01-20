@@ -19,38 +19,32 @@ mixin _$QuestionListEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetchQuestions,
-    required TResult Function(List<Question> questions) updateQuestions,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? fetchQuestions,
-    TResult? Function(List<Question> questions)? updateQuestions,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetchQuestions,
-    TResult Function(List<Question> questions)? updateQuestions,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(FetchQuestions value) fetchQuestions,
-    required TResult Function(UpdateQuestions value) updateQuestions,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(FetchQuestions value)? fetchQuestions,
-    TResult? Function(UpdateQuestions value)? updateQuestions,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(FetchQuestions value)? fetchQuestions,
-    TResult Function(UpdateQuestions value)? updateQuestions,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -113,7 +107,6 @@ class _$FetchQuestions implements FetchQuestions {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetchQuestions,
-    required TResult Function(List<Question> questions) updateQuestions,
   }) {
     return fetchQuestions();
   }
@@ -122,7 +115,6 @@ class _$FetchQuestions implements FetchQuestions {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? fetchQuestions,
-    TResult? Function(List<Question> questions)? updateQuestions,
   }) {
     return fetchQuestions?.call();
   }
@@ -131,7 +123,6 @@ class _$FetchQuestions implements FetchQuestions {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetchQuestions,
-    TResult Function(List<Question> questions)? updateQuestions,
     required TResult orElse(),
   }) {
     if (fetchQuestions != null) {
@@ -144,7 +135,6 @@ class _$FetchQuestions implements FetchQuestions {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(FetchQuestions value) fetchQuestions,
-    required TResult Function(UpdateQuestions value) updateQuestions,
   }) {
     return fetchQuestions(this);
   }
@@ -153,7 +143,6 @@ class _$FetchQuestions implements FetchQuestions {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(FetchQuestions value)? fetchQuestions,
-    TResult? Function(UpdateQuestions value)? updateQuestions,
   }) {
     return fetchQuestions?.call(this);
   }
@@ -162,7 +151,6 @@ class _$FetchQuestions implements FetchQuestions {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(FetchQuestions value)? fetchQuestions,
-    TResult Function(UpdateQuestions value)? updateQuestions,
     required TResult orElse(),
   }) {
     if (fetchQuestions != null) {
@@ -174,148 +162,6 @@ class _$FetchQuestions implements FetchQuestions {
 
 abstract class FetchQuestions implements QuestionListEvent {
   const factory FetchQuestions() = _$FetchQuestions;
-}
-
-/// @nodoc
-abstract class _$$UpdateQuestionsCopyWith<$Res> {
-  factory _$$UpdateQuestionsCopyWith(
-          _$UpdateQuestions value, $Res Function(_$UpdateQuestions) then) =
-      __$$UpdateQuestionsCopyWithImpl<$Res>;
-  @useResult
-  $Res call({List<Question> questions});
-}
-
-/// @nodoc
-class __$$UpdateQuestionsCopyWithImpl<$Res>
-    extends _$QuestionListEventCopyWithImpl<$Res, _$UpdateQuestions>
-    implements _$$UpdateQuestionsCopyWith<$Res> {
-  __$$UpdateQuestionsCopyWithImpl(
-      _$UpdateQuestions _value, $Res Function(_$UpdateQuestions) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? questions = null,
-  }) {
-    return _then(_$UpdateQuestions(
-      null == questions
-          ? _value._questions
-          : questions // ignore: cast_nullable_to_non_nullable
-              as List<Question>,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$UpdateQuestions implements UpdateQuestions {
-  const _$UpdateQuestions(final List<Question> questions)
-      : _questions = questions;
-
-  final List<Question> _questions;
-  @override
-  List<Question> get questions {
-    if (_questions is EqualUnmodifiableListView) return _questions;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_questions);
-  }
-
-  @override
-  String toString() {
-    return 'QuestionListEvent.updateQuestions(questions: $questions)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UpdateQuestions &&
-            const DeepCollectionEquality()
-                .equals(other._questions, _questions));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_questions));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UpdateQuestionsCopyWith<_$UpdateQuestions> get copyWith =>
-      __$$UpdateQuestionsCopyWithImpl<_$UpdateQuestions>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() fetchQuestions,
-    required TResult Function(List<Question> questions) updateQuestions,
-  }) {
-    return updateQuestions(questions);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? fetchQuestions,
-    TResult? Function(List<Question> questions)? updateQuestions,
-  }) {
-    return updateQuestions?.call(questions);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? fetchQuestions,
-    TResult Function(List<Question> questions)? updateQuestions,
-    required TResult orElse(),
-  }) {
-    if (updateQuestions != null) {
-      return updateQuestions(questions);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(FetchQuestions value) fetchQuestions,
-    required TResult Function(UpdateQuestions value) updateQuestions,
-  }) {
-    return updateQuestions(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FetchQuestions value)? fetchQuestions,
-    TResult? Function(UpdateQuestions value)? updateQuestions,
-  }) {
-    return updateQuestions?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(FetchQuestions value)? fetchQuestions,
-    TResult Function(UpdateQuestions value)? updateQuestions,
-    required TResult orElse(),
-  }) {
-    if (updateQuestions != null) {
-      return updateQuestions(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class UpdateQuestions implements QuestionListEvent {
-  const factory UpdateQuestions(final List<Question> questions) =
-      _$UpdateQuestions;
-
-  List<Question> get questions;
-  @JsonKey(ignore: true)
-  _$$UpdateQuestionsCopyWith<_$UpdateQuestions> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

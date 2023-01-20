@@ -27,6 +27,7 @@ const double inputBorderRadius = 30;
 const double questionCardBorder = 18;
 
 // Size
+const double sizeBoxHeightExtraSmall = 3;
 const double sizeBoxHeightSmall = 7;
 const double sizeBoxHeightMedium = 17;
 const double sizeBoxHeightLarge = 22;

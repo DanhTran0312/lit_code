@@ -35,6 +35,22 @@ abstract class Statistics with _$Statistics {
     return completedQuestionsByCategory;
   }
 
+  int getCompletedQuestionsCountByCategory(Category category) {
+    if (completedQuestionsByCategory.containsKey(category)) {
+      return completedQuestionsByCategory[category]!.length;
+    } else {
+      return 0;
+    }
+  }
+
+  int getTotalQuestionsCountByCategory(Category category) {
+    if (totalQuestionsByCategory.containsKey(category)) {
+      return totalQuestionsByCategory[category]!;
+    } else {
+      return 0;
+    }
+  }
+
   Map<Category, int> get totalQuestionsByCategory {
     final totalQuestionsByCategory = <Category, int>{};
     for (final question in totalQuestions ?? <Question>[]) {

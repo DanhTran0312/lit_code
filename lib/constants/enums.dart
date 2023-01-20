@@ -182,4 +182,45 @@ extension CategoryString on Category {
         return 'Math & Geometry';
     }
   }
+
+  String get icon {
+    switch (this) {
+      case Category.arrayAndHashing:
+        return 'assets/svg/array_hashing.svg';
+      case Category.twoPointers:
+        return 'assets/svg/two_pointers.svg';
+      case Category.slidingWindow:
+        return 'assets/svg/sliding_window.svg';
+      case Category.stack:
+        return 'assets/svg/stack.svg';
+      case Category.binarySearch:
+        return 'assets/svg/binary_search.svg';
+      case Category.trees:
+        return 'assets/svg/trees.svg';
+      case Category.tries:
+        return 'assets/svg/tries.svg';
+      case Category.linkedList:
+        return 'assets/svg/linked_list.svg';
+      case Category.heapAndPriorityQueue:
+        return 'assets/svg/heap_priority_queue.svg';
+      case Category.backtracking:
+        return 'assets/svg/backtracking.svg';
+      case Category.graphs:
+        return 'assets/svg/graphs.svg';
+      case Category.advancedGraphs:
+        return 'assets/svg/advanced_graphs.svg';
+      case Category.dynamicProgramming:
+        return 'assets/svg/dynamic_programming.svg';
+      case Category.advancedDynamicProgramming:
+        return 'assets/svg/advanced_dynamic_programming.svg';
+      case Category.greedy:
+        return 'assets/svg/greedy.svg';
+      case Category.intervals:
+        return 'assets/svg/intervals.svg';
+      case Category.bitManipulation:
+        return 'assets/svg/bit_manipulation.svg';
+      case Category.mathAndGeometry:
+        return 'assets/svg/math_geometry.svg';
+    }
+  }
 }

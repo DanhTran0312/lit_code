@@ -51,6 +51,7 @@ class CustomProgressCard extends StatelessWidget {
                 currentStep: currentStep,
                 size: size,
                 theme: theme,
+                roundedEdges: false,
               ),
             ],
           ),

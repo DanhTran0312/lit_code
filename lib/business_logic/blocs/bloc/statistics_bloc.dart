@@ -17,9 +17,8 @@ class StatisticsBloc extends Bloc<StatisticsEvent, StatisticsState> {
     Emitter<StatisticsState> emit,
   ) async {
     try {
-      final statistics = Statistics(
+      final statistics = state.statistics.copyWith(
         completedQuestions: event.completedQuestions.values.toList(),
-        totalQuestions: state.totalQuestions,
       );
       emit(
         state.copyWith(
@@ -37,8 +36,7 @@ class StatisticsBloc extends Bloc<StatisticsEvent, StatisticsState> {
     Emitter<StatisticsState> emit,
   ) async {
     try {
-      final statistics = Statistics(
-        completedQuestions: state.completedQuestions.values.toList(),
+      final statistics = state.statistics.copyWith(
         totalQuestions: event.totalQuestions,
       );
       emit(
