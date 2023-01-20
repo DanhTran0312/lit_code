@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lit_code/business_logic/cubits/cubit/question_completed_cubit.dart';
+import 'package:lit_code/business_logic/cubits/cubit/completed_question_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/question_expansion_cubit.dart';
 import 'package:lit_code/constants/constants.dart';
 import 'package:lit_code/data/models/question.dart';
@@ -11,13 +11,13 @@ class CategorizedQuestionListCard extends StatelessWidget {
     required this.category,
     required this.questions,
     required this.expansionCubit,
-    required this.questionCompletedCubit,
+    required this.completedQuestionCubit,
   });
 
   final List<Question> questions;
   final Category category;
   final QuestionExpansionCubit expansionCubit;
-  final QuestionCompletedCubit questionCompletedCubit;
+  final CompletedQuestionCubit completedQuestionCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class CategorizedQuestionListCard extends StatelessWidget {
           isTranparent: true,
           question: question,
           expansionCubit: expansionCubit,
-          questionCompletedCubit: questionCompletedCubit,
+          completedQuestionCubit: completedQuestionCubit,
         ),
       ),
     ];

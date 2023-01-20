@@ -1,20 +1,19 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/theme_cubit.dart';
 
 class AnimatedThemeToggleSwitch extends StatelessWidget {
   const AnimatedThemeToggleSwitch({
     super.key,
-    required this.state,
-  });
+    required ThemeCubit themeCubit,
+  }) : _themeCubit = themeCubit;
 
-  final ThemeState state;
+  final ThemeCubit _themeCubit;
 
   @override
   Widget build(BuildContext context) {
     return AnimatedToggleSwitch<int>.size(
-      current: state.selectedIndex,
+      current: _themeCubit.state.selectedIndex,
       values: const [
         0,
         1,
@@ -32,7 +31,7 @@ class AnimatedThemeToggleSwitch extends StatelessWidget {
       borderColor: Colors.transparent,
       colorBuilder: (i) => i.isEven ? Colors.amberAccent : Colors.black,
       onChanged: (i) {
-        BlocProvider.of<ThemeCubit>(context).toggleTheme();
+        _themeCubit.toggleTheme();
       },
     );
   }

@@ -11,9 +11,9 @@ import 'package:lit_code/bootstrap.dart';
 import 'package:lit_code/business_logic/blocs/bloc/app_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/question_list_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/statistics_bloc.dart';
+import 'package:lit_code/business_logic/cubits/cubit/completed_question_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/network_connection_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/on_boarding_cubit.dart';
-import 'package:lit_code/business_logic/cubits/cubit/question_completed_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/theme_cubit.dart';
 import 'package:lit_code/constants/enums.dart';
 import 'package:lit_code/data/models/models.dart';
@@ -77,7 +77,7 @@ Future<void> main() async {
     onboardingCubit: onboardingCubit,
   );
 
-  final questionCompletedCubit = QuestionCompletedCubit(
+  final completedQuestionCubit = CompletedQuestionCubit(
     userRepository: userReposiory,
     statisticsBloc: statisticsBloc,
   );
@@ -87,7 +87,7 @@ Future<void> main() async {
       appBloc: appBloc,
       themeCubit: themeCubit,
       networkConnectionCubit: networkConnectionCubit,
-      questionCompletedCubit: questionCompletedCubit,
+      completedQuestionCubit: completedQuestionCubit,
       questionListBloc: questionListBloc,
       authRepository: authRepository,
       userRepository: userReposiory,

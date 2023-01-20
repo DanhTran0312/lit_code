@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/question_list_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/statistics_bloc.dart';
-import 'package:lit_code/business_logic/cubits/cubit/question_completed_cubit.dart';
+import 'package:lit_code/business_logic/cubits/cubit/completed_question_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/question_expansion_cubit.dart';
 import 'package:lit_code/constants/constants.dart';
 import 'package:lit_code/data/models/question.dart';
@@ -85,8 +85,8 @@ class _StudyScreenBody extends StatelessWidget {
         const SizedBox(height: sizeBoxHeightSmall),
         _CategoryList(
           stateQuestion: stateQuestion,
-          questionCompletedCubit:
-              BlocProvider.of<QuestionCompletedCubit>(context),
+          completedQuestionCubit:
+              BlocProvider.of<CompletedQuestionCubit>(context),
         ),
       ],
     );
@@ -96,11 +96,11 @@ class _StudyScreenBody extends StatelessWidget {
 class _CategoryList extends StatelessWidget {
   const _CategoryList({
     required this.stateQuestion,
-    required this.questionCompletedCubit,
+    required this.completedQuestionCubit,
   });
 
   final List<Question> stateQuestion;
-  final QuestionCompletedCubit questionCompletedCubit;
+  final CompletedQuestionCubit completedQuestionCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +121,7 @@ class _CategoryList extends StatelessWidget {
             expansionCubit: BlocProvider.of<QuestionExpansionCubit>(
               context,
             ),
-            questionCompletedCubit: questionCompletedCubit,
+            completedQuestionCubit: completedQuestionCubit,
           );
         },
       ),

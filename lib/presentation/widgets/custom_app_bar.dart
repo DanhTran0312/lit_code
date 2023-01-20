@@ -17,6 +17,7 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeCubit = context.read<ThemeCubit>();
     return Column(
       children: [
         Row(
@@ -26,23 +27,7 @@ class CustomAppBar extends StatelessWidget {
               backgroundColor: Colors.white,
               child: url != null
                   ? ClipOval(
-                      child: CachedNetworkImage(
-                        imageUrl: url!,
-                        width: 60,
-                        height: 60,
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) => Shimmer.fromColors(
-                          baseColor: Colors.grey[300]!,
-                          highlightColor: Colors.grey[100]!,
-                          child: Container(
-                            width: 60,
-                            height: 60,
-                            color: Colors.white,
-                          ),
-                        ),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
-                      ),
+                      child: _CachedNetworkImage(url: url),
                     )
                   : const Icon(Icons.person),
             ),
@@ -58,11 +43,39 @@ class CustomAppBar extends StatelessWidget {
             ),
             const Spacer(),
             AnimatedThemeToggleSwitch(
-              state: context.read<ThemeCubit>().state,
+              themeCubit: themeCubit,
             ),
           ],
         ),
       ],
+    );
+  }
+}
+
+class _CachedNetworkImage extends StatelessWidget {
+  const _CachedNetworkImage({
+    required this.url,
+  });
+
+  final String? url;
+
+  @override
+  Widget build(BuildContext context) {
+    return CachedNetworkImage(
+      imageUrl: url!,
+      width: 60,
+      height: 60,
+      fit: BoxFit.cover,
+      placeholder: (context, url) => Shimmer.fromColors(
+        baseColor: Colors.grey[300]!,
+        highlightColor: Colors.grey[100]!,
+        child: Container(
+          width: 60,
+          height: 60,
+          color: Colors.white,
+        ),
+      ),
+      errorWidget: (context, url, error) => const Icon(Icons.error),
     );
   }
 }

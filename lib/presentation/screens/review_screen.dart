@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/statistics_bloc.dart';
-import 'package:lit_code/business_logic/cubits/cubit/question_completed_cubit.dart';
+import 'package:lit_code/business_logic/cubits/cubit/completed_question_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/question_expansion_cubit.dart';
 import 'package:lit_code/constants/constants.dart';
 import 'package:lit_code/presentation/widgets/widgets.dart';
@@ -12,9 +12,9 @@ class ReviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocListener<QuestionCompletedCubit, QuestionCompletedState>(
+      body: BlocListener<CompletedQuestionCubit, CompletedQuestionState>(
         listener: (context, state) {
-          if (state is QuestionCompletedError) {
+          if (state is CompletedQuestionError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(state.message),
@@ -25,8 +25,8 @@ class ReviewScreen extends StatelessWidget {
         child: BlocBuilder<StatisticsBloc, StatisticsState>(
           builder: (context, state) {
             final completedQuestions = state.completedQuestions.values.toSet();
-            final questionCompletedCubit =
-                BlocProvider.of<QuestionCompletedCubit>(context);
+            final completedQuestionCubit =
+                BlocProvider.of<CompletedQuestionCubit>(context);
             return Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: defaultPageHorizontalPadding,
@@ -43,7 +43,7 @@ class ReviewScreen extends StatelessWidget {
                           BlocProvider.of<QuestionExpansionCubit>(context),
                       isTranparent: false,
                       question: question,
-                      questionCompletedCubit: questionCompletedCubit,
+                      completedQuestionCubit: completedQuestionCubit,
                     );
                   },
                 ),

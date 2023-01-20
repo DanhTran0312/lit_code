@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/statistics_bloc.dart';
-import 'package:lit_code/business_logic/cubits/cubit/question_completed_cubit.dart';
+import 'package:lit_code/business_logic/cubits/cubit/completed_question_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/question_expansion_cubit.dart';
 import 'package:lit_code/constants/constant.dart';
 import 'package:lit_code/constants/enums.dart';
@@ -16,13 +16,13 @@ class CollapsableQuestionCard extends StatelessWidget {
     required this.expansionCubit,
     required this.isTranparent,
     required this.question,
-    required this.questionCompletedCubit,
+    required this.completedQuestionCubit,
   });
 
   final Question question;
   final QuestionExpansionCubit expansionCubit;
   final bool isTranparent;
-  final QuestionCompletedCubit questionCompletedCubit;
+  final CompletedQuestionCubit completedQuestionCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class CollapsableQuestionCard extends StatelessWidget {
       theme: theme,
       expansionCubit: expansionCubit,
       question: question,
-      questionCompletedCubit: questionCompletedCubit,
+      completedQuestionCubit: completedQuestionCubit,
     );
   }
 }
@@ -43,14 +43,14 @@ class _BuildExpansionTile extends StatelessWidget {
     required this.theme,
     required this.expansionCubit,
     required this.question,
-    required this.questionCompletedCubit,
+    required this.completedQuestionCubit,
   });
 
   final bool isTranparent;
   final ThemeData theme;
   final QuestionExpansionCubit expansionCubit;
   final Question question;
-  final QuestionCompletedCubit questionCompletedCubit;
+  final CompletedQuestionCubit completedQuestionCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -64,9 +64,9 @@ class _BuildExpansionTile extends StatelessWidget {
         data: theme.copyWith(
           dividerColor: Colors.transparent,
         ),
-        child: BlocListener<QuestionCompletedCubit, QuestionCompletedState>(
+        child: BlocListener<CompletedQuestionCubit, CompletedQuestionState>(
           listener: (context, state) {
-            if (state is QuestionCompletedError) {
+            if (state is CompletedQuestionError) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(state.message),
@@ -85,7 +85,7 @@ class _BuildExpansionTile extends StatelessWidget {
               return _ExpansionQuestionTile(
                 expansionCubit: expansionCubit,
                 question: question,
-                questionCompletedCubit: questionCompletedCubit,
+                completedQuestionCubit: completedQuestionCubit,
                 statisticsBloc: BlocProvider.of<StatisticsBloc>(context),
                 isSelected: isSelected,
                 theme: theme,
@@ -102,7 +102,7 @@ class _ExpansionQuestionTile extends StatelessWidget {
   const _ExpansionQuestionTile({
     required this.expansionCubit,
     required this.question,
-    required this.questionCompletedCubit,
+    required this.completedQuestionCubit,
     required this.theme,
     required this.isSelected,
     required this.statisticsBloc,
@@ -110,7 +110,7 @@ class _ExpansionQuestionTile extends StatelessWidget {
 
   final QuestionExpansionCubit expansionCubit;
   final Question question;
-  final QuestionCompletedCubit questionCompletedCubit;
+  final CompletedQuestionCubit completedQuestionCubit;
   final ThemeData theme;
   final bool isSelected;
   final StatisticsBloc statisticsBloc;
@@ -129,7 +129,7 @@ class _ExpansionQuestionTile extends StatelessWidget {
             child: Row(
               children: [
                 _CheckBox(
-                  questionCompletedCubit: questionCompletedCubit,
+                  completedQuestionCubit: completedQuestionCubit,
                   statisticsBloc: statisticsBloc,
                   isSelected: isSelected,
                   question: question,
@@ -163,13 +163,13 @@ class _ExpansionQuestionTile extends StatelessWidget {
 
 class _CheckBox extends StatelessWidget {
   const _CheckBox({
-    required this.questionCompletedCubit,
+    required this.completedQuestionCubit,
     required this.question,
     required this.isSelected,
     required this.statisticsBloc,
   });
 
-  final QuestionCompletedCubit questionCompletedCubit;
+  final CompletedQuestionCubit completedQuestionCubit;
   final Question question;
   final bool isSelected;
   final StatisticsBloc statisticsBloc;
@@ -181,9 +181,9 @@ class _CheckBox extends StatelessWidget {
       value: isSelected,
       onChanged: (bool? value) {
         if (!isSelected) {
-          questionCompletedCubit.markQuestionAsCompleted(question);
+          completedQuestionCubit.markQuestionAsCompleted(question);
         } else {
-          questionCompletedCubit.markQuestionAsUncompleted(question);
+          completedQuestionCubit.markQuestionAsUncompleted(question);
         }
       },
     );

@@ -4,7 +4,7 @@ import 'package:lit_code/business_logic/blocs/bloc/app_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/question_list_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/statistics_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/network_connection_cubit.dart';
-import 'package:lit_code/business_logic/cubits/cubit/question_completed_cubit.dart';
+import 'package:lit_code/business_logic/cubits/cubit/completed_question_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/theme_cubit.dart';
 import 'package:lit_code/data/models/models.dart';
 import 'package:lit_code/data/repositories/repositories.dart';
@@ -19,7 +19,7 @@ class LitCodeApp extends StatefulWidget {
     required ThemeCubit themeCubit,
     required NetworkConnectionCubit networkConnectionCubit,
     required QuestionListBloc questionListBloc,
-    required QuestionCompletedCubit questionCompletedCubit,
+    required CompletedQuestionCubit completedQuestionCubit,
     required UserRepository userRepository,
     required AppRouter appRouter,
     required Boxes boxes,
@@ -29,7 +29,7 @@ class LitCodeApp extends StatefulWidget {
         _themeCubit = themeCubit,
         _networkConnectionCubit = networkConnectionCubit,
         _questionListBloc = questionListBloc,
-        _questionCompletedCubit = questionCompletedCubit,
+        _completedQuestionCubit = completedQuestionCubit,
         _userRepository = userRepository,
         _appRouter = appRouter,
         _statisticsBloc = statisticsBloc,
@@ -40,7 +40,7 @@ class LitCodeApp extends StatefulWidget {
   final ThemeCubit _themeCubit;
   final NetworkConnectionCubit _networkConnectionCubit;
   final QuestionListBloc _questionListBloc;
-  final QuestionCompletedCubit _questionCompletedCubit;
+  final CompletedQuestionCubit _completedQuestionCubit;
   final AppRouter _appRouter;
   final Boxes _boxes;
   final StatisticsBloc _statisticsBloc;
@@ -78,8 +78,8 @@ class _LitCodeAppState extends State<LitCodeApp> {
           BlocProvider<QuestionListBloc>(
             create: (context) => widget._questionListBloc,
           ),
-          BlocProvider<QuestionCompletedCubit>(
-            create: (context) => widget._questionCompletedCubit,
+          BlocProvider<CompletedQuestionCubit>(
+            create: (context) => widget._completedQuestionCubit,
           ),
         ],
         child: MultiBlocListener(

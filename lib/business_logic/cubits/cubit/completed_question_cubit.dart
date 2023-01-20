@@ -6,22 +6,22 @@ import 'package:lit_code/business_logic/blocs/bloc/statistics_bloc.dart';
 import 'package:lit_code/data/models/models.dart';
 import 'package:lit_code/data/repositories/repositories.dart';
 
-part 'question_completed_state.dart';
-part 'question_completed_cubit.freezed.dart';
+part 'completed_question_state.dart';
+part 'completed_question_cubit.freezed.dart';
 
-class QuestionCompletedCubit extends Cubit<QuestionCompletedState> {
-  QuestionCompletedCubit({
+class CompletedQuestionCubit extends Cubit<CompletedQuestionState> {
+  CompletedQuestionCubit({
     required UserRepository userRepository,
     required StatisticsBloc statisticsBloc,
   })  : _userRepository = userRepository,
         _statisticsBloc = statisticsBloc,
-        super(const QuestionCompletedState.initial());
+        super(const CompletedQuestionState.initial());
 
   final UserRepository _userRepository;
   final StatisticsBloc _statisticsBloc;
 
   Future<void> markQuestionAsCompleted(Question question) async {
-    emit(const QuestionCompletedState.loading());
+    emit(const CompletedQuestionState.syncing());
     try {
       await _userRepository.markQuestionAsCompleted(question);
       final questions = await _userRepository.getCompletedQuestions();
@@ -30,15 +30,15 @@ class QuestionCompletedCubit extends Cubit<QuestionCompletedState> {
           completedQuestions: questions,
         ),
       );
-      emit(const QuestionCompletedState.loaded());
+      emit(const CompletedQuestionState.synced());
       await _userRepository.syncCompletedQuestions();
     } catch (e) {
-      emit(QuestionCompletedState.error(e.toString()));
+      emit(CompletedQuestionState.error(e.toString()));
     }
   }
 
   Future<void> markQuestionAsUncompleted(Question question) async {
-    emit(const QuestionCompletedState.loading());
+    emit(const CompletedQuestionState.syncing());
     try {
       await _userRepository.markQuestionAsUncompleted(question);
       final questions = await _userRepository.getCompletedQuestions();
@@ -47,10 +47,10 @@ class QuestionCompletedCubit extends Cubit<QuestionCompletedState> {
           completedQuestions: questions,
         ),
       );
-      emit(const QuestionCompletedState.loaded());
+      emit(const CompletedQuestionState.synced());
       await _userRepository.syncCompletedQuestions();
     } catch (e) {
-      emit(QuestionCompletedState.error(e.toString()));
+      emit(CompletedQuestionState.error(e.toString()));
     }
   }
 }

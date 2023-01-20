@@ -27,32 +27,41 @@ class ProgressScreen extends StatelessWidget {
             const SizedBox(height: sizeBoxHeightSmall),
             const SectionHeading(title: 'Category Progress'),
             const SizedBox(height: sizeBoxHeightSmall),
-            BlocSelector<StatisticsBloc, StatisticsState, Statistics>(
-              selector: (state) {
-                if (state.statistics.completedQuestions != null &&
-                    state.statistics.completedQuestions!.isNotEmpty) {
-                  return state.statistics;
-                }
-                return const Statistics();
-              },
-              builder: (context, statistics) {
-                return ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: Category.values.length,
-                  itemBuilder: (context, index) {
-                    final category = Category.values[index];
-                    return CategoryProgressCard(
-                      category: category,
-                      statistics: statistics,
-                    );
-                  },
-                );
-              },
-            ),
+            const _CategoryProgressCardsBuilder(),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _CategoryProgressCardsBuilder extends StatelessWidget {
+  const _CategoryProgressCardsBuilder();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocSelector<StatisticsBloc, StatisticsState, Statistics>(
+      selector: (state) {
+        if (state.statistics.completedQuestions != null &&
+            state.statistics.completedQuestions!.isNotEmpty) {
+          return state.statistics;
+        }
+        return const Statistics();
+      },
+      builder: (context, statistics) {
+        return ListView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: Category.values.length,
+          itemBuilder: (context, index) {
+            final category = Category.values[index];
+            return CategoryProgressCard(
+              category: category,
+              statistics: statistics,
+            );
+          },
+        );
+      },
     );
   }
 }
@@ -126,6 +135,7 @@ class _HeatMapCalendar extends StatelessWidget {
             color: Colors.amber,
             fontSize: 12,
           ),
+          // TODO: Change Theme Style
           weekFontSize: 14,
           monthFontSize: 25,
           showColorTip: false,
@@ -136,18 +146,7 @@ class _HeatMapCalendar extends StatelessWidget {
           defaultColor: Colors.white,
           flexible: true,
           datasets: datasets,
-          colorsets: const {
-            1: Color.fromARGB(20, 2, 179, 8),
-            2: Color.fromARGB(40, 2, 179, 8),
-            3: Color.fromARGB(60, 2, 179, 8),
-            4: Color.fromARGB(80, 2, 179, 8),
-            5: Color.fromARGB(100, 2, 179, 8),
-            6: Color.fromARGB(120, 2, 179, 8),
-            7: Color.fromARGB(150, 2, 179, 8),
-            8: Color.fromARGB(180, 2, 179, 8),
-            9: Color.fromARGB(220, 2, 179, 8),
-            10: Color.fromARGB(255, 2, 179, 8),
-          },
+          colorsets: heatMapColorSet,
         );
       },
     );

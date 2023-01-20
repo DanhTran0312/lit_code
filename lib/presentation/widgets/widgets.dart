@@ -12,7 +12,6 @@ export 'custom_elevated_button_with_image.dart';
 export 'custom_progress_card.dart';
 export 'custom_text_form_field.dart';
 export 'difficulty_chip.dart';
-export 'hightlighted_text.dart';
 export 'image_container.dart';
 export 'persisted_bottom_nav_bar.dart';
 export 'pie_chart_progress.dart';
