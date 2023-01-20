@@ -32,7 +32,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   hydrated_bloc: ^9.0.0
-  json_annotation: ^4.7.0
+  json_annotation: ^4.8.0
   path_provider: ^2.0.11
   shimmer: ^2.0.0
   sleek_circular_slider: ^2.0.1
