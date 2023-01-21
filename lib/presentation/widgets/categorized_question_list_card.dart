@@ -8,16 +8,22 @@ import 'package:lit_code/presentation/widgets/widgets.dart';
 class CategorizedQuestionListCard extends StatelessWidget {
   const CategorizedQuestionListCard({
     super.key,
-    required this.category,
-    required this.questions,
-    required this.expansionCubit,
-    required this.completedQuestionCubit,
-  });
+    required List<Question> questions,
+    required Category category,
+    required QuestionExpansionCubit expansionCubit,
+    required CompletedQuestionCubit completedQuestionCubit,
+    required Map<String, Question> completedQuestions,
+  })  : _questions = questions,
+        _category = category,
+        _expansionCubit = expansionCubit,
+        _completedQuestions = completedQuestions,
+        _completedQuestionCubit = completedQuestionCubit;
 
-  final List<Question> questions;
-  final Category category;
-  final QuestionExpansionCubit expansionCubit;
-  final CompletedQuestionCubit completedQuestionCubit;
+  final List<Question> _questions;
+  final Category _category;
+  final QuestionExpansionCubit _expansionCubit;
+  final CompletedQuestionCubit _completedQuestionCubit;
+  final Map<String, Question> _completedQuestions;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +39,7 @@ class CategorizedQuestionListCard extends StatelessWidget {
           dividerColor: Colors.transparent,
         ),
         child: _CategorizedQuestionTile(
-          category: category,
+          category: _category,
           generateCategorizedQuestionList: _generateCategorizedQuestionList,
         ),
       ),
@@ -42,13 +48,15 @@ class CategorizedQuestionListCard extends StatelessWidget {
 
   List<Widget> get _generateCategorizedQuestionList {
     return [
-      ...questions.map(
+      ..._questions.map(
         (question) => CollapsableQuestionCard(
           key: Key(question.id),
           isTranparent: true,
-          question: question,
-          expansionCubit: expansionCubit,
-          completedQuestionCubit: completedQuestionCubit,
+          question: _completedQuestions.containsKey(question.id)
+              ? _completedQuestions[question.id]!
+              : question,
+          expansionCubit: _expansionCubit,
+          completedQuestionCubit: _completedQuestionCubit,
         ),
       ),
     ];

@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:hive/hive.dart';
+import 'package:lit_code/constants/enums.dart';
 import 'package:lit_code/data/models/models.dart';
 import 'package:lit_code/data/repositories/auth_repository.dart';
 
@@ -113,6 +114,7 @@ class UserRepository {
           ..._user.completedQuestions,
           question.copyWith(
             isCompleted: true,
+            confidence: Confidence.medium,
             completedAt: DateTime.now().millisecondsSinceEpoch,
           )
         ],
@@ -131,6 +133,29 @@ class UserRepository {
       _user = _user.copyWith(
         completedQuestions: _user.completedQuestions
             .where((element) => element?.id != question.id)
+            .toList(),
+      );
+      await _userBox.put(_user.id, _user);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> onQuestionConfidenceChange(
+    Question question,
+    Confidence confidence,
+  ) async {
+    try {
+      if (_user.isEmpty) {
+        throw Exception('Cannot update user because it does not exist');
+      }
+      _user = _user.copyWith(
+        completedQuestions: _user.completedQuestions
+            .map(
+              (q) => q?.id == question.id
+                  ? q?.copyWith(confidence: confidence)
+                  : q,
+            )
             .toList(),
       );
       await _userBox.put(_user.id, _user);

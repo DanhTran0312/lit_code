@@ -76,13 +76,10 @@ class _BuildExpansionTile extends StatelessWidget {
           },
           child: BlocSelector<StatisticsBloc, StatisticsState, bool>(
             selector: (state) {
-              if (state.completedQuestions.containsKey(question.id)) {
-                return true;
-              }
-              return false;
+              return state.completedQuestions.containsKey(question.id);
             },
             builder: (context, isSelected) {
-              return _ExpansionQuestionTile(
+              return _QuestionExpansionTile(
                 expansionCubit: expansionCubit,
                 question: question,
                 completedQuestionCubit: completedQuestionCubit,
@@ -98,8 +95,8 @@ class _BuildExpansionTile extends StatelessWidget {
   }
 }
 
-class _ExpansionQuestionTile extends StatelessWidget {
-  const _ExpansionQuestionTile({
+class _QuestionExpansionTile extends StatelessWidget {
+  const _QuestionExpansionTile({
     required this.expansionCubit,
     required this.question,
     required this.completedQuestionCubit,
@@ -154,6 +151,7 @@ class _ExpansionQuestionTile extends StatelessWidget {
         _RateConfidenceWidget(
           theme: theme,
           question: question,
+          completedQuestionCubit: completedQuestionCubit,
         ),
         const SizedBox(height: sizeBoxHeightSmall),
       ],
@@ -194,10 +192,12 @@ class _RateConfidenceWidget extends StatelessWidget {
   const _RateConfidenceWidget({
     required this.theme,
     required this.question,
-  });
+    required CompletedQuestionCubit completedQuestionCubit,
+  }) : _completedQuestionCubit = completedQuestionCubit;
 
   final ThemeData theme;
   final Question question;
+  final CompletedQuestionCubit _completedQuestionCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -221,17 +221,32 @@ class _RateConfidenceWidget extends StatelessWidget {
               ConfidenceRadioButton(
                 question: question,
                 confidence: Confidence.low,
-                onChanged: (Enum? value) {},
+                onChanged: (Enum? value) {
+                  _completedQuestionCubit.onQuestionConfidenceChanged(
+                    question,
+                    Confidence.low,
+                  );
+                },
               ),
               ConfidenceRadioButton(
                 question: question,
                 confidence: Confidence.medium,
-                onChanged: (Enum? value) {},
+                onChanged: (Enum? value) {
+                  _completedQuestionCubit.onQuestionConfidenceChanged(
+                    question,
+                    Confidence.medium,
+                  );
+                },
               ),
               ConfidenceRadioButton(
                 question: question,
                 confidence: Confidence.high,
-                onChanged: (Enum? value) {},
+                onChanged: (Enum? value) {
+                  _completedQuestionCubit.onQuestionConfidenceChanged(
+                    question,
+                    Confidence.high,
+                  );
+                },
               ),
             ],
           )

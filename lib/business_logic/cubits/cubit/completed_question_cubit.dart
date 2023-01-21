@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:lit_code/business_logic/blocs/bloc/statistics_bloc.dart';
+import 'package:lit_code/constants/constants.dart';
 import 'package:lit_code/data/models/models.dart';
 import 'package:lit_code/data/repositories/repositories.dart';
 
@@ -41,6 +42,26 @@ class CompletedQuestionCubit extends Cubit<CompletedQuestionState> {
     emit(const CompletedQuestionState.syncing());
     try {
       await _userRepository.markQuestionAsUncompleted(question);
+      final questions = await _userRepository.getCompletedQuestions();
+      _statisticsBloc.add(
+        UpdateCompletedQuestions(
+          completedQuestions: questions,
+        ),
+      );
+      emit(const CompletedQuestionState.synced());
+      await _userRepository.syncCompletedQuestions();
+    } catch (e) {
+      emit(CompletedQuestionState.error(e.toString()));
+    }
+  }
+
+  Future<void> onQuestionConfidenceChanged(
+    Question question,
+    Confidence confidence,
+  ) async {
+    emit(const CompletedQuestionState.syncing());
+    try {
+      await _userRepository.onQuestionConfidenceChange(question, confidence);
       final questions = await _userRepository.getCompletedQuestions();
       _statisticsBloc.add(
         UpdateCompletedQuestions(

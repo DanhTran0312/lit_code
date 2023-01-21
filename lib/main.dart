@@ -105,6 +105,7 @@ Future<Boxes> initializeHive() async {
     ..registerAdapter(QuestionAdapter())
     ..registerAdapter(SettingsAdapter())
     ..registerAdapter(DifficultyAdapter())
+    ..registerAdapter(ConfidenceAdapter())
     ..registerAdapter(CategoryAdapter());
   final userBox = await Hive.openBox<User>('userBox');
   final questionBox = await Hive.openBox<Question>('questionBox');

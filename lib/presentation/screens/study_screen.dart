@@ -74,8 +74,9 @@ class _StudyScreenBody extends StatelessWidget {
         const SizedBox(height: sizeBoxHeightSmall),
         BlocBuilder<StatisticsBloc, StatisticsState>(
           builder: (context, state) {
+            final completedQuestion = state.completedQuestions;
             return _ProgressSection(
-              completedQuestions: state.completedQuestions,
+              completedQuestions: completedQuestion,
               total: state.totalQuestions.length,
               theme: theme,
             );
@@ -85,6 +86,8 @@ class _StudyScreenBody extends StatelessWidget {
         const SizedBox(height: sizeBoxHeightSmall),
         _CategoryList(
           stateQuestion: stateQuestion,
+          completedQuestions:
+              BlocProvider.of<StatisticsBloc>(context).state.completedQuestions,
           completedQuestionCubit:
               BlocProvider.of<CompletedQuestionCubit>(context),
         ),
@@ -95,12 +98,16 @@ class _StudyScreenBody extends StatelessWidget {
 
 class _CategoryList extends StatelessWidget {
   const _CategoryList({
-    required this.stateQuestion,
-    required this.completedQuestionCubit,
-  });
+    required List<Question> stateQuestion,
+    required Map<String, Question> completedQuestions,
+    required CompletedQuestionCubit completedQuestionCubit,
+  })  : _stateQuestion = stateQuestion,
+        _completedQuestionCubit = completedQuestionCubit,
+        _completedQuestions = completedQuestions;
 
-  final List<Question> stateQuestion;
-  final CompletedQuestionCubit completedQuestionCubit;
+  final List<Question> _stateQuestion;
+  final Map<String, Question> _completedQuestions;
+  final CompletedQuestionCubit _completedQuestionCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +119,7 @@ class _CategoryList extends StatelessWidget {
         itemCount: categoryList.length,
         itemBuilder: (context, index) {
           final category = categoryList[index];
-          final questions = stateQuestion
+          final questions = _stateQuestion
               .where((question) => question.category == category)
               .toList();
           return CategorizedQuestionListCard(
@@ -121,7 +128,8 @@ class _CategoryList extends StatelessWidget {
             expansionCubit: BlocProvider.of<QuestionExpansionCubit>(
               context,
             ),
-            completedQuestionCubit: completedQuestionCubit,
+            completedQuestions: _completedQuestions,
+            completedQuestionCubit: _completedQuestionCubit,
           );
         },
       ),
