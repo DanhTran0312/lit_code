@@ -23,13 +23,16 @@ class CategoryProgressCard extends StatelessWidget {
         _statistics.getTotalQuestionsCountByCategory(category).toDouble() == 0
             ? 1.0
             : _statistics.getTotalQuestionsCountByCategory(category).toDouble();
-    final currentStep =
+    final currentProgressStep =
         (completedQuestionsCount / totalQuestionsCount * 14).toInt();
+    final currentConfidenceStep =
+        (_statistics.getAverageConfidenceByCategory(category) / 10 * 14)
+            .toInt();
     final theme = Theme.of(context);
     return Card(
       color: ThemeUtils.getThemeColor(
         theme,
-        lightProgressCardColor.withOpacity(0.57),
+        lightSecondaryColor.withOpacity(0.57),
         darkSecondaryColor.withOpacity(0.5),
       ),
       child: _CategoryProgressContent(
@@ -37,7 +40,8 @@ class CategoryProgressCard extends StatelessWidget {
         theme: theme,
         completedQuestionsCount: completedQuestionsCount,
         totalQuestionsCount: totalQuestionsCount,
-        currentStep: currentStep,
+        currentStep: currentProgressStep,
+        currentConfidenceStep: currentConfidenceStep,
       ),
     );
   }
@@ -50,6 +54,7 @@ class _CategoryProgressContent extends StatelessWidget {
     required this.completedQuestionsCount,
     required this.totalQuestionsCount,
     required this.currentStep,
+    required this.currentConfidenceStep,
   });
 
   final Category category;
@@ -57,6 +62,7 @@ class _CategoryProgressContent extends StatelessWidget {
   final double completedQuestionsCount;
   final double totalQuestionsCount;
   final int currentStep;
+  final int currentConfidenceStep;
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +80,8 @@ class _CategoryProgressContent extends StatelessWidget {
           _CategoryIconAndStatistics(
             category: category,
             theme: theme,
-            currentStep: currentStep,
+            currentProgressStep: currentStep,
+            currentConfidenceStep: currentConfidenceStep,
           ),
           const SizedBox(
             height: sizeBoxHeightSmall,
@@ -89,12 +96,14 @@ class _CategoryIconAndStatistics extends StatelessWidget {
   const _CategoryIconAndStatistics({
     required this.category,
     required this.theme,
-    required this.currentStep,
+    required this.currentProgressStep,
+    required this.currentConfidenceStep,
   });
 
   final Category category;
   final ThemeData theme;
-  final int currentStep;
+  final int currentProgressStep;
+  final int currentConfidenceStep;
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +119,8 @@ class _CategoryIconAndStatistics extends StatelessWidget {
         ),
         _StatisticsProgressBars(
           theme: theme,
-          currentStep: currentStep,
+          currentProgressStep: currentProgressStep,
+          currentConfidenceStep: currentConfidenceStep,
         ),
         const Spacer(),
       ],
@@ -121,11 +131,13 @@ class _CategoryIconAndStatistics extends StatelessWidget {
 class _StatisticsProgressBars extends StatelessWidget {
   const _StatisticsProgressBars({
     required this.theme,
-    required this.currentStep,
+    required this.currentProgressStep,
+    required this.currentConfidenceStep,
   });
 
   final ThemeData theme;
-  final int currentStep;
+  final int currentProgressStep;
+  final int currentConfidenceStep;
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +156,7 @@ class _StatisticsProgressBars extends StatelessWidget {
           ),
           CustomBoxedProgressBar(
             totalSteps: 14,
-            currentStep: 6,
+            currentStep: currentConfidenceStep,
             size: 9,
             theme: theme,
             roundedEdges: true,
@@ -161,7 +173,7 @@ class _StatisticsProgressBars extends StatelessWidget {
           ),
           CustomBoxedProgressBar(
             totalSteps: 14,
-            currentStep: currentStep,
+            currentStep: currentProgressStep,
             size: 9,
             theme: theme,
             roundedEdges: true,
@@ -192,8 +204,8 @@ class _CategoryTitleAndProgress extends StatelessWidget {
         Expanded(
           child: Text(
             category.name,
-            style: theme.textTheme.headline5!.copyWith(
-              fontSize: 20,
+            style: theme.textTheme.headline4!.copyWith(
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),

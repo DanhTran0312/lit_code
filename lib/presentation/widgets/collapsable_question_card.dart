@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/statistics_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/completed_question_cubit.dart';
+import 'package:lit_code/business_logic/cubits/cubit/confetti_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/question_expansion_cubit.dart';
 import 'package:lit_code/constants/constant.dart';
 import 'package:lit_code/constants/enums.dart';
@@ -64,31 +65,18 @@ class _BuildExpansionTile extends StatelessWidget {
         data: theme.copyWith(
           dividerColor: Colors.transparent,
         ),
-        child: BlocListener<CompletedQuestionCubit, CompletedQuestionState>(
-          listener: (context, state) {
-            if (state is CompletedQuestionError) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.message),
-                ),
-              );
-            }
+        child: BlocBuilder<StatisticsBloc, StatisticsState>(
+          builder: (context, stateQuestion) {
+            return _QuestionExpansionTile(
+              expansionCubit: expansionCubit,
+              question:
+                  stateQuestion.completedQuestions[question.id] ?? question,
+              completedQuestionCubit: completedQuestionCubit,
+              statisticsBloc: BlocProvider.of<StatisticsBloc>(context),
+              isSelected: stateQuestion.completedQuestions[question.id] != null,
+              theme: theme,
+            );
           },
-          child: BlocSelector<StatisticsBloc, StatisticsState, bool>(
-            selector: (state) {
-              return state.completedQuestions.containsKey(question.id);
-            },
-            builder: (context, isSelected) {
-              return _QuestionExpansionTile(
-                expansionCubit: expansionCubit,
-                question: question,
-                completedQuestionCubit: completedQuestionCubit,
-                statisticsBloc: BlocProvider.of<StatisticsBloc>(context),
-                isSelected: isSelected,
-                theme: theme,
-              );
-            },
-          ),
         ),
       ),
     );
@@ -180,6 +168,7 @@ class _CheckBox extends StatelessWidget {
       onChanged: (bool? value) {
         if (!isSelected) {
           completedQuestionCubit.markQuestionAsCompleted(question);
+          BlocProvider.of<ConfettiCubit>(context).startConfetti();
         } else {
           completedQuestionCubit.markQuestionAsUncompleted(question);
         }

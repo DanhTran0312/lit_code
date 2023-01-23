@@ -12,6 +12,7 @@ import 'package:lit_code/business_logic/blocs/bloc/app_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/question_list_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/statistics_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/completed_question_cubit.dart';
+import 'package:lit_code/business_logic/cubits/cubit/confetti_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/network_connection_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/on_boarding_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/theme_cubit.dart';
@@ -82,6 +83,8 @@ Future<void> main() async {
     statisticsBloc: statisticsBloc,
   );
 
+  final confetttiCubit = ConfettiCubit();
+
   await bootstrap(
     () => LitCodeApp(
       appBloc: appBloc,
@@ -94,6 +97,7 @@ Future<void> main() async {
       appRouter: appRouter,
       boxes: boxes,
       statisticsBloc: statisticsBloc,
+      confettiCubit: confetttiCubit,
     ),
   );
 }

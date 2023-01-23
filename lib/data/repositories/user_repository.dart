@@ -149,15 +149,28 @@ class UserRepository {
       if (_user.isEmpty) {
         throw Exception('Cannot update user because it does not exist');
       }
-      _user = _user.copyWith(
-        completedQuestions: _user.completedQuestions
-            .map(
-              (q) => q?.id == question.id
-                  ? q?.copyWith(confidence: confidence)
-                  : q,
+      if (_user.completedQuestions.any((q) => q!.id == question.id)) {
+        _user = _user.copyWith(
+          completedQuestions: _user.completedQuestions
+              .map(
+                (q) => q?.id == question.id
+                    ? q?.copyWith(confidence: confidence, isCompleted: true)
+                    : q,
+              )
+              .toList(),
+        );
+      } else {
+        _user = _user.copyWith(
+          completedQuestions: [
+            ..._user.completedQuestions,
+            question.copyWith(
+              isCompleted: true,
+              confidence: confidence,
+              completedAt: DateTime.now().millisecondsSinceEpoch,
             )
-            .toList(),
-      );
+          ],
+        );
+      }
       await _userBox.put(_user.id, _user);
     } catch (e) {
       rethrow;

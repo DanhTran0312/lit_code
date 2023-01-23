@@ -22,7 +22,7 @@ class ProgressScreen extends StatelessWidget {
           shrinkWrap: true,
           children: [
             const SectionHeading(title: 'Activity Calendar'),
-            const SizedBox(height: sizeBoxHeightMedium),
+            const SizedBox(height: sizeBoxHeightSmall),
             _HeatMapCalendarDecoratedContainer(theme: theme),
             const SizedBox(height: sizeBoxHeightSmall),
             const SectionHeading(title: 'Category Progress'),
@@ -75,16 +75,10 @@ class _HeatMapCalendarDecoratedContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: ThemeUtils.getThemeColor(
-          theme,
-          lightProgressCardColor.withOpacity(0.8),
-          darkCalendarBackgroundColor,
-        ),
-        borderRadius: BorderRadius.circular(20),
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: defaultPageHorizontalPadding,
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       child: _HeatMapCalendar(theme: theme),
     );
   }
@@ -104,6 +98,7 @@ class _HeatMapCalendar extends StatelessWidget {
         final questions = state.completedQuestions.values.toList();
 
         final datasets = <DateTime, int>{
+          // TODO: Remove this dummy data
           DateTime(2023): 3,
           DateTime(2023, 1, 2): 2,
           DateTime(2023, 1, 3): 1,
@@ -133,18 +128,25 @@ class _HeatMapCalendar extends StatelessWidget {
           ),
           weekTextStyle: theme.textTheme.headline6!.copyWith(
             color: Colors.amber,
-            fontSize: 12,
+            fontSize: 14,
           ),
-          // TODO: Change Theme Style
           weekFontSize: 14,
           monthFontSize: 25,
+          margin: const EdgeInsets.symmetric(
+            horizontal: 5.8,
+            vertical: 1.5,
+          ),
+          size: 37,
           showColorTip: false,
-          textColor: Colors.black,
+          textColor: ThemeUtils.getThemeColor(
+            theme,
+            Colors.black,
+            Colors.white,
+          ),
           fontSize: 15,
           weekTextColor: Colors.white,
-          borderRadius: 15,
-          defaultColor: Colors.white,
-          flexible: true,
+          borderRadius: 12,
+          defaultColor: Colors.transparent,
           datasets: datasets,
           colorsets: heatMapColorSet,
         );

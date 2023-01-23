@@ -1,3 +1,4 @@
+export 'animated_completion_toggle_swtich.dart';
 export 'animated_theme_toggle_switch.dart';
 export 'categorized_question_list_card.dart';
 export 'category_progress_card.dart';

@@ -26,7 +26,7 @@ class CustomBoxedProgressBar extends StatelessWidget {
       padding: const EdgeInsets.all(2.4),
       decoration: BoxDecoration(
         border: Border.all(
-          color: inputBorderColor,
+          color: darkPrimaryColor,
         ),
         borderRadius: BorderRadius.circular(roundEdgesBorderRadius),
       ),
@@ -35,12 +35,12 @@ class CustomBoxedProgressBar extends StatelessWidget {
         totalSteps: totalSteps,
         currentStep: currentStep,
         size: size,
-        selectedColor: ThemeUtils.getThemeColor(
+        selectedColor: darkPrimaryColor,
+        unselectedColor: ThemeUtils.getThemeColor(
           theme,
-          Colors.black,
-          darkPrimaryColor,
+          Colors.pink.shade100,
+          Colors.white,
         ),
-        unselectedColor: Colors.white54,
       ),
     );
   }

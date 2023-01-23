@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:lit_code/constants/enums.dart';
 
-// Colors
-const Color inputBorderColor = Color(0xffe3c7a1);
+// ---- dark ----
 const Color darkSecondaryColor = Color(0xffdd3d4e);
-const Color lightPrimaryColor = Color(0xffa825cc);
 const Color darkPrimaryColor = Color(0xfff5873b);
-const Color lightCircularProgressBarTrackColor = Color(0xffffd8c9);
-const Color lightCircularProgressBarColor = darkPrimaryColor;
 const Color darkCircularProgressBarTrackColor = Color(0xffef3a5d);
 const Color darkCircularProgressBarColor = Color(0xfffa9151);
+const Color darkQuestionCardColor = Color(0xff181818);
+const Color darkExpandedQuestionCardColor = darkSecondaryColor;
+const Color darkCalendarBackgroundColor = Color(0xff202020);
+
+// ---- light ----
+const Color lightPrimaryColor = Color(0xffa825cc);
+const Color lightSecondaryColor = Color(0xffffdecf);
+const Color lightCircularProgressBarTrackColor = Color(0xffffd8c9);
+const Color lightCircularProgressBarColor = darkPrimaryColor;
+const Color lightExpandedQuestionCardColor = lightPrimaryColor;
+const Color lightQuestionCardColor = lightSecondaryColor;
+const Color lightProgressCardColor = Color(0xffa16ce6);
+const Color lightChipColor = Color(0xffba9df2);
+
+// ---- others ----
 const Color difficultyChipColorEasy = Colors.green;
 const Color difficultyChipColorMedium = Colors.orange;
 const Color difficultyChipColorHard = Colors.red;
-const Color darkQuestionCardColor = Color(0xff181818);
-const Color darkExpandedQuestionCardColor = darkSecondaryColor;
-const Color lightExpandedQuestionCardColor = lightPrimaryColor;
-const Color lightQuestionCardColor = Color(0xffffdecf);
-const Color lightProgressCardColor = Color(0xffa16ce6);
-const Color lightChipColor = Color(0xffba9df2);
-const Color darkCalendarBackgroundColor = Color(0xff202020);
+const Color inputBorderColor = Color(0xffe3c7a1);
 
 // Border
 const double inputBorderWidth = 2;

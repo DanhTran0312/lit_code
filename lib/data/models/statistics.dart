@@ -51,6 +51,19 @@ abstract class Statistics with _$Statistics {
     }
   }
 
+  double getAverageConfidenceByCategory(Category category) {
+    if (completedQuestionsByCategory.containsKey(category)) {
+      final completedQuestions = completedQuestionsByCategory[category]!;
+      var totalConfidenceLevel = 0.0;
+      for (final question in completedQuestions) {
+        totalConfidenceLevel += question.confidence!.value;
+      }
+      return totalConfidenceLevel / completedQuestions.length;
+    } else {
+      return 0;
+    }
+  }
+
   Map<Category, int> get totalQuestionsByCategory {
     final totalQuestionsByCategory = <Category, int>{};
     for (final question in totalQuestions ?? <Question>[]) {

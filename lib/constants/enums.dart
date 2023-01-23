@@ -42,7 +42,7 @@ enum Difficulty {
   hard,
 }
 
-extension DifficultyString on Difficulty {
+extension DifficultyExtension on Difficulty {
   String get label {
     switch (this) {
       case Difficulty.easy:
@@ -69,7 +69,7 @@ enum Confidence {
   high,
 }
 
-extension ConfidenceString on Confidence {
+extension ConfidenceExtension on Confidence {
   String get label {
     switch (this) {
       case Confidence.low:
@@ -78,6 +78,17 @@ extension ConfidenceString on Confidence {
         return 'Medium';
       case Confidence.high:
         return 'High';
+    }
+  }
+
+  int get value {
+    switch (this) {
+      case Confidence.low:
+        return 1;
+      case Confidence.medium:
+        return 5;
+      case Confidence.high:
+        return 10;
     }
   }
 }

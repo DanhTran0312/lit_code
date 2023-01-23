@@ -19,6 +19,8 @@ class AnimatedThemeToggleSwitch extends StatelessWidget {
         1,
       ],
       iconOpacity: 0.2,
+      animationCurve: Curves.easeInOutCubic,
+      animationDuration: const Duration(milliseconds: 700),
       indicatorSize: const Size.fromWidth(40),
       iconBuilder: (value, size) {
         if (value.isEven) {
@@ -27,6 +29,7 @@ class AnimatedThemeToggleSwitch extends StatelessWidget {
         return const Icon(Icons.nightlight_round);
       },
       borderWidth: 0,
+      iconSize: const Size(30, 30),
       height: 42,
       borderColor: Colors.transparent,
       colorBuilder: (i) => i.isEven ? Colors.amberAccent : Colors.black,

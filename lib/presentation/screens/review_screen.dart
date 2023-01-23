@@ -24,7 +24,6 @@ class ReviewScreen extends StatelessWidget {
         },
         child: BlocBuilder<StatisticsBloc, StatisticsState>(
           builder: (context, state) {
-            print('BlocBuilder<StatisticsBloc, StatisticsState> rebuilds');
             final completedQuestions = state.completedQuestions.values.toSet();
             final completedQuestionCubit =
                 BlocProvider.of<CompletedQuestionCubit>(context);
