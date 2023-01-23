@@ -7,12 +7,12 @@ class ConfettiCubit extends Cubit<ConfettiState> {
   ConfettiCubit() : super(ConfettiState.initial) {
     _confettiController.addListener(() {
       if (_confettiController.state == ConfettiControllerState.stopped) {
-        stopConfetti();
+        emit(ConfettiState.stopped);
       }
     });
   }
   final ConfettiController _confettiController = ConfettiController(
-    duration: const Duration(seconds: 3),
+    duration: const Duration(seconds: 2),
   );
 
   void startConfetti() {

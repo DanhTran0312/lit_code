@@ -8,6 +8,7 @@ export 'custom_app_bar.dart';
 export 'custom_bottom_navigation_bar_item.dart';
 export 'custom_boxed_progress_bar.dart';
 export 'custom_circular_progress_bar.dart';
+export 'custom_confetti.dart';
 export 'custom_elevated_button.dart';
 export 'custom_elevated_button_with_image.dart';
 export 'custom_progress_card.dart';
