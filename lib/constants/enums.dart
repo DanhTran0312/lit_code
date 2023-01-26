@@ -13,10 +13,40 @@ enum NetworkStatus {
   disconnected,
 }
 
+@JsonEnum(valueField: 'experience')
+@HiveType(typeId: 7)
+enum Experience {
+  @HiveField(0)
+  @JsonValue('beginner')
+  beginner,
+  @HiveField(1)
+  @JsonValue('intermediate')
+  intermediate,
+  @HiveField(2)
+  @JsonValue('advanced')
+  advanced,
+}
+
+@JsonEnum(valueField: 'themeMode')
+@HiveType(typeId: 6)
+enum ThemeMode {
+  @HiveField(0)
+  @JsonValue('light')
+  light,
+  @HiveField(1)
+  @JsonValue('dark')
+  dark,
+  @HiveField(2)
+  @JsonValue('system')
+  system,
+}
+
 enum EmailValidationErrors {
   empty,
   invalid,
 }
+
+enum SettingStatus { initial, loading, success, failure }
 
 enum PasswordValidationErrors {
   empty,
@@ -43,7 +73,7 @@ enum Difficulty {
 }
 
 extension DifficultyExtension on Difficulty {
-  String get label {
+  String get name {
     switch (this) {
       case Difficulty.easy:
         return 'Easy';

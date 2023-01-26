@@ -25,13 +25,19 @@ class UserAdapter extends TypeAdapter<User> {
       completedQuestions: (fields[6] as List).cast<Question?>(),
       questionsVersion: fields[7] as String?,
       lastSynced: fields[8] as int?,
+      streak: fields[9] as int?,
+      experience: fields[10] as Experience?,
+      todayQuestions: (fields[11] as List?)?.cast<Question?>(),
+      thisWeekQuestions: (fields[12] as List?)?.cast<Question?>(),
+      lastQuestionGenerated: fields[13] as int?,
+      experienceLevel: fields[14] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, User obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(14)
       ..writeByte(1)
       ..write(obj.id)
       ..writeByte(2)
@@ -47,7 +53,19 @@ class UserAdapter extends TypeAdapter<User> {
       ..writeByte(7)
       ..write(obj.questionsVersion)
       ..writeByte(8)
-      ..write(obj.lastSynced);
+      ..write(obj.lastSynced)
+      ..writeByte(9)
+      ..write(obj.streak)
+      ..writeByte(10)
+      ..write(obj.experience)
+      ..writeByte(11)
+      ..write(obj.todayQuestions)
+      ..writeByte(12)
+      ..write(obj.thisWeekQuestions)
+      ..writeByte(13)
+      ..write(obj.lastQuestionGenerated)
+      ..writeByte(14)
+      ..write(obj.experienceLevel);
   }
 
   @override
@@ -81,6 +99,18 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
           const [],
       questionsVersion: json['questionsVersion'] as String? ?? '',
       lastSynced: json['lastSynced'] as int?,
+      streak: json['streak'] as int?,
+      experience: $enumDecodeNullable(_$ExperienceEnumMap, json['experience']),
+      todayQuestions: (json['todayQuestions'] as List<dynamic>?)
+          ?.map((e) =>
+              e == null ? null : Question.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      thisWeekQuestions: (json['thisWeekQuestions'] as List<dynamic>?)
+          ?.map((e) =>
+              e == null ? null : Question.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      lastQuestionGenerated: json['lastQuestionGenerated'] as int?,
+      experienceLevel: json['experienceLevel'] as int?,
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
@@ -92,4 +122,16 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'completedQuestions': instance.completedQuestions,
       'questionsVersion': instance.questionsVersion,
       'lastSynced': instance.lastSynced,
+      'streak': instance.streak,
+      'experience': _$ExperienceEnumMap[instance.experience],
+      'todayQuestions': instance.todayQuestions,
+      'thisWeekQuestions': instance.thisWeekQuestions,
+      'lastQuestionGenerated': instance.lastQuestionGenerated,
+      'experienceLevel': instance.experienceLevel,
     };
+
+const _$ExperienceEnumMap = {
+  Experience.beginner: 'beginner',
+  Experience.intermediate: 'intermediate',
+  Experience.advanced: 'advanced',
+};

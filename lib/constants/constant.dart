@@ -32,13 +32,14 @@ const double inputBorderRadius = 30;
 const double questionCardBorder = 18;
 
 // Size
-const double sizeBoxHeightExtraSmall = 3;
-const double sizeBoxHeightSmall = 7;
-const double sizeBoxHeightMedium = 17;
-const double sizeBoxHeightLarge = 22;
-const double sizeBoxHeightExtraLarge = 40;
+const double sizeBoxExtraSmall = 3;
+const double sizeBoxSmall = 7;
+const double sizeBoxMedium = 17;
+const double sizeBoxLarge = 22;
+const double sizeBoxExtraLarge = 40;
 const double bottomNavigationBarItemIconSize = 27;
 const double bottomNavigationBarItemIconSizeSelected = 35;
+const double illustratedAnimationSize = 80;
 
 // ------------------- Padding  -------------------
 const double elevatedButtonVerticalPadding = 12;

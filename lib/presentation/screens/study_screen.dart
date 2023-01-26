@@ -20,52 +20,56 @@ class StudyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final confettiCubit = BlocProvider.of<ConfettiCubit>(context);
+
     return Scaffold(
-      body: BlocConsumer<QuestionListBloc, QuestionListState>(
-        listener: (context, state) {
-          if (state is QuestionListError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.message),
-              ),
-            );
-          } else if (state is QuestionListLoading) {
-            // If the state is QuestionListLoading, then show a circular progress indicator.
-            const CircularProgressIndicator();
-          }
-        },
-        builder: (context, state) {
-          if (state is QuestionListInitial) {
-            // If the state is QuestionListInitial, then fetch the questions.
-            BlocProvider.of<QuestionListBloc>(context).add(
-              const FetchQuestions(),
-            );
+      body: BlocProvider(
+        create: (context) => ConfettiCubit(),
+        child: BlocConsumer<QuestionListBloc, QuestionListState>(
+          listener: (context, state) {
+            if (state is QuestionListError) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(state.message),
+                ),
+              );
+            } else if (state is QuestionListLoading) {
+              // If the state is QuestionListLoading, then show a circular progress indicator.
+              const CircularProgressIndicator();
+            }
+          },
+          builder: (context, state) {
+            final confettiCubit = BlocProvider.of<ConfettiCubit>(context);
+            if (state is QuestionListInitial) {
+              // If the state is QuestionListInitial, then fetch the questions.
+              BlocProvider.of<QuestionListBloc>(context).add(
+                const FetchQuestions(),
+              );
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is QuestionListLoaded) {
+              // If the state is QuestionListLoaded, then show the list of questions.
+              final stateQuestion = state.questions;
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: defaultPageHorizontalPadding,
+                ),
+                child: Stack(
+                  children: [
+                    _StudyScreenBody(
+                      stateQuestion: stateQuestion,
+                      theme: theme,
+                    ),
+                    BlocBuilder<ConfettiCubit, ConfettiState>(
+                      builder: (context, state) {
+                        return _ConfettiBuilder(confettiCubit: confettiCubit);
+                      },
+                    )
+                  ],
+                ),
+              );
+            }
             return const Center(child: CircularProgressIndicator());
-          } else if (state is QuestionListLoaded) {
-            // If the state is QuestionListLoaded, then show the list of questions.
-            final stateQuestion = state.questions;
-            return Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: defaultPageHorizontalPadding,
-              ),
-              child: Stack(
-                children: [
-                  _StudyScreenBody(
-                    stateQuestion: stateQuestion,
-                    theme: theme,
-                  ),
-                  BlocBuilder<ConfettiCubit, ConfettiState>(
-                    builder: (context, state) {
-                      return _ConfettiBuilder(confettiCubit: confettiCubit);
-                    },
-                  )
-                ],
-              ),
-            );
-          }
-          return const Center(child: CircularProgressIndicator());
-        },
+          },
+        ),
       ),
     );
   }
@@ -116,9 +120,9 @@ class _StudyScreenBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        const SizedBox(height: sizeBoxHeightSmall),
+        const SizedBox(height: sizeBoxSmall),
         const SectionHeading(title: 'Your Progress:'),
-        const SizedBox(height: sizeBoxHeightSmall),
+        const SizedBox(height: sizeBoxSmall),
         BlocBuilder<StatisticsBloc, StatisticsState>(
           builder: (context, state) {
             final completedQuestion = state.completedQuestions;
@@ -130,7 +134,7 @@ class _StudyScreenBody extends StatelessWidget {
           },
         ),
         const SectionHeading(title: 'Categories'),
-        const SizedBox(height: sizeBoxHeightSmall),
+        const SizedBox(height: sizeBoxSmall),
         _CategoryList(
           stateQuestion: stateQuestion,
           completedQuestions:

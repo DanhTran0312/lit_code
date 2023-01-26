@@ -2,9 +2,10 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:lit_code/business_logic/blocs/bloc/statistics_bloc.dart';
 import 'package:lit_code/constants/constants.dart';
 import 'package:lit_code/data/models/models.dart';
-import 'package:lit_code/data/repositories/auth_repository.dart';
+import 'package:lit_code/data/repositories/repositories.dart';
 
 part 'app_event.dart';
 part 'app_state.dart';
@@ -13,7 +14,11 @@ part 'app_bloc.freezed.dart';
 class AppBloc extends Bloc<AppEvent, AppState> {
   AppBloc({
     required AuthRepository authRepository,
+    required UserRepository userRepository,
+    required StatisticsBloc statisticsBloc,
   })  : _authRepository = authRepository,
+        _userRepository = userRepository,
+        _statisticsBloc = statisticsBloc,
         super(
           authRepository.currentUser.isNotEmpty
               ? AppState.authenticated(
@@ -34,7 +39,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
     on<AppLogoutRequested>(_onLogoutRequested);
 
-    _userSubscription = _authRepository.user.listen(
+    _userSubscription = _authRepository.userStream.listen(
       (user) => add(AppUserChanged(user)),
     );
   }
@@ -60,9 +65,13 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     Emitter<AppState> emit,
   ) async {
     await _authRepository.signOut();
+    await _userRepository.signOut();
+    _statisticsBloc.add(const ResetStatistics());
   }
 
   final AuthRepository _authRepository;
+  final UserRepository _userRepository;
+  final StatisticsBloc _statisticsBloc;
 
   late final StreamSubscription<User> _userSubscription;
 

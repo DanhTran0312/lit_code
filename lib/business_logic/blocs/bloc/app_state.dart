@@ -11,6 +11,7 @@ class AppState with _$AppState {
     @Default(AppStatus.authenticated) AppStatus status,
   }) = Authenticated;
   const factory AppState.unauthenticated({
+    @Default(User.empty) User user,
     @Default(AppStatus.unauthenticated) AppStatus status,
   }) = Unauthenticated;
 }

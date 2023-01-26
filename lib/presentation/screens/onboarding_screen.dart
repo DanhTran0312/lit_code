@@ -17,12 +17,7 @@ class OnBoardingScreen extends StatelessWidget {
       child: BlocConsumer<OnBoardingCubit, OnBoardingState>(
         listener: (context, state) {
           if (state is OnBoardingCompleted) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('OnBoarding Completed'),
-              ),
-            );
-            context.go('/');
+            context.goNamed('signIn');
           }
         },
         builder: (context, state) {
@@ -79,13 +74,13 @@ class OnBoardingPageView extends StatelessWidget {
                 onBoardingData[index].illustration,
                 height: 300,
               ),
-              const SizedBox(height: sizeBoxHeightMedium),
+              const SizedBox(height: sizeBoxMedium),
               Text(
                 onBoardingData[index].title,
                 style: Theme.of(context).textTheme.headline2,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: sizeBoxHeightMedium),
+              const SizedBox(height: sizeBoxMedium),
               Text(
                 onBoardingData[index].description,
                 style: Theme.of(context).textTheme.headline5,

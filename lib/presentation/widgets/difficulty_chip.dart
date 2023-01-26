@@ -13,7 +13,7 @@ class DifficultyChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Chip(
       label: Text(
-        difficulty.label,
+        difficulty.name,
       ),
       backgroundColor: difficulty == Difficulty.easy
           ? Colors.green

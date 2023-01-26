@@ -22,20 +22,20 @@ class SignUpForm extends StatelessWidget {
           style: theme.textTheme.headline2,
           textAlign: TextAlign.start,
         ),
-        const SizedBox(height: sizeBoxHeightLarge),
+        const SizedBox(height: sizeBoxLarge),
         _EmailInput(),
-        const SizedBox(height: sizeBoxHeightMedium),
+        const SizedBox(height: sizeBoxMedium),
         _PasswordInput(),
-        const SizedBox(height: sizeBoxHeightMedium),
+        const SizedBox(height: sizeBoxMedium),
         _ConfirmPasswordInput(),
-        const SizedBox(height: sizeBoxHeightLarge),
+        const SizedBox(height: sizeBoxLarge),
         CustomElevatedButton(
           text: 'Sign Up',
           onPressed: () {
             context.read<SignUpCubit>().signUpWithEmailAndPassword();
           },
         ),
-        const SizedBox(height: sizeBoxHeightMedium),
+        const SizedBox(height: sizeBoxMedium),
         _SignInOption(theme: theme),
       ],
     );

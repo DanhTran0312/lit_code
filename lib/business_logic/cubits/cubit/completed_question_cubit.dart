@@ -32,7 +32,6 @@ class CompletedQuestionCubit extends Cubit<CompletedQuestionState> {
         ),
       );
       emit(const CompletedQuestionState.synced());
-      await _userRepository.syncCompletedQuestions();
     } catch (e) {
       emit(CompletedQuestionState.error(e.toString()));
     }
@@ -49,7 +48,6 @@ class CompletedQuestionCubit extends Cubit<CompletedQuestionState> {
         ),
       );
       emit(const CompletedQuestionState.synced());
-      await _userRepository.syncCompletedQuestions();
     } catch (e) {
       emit(CompletedQuestionState.error(e.toString()));
     }
@@ -69,7 +67,6 @@ class CompletedQuestionCubit extends Cubit<CompletedQuestionState> {
         ),
       );
       emit(const CompletedQuestionState.synced());
-      await _userRepository.syncCompletedQuestions();
     } catch (e) {
       emit(CompletedQuestionState.error(e.toString()));
     }

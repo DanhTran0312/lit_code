@@ -6,95 +6,40 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:hive/hive.dart';
 import 'package:lit_code/constants/enums.dart';
 import 'package:lit_code/data/models/models.dart';
-import 'package:lit_code/data/repositories/auth_repository.dart';
 
 class UserRepository {
   UserRepository({
     required Box<User> userBox,
     required DatabaseReference firebaseDatabase,
-    required AuthRepository authRepository,
   })  : _userBox = userBox,
-        _firebaseDatabase = firebaseDatabase,
-        _authRepository = authRepository {
-    userStream = _authRepository.user.listen((user) {
-      if (user.isNotEmpty) {
-        _user = user;
-      } else {
-        _user = User.empty;
-      }
-    });
+        _firebaseDatabase = firebaseDatabase {
+    if (_userBox.isEmpty) {
+      _userBox.put('user', User.empty);
+    } else {
+      _user = _userBox.values.first;
+    }
   }
 
-  User _user = User.empty;
+  late User _user;
   final Box<User> _userBox;
   final DatabaseReference _firebaseDatabase;
-  final AuthRepository _authRepository;
-  late final StreamSubscription<User> userStream;
 
   late final usersDatabaseReference = _firebaseDatabase.child('users');
 
-  /// Syncs the completed questions of the user with the cloud database.
-  ///
-  /// Checks if the last synced time of the user in the cloud database is greater
-  /// than the last synced time of the user in the local database. If it is, then
-  /// the completed questions of the user in the cloud database is updated to the
-  /// completed questions of the user in the local database. Otherwise, the
-  /// completed questions of the user in the local database is updated to the
-  /// completed questions of the user in the cloud database.
-  ///
-  /// Throws an exception if the user does not exist.
-  ///
-  /// Throws an exception if the user does not have any completed questions.
-  ///
-  /// Throws an exception if the user's completed questions cannot be synced with
-  /// the cloud database.
-  ///
-  /// This function is called in [UserRepository].
-  Future<void> syncCompletedQuestions() async {
-    try {
-      if (_user.isEmpty) {
-        throw Exception(
-          'Cannot sync completed questions because user does not exist',
-        );
-      }
-      if (_user.completedQuestions.isEmpty) {
-        return;
-      }
-      final localLastSynced = _user.lastSynced ?? 0;
+  User get user => _user;
 
-      // Get the questions from the local database
-      final completedQuestions = _user.completedQuestions;
-      // Update the cloud database
-      await usersDatabaseReference
-          .child(_user.id)
-          .child('completed_questions')
-          .set(completedQuestions.map((e) => e!.toJson()).toList());
-      await usersDatabaseReference
-          .child(_user.id)
-          .child('last_synced')
-          .set(localLastSynced);
-    } catch (e) {
-      throw Exception(e);
-    }
+  void addUser(User user) {
+    _userBox.put(user.id, user);
+    _user = user;
+    assert(_userBox.get(user.id) == _user, 'User was not added to box');
   }
 
-  Future<User> getUser() async {
-    try {
-      if (_user.isEmpty) {
-        throw Exception('Cannot get user because it does not exist');
-      }
-      return _user;
-    } catch (e) {
-      throw Exception('Error while getting user');
-    }
+  Future<void> signOut() async {
+    await _userBox.clear();
+    _user = User.empty;
   }
 
   Future<Map<String, Question>> getCompletedQuestions() async {
-    if (_user.isEmpty) {
-      throw Exception(
-        'Cannot get completed questions because user does not exist',
-      );
-    }
     if (_user.completedQuestions.isEmpty) {
       return <String, Question>{};
     }
@@ -119,7 +64,12 @@ class UserRepository {
           )
         ],
       );
+
       await _userBox.put(_user.id, _user);
+      assert(
+        _user.completedQuestions.any((q) => q!.id == question.id),
+        'Question was not added to user',
+      );
     } catch (e) {
       throw Exception(e);
     }
@@ -136,6 +86,10 @@ class UserRepository {
             .toList(),
       );
       await _userBox.put(_user.id, _user);
+      assert(
+        !_user.completedQuestions.any((q) => q!.id == question.id),
+        'Question was not removed from user',
+      );
     } catch (e) {
       rethrow;
     }
@@ -172,12 +126,37 @@ class UserRepository {
         );
       }
       await _userBox.put(_user.id, _user);
+      assert(
+        _user.completedQuestions.any((q) => q!.id == question.id),
+        'Question was not added to user',
+      );
     } catch (e) {
       rethrow;
     }
   }
 
-  void dispose() {
-    userStream.cancel();
+  Future<Settings> getUserSettings() async {
+    try {
+      if (_user.isEmpty) {
+        throw Exception('Cannot get user settings because user does not exist');
+      }
+      return _user.settings ?? const Settings();
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<void> updateUserSettings(Settings settings) async {
+    try {
+      if (_user.isEmpty) {
+        throw Exception(
+          'Cannot update user settings because user does not exist',
+        );
+      }
+      _user = _user.copyWith(settings: settings);
+      await _userBox.put(_user.id, _user);
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 }

@@ -17,7 +17,7 @@ class SettingsAdapter extends TypeAdapter<Settings> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Settings(
-      isDarkMode: fields[0] as bool,
+      themeMode: fields[0] as ThemeMode?,
       isNotificationsEnabled: fields[1] as bool,
       difficulties: (fields[2] as List).cast<Difficulty>(),
       categories: (fields[3] as List).cast<Category>(),
@@ -31,7 +31,7 @@ class SettingsAdapter extends TypeAdapter<Settings> {
     writer
       ..writeByte(6)
       ..writeByte(0)
-      ..write(obj.isDarkMode)
+      ..write(obj.themeMode)
       ..writeByte(1)
       ..write(obj.isNotificationsEnabled)
       ..writeByte(2)
@@ -60,7 +60,8 @@ class SettingsAdapter extends TypeAdapter<Settings> {
 // **************************************************************************
 
 _$_Settings _$$_SettingsFromJson(Map<String, dynamic> json) => _$_Settings(
-      isDarkMode: json['isDarkMode'] as bool? ?? false,
+      themeMode: $enumDecodeNullable(_$ThemeModeEnumMap, json['themeMode']) ??
+          ThemeMode.system,
       isNotificationsEnabled: json['isNotificationsEnabled'] as bool? ?? false,
       difficulties: (json['difficulties'] as List<dynamic>?)
               ?.map((e) => $enumDecode(_$DifficultyEnumMap, e))
@@ -97,7 +98,7 @@ _$_Settings _$$_SettingsFromJson(Map<String, dynamic> json) => _$_Settings(
 
 Map<String, dynamic> _$$_SettingsToJson(_$_Settings instance) =>
     <String, dynamic>{
-      'isDarkMode': instance.isDarkMode,
+      'themeMode': _$ThemeModeEnumMap[instance.themeMode],
       'isNotificationsEnabled': instance.isNotificationsEnabled,
       'difficulties':
           instance.difficulties.map((e) => _$DifficultyEnumMap[e]!).toList(),
@@ -106,6 +107,12 @@ Map<String, dynamic> _$$_SettingsToJson(_$_Settings instance) =>
       'goalDate': instance.goalDate?.toIso8601String(),
       'goalQuestions': instance.goalQuestions,
     };
+
+const _$ThemeModeEnumMap = {
+  ThemeMode.light: 'light',
+  ThemeMode.dark: 'dark',
+  ThemeMode.system: 'system',
+};
 
 const _$DifficultyEnumMap = {
   Difficulty.easy: 'Easy',

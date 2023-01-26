@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive/hive.dart';
 import 'package:lit_code/data/models/models.dart';
+import 'package:lit_code/data/repositories/repositories.dart';
 
 class AuthRepository {
   /// Creates an instance of [AuthRepository]
@@ -17,16 +18,16 @@ class AuthRepository {
   /// [userBox] is the instance of [Hive] box to use
   /// [googleSignIn] is the instance of [GoogleSignIn] to use
   AuthRepository({
-    required firebase_auth.FirebaseAuth? firebaseAuth,
+    required firebase_auth.FirebaseAuth firebaseAuth,
     required GoogleSignIn googleSignIn,
-    required Box<User> userBox,
-  })  : _firebaseAuth = firebaseAuth!,
-        _userBox = userBox,
+    required UserRepository userRepository,
+  })  : _firebaseAuth = firebaseAuth,
+        _userRepository = userRepository,
         _googleSignIn = googleSignIn;
 
   final firebase_auth.FirebaseAuth _firebaseAuth;
+  final UserRepository _userRepository;
   final GoogleSignIn _googleSignIn;
-  final Box<User> _userBox;
 
   /// Returns a stream of [User]s.
   ///
@@ -47,12 +48,13 @@ class AuthRepository {
   ///    package.
   ///  * [User.toUser], which converts a Firebase user to a [User] object.
 
-  Stream<User> get user {
+  Stream<User> get userStream {
     try {
       return _firebaseAuth.authStateChanges().map((firebaseUser) {
         final user = firebaseUser == null ? User.empty : firebaseUser.toUser;
-        if (user.isNotEmpty) {
-          _userBox.put(user.id, user);
+        final storageUser = _userRepository.user;
+        if (user.isNotEmpty && storageUser.isEmpty) {
+          _userRepository.addUser(user);
         }
         return user;
       });
@@ -61,18 +63,13 @@ class AuthRepository {
     }
   }
 
+  User get currentUser {
+    return _userRepository.user;
+  }
+
   // Get the current user from the local database.
   // The _userBox is a Hive box that stores information about the user.
   // The _firebaseAuth is a Firebase Auth object that stores information about the user.
-
-  User get currentUser {
-    try {
-      final user = _userBox.get(_firebaseAuth.currentUser!.uid);
-      return user ?? User.empty;
-    } catch (e) {
-      return User.empty;
-    }
-  }
 
   /// Create a new user account with the given email and password.
   ///
@@ -148,7 +145,6 @@ class AuthRepository {
     try {
       await _firebaseAuth.signOut();
       await _googleSignIn.signOut();
-      await _userBox.clear();
     } catch (e) {
       throw Exception(e);
     }

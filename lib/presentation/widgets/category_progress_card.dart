@@ -84,7 +84,7 @@ class _CategoryProgressContent extends StatelessWidget {
             currentConfidenceStep: currentConfidenceStep,
           ),
           const SizedBox(
-            height: sizeBoxHeightSmall,
+            height: sizeBoxSmall,
           ),
         ],
       ),
@@ -152,7 +152,7 @@ class _StatisticsProgressBars extends StatelessWidget {
             style: theme.textTheme.headline6,
           ),
           const SizedBox(
-            height: sizeBoxHeightExtraSmall,
+            height: sizeBoxExtraSmall,
           ),
           CustomBoxedProgressBar(
             totalSteps: 14,
@@ -162,14 +162,14 @@ class _StatisticsProgressBars extends StatelessWidget {
             roundedEdges: true,
           ),
           const SizedBox(
-            height: sizeBoxHeightExtraSmall,
+            height: sizeBoxExtraSmall,
           ),
           Text(
             'Progress',
             style: theme.textTheme.headline6,
           ),
           const SizedBox(
-            height: sizeBoxHeightExtraSmall,
+            height: sizeBoxExtraSmall,
           ),
           CustomBoxedProgressBar(
             totalSteps: 14,

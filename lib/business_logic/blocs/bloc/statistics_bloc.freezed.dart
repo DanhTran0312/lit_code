@@ -22,6 +22,7 @@ mixin _$StatisticsEvent {
         updateCompletedQuestions,
     required TResult Function(List<Question> totalQuestions)
         updateTotalQuestions,
+    required TResult Function() resetStatistics,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,6 +30,7 @@ mixin _$StatisticsEvent {
     TResult? Function(Map<String, Question> completedQuestions)?
         updateCompletedQuestions,
     TResult? Function(List<Question> totalQuestions)? updateTotalQuestions,
+    TResult? Function()? resetStatistics,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -36,6 +38,7 @@ mixin _$StatisticsEvent {
     TResult Function(Map<String, Question> completedQuestions)?
         updateCompletedQuestions,
     TResult Function(List<Question> totalQuestions)? updateTotalQuestions,
+    TResult Function()? resetStatistics,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -44,18 +47,21 @@ mixin _$StatisticsEvent {
     required TResult Function(UpdateCompletedQuestions value)
         updateCompletedQuestions,
     required TResult Function(UpdateTotalQuestions value) updateTotalQuestions,
+    required TResult Function(ResetStatistics value) resetStatistics,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(UpdateCompletedQuestions value)? updateCompletedQuestions,
     TResult? Function(UpdateTotalQuestions value)? updateTotalQuestions,
+    TResult? Function(ResetStatistics value)? resetStatistics,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(UpdateCompletedQuestions value)? updateCompletedQuestions,
     TResult Function(UpdateTotalQuestions value)? updateTotalQuestions,
+    TResult Function(ResetStatistics value)? resetStatistics,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -159,6 +165,7 @@ class _$UpdateCompletedQuestions implements UpdateCompletedQuestions {
         updateCompletedQuestions,
     required TResult Function(List<Question> totalQuestions)
         updateTotalQuestions,
+    required TResult Function() resetStatistics,
   }) {
     return updateCompletedQuestions(completedQuestions);
   }
@@ -169,6 +176,7 @@ class _$UpdateCompletedQuestions implements UpdateCompletedQuestions {
     TResult? Function(Map<String, Question> completedQuestions)?
         updateCompletedQuestions,
     TResult? Function(List<Question> totalQuestions)? updateTotalQuestions,
+    TResult? Function()? resetStatistics,
   }) {
     return updateCompletedQuestions?.call(completedQuestions);
   }
@@ -179,6 +187,7 @@ class _$UpdateCompletedQuestions implements UpdateCompletedQuestions {
     TResult Function(Map<String, Question> completedQuestions)?
         updateCompletedQuestions,
     TResult Function(List<Question> totalQuestions)? updateTotalQuestions,
+    TResult Function()? resetStatistics,
     required TResult orElse(),
   }) {
     if (updateCompletedQuestions != null) {
@@ -193,6 +202,7 @@ class _$UpdateCompletedQuestions implements UpdateCompletedQuestions {
     required TResult Function(UpdateCompletedQuestions value)
         updateCompletedQuestions,
     required TResult Function(UpdateTotalQuestions value) updateTotalQuestions,
+    required TResult Function(ResetStatistics value) resetStatistics,
   }) {
     return updateCompletedQuestions(this);
   }
@@ -202,6 +212,7 @@ class _$UpdateCompletedQuestions implements UpdateCompletedQuestions {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(UpdateCompletedQuestions value)? updateCompletedQuestions,
     TResult? Function(UpdateTotalQuestions value)? updateTotalQuestions,
+    TResult? Function(ResetStatistics value)? resetStatistics,
   }) {
     return updateCompletedQuestions?.call(this);
   }
@@ -211,6 +222,7 @@ class _$UpdateCompletedQuestions implements UpdateCompletedQuestions {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(UpdateCompletedQuestions value)? updateCompletedQuestions,
     TResult Function(UpdateTotalQuestions value)? updateTotalQuestions,
+    TResult Function(ResetStatistics value)? resetStatistics,
     required TResult orElse(),
   }) {
     if (updateCompletedQuestions != null) {
@@ -308,6 +320,7 @@ class _$UpdateTotalQuestions implements UpdateTotalQuestions {
         updateCompletedQuestions,
     required TResult Function(List<Question> totalQuestions)
         updateTotalQuestions,
+    required TResult Function() resetStatistics,
   }) {
     return updateTotalQuestions(totalQuestions);
   }
@@ -318,6 +331,7 @@ class _$UpdateTotalQuestions implements UpdateTotalQuestions {
     TResult? Function(Map<String, Question> completedQuestions)?
         updateCompletedQuestions,
     TResult? Function(List<Question> totalQuestions)? updateTotalQuestions,
+    TResult? Function()? resetStatistics,
   }) {
     return updateTotalQuestions?.call(totalQuestions);
   }
@@ -328,6 +342,7 @@ class _$UpdateTotalQuestions implements UpdateTotalQuestions {
     TResult Function(Map<String, Question> completedQuestions)?
         updateCompletedQuestions,
     TResult Function(List<Question> totalQuestions)? updateTotalQuestions,
+    TResult Function()? resetStatistics,
     required TResult orElse(),
   }) {
     if (updateTotalQuestions != null) {
@@ -342,6 +357,7 @@ class _$UpdateTotalQuestions implements UpdateTotalQuestions {
     required TResult Function(UpdateCompletedQuestions value)
         updateCompletedQuestions,
     required TResult Function(UpdateTotalQuestions value) updateTotalQuestions,
+    required TResult Function(ResetStatistics value) resetStatistics,
   }) {
     return updateTotalQuestions(this);
   }
@@ -351,6 +367,7 @@ class _$UpdateTotalQuestions implements UpdateTotalQuestions {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(UpdateCompletedQuestions value)? updateCompletedQuestions,
     TResult? Function(UpdateTotalQuestions value)? updateTotalQuestions,
+    TResult? Function(ResetStatistics value)? resetStatistics,
   }) {
     return updateTotalQuestions?.call(this);
   }
@@ -360,6 +377,7 @@ class _$UpdateTotalQuestions implements UpdateTotalQuestions {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(UpdateCompletedQuestions value)? updateCompletedQuestions,
     TResult Function(UpdateTotalQuestions value)? updateTotalQuestions,
+    TResult Function(ResetStatistics value)? resetStatistics,
     required TResult orElse(),
   }) {
     if (updateTotalQuestions != null) {
@@ -377,6 +395,119 @@ abstract class UpdateTotalQuestions implements StatisticsEvent {
   @JsonKey(ignore: true)
   _$$UpdateTotalQuestionsCopyWith<_$UpdateTotalQuestions> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ResetStatisticsCopyWith<$Res> {
+  factory _$$ResetStatisticsCopyWith(
+          _$ResetStatistics value, $Res Function(_$ResetStatistics) then) =
+      __$$ResetStatisticsCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ResetStatisticsCopyWithImpl<$Res>
+    extends _$StatisticsEventCopyWithImpl<$Res, _$ResetStatistics>
+    implements _$$ResetStatisticsCopyWith<$Res> {
+  __$$ResetStatisticsCopyWithImpl(
+      _$ResetStatistics _value, $Res Function(_$ResetStatistics) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ResetStatistics implements ResetStatistics {
+  const _$ResetStatistics();
+
+  @override
+  String toString() {
+    return 'StatisticsEvent.resetStatistics()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ResetStatistics);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Map<String, Question> completedQuestions)
+        updateCompletedQuestions,
+    required TResult Function(List<Question> totalQuestions)
+        updateTotalQuestions,
+    required TResult Function() resetStatistics,
+  }) {
+    return resetStatistics();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Map<String, Question> completedQuestions)?
+        updateCompletedQuestions,
+    TResult? Function(List<Question> totalQuestions)? updateTotalQuestions,
+    TResult? Function()? resetStatistics,
+  }) {
+    return resetStatistics?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Map<String, Question> completedQuestions)?
+        updateCompletedQuestions,
+    TResult Function(List<Question> totalQuestions)? updateTotalQuestions,
+    TResult Function()? resetStatistics,
+    required TResult orElse(),
+  }) {
+    if (resetStatistics != null) {
+      return resetStatistics();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(UpdateCompletedQuestions value)
+        updateCompletedQuestions,
+    required TResult Function(UpdateTotalQuestions value) updateTotalQuestions,
+    required TResult Function(ResetStatistics value) resetStatistics,
+  }) {
+    return resetStatistics(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(UpdateCompletedQuestions value)? updateCompletedQuestions,
+    TResult? Function(UpdateTotalQuestions value)? updateTotalQuestions,
+    TResult? Function(ResetStatistics value)? resetStatistics,
+  }) {
+    return resetStatistics?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(UpdateCompletedQuestions value)? updateCompletedQuestions,
+    TResult Function(UpdateTotalQuestions value)? updateTotalQuestions,
+    TResult Function(ResetStatistics value)? resetStatistics,
+    required TResult orElse(),
+  }) {
+    if (resetStatistics != null) {
+      return resetStatistics(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ResetStatistics implements StatisticsEvent {
+  const factory ResetStatistics() = _$ResetStatistics;
 }
 
 /// @nodoc

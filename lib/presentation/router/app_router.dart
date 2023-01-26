@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lit_code/business_logic/blocs/bloc/app_bloc.dart';
+import 'package:lit_code/business_logic/cubits/cubit/experience_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/on_boarding_cubit.dart';
 import 'package:lit_code/presentation/screens/screens.dart';
 import 'package:lit_code/presentation/widgets/persisted_bottom_nav_bar.dart';
@@ -18,8 +19,10 @@ class AppRouter {
   AppRouter({
     required AppBloc appBloc,
     required OnBoardingCubit onboardingCubit,
+    required ExperienceCubit experienceCubit,
   })  : _appBloc = appBloc,
-        _onboardingCubit = onboardingCubit;
+        _onboardingCubit = onboardingCubit,
+        _experienceCubit = experienceCubit;
 
   static const String initialRoute = '/';
   static const String settingsRoute = '/settings';
@@ -31,6 +34,7 @@ class AppRouter {
   static const String signInRoute = '/signIn';
   static const String signUpRoute = '/signUp';
   static const String onboardingRoute = '/onBoarding';
+  static const String experienceRoute = '/experience';
 
   final _shellNavigatorKey = GlobalKey<NavigatorState>();
   final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -38,6 +42,7 @@ class AppRouter {
   GoRouter get router => _router;
   final AppBloc _appBloc;
   final OnBoardingCubit _onboardingCubit;
+  final ExperienceCubit _experienceCubit;
 
   late final GoRouter _router = GoRouter(
     debugLogDiagnostics: true,
@@ -57,8 +62,7 @@ class AppRouter {
         redirect: (context, state) {
           if (_onboardingCubit.state is OnBoardingNotCompleted) {
             return onboardingRoute;
-          }
-          if (_appBloc.state is Authenticated) {
+          } else if (_appBloc.state is Authenticated) {
             return homeRoute;
           }
           return null;
@@ -83,6 +87,17 @@ class AppRouter {
         path: onboardingRoute,
         pageBuilder: (context, state) {
           return const MaterialPage(child: OnBoardingScreen());
+        },
+      ),
+      GoRoute(
+        name: 'experience',
+        path: experienceRoute,
+        pageBuilder: (context, state) {
+          return MaterialPage(
+            child: ExperienceScreen(
+              experienceCubit: _experienceCubit,
+            ),
+          );
         },
       ),
       ShellRoute(
@@ -131,6 +146,12 @@ class AppRouter {
                 },
               ),
             ],
+            redirect: (context, state) {
+              if (_experienceCubit.state is ExperienceNotCompleted) {
+                return experienceRoute;
+              }
+              return null;
+            },
           ),
           GoRoute(
             name: 'study',

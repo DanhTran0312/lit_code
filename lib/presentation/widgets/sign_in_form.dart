@@ -22,14 +22,14 @@ class SignInForm extends StatelessWidget {
       children: [
         _EmailInput(),
         _PasswordInput(),
-        const SizedBox(height: sizeBoxHeightLarge),
+        const SizedBox(height: sizeBoxLarge),
         CustomElevatedButton(
           text: 'Sign In',
           onPressed: () {
             context.read<SignInCubit>().signInWithEmailAndPassword();
           },
         ),
-        const SizedBox(height: sizeBoxHeightLarge),
+        const SizedBox(height: sizeBoxLarge),
         CustomElevatedButtonWithImage(
           text: 'Sign In with Google',
           image: SvgPicture.asset(
@@ -40,7 +40,7 @@ class SignInForm extends StatelessWidget {
             context.read<SignInCubit>().signInWithGoogle();
           },
         ),
-        const SizedBox(height: sizeBoxHeightMedium),
+        const SizedBox(height: sizeBoxMedium),
         CustomElevatedButtonWithImage(
           text: 'Sign In with Apple',
           image: SvgPicture.asset(
@@ -55,7 +55,7 @@ class SignInForm extends StatelessWidget {
             // TODO: Implement Apple Sign In
           },
         ),
-        const SizedBox(height: sizeBoxHeightSmall),
+        const SizedBox(height: sizeBoxSmall),
         _SignUpOption(theme: theme),
       ],
     );

@@ -64,7 +64,7 @@ class _HomeScreenContent extends StatelessWidget {
           shrinkWrap: true,
           children: [
             CustomAppBar(url: url, theme: theme),
-            const SizedBox(height: sizeBoxHeightSmall),
+            const SizedBox(height: sizeBoxSmall),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -92,7 +92,7 @@ class _HomeScreenContent extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: sizeBoxHeightSmall),
+                const SizedBox(height: sizeBoxSmall),
                 Align(
                   child: Column(
                     children: [
@@ -102,7 +102,7 @@ class _HomeScreenContent extends StatelessWidget {
                         total: 20,
                         theme: theme,
                       ),
-                      const SizedBox(height: sizeBoxHeightSmall),
+                      const SizedBox(height: sizeBoxSmall),
                       RichText(
                         text: TextSpan(
                           text: dummyCompletedQuestion.toString(),
@@ -125,9 +125,9 @@ class _HomeScreenContent extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: sizeBoxHeightSmall),
+                const SizedBox(height: sizeBoxSmall),
                 _ProgressCardsRow(theme: theme),
-                const SizedBox(height: sizeBoxHeightMedium),
+                const SizedBox(height: sizeBoxMedium),
                 BlocProvider(
                   create: (context) => CompletionToggleCubit(),
                   child: Builder(
@@ -149,7 +149,7 @@ class _HomeScreenContent extends StatelessWidget {
                     },
                   ),
                 ),
-                const SizedBox(height: sizeBoxHeightSmall),
+                const SizedBox(height: sizeBoxSmall),
                 Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: defaultPageHorizontalPadding,
@@ -194,7 +194,7 @@ class _ProgressCardsRow extends StatelessWidget {
             size: 10,
           ),
         ),
-        const SizedBox(width: sizeBoxHeightMedium),
+        const SizedBox(width: sizeBoxMedium),
         Expanded(
           child: CustomProgressCard(
             theme: theme,

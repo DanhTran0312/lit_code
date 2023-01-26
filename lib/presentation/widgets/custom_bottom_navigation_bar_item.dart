@@ -28,14 +28,13 @@ class CustomBottomNavBarIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       clipBehavior: Clip.hardEdge,
-      margin: const EdgeInsets.only(top: 25),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      margin: const EdgeInsets.symmetric(vertical: 22),
       decoration: BoxDecoration(
         color: isSelected ? Colors.amber : Colors.transparent,
         borderRadius: BorderRadius.circular(10),
       ),
       child: SvgPicture.asset(
-        fit: BoxFit.cover,
         svgIconPath,
         height: isSelected
             ? bottomNavigationBarItemIconSizeSelected

@@ -7,11 +7,21 @@ part 'statistics_state.dart';
 part 'statistics_bloc.freezed.dart';
 
 class StatisticsBloc extends Bloc<StatisticsEvent, StatisticsState> {
-  StatisticsBloc() : super(StatisticsState.initial()) {
+  StatisticsBloc({
+    Map<String, Question> completedQuestions = const {},
+    List<Question> totalQuestions = const [],
+    Statistics statistics = const Statistics(),
+  }) : super(
+          StatisticsState(
+            completedQuestions: completedQuestions,
+            totalQuestions: totalQuestions,
+            statistics: statistics,
+          ),
+        ) {
     on<UpdateCompletedQuestions>(_onUpdateCompletedQuestions);
     on<UpdateTotalQuestions>(_onUpdateTotalQuestions);
+    on<ResetStatistics>(_onResetStatistics);
   }
-
   Future<void> _onUpdateCompletedQuestions(
     UpdateCompletedQuestions event,
     Emitter<StatisticsState> emit,
@@ -24,6 +34,23 @@ class StatisticsBloc extends Bloc<StatisticsEvent, StatisticsState> {
         state.copyWith(
           completedQuestions: event.completedQuestions,
           statistics: statistics,
+        ),
+      );
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<void> _onResetStatistics(
+    ResetStatistics event,
+    Emitter<StatisticsState> emit,
+  ) async {
+    try {
+      emit(
+        state.copyWith(
+          completedQuestions: {},
+          totalQuestions: [],
+          statistics: const Statistics(),
         ),
       );
     } catch (e) {

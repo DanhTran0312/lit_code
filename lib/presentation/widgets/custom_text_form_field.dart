@@ -35,7 +35,7 @@ class CustomTextFormField extends StatelessWidget {
             style: Theme.of(context).textTheme.labelMedium,
           ),
         ),
-        const SizedBox(height: sizeBoxHeightSmall),
+        const SizedBox(height: sizeBoxSmall),
         TextField(
           key: fieldKey,
           onChanged: onChanged,

@@ -126,7 +126,7 @@ class _QuestionExpansionTile extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  width: sizeBoxHeightSmall,
+                  width: sizeBoxSmall,
                 ),
               ],
             ),
@@ -135,13 +135,13 @@ class _QuestionExpansionTile extends StatelessWidget {
         ],
       ),
       children: [
-        const SizedBox(height: sizeBoxHeightSmall),
+        const SizedBox(height: sizeBoxSmall),
         _RateConfidenceWidget(
           theme: theme,
           question: question,
           completedQuestionCubit: completedQuestionCubit,
         ),
-        const SizedBox(height: sizeBoxHeightSmall),
+        const SizedBox(height: sizeBoxSmall),
       ],
     );
   }

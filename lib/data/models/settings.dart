@@ -9,18 +9,18 @@ part 'settings.g.dart';
 @freezed
 class Settings with _$Settings {
   const factory Settings({
-    @Default(false)
+    @Default(ThemeMode.system)
     @HiveField(0)
-        bool isDarkMode,
+        ThemeMode? themeMode,
     @Default(false)
     @HiveField(1)
         bool isNotificationsEnabled,
+    @HiveField(2)
     @Default([
       Difficulty.easy,
       Difficulty.medium,
       Difficulty.hard,
     ])
-    @HiveField(2)
         List<Difficulty> difficulties,
     @Default([
       Category.arrayAndHashing,

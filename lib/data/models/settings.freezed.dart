@@ -21,7 +21,7 @@ Settings _$SettingsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Settings {
   @HiveField(0)
-  bool get isDarkMode => throw _privateConstructorUsedError;
+  ThemeMode? get themeMode => throw _privateConstructorUsedError;
   @HiveField(1)
   bool get isNotificationsEnabled => throw _privateConstructorUsedError;
   @HiveField(2)
@@ -45,7 +45,7 @@ abstract class $SettingsCopyWith<$Res> {
       _$SettingsCopyWithImpl<$Res, Settings>;
   @useResult
   $Res call(
-      {@HiveField(0) bool isDarkMode,
+      {@HiveField(0) ThemeMode? themeMode,
       @HiveField(1) bool isNotificationsEnabled,
       @HiveField(2) List<Difficulty> difficulties,
       @HiveField(3) List<Category> categories,
@@ -66,7 +66,7 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isDarkMode = null,
+    Object? themeMode = freezed,
     Object? isNotificationsEnabled = null,
     Object? difficulties = null,
     Object? categories = null,
@@ -74,10 +74,10 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
     Object? goalQuestions = freezed,
   }) {
     return _then(_value.copyWith(
-      isDarkMode: null == isDarkMode
-          ? _value.isDarkMode
-          : isDarkMode // ignore: cast_nullable_to_non_nullable
-              as bool,
+      themeMode: freezed == themeMode
+          ? _value.themeMode
+          : themeMode // ignore: cast_nullable_to_non_nullable
+              as ThemeMode?,
       isNotificationsEnabled: null == isNotificationsEnabled
           ? _value.isNotificationsEnabled
           : isNotificationsEnabled // ignore: cast_nullable_to_non_nullable
@@ -110,7 +110,7 @@ abstract class _$$_SettingsCopyWith<$Res> implements $SettingsCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@HiveField(0) bool isDarkMode,
+      {@HiveField(0) ThemeMode? themeMode,
       @HiveField(1) bool isNotificationsEnabled,
       @HiveField(2) List<Difficulty> difficulties,
       @HiveField(3) List<Category> categories,
@@ -129,7 +129,7 @@ class __$$_SettingsCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isDarkMode = null,
+    Object? themeMode = freezed,
     Object? isNotificationsEnabled = null,
     Object? difficulties = null,
     Object? categories = null,
@@ -137,10 +137,10 @@ class __$$_SettingsCopyWithImpl<$Res>
     Object? goalQuestions = freezed,
   }) {
     return _then(_$_Settings(
-      isDarkMode: null == isDarkMode
-          ? _value.isDarkMode
-          : isDarkMode // ignore: cast_nullable_to_non_nullable
-              as bool,
+      themeMode: freezed == themeMode
+          ? _value.themeMode
+          : themeMode // ignore: cast_nullable_to_non_nullable
+              as ThemeMode?,
       isNotificationsEnabled: null == isNotificationsEnabled
           ? _value.isNotificationsEnabled
           : isNotificationsEnabled // ignore: cast_nullable_to_non_nullable
@@ -169,7 +169,7 @@ class __$$_SettingsCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Settings extends _Settings {
   const _$_Settings(
-      {@HiveField(0) this.isDarkMode = false,
+      {@HiveField(0) this.themeMode = ThemeMode.system,
       @HiveField(1) this.isNotificationsEnabled = false,
       @HiveField(2) final List<Difficulty> difficulties = const [
         Difficulty.easy,
@@ -208,7 +208,7 @@ class _$_Settings extends _Settings {
   @override
   @JsonKey()
   @HiveField(0)
-  final bool isDarkMode;
+  final ThemeMode? themeMode;
   @override
   @JsonKey()
   @HiveField(1)
@@ -242,7 +242,7 @@ class _$_Settings extends _Settings {
 
   @override
   String toString() {
-    return 'Settings(isDarkMode: $isDarkMode, isNotificationsEnabled: $isNotificationsEnabled, difficulties: $difficulties, categories: $categories, goalDate: $goalDate, goalQuestions: $goalQuestions)';
+    return 'Settings(themeMode: $themeMode, isNotificationsEnabled: $isNotificationsEnabled, difficulties: $difficulties, categories: $categories, goalDate: $goalDate, goalQuestions: $goalQuestions)';
   }
 
   @override
@@ -250,8 +250,8 @@ class _$_Settings extends _Settings {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Settings &&
-            (identical(other.isDarkMode, isDarkMode) ||
-                other.isDarkMode == isDarkMode) &&
+            (identical(other.themeMode, themeMode) ||
+                other.themeMode == themeMode) &&
             (identical(other.isNotificationsEnabled, isNotificationsEnabled) ||
                 other.isNotificationsEnabled == isNotificationsEnabled) &&
             const DeepCollectionEquality()
@@ -268,7 +268,7 @@ class _$_Settings extends _Settings {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      isDarkMode,
+      themeMode,
       isNotificationsEnabled,
       const DeepCollectionEquality().hash(_difficulties),
       const DeepCollectionEquality().hash(_categories),
@@ -291,7 +291,7 @@ class _$_Settings extends _Settings {
 
 abstract class _Settings extends Settings {
   const factory _Settings(
-      {@HiveField(0) final bool isDarkMode,
+      {@HiveField(0) final ThemeMode? themeMode,
       @HiveField(1) final bool isNotificationsEnabled,
       @HiveField(2) final List<Difficulty> difficulties,
       @HiveField(3) final List<Category> categories,
@@ -303,7 +303,7 @@ abstract class _Settings extends Settings {
 
   @override
   @HiveField(0)
-  bool get isDarkMode;
+  ThemeMode? get themeMode;
   @override
   @HiveField(1)
   bool get isNotificationsEnabled;

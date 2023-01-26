@@ -10,9 +10,10 @@ import 'package:lit_code/app/app.dart';
 import 'package:lit_code/bootstrap.dart';
 import 'package:lit_code/business_logic/blocs/bloc/app_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/question_list_bloc.dart';
+import 'package:lit_code/business_logic/blocs/bloc/settings_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/statistics_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/completed_question_cubit.dart';
-import 'package:lit_code/business_logic/cubits/cubit/confetti_cubit.dart';
+import 'package:lit_code/business_logic/cubits/cubit/experience_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/network_connection_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/on_boarding_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/theme_cubit.dart';
@@ -35,29 +36,34 @@ Future<void> main() async {
   final googleSignIn = GoogleSignIn();
   final databaseReference = FirebaseDatabase.instance.ref();
 
-  final authRepository = AuthRepository(
-    userBox: boxes.userBox,
-    firebaseAuth: firebaseAuth,
-    googleSignIn: googleSignIn,
-  );
-
-  await authRepository.user.first;
   final userReposiory = UserRepository(
     userBox: boxes.userBox,
     firebaseDatabase: databaseReference,
-    authRepository: authRepository,
   );
+
+  final authRepository = AuthRepository(
+    firebaseAuth: firebaseAuth,
+    googleSignIn: googleSignIn,
+    userRepository: userReposiory,
+  );
+
+  await authRepository.userStream.first;
+
   final questionRepository = QuestionRepository(
     firebaseDatabase: databaseReference,
     questionBox: boxes.questionBox,
     userBox: boxes.userBox,
   );
-  final statisticsBloc = StatisticsBloc();
+  final statisticsBloc = StatisticsBloc(
+    completedQuestions: await userReposiory.getCompletedQuestions(),
+  );
 
   final connectivity = Connectivity();
 
   final appBloc = AppBloc(
     authRepository: authRepository,
+    userRepository: userReposiory,
+    statisticsBloc: statisticsBloc,
   );
 
   final themeCubit = ThemeCubit();
@@ -72,10 +78,12 @@ Future<void> main() async {
   );
 
   final onboardingCubit = OnBoardingCubit();
+  final experienceCubit = ExperienceCubit();
 
   final appRouter = AppRouter(
     appBloc: appBloc,
     onboardingCubit: onboardingCubit,
+    experienceCubit: experienceCubit,
   );
 
   final completedQuestionCubit = CompletedQuestionCubit(
@@ -83,7 +91,9 @@ Future<void> main() async {
     statisticsBloc: statisticsBloc,
   );
 
-  final confetttiCubit = ConfettiCubit();
+  final settingsBloc = SettingsBloc(
+    userRepository: userReposiory,
+  );
 
   await bootstrap(
     () => LitCodeApp(
@@ -97,7 +107,7 @@ Future<void> main() async {
       appRouter: appRouter,
       boxes: boxes,
       statisticsBloc: statisticsBloc,
-      confettiCubit: confetttiCubit,
+      settingsBloc: settingsBloc,
     ),
   );
 }
@@ -110,7 +120,9 @@ Future<Boxes> initializeHive() async {
     ..registerAdapter(SettingsAdapter())
     ..registerAdapter(DifficultyAdapter())
     ..registerAdapter(ConfidenceAdapter())
-    ..registerAdapter(CategoryAdapter());
+    ..registerAdapter(CategoryAdapter())
+    ..registerAdapter(ExperienceAdapter())
+    ..registerAdapter(ThemeModeAdapter());
   final userBox = await Hive.openBox<User>('userBox');
   final questionBox = await Hive.openBox<Question>('questionBox');
   return Boxes(

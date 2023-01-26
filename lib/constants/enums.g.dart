@@ -6,6 +6,94 @@ part of 'enums.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
+class ExperienceAdapter extends TypeAdapter<Experience> {
+  @override
+  final int typeId = 7;
+
+  @override
+  Experience read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return Experience.beginner;
+      case 1:
+        return Experience.intermediate;
+      case 2:
+        return Experience.advanced;
+      default:
+        return Experience.beginner;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, Experience obj) {
+    switch (obj) {
+      case Experience.beginner:
+        writer.writeByte(0);
+        break;
+      case Experience.intermediate:
+        writer.writeByte(1);
+        break;
+      case Experience.advanced:
+        writer.writeByte(2);
+        break;
+    }
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ExperienceAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class ThemeModeAdapter extends TypeAdapter<ThemeMode> {
+  @override
+  final int typeId = 6;
+
+  @override
+  ThemeMode read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return ThemeMode.light;
+      case 1:
+        return ThemeMode.dark;
+      case 2:
+        return ThemeMode.system;
+      default:
+        return ThemeMode.light;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, ThemeMode obj) {
+    switch (obj) {
+      case ThemeMode.light:
+        writer.writeByte(0);
+        break;
+      case ThemeMode.dark:
+        writer.writeByte(1);
+        break;
+      case ThemeMode.system:
+        writer.writeByte(2);
+        break;
+    }
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ThemeModeAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
 class DifficultyAdapter extends TypeAdapter<Difficulty> {
   @override
   final int typeId = 3;

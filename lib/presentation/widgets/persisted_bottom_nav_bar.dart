@@ -14,13 +14,7 @@ class PersistedBottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => BottomNavBarCubit(),
-      child: BlocBuilder<BottomNavBarCubit, BottomNavBarState>(
-        builder: (context, state) {
-          return CustomBottomNavBar(
-            state: state,
-          );
-        },
-      ),
+      child: const CustomBottomNavBar(),
     );
   }
 }
@@ -28,17 +22,14 @@ class PersistedBottomNavBar extends StatelessWidget {
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({
     super.key,
-    required this.state,
   });
-
-  final BottomNavBarState state;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final boxDecoration = BoxDecoration(
       color: Colors.transparent,
-      borderRadius: BorderRadius.circular(30),
+      borderRadius: BorderRadius.circular(50),
       boxShadow: [
         BoxShadow(
           color: ThemeUtils.getThemeColor(
@@ -51,7 +42,51 @@ class CustomBottomNavBar extends StatelessWidget {
         ),
       ],
     );
-    final bottomNavItems = [
+    return BlocBuilder<BottomNavBarCubit, BottomNavBarState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 32, left: 10, right: 10),
+          child: Container(
+            clipBehavior: Clip.hardEdge,
+            decoration: boxDecoration,
+            child: Theme(
+              data: theme.copyWith(
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+              ),
+              child: MediaQuery(
+                data: MediaQuery.of(context).copyWith(
+                  padding: EdgeInsets.zero,
+                ),
+                child: BottomNavigationBar(
+                  landscapeLayout: BottomNavigationBarLandscapeLayout.spread,
+                  currentIndex: state.selectedIndex,
+                  onTap: (index) {
+                    if (state.selectedIndex == index) return;
+                    _onBottomNavBarItemTapped(context, index);
+                  },
+                  // backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  type: BottomNavigationBarType.fixed,
+                  enableFeedback: true,
+                  selectedFontSize: 0,
+                  unselectedFontSize: 0,
+                  showSelectedLabels: false,
+                  showUnselectedLabels: false,
+                  items: _bottomNavBarItemsBuilder(state),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  List<BottomNavigationBarItem> _bottomNavBarItemsBuilder(
+    BottomNavBarState state,
+  ) {
+    return [
       CustomBottomNavigationBarItem(
         svgIconPath: 'assets/svg/progress.svg',
         isSelected: state.selectedIndex == 0,
@@ -73,33 +108,6 @@ class CustomBottomNavBar extends StatelessWidget {
         isSelected: state.selectedIndex == 4,
       ),
     ];
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 37, left: 17, right: 17),
-      child: Container(
-        clipBehavior: Clip.hardEdge,
-        decoration: boxDecoration,
-        child: Theme(
-          data: theme.copyWith(
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-          ),
-          child: BottomNavigationBar(
-            currentIndex: state.selectedIndex,
-            onTap: (index) {
-              if (state.selectedIndex == index) return;
-              _onBottomNavBarItemTapped(context, index);
-            },
-            // backgroundColor: Colors.transparent,
-            elevation: 0,
-            type: BottomNavigationBarType.fixed,
-            enableFeedback: true,
-            selectedFontSize: 0,
-            unselectedFontSize: 0,
-            items: bottomNavItems,
-          ),
-        ),
-      ),
-    );
   }
 }
 

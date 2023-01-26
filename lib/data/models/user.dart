@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
+import 'package:lit_code/constants/constants.dart';
 import 'package:lit_code/data/models/models.dart';
 
 part 'user.freezed.dart';
@@ -20,6 +21,12 @@ abstract class User with _$User {
     @HiveField(6) @Default([]) List<Question?> completedQuestions,
     @HiveField(7) @Default('') String? questionsVersion,
     @HiveField(8) int? lastSynced,
+    @HiveField(9) int? streak,
+    @HiveField(10) Experience? experience,
+    @HiveField(11) List<Question?>? todayQuestions,
+    @HiveField(12) List<Question?>? thisWeekQuestions,
+    @HiveField(13) int? lastQuestionGenerated,
+    @HiveField(14) int? experienceLevel,
   }) = _User;
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   const User._();

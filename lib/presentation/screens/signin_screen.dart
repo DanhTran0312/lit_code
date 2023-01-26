@@ -63,7 +63,7 @@ class SignInScreenContent extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               WelcomText(theme: theme),
-              const SizedBox(height: sizeBoxHeightLarge),
+              const SizedBox(height: sizeBoxLarge),
               SignInForm(theme: theme),
             ],
           ),

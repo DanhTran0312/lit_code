@@ -45,7 +45,7 @@ class CustomProgressCard extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              const SizedBox(height: sizeBoxHeightSmall),
+              const SizedBox(height: sizeBoxSmall),
               CustomBoxedProgressBar(
                 totalSteps: totalSteps,
                 currentStep: currentStep,

@@ -52,6 +52,27 @@ final ElevatedButtonThemeData darkElevatedButtonThemeData =
   ),
 );
 
+// ---------------------------- Light FloatingActionButtonTheme ----------------------------
+
+final FloatingActionButtonThemeData lightFloatingActionButtonThemeData =
+    FloatingActionButtonThemeData(
+  backgroundColor: lightPrimaryColor,
+  elevation: 0,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(10),
+  ),
+);
+
+// ---------------------------- Dark FloatingActionButtonTheme ----------------------------
+final FloatingActionButtonThemeData darkFloatingActionButtonThemeData =
+    FloatingActionButtonThemeData(
+  backgroundColor: darkPrimaryColor,
+  elevation: 0,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(18),
+  ),
+);
+
 // ---------------------------- Dark TextTheme ----------------------------
 final TextTheme darkTextTheme = TextTheme(
   headline1: GoogleFonts.poppins(
@@ -224,6 +245,7 @@ final ThemeData lightAppTheme = ThemeData(
   chipTheme: lightChipTheme,
   cardColor: lightQuestionCardColor,
   cardTheme: lightCardTheme,
+  floatingActionButtonTheme: lightFloatingActionButtonThemeData,
   bottomNavigationBarTheme: lightBottomNavigationBarThemeData,
   useMaterial3: true,
 );
@@ -239,6 +261,7 @@ final ThemeData darkAppTheme = ThemeData(
   cardTheme: darkCardTheme,
   scaffoldBackgroundColor: const Color(0xff121212),
   cardColor: darkQuestionCardColor,
+  floatingActionButtonTheme: darkFloatingActionButtonThemeData,
   bottomNavigationBarTheme: darkBottomNavigationBarThemeData,
   useMaterial3: true,
 );

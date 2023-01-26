@@ -320,23 +320,24 @@ abstract class AppUserChanged implements AppEvent {
 
 /// @nodoc
 mixin _$AppState {
+  User get user => throw _privateConstructorUsedError;
   AppStatus get status => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(User user, AppStatus status) authenticated,
-    required TResult Function(AppStatus status) unauthenticated,
+    required TResult Function(User user, AppStatus status) unauthenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(User user, AppStatus status)? authenticated,
-    TResult? Function(AppStatus status)? unauthenticated,
+    TResult? Function(User user, AppStatus status)? unauthenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(User user, AppStatus status)? authenticated,
-    TResult Function(AppStatus status)? unauthenticated,
+    TResult Function(User user, AppStatus status)? unauthenticated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -370,7 +371,9 @@ abstract class $AppStateCopyWith<$Res> {
   factory $AppStateCopyWith(AppState value, $Res Function(AppState) then) =
       _$AppStateCopyWithImpl<$Res, AppState>;
   @useResult
-  $Res call({AppStatus status});
+  $Res call({User user, AppStatus status});
+
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -386,14 +389,27 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? user = null,
     Object? status = null,
   }) {
     return _then(_value.copyWith(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as AppStatus,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
   }
 }
 
@@ -407,6 +423,7 @@ abstract class _$$AuthenticatedCopyWith<$Res>
   @useResult
   $Res call({User user, AppStatus status});
 
+  @override
   $UserCopyWith<$Res> get user;
 }
 
@@ -434,14 +451,6 @@ class __$$AuthenticatedCopyWithImpl<$Res>
           : status // ignore: cast_nullable_to_non_nullable
               as AppStatus,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
-    });
   }
 }
 
@@ -484,7 +493,7 @@ class _$Authenticated implements Authenticated {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(User user, AppStatus status) authenticated,
-    required TResult Function(AppStatus status) unauthenticated,
+    required TResult Function(User user, AppStatus status) unauthenticated,
   }) {
     return authenticated(user, status);
   }
@@ -493,7 +502,7 @@ class _$Authenticated implements Authenticated {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(User user, AppStatus status)? authenticated,
-    TResult? Function(AppStatus status)? unauthenticated,
+    TResult? Function(User user, AppStatus status)? unauthenticated,
   }) {
     return authenticated?.call(user, status);
   }
@@ -502,7 +511,7 @@ class _$Authenticated implements Authenticated {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(User user, AppStatus status)? authenticated,
-    TResult Function(AppStatus status)? unauthenticated,
+    TResult Function(User user, AppStatus status)? unauthenticated,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
@@ -547,6 +556,7 @@ abstract class Authenticated implements AppState {
   const factory Authenticated(
       {required final User user, final AppStatus status}) = _$Authenticated;
 
+  @override
   User get user;
   @override
   AppStatus get status;
@@ -564,7 +574,10 @@ abstract class _$$UnauthenticatedCopyWith<$Res>
       __$$UnauthenticatedCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({AppStatus status});
+  $Res call({User user, AppStatus status});
+
+  @override
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -578,9 +591,14 @@ class __$$UnauthenticatedCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? user = null,
     Object? status = null,
   }) {
     return _then(_$Unauthenticated(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -592,15 +610,19 @@ class __$$UnauthenticatedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$Unauthenticated implements Unauthenticated {
-  const _$Unauthenticated({this.status = AppStatus.unauthenticated});
+  const _$Unauthenticated(
+      {this.user = User.empty, this.status = AppStatus.unauthenticated});
 
+  @override
+  @JsonKey()
+  final User user;
   @override
   @JsonKey()
   final AppStatus status;
 
   @override
   String toString() {
-    return 'AppState.unauthenticated(status: $status)';
+    return 'AppState.unauthenticated(user: $user, status: $status)';
   }
 
   @override
@@ -608,11 +630,12 @@ class _$Unauthenticated implements Unauthenticated {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Unauthenticated &&
+            (identical(other.user, user) || other.user == user) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status);
+  int get hashCode => Object.hash(runtimeType, user, status);
 
   @JsonKey(ignore: true)
   @override
@@ -624,29 +647,29 @@ class _$Unauthenticated implements Unauthenticated {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(User user, AppStatus status) authenticated,
-    required TResult Function(AppStatus status) unauthenticated,
+    required TResult Function(User user, AppStatus status) unauthenticated,
   }) {
-    return unauthenticated(status);
+    return unauthenticated(user, status);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(User user, AppStatus status)? authenticated,
-    TResult? Function(AppStatus status)? unauthenticated,
+    TResult? Function(User user, AppStatus status)? unauthenticated,
   }) {
-    return unauthenticated?.call(status);
+    return unauthenticated?.call(user, status);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(User user, AppStatus status)? authenticated,
-    TResult Function(AppStatus status)? unauthenticated,
+    TResult Function(User user, AppStatus status)? unauthenticated,
     required TResult orElse(),
   }) {
     if (unauthenticated != null) {
-      return unauthenticated(status);
+      return unauthenticated(user, status);
     }
     return orElse();
   }
@@ -684,8 +707,11 @@ class _$Unauthenticated implements Unauthenticated {
 }
 
 abstract class Unauthenticated implements AppState {
-  const factory Unauthenticated({final AppStatus status}) = _$Unauthenticated;
+  const factory Unauthenticated({final User user, final AppStatus status}) =
+      _$Unauthenticated;
 
+  @override
+  User get user;
   @override
   AppStatus get status;
   @override
