@@ -20,7 +20,7 @@ class UserRepository {
     }
   }
 
-  late User _user;
+  late User _user = User.empty;
   final Box<User> _userBox;
   final DatabaseReference _firebaseDatabase;
 
@@ -29,9 +29,9 @@ class UserRepository {
   User get user => _user;
 
   void addUser(User user) {
-    _userBox.put(user.id, user);
+    _userBox.put('user', user);
     _user = user;
-    assert(_userBox.get(user.id) == _user, 'User was not added to box');
+    assert(_userBox.get('user') == _user, 'User was not added to box');
   }
 
   Future<void> signOut() async {
@@ -48,9 +48,6 @@ class UserRepository {
 
   Future<void> markQuestionAsCompleted(Question question) async {
     try {
-      if (_user.isEmpty) {
-        throw Exception('Cannot update user because it does not exist');
-      }
       if (_user.completedQuestions.any((q) => q!.id == question.id)) {
         throw Exception('Question ${question.id} has already been completed');
       }
@@ -65,7 +62,7 @@ class UserRepository {
         ],
       );
 
-      await _userBox.put(_user.id, _user);
+      await _userBox.put('user', _user);
       assert(
         _user.completedQuestions.any((q) => q!.id == question.id),
         'Question was not added to user',
@@ -77,15 +74,12 @@ class UserRepository {
 
   Future<void> markQuestionAsUncompleted(Question question) async {
     try {
-      if (_user.isEmpty) {
-        throw Exception('Cannot update user because it does not exist');
-      }
       _user = _user.copyWith(
         completedQuestions: _user.completedQuestions
             .where((element) => element?.id != question.id)
             .toList(),
       );
-      await _userBox.put(_user.id, _user);
+      await _userBox.put('user', _user);
       assert(
         !_user.completedQuestions.any((q) => q!.id == question.id),
         'Question was not removed from user',
@@ -100,9 +94,6 @@ class UserRepository {
     Confidence confidence,
   ) async {
     try {
-      if (_user.isEmpty) {
-        throw Exception('Cannot update user because it does not exist');
-      }
       if (_user.completedQuestions.any((q) => q!.id == question.id)) {
         _user = _user.copyWith(
           completedQuestions: _user.completedQuestions
@@ -125,7 +116,7 @@ class UserRepository {
           ],
         );
       }
-      await _userBox.put(_user.id, _user);
+      await _userBox.put('user', _user);
       assert(
         _user.completedQuestions.any((q) => q!.id == question.id),
         'Question was not added to user',
@@ -137,9 +128,6 @@ class UserRepository {
 
   Future<Settings> getUserSettings() async {
     try {
-      if (_user.isEmpty) {
-        throw Exception('Cannot get user settings because user does not exist');
-      }
       return _user.settings ?? const Settings();
     } catch (e) {
       throw Exception(e);
@@ -148,13 +136,8 @@ class UserRepository {
 
   Future<void> updateUserSettings(Settings settings) async {
     try {
-      if (_user.isEmpty) {
-        throw Exception(
-          'Cannot update user settings because user does not exist',
-        );
-      }
       _user = _user.copyWith(settings: settings);
-      await _userBox.put(_user.id, _user);
+      await _userBox.put('user', _user);
     } catch (e) {
       throw Exception(e);
     }

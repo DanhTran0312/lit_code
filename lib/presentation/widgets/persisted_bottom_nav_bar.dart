@@ -60,7 +60,6 @@ class CustomBottomNavBar extends StatelessWidget {
                   padding: EdgeInsets.zero,
                 ),
                 child: BottomNavigationBar(
-                  landscapeLayout: BottomNavigationBarLandscapeLayout.spread,
                   currentIndex: state.selectedIndex,
                   onTap: (index) {
                     if (state.selectedIndex == index) return;

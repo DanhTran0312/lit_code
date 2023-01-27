@@ -93,19 +93,22 @@ List<PieChartSectionData> _sectionBuilder(
     PieChartSectionData(
       color: Colors.green,
       value: easy,
-      showTitle: false,
+      showTitle: touchedIndex == 0,
+      title: '${(easy * 100).toStringAsFixed(0)}%',
       radius: touchedIndex == 0 ? touchedSectionRadius : normalSectionRadius,
     ),
     PieChartSectionData(
       color: Colors.orange,
       value: medium,
-      showTitle: false,
+      showTitle: touchedIndex == 1,
+      title: '${(medium * 100).toStringAsFixed(0)}%',
       radius: touchedIndex == 1 ? touchedSectionRadius : normalSectionRadius,
     ),
     PieChartSectionData(
       color: Colors.red,
       value: hard,
-      showTitle: false,
+      showTitle: touchedIndex == 2,
+      title: '${(hard * 100).toStringAsFixed(0)}%',
       radius: touchedIndex == 2 ? touchedSectionRadius : normalSectionRadius,
     ),
   ];

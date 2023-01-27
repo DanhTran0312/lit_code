@@ -46,7 +46,6 @@ Future<void> main() async {
     googleSignIn: googleSignIn,
     userRepository: userReposiory,
   );
-
   await authRepository.userStream.first;
 
   final questionRepository = QuestionRepository(

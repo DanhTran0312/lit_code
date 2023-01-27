@@ -181,9 +181,9 @@ const BottomNavigationBarThemeData lightBottomNavigationBarThemeData =
 
 const BottomNavigationBarThemeData darkBottomNavigationBarThemeData =
     BottomNavigationBarThemeData(
-  backgroundColor: darkPrimaryColor,
+  backgroundColor: Colors.black87,
   selectedItemColor: Colors.white,
-  unselectedItemColor: Colors.black,
+  unselectedItemColor: Colors.white,
   selectedIconTheme: IconThemeData(
     size: bottomNavigationBarItemIconSizeSelected,
   ),

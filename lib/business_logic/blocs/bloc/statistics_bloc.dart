@@ -15,7 +15,10 @@ class StatisticsBloc extends Bloc<StatisticsEvent, StatisticsState> {
           StatisticsState(
             completedQuestions: completedQuestions,
             totalQuestions: totalQuestions,
-            statistics: statistics,
+            statistics: statistics.copyWith(
+              completedQuestions: completedQuestions.values.toList(),
+              totalQuestions: totalQuestions,
+            ),
           ),
         ) {
     on<UpdateCompletedQuestions>(_onUpdateCompletedQuestions);
@@ -48,9 +51,10 @@ class StatisticsBloc extends Bloc<StatisticsEvent, StatisticsState> {
     try {
       emit(
         state.copyWith(
-          completedQuestions: {},
-          totalQuestions: [],
-          statistics: const Statistics(),
+          completedQuestions: <String, Question>{},
+          statistics: state.statistics.copyWith(
+            completedQuestions: <Question>[],
+          ),
         ),
       );
     } catch (e) {

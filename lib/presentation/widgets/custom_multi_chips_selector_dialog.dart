@@ -22,7 +22,7 @@ class CustomMultiChipsSelectorDialog extends StatelessWidget {
   final double height;
   final double width;
   final MultiChipSelectorCubit _multiChipSelectorCubit;
-
+  final String suggestion = 'Select one or more';
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -32,9 +32,17 @@ class CustomMultiChipsSelectorDialog extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           title,
-          Text(
-            'Select one or more',
-            style: theme.textTheme.titleLarge,
+          BlocSelector<MultiChipSelectorCubit, MultiChipSelectorState, int>(
+            bloc: _multiChipSelectorCubit,
+            selector: (state) {
+              return state.selectedItems.length;
+            },
+            builder: (context, length) {
+              return Text(
+                length > 0 ? '$length items selected' : suggestion,
+                style: theme.textTheme.titleLarge,
+              );
+            },
           )
         ],
       ),
@@ -54,9 +62,11 @@ class CustomMultiChipsSelectorDialog extends StatelessWidget {
       ),
       actions: [
         TextButton(
-          onPressed: () {
-            _multiChipSelectorCubit.reset();
+          onPressed: () async {
             Navigator.pop(context);
+            // Delay to close the dialog before resetting the state.
+            await Future<void>.delayed(const Duration(milliseconds: 100));
+            _multiChipSelectorCubit.reset();
           },
           child: Text(
             'Cancel',
@@ -120,9 +130,9 @@ class _DialogContent extends StatelessWidget {
                         item,
                         style: theme.textTheme.titleLarge,
                       ),
-                      backgroundColor: Colors.indigo,
-                      selected: _multiChipSelectorCubit.isSelected(item),
-                      selectedColor: darkSecondaryColor,
+                      backgroundColor: darkSecondaryColor.withOpacity(0.75),
+                      selectedColor: theme.primaryColor,
+                      selected: state.selectedItems.contains(item),
                       onSelected: (selected) {
                         _multiChipSelectorCubit.selectItem(item);
                       },

@@ -125,10 +125,8 @@ class _StudyScreenBody extends StatelessWidget {
         const SizedBox(height: sizeBoxSmall),
         BlocBuilder<StatisticsBloc, StatisticsState>(
           builder: (context, state) {
-            final completedQuestion = state.completedQuestions;
             return _ProgressSection(
-              completedQuestions: completedQuestion,
-              total: state.totalQuestions.length,
+              state: state,
               theme: theme,
             );
           },
@@ -190,43 +188,35 @@ class _CategoryList extends StatelessWidget {
 
 class _ProgressSection extends StatelessWidget {
   const _ProgressSection({
-    required this.completedQuestions,
+    required StatisticsState state,
     required this.theme,
-    required this.total,
-  });
+  }) : _state = state;
 
-  final Map<String, Question> completedQuestions;
-  final int total;
+  final StatisticsState _state;
   final ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
-    final completed = completedQuestions.length;
-    late final int easy;
-    late final int medium;
-    late final int hard;
-    if (completed == 0) {
-      easy = 0;
-      medium = 0;
-      hard = 0;
-    } else {
-      easy = completedQuestions.values
-          .where(
-            (question) => question.difficulty == Difficulty.easy,
-          )
-          .length;
-      medium = completedQuestions.values
-          .where(
-            (question) => question.difficulty == Difficulty.medium,
-          )
-          .length;
-      hard = completedQuestions.values
-          .where(
-            (question) => question.difficulty == Difficulty.hard,
-          )
-          .length;
-    }
-
+    final completed = _state.statistics.completedQuestions == null
+        ? 0
+        : _state.statistics.completedQuestions!.length;
+    final percentageCompletedByDifficulty =
+        _state.statistics.percentageCompletedPerDifficulty;
+    final questionCompletedPerDifficulty =
+        _state.statistics.completedQuestionsByDifficulty;
+    final easyCompleted =
+        questionCompletedPerDifficulty[Difficulty.easy] == null
+            ? 0
+            : questionCompletedPerDifficulty[Difficulty.easy]!.length;
+    final mediumCompleted =
+        questionCompletedPerDifficulty[Difficulty.medium] == null
+            ? 0
+            : questionCompletedPerDifficulty[Difficulty.medium]!.length;
+    final hardCompleted =
+        questionCompletedPerDifficulty[Difficulty.hard] == null
+            ? 0
+            : questionCompletedPerDifficulty[Difficulty.hard]!.length;
+    final totalQuestionCount = _state.totalQuestions.length;
     return Row(
       children: [
         Expanded(
@@ -235,9 +225,9 @@ class _ProgressSection extends StatelessWidget {
               horizontal: 12,
             ),
             child: PieChartProgress(
-              easy: easy.toDouble(),
-              medium: medium.toDouble(),
-              hard: hard.toDouble(),
+              easy: percentageCompletedByDifficulty[Difficulty.easy] ?? 0,
+              medium: percentageCompletedByDifficulty[Difficulty.medium] ?? 0,
+              hard: percentageCompletedByDifficulty[Difficulty.hard] ?? 0,
             ),
           ),
         ),
@@ -256,10 +246,10 @@ class _ProgressSection extends StatelessWidget {
               child: ProgressCard(
                 theme: theme,
                 completed: completed,
-                total: total,
-                easy: easy,
-                medium: medium,
-                hard: hard,
+                total: totalQuestionCount,
+                easy: easyCompleted,
+                medium: mediumCompleted,
+                hard: hardCompleted,
               ),
             ),
           ),

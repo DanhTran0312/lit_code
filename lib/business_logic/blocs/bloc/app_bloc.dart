@@ -67,10 +67,10 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     AppLogoutRequested event,
     Emitter<AppState> emit,
   ) async {
-    _statisticsBloc.add(const ResetStatistics());
-    _settingsBloc.add(const SignOutRequested());
     await _authRepository.signOut();
     await _userRepository.signOut();
+    _statisticsBloc.add(const ResetStatistics());
+    _settingsBloc.add(const SignOutRequested());
   }
 
   final AuthRepository _authRepository;

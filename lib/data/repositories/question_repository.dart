@@ -63,8 +63,8 @@ class QuestionRepository {
 
   Future<void> updateQuestionsVersion(String version) async {
     try {
-      await userBox.putAt(
-        0,
+      await userBox.put(
+        'user',
         userBox.getAt(0)!.copyWith(
               questionsVersion: version,
             ),

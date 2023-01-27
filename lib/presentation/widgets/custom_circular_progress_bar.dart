@@ -19,8 +19,9 @@ class CustomCirCularProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final total = this.total == 0 ? 1.0 : this.total;
     return SleekCircularSlider(
-      max: total == 0 ? 1 : total,
+      max: total,
       initialValue: initialValue,
       innerWidget: (value) {
         return _CustomInnerWidget(
@@ -72,7 +73,6 @@ class _CustomInnerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final total = this.total == 0 ? 1 : this.total;
     final percentage = (value / total * 100).toStringAsFixed(0);
     return Container(
       margin: EdgeInsets.all(size * 0.165),

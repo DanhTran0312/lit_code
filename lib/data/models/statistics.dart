@@ -77,6 +77,39 @@ abstract class Statistics with _$Statistics {
     return totalQuestionsByCategory;
   }
 
+  Map<Difficulty, int> get totalQuestionsByDifficulty {
+    final totalQuestionsByDifficulty = <Difficulty, int>{};
+    for (final question in totalQuestions ?? <Question>[]) {
+      if (totalQuestionsByDifficulty.containsKey(question.difficulty)) {
+        totalQuestionsByDifficulty[question.difficulty] =
+            totalQuestionsByDifficulty[question.difficulty]! + 1;
+      } else {
+        totalQuestionsByDifficulty[question.difficulty] = 1;
+      }
+    }
+    return totalQuestionsByDifficulty;
+  }
+
+  Map<Difficulty, double> get percentageCompletedPerDifficulty {
+    final percentageCompletedPerDifficulty = <Difficulty, double>{};
+    for (final difficulty in Difficulty.values) {
+      if (totalQuestionsByDifficulty.containsKey(difficulty)) {
+        final completedCount =
+            completedQuestionsByDifficulty[difficulty] == null
+                ? 0
+                : completedQuestionsByDifficulty[difficulty]!.length;
+        final totalCount = totalQuestionsByDifficulty[difficulty] == null
+            ? 1
+            : totalQuestionsByDifficulty[difficulty]!;
+        percentageCompletedPerDifficulty[difficulty] =
+            completedCount / totalCount;
+      } else {
+        percentageCompletedPerDifficulty[difficulty] = 0.0;
+      }
+    }
+    return percentageCompletedPerDifficulty;
+  }
+
   Map<Category, double> get percentageCompletedPerCategory {
     final percentageCompletedPerCategory = <Category, double>{};
     for (final category in Category.values) {
@@ -89,5 +122,17 @@ abstract class Statistics with _$Statistics {
       }
     }
     return percentageCompletedPerCategory;
+  }
+
+  Map<Difficulty, List<Question>> get completedQuestionsByDifficulty {
+    final completedQuestionsByDifficulty = <Difficulty, List<Question>>{};
+    for (final question in completedQuestions ?? <Question>[]) {
+      if (completedQuestionsByDifficulty.containsKey(question.difficulty)) {
+        completedQuestionsByDifficulty[question.difficulty]!.add(question);
+      } else {
+        completedQuestionsByDifficulty[question.difficulty] = [question];
+      }
+    }
+    return completedQuestionsByDifficulty;
   }
 }

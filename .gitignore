@@ -36,7 +36,7 @@
 /dev/integration_tests/**/Pods
 /packages/flutter/coverage/
 version
-
+.fvm/flutter_sdk
 # packages file containing multi-root paths
 .packages.generated
 
