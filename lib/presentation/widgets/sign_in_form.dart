@@ -116,7 +116,7 @@ class _SignUpOption extends StatelessWidget {
       children: [
         Text(
           "Don't have an account?",
-          style: theme.textTheme.bodyText1,
+          style: theme.textTheme.bodyLarge,
         ),
         TextButton(
           onPressed: () {
@@ -124,7 +124,7 @@ class _SignUpOption extends StatelessWidget {
           },
           child: Text(
             'Sign Up',
-            style: theme.textTheme.bodyText1!.copyWith(
+            style: theme.textTheme.bodyLarge!.copyWith(
               decoration: TextDecoration.underline,
             ),
           ),

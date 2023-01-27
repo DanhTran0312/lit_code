@@ -19,7 +19,7 @@ class SignUpForm extends StatelessWidget {
       children: [
         Text(
           'Sign Up',
-          style: theme.textTheme.headline2,
+          style: theme.textTheme.displayMedium,
           textAlign: TextAlign.start,
         ),
         const SizedBox(height: sizeBoxLarge),
@@ -56,7 +56,7 @@ class _SignInOption extends StatelessWidget {
       children: [
         Text(
           'Already have an account?',
-          style: theme.textTheme.bodyText1,
+          style: theme.textTheme.bodyLarge,
         ),
         TextButton(
           onPressed: () {
@@ -64,7 +64,7 @@ class _SignInOption extends StatelessWidget {
           },
           child: Text(
             'Sign In',
-            style: theme.textTheme.bodyText1!.copyWith(
+            style: theme.textTheme.bodyLarge!.copyWith(
               decoration: TextDecoration.underline,
             ),
           ),

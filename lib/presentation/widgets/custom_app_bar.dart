@@ -37,7 +37,7 @@ class CustomAppBar extends StatelessWidget {
               children: [
                 Text(
                   'Welcome back!',
-                  style: theme.textTheme.headline4,
+                  style: theme.textTheme.headlineMedium,
                 ),
               ],
             ),

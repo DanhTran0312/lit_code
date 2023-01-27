@@ -35,13 +35,13 @@ class CustomProgressCard extends StatelessWidget {
             children: [
               Text(
                 '$current/$total',
-                style: theme.textTheme.headline5!.copyWith(
+                style: theme.textTheme.headlineSmall!.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
               ),
               Text(
                 title,
-                style: theme.textTheme.headline5!.copyWith(
+                style: theme.textTheme.headlineSmall!.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
               ),

@@ -63,7 +63,7 @@ class CustomRadioListTile extends StatelessWidget {
                 flex: 3,
                 child: Text(
                   title,
-                  style: theme.textTheme.headline4,
+                  style: theme.textTheme.headlineMedium,
                   textAlign: TextAlign.center,
                 ),
               ),

@@ -59,7 +59,7 @@ class _HomeScreenContent extends StatelessWidget {
           url = state.user.photoUrl!;
         }
         final welcomeTextStyle =
-            theme.textTheme.headline4!.copyWith(fontWeight: FontWeight.w600);
+            theme.textTheme.headlineMedium!.copyWith(fontWeight: FontWeight.w600);
         return ListView(
           shrinkWrap: true,
           children: [

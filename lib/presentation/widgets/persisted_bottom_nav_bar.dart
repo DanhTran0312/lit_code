@@ -29,7 +29,7 @@ class CustomBottomNavBar extends StatelessWidget {
     final theme = Theme.of(context);
     final boxDecoration = BoxDecoration(
       color: Colors.transparent,
-      borderRadius: BorderRadius.circular(50),
+      borderRadius: BorderRadius.circular(60),
       boxShadow: [
         BoxShadow(
           color: ThemeUtils.getThemeColor(
@@ -56,6 +56,7 @@ class CustomBottomNavBar extends StatelessWidget {
               ),
               child: MediaQuery(
                 data: MediaQuery.of(context).copyWith(
+                  viewPadding: EdgeInsets.zero,
                   padding: EdgeInsets.zero,
                 ),
                 child: BottomNavigationBar(

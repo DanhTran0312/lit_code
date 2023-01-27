@@ -19,9 +19,9 @@ class SectionHeading extends StatelessWidget {
     final theme = Theme.of(context);
     return Text(
       title,
-      style: theme.textTheme.headline4!.copyWith(
+      style: theme.textTheme.headlineMedium!.copyWith(
         fontWeight: FontWeight.w700,
-        fontSize: fontSize ?? theme.textTheme.headline4!.fontSize,
+        fontSize: fontSize ?? theme.textTheme.headlineMedium!.fontSize,
         color: color ??
             ThemeUtils.getThemeColor(
               theme,

@@ -268,7 +268,7 @@ class _HeadingWithIcon extends StatelessWidget {
         const SizedBox(width: sizeBoxSmall),
         Text(
           'Experience Level',
-          style: theme.textTheme.headline2!.copyWith(
+          style: theme.textTheme.displayMedium!.copyWith(
             fontSize: 32,
           ),
         ),

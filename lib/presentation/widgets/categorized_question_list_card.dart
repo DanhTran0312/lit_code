@@ -85,7 +85,7 @@ class _CategorizedQuestionTile extends StatelessWidget {
           Expanded(
             child: Text(
               category.name,
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),
         ],

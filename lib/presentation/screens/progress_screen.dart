@@ -118,7 +118,7 @@ class _HeatMapCalendar extends StatelessWidget {
           datasets[date] = 1 + (datasets[date] ?? 0);
         }
         return HeatMapCalendar(
-          monthTextStyle: theme.textTheme.headline4!.copyWith(
+          monthTextStyle: theme.textTheme.headlineMedium!.copyWith(
             color: ThemeUtils.getThemeColor(
               theme,
               Colors.black,
@@ -126,7 +126,7 @@ class _HeatMapCalendar extends StatelessWidget {
             ),
             fontSize: 27,
           ),
-          weekTextStyle: theme.textTheme.headline6!.copyWith(
+          weekTextStyle: theme.textTheme.titleLarge!.copyWith(
             color: Colors.amber,
             fontSize: 14,
           ),

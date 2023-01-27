@@ -15,4 +15,5 @@ class SettingsEvent with _$SettingsEvent {
   const factory SettingsEvent.categoryChanged({
     required List<Category> category,
   }) = CategoryChanged;
+  const factory SettingsEvent.signOutRequested() = SignOutRequested;
 }

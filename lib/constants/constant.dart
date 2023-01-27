@@ -56,14 +56,14 @@ const double chipHorizontalPadding = 10;
 const double chipVerticalPadding = 2;
 
 // ------------------- Fonts Size -------------------
-const double headline1Size = 50;
-const double headline2Size = 40;
-const double headline3Size = 26;
-const double headline4Size = 23;
-const double headline5Size = 18;
-const double headline6Size = 15;
-const double subtitle1Size = 18;
-const double subtitle2Size = 14;
+const double displayLargeFontSize = 50;
+const double displayMediumFontSize = 40;
+const double displaySmallFontSize = 26;
+const double headlineMediumFontSize = 23;
+const double headlineSmallFontSize = 18;
+const double titleLargeFontSize = 15;
+const double titleMediumFontSize = 18;
+const double titleSmallFontSize = 14;
 const double elevatedButtonTextSize = 24;
 const double inputTextSize = 17;
 

@@ -25,7 +25,7 @@ class ConfidenceRadioButton extends StatelessWidget {
         ),
         Text(
           confidence.label,
-          style: Theme.of(context).textTheme.subtitle2,
+          style: Theme.of(context).textTheme.titleSmall,
         ),
       ],
     );

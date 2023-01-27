@@ -12,7 +12,7 @@ class WelcomText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       'Welcome to 🔥Code!',
-      style: theme.textTheme.headline1,
+      style: theme.textTheme.displayLarge,
       textAlign: TextAlign.center,
     );
   }

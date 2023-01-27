@@ -34,7 +34,7 @@ class CustomMultiChipsSelectorDialog extends StatelessWidget {
           title,
           Text(
             'Select one or more',
-            style: theme.textTheme.headline6,
+            style: theme.textTheme.titleLarge,
           )
         ],
       ),
@@ -60,7 +60,7 @@ class CustomMultiChipsSelectorDialog extends StatelessWidget {
           },
           child: Text(
             'Cancel',
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
         TextButton(
@@ -69,7 +69,7 @@ class CustomMultiChipsSelectorDialog extends StatelessWidget {
           },
           child: Text(
             'Confirm',
-            style: Theme.of(context).textTheme.headline5!.copyWith(
+            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                   color: theme.primaryColor,
                 ),
           ),
@@ -118,7 +118,7 @@ class _DialogContent extends StatelessWidget {
                       ),
                       label: Text(
                         item,
-                        style: theme.textTheme.headline6,
+                        style: theme.textTheme.titleLarge,
                       ),
                       backgroundColor: Colors.indigo,
                       selected: _multiChipSelectorCubit.isSelected(item),

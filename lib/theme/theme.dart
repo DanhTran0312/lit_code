@@ -75,43 +75,43 @@ final FloatingActionButtonThemeData darkFloatingActionButtonThemeData =
 
 // ---------------------------- Dark TextTheme ----------------------------
 final TextTheme darkTextTheme = TextTheme(
-  headline1: GoogleFonts.poppins(
-    fontSize: headline1Size,
+  displayLarge: GoogleFonts.poppins(
+    fontSize: displayLargeFontSize,
     fontWeight: FontWeight.w900,
     color: darkSecondaryColor,
   ),
-  headline2: GoogleFonts.poppins(
-    fontSize: headline2Size,
+  displayMedium: GoogleFonts.poppins(
+    fontSize: displayMediumFontSize,
     fontWeight: FontWeight.w700,
     color: darkSecondaryColor,
   ),
-  headline3: GoogleFonts.poppins(
-    fontSize: headline3Size,
+  displaySmall: GoogleFonts.poppins(
+    fontSize: displaySmallFontSize,
     fontWeight: FontWeight.w500,
     color: Colors.white,
   ),
-  headline4: GoogleFonts.poppins(
-    fontSize: headline4Size,
+  headlineMedium: GoogleFonts.poppins(
+    fontSize: headlineMediumFontSize,
     fontWeight: FontWeight.w500,
     color: Colors.white,
   ),
-  headline5: GoogleFonts.poppins(
-    fontSize: headline5Size,
+  headlineSmall: GoogleFonts.poppins(
+    fontSize: headlineSmallFontSize,
     fontWeight: FontWeight.w500,
     color: Colors.white,
   ),
-  headline6: GoogleFonts.poppins(
-    fontSize: headline6Size,
+  titleLarge: GoogleFonts.poppins(
+    fontSize: titleLargeFontSize,
     fontWeight: FontWeight.w500,
     color: Colors.white,
   ),
-  subtitle1: GoogleFonts.openSans(
-    fontSize: subtitle1Size,
+  titleMedium: GoogleFonts.openSans(
+    fontSize: titleMediumFontSize,
     fontWeight: FontWeight.w500,
     color: Colors.white,
   ),
-  subtitle2: GoogleFonts.openSans(
-    fontSize: subtitle2Size,
+  titleSmall: GoogleFonts.openSans(
+    fontSize: titleSmallFontSize,
     fontWeight: FontWeight.w500,
     color: Colors.white,
   ),
@@ -119,43 +119,43 @@ final TextTheme darkTextTheme = TextTheme(
 
 // ---------------------------- Light TextTheme ----------------------------
 final TextTheme lightTextTheme = TextTheme(
-  headline1: GoogleFonts.poppins(
-    fontSize: headline1Size,
+  displayLarge: GoogleFonts.poppins(
+    fontSize: displayLargeFontSize,
     fontWeight: FontWeight.w900,
     color: lightPrimaryColor,
   ),
-  headline2: GoogleFonts.poppins(
-    fontSize: headline2Size,
+  displayMedium: GoogleFonts.poppins(
+    fontSize: displayMediumFontSize,
     fontWeight: FontWeight.w700,
     color: lightPrimaryColor,
   ),
-  headline3: GoogleFonts.poppins(
-    fontSize: headline3Size,
+  displaySmall: GoogleFonts.poppins(
+    fontSize: displaySmallFontSize,
     fontWeight: FontWeight.w500,
     color: Colors.black,
   ),
-  headline4: GoogleFonts.poppins(
-    fontSize: headline4Size,
+  headlineMedium: GoogleFonts.poppins(
+    fontSize: headlineMediumFontSize,
     fontWeight: FontWeight.w500,
     color: Colors.black,
   ),
-  headline5: GoogleFonts.poppins(
-    fontSize: headline5Size,
+  headlineSmall: GoogleFonts.poppins(
+    fontSize: headlineSmallFontSize,
     fontWeight: FontWeight.w500,
     color: Colors.black,
   ),
-  headline6: GoogleFonts.poppins(
-    fontSize: headline6Size,
+  titleLarge: GoogleFonts.poppins(
+    fontSize: titleLargeFontSize,
     fontWeight: FontWeight.w500,
     color: Colors.black,
   ),
-  subtitle1: GoogleFonts.openSans(
-    fontSize: subtitle1Size,
+  titleMedium: GoogleFonts.openSans(
+    fontSize: titleMediumFontSize,
     fontWeight: FontWeight.w500,
     color: Colors.white,
   ),
-  subtitle2: GoogleFonts.openSans(
-    fontSize: subtitle2Size,
+  titleSmall: GoogleFonts.openSans(
+    fontSize: titleSmallFontSize,
     fontWeight: FontWeight.w500,
     color: Colors.white,
   ),
@@ -197,7 +197,11 @@ const BottomNavigationBarThemeData darkBottomNavigationBarThemeData =
 
 // ---------------------------- Chip Theme ----------------------------
 final ChipThemeData lightChipTheme = ChipThemeData(
-  labelStyle: lightTextTheme.subtitle2,
+  labelStyle: lightTextTheme.titleSmall,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(20),
+  ),
+  side: BorderSide.none,
   backgroundColor: lightChipColor,
   padding: const EdgeInsets.symmetric(
     horizontal: chipHorizontalPadding,
@@ -206,7 +210,11 @@ final ChipThemeData lightChipTheme = ChipThemeData(
 );
 
 final ChipThemeData darkChipTheme = ChipThemeData(
-  labelStyle: darkTextTheme.subtitle2,
+  labelStyle: darkTextTheme.titleSmall,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(20),
+  ),
+  side: BorderSide.none,
   backgroundColor: Colors.pinkAccent,
   padding: const EdgeInsets.symmetric(
     horizontal: chipHorizontalPadding,
@@ -238,9 +246,7 @@ final ThemeData lightAppTheme = ThemeData(
   brightness: Brightness.light,
   textTheme: lightTextTheme,
   elevatedButtonTheme: lightElevatedButtonThemeData,
-  bottomAppBarColor: lightPrimaryColor,
   primaryColor: lightPrimaryColor,
-  backgroundColor: Colors.white,
   scaffoldBackgroundColor: Colors.white,
   chipTheme: lightChipTheme,
   cardColor: lightQuestionCardColor,
@@ -248,15 +254,14 @@ final ThemeData lightAppTheme = ThemeData(
   floatingActionButtonTheme: lightFloatingActionButtonThemeData,
   bottomNavigationBarTheme: lightBottomNavigationBarThemeData,
   useMaterial3: true,
+  bottomAppBarTheme: const BottomAppBarTheme(color: lightPrimaryColor),
 );
 // ---------------------------- Dark Theme ----------------------------
 final ThemeData darkAppTheme = ThemeData(
   brightness: Brightness.dark,
   textTheme: darkTextTheme,
   elevatedButtonTheme: darkElevatedButtonThemeData,
-  bottomAppBarColor: darkPrimaryColor,
   primaryColor: darkPrimaryColor,
-  backgroundColor: Colors.black,
   chipTheme: darkChipTheme,
   cardTheme: darkCardTheme,
   scaffoldBackgroundColor: const Color(0xff121212),
@@ -264,4 +269,5 @@ final ThemeData darkAppTheme = ThemeData(
   floatingActionButtonTheme: darkFloatingActionButtonThemeData,
   bottomNavigationBarTheme: darkBottomNavigationBarThemeData,
   useMaterial3: true,
+  bottomAppBarTheme: const BottomAppBarTheme(color: darkPrimaryColor),
 );

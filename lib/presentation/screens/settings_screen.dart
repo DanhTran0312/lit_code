@@ -66,14 +66,15 @@ class SettingsScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   user.name!,
-                                  style: theme.textTheme.headline5!.copyWith(
+                                  style:
+                                      theme.textTheme.headlineSmall!.copyWith(
                                     color: theme.primaryColor,
                                   ),
                                 ),
                                 const SizedBox(height: sizeBoxSmall),
                                 Text(
                                   user.email!,
-                                  style: theme.textTheme.headline6,
+                                  style: theme.textTheme.titleLarge,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ],
@@ -119,7 +120,7 @@ class SettingsScreen extends StatelessWidget {
                               .toSet(),
                           title: Text(
                             'Select Difficulty Level',
-                            style: theme.textTheme.headline4,
+                            style: theme.textTheme.headlineMedium,
                           ),
                           width: size.width * 0.85,
                           height: size.height * 0.25,
@@ -128,6 +129,7 @@ class SettingsScreen extends StatelessWidget {
                       );
 
                       if (difficulties != null) {
+                        // ignore: use_build_context_synchronously
                         context.read<SettingsBloc>().add(
                               SettingsEvent.difficultyChanged(
                                 difficulty: difficulties
@@ -167,7 +169,7 @@ class SettingsScreen extends StatelessWidget {
                               .toSet(),
                           title: Text(
                             'Select Category',
-                            style: theme.textTheme.headline4,
+                            style: theme.textTheme.headlineMedium,
                           ),
                           width: size.width * 0.9,
                           height: size.height * 0.3,
@@ -175,6 +177,7 @@ class SettingsScreen extends StatelessWidget {
                         ),
                       );
                       if (selectedItems != null) {
+                        // ignore: use_build_context_synchronously
                         context.read<SettingsBloc>().add(
                               SettingsEvent.categoryChanged(
                                 category: selectedItems
@@ -190,6 +193,70 @@ class SettingsScreen extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: sizeBoxMedium),
+                  Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Goals 🎯',
+                            style: theme.textTheme.headlineMedium,
+                          ),
+                          const SizedBox(height: sizeBoxMedium),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      'Daily',
+                                      style: theme.textTheme.headlineSmall,
+                                    ),
+                                    const SizedBox(height: sizeBoxSmall),
+                                    Text(
+                                      '',
+                                      style: theme.textTheme.headlineSmall,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      'Weekly',
+                                      style: theme.textTheme.headlineSmall,
+                                    ),
+                                    const SizedBox(height: sizeBoxSmall),
+                                    Text(
+                                      '',
+                                      style: theme.textTheme.headlineSmall,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      'Monthly',
+                                      style: theme.textTheme.headlineSmall,
+                                    ),
+                                    const SizedBox(height: sizeBoxSmall),
+                                    Text(
+                                      '',
+                                      style: theme.textTheme.headlineSmall,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   ElevatedButton(
                     onPressed: () {
                       context

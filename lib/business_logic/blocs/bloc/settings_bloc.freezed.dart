@@ -23,6 +23,7 @@ mixin _$SettingsEvent {
     required TResult Function(List<Difficulty> difficulty) difficultyChanged,
     required TResult Function(ThemeMode themeMode) themeChanged,
     required TResult Function(List<Category> category) categoryChanged,
+    required TResult Function() signOutRequested,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +33,7 @@ mixin _$SettingsEvent {
     TResult? Function(List<Difficulty> difficulty)? difficultyChanged,
     TResult? Function(ThemeMode themeMode)? themeChanged,
     TResult? Function(List<Category> category)? categoryChanged,
+    TResult? Function()? signOutRequested,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +43,7 @@ mixin _$SettingsEvent {
     TResult Function(List<Difficulty> difficulty)? difficultyChanged,
     TResult Function(ThemeMode themeMode)? themeChanged,
     TResult Function(List<Category> category)? categoryChanged,
+    TResult Function()? signOutRequested,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -51,6 +54,7 @@ mixin _$SettingsEvent {
     required TResult Function(DifficultyChanged value) difficultyChanged,
     required TResult Function(ThemeChanged value) themeChanged,
     required TResult Function(CategoryChanged value) categoryChanged,
+    required TResult Function(SignOutRequested value) signOutRequested,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,6 +64,7 @@ mixin _$SettingsEvent {
     TResult? Function(DifficultyChanged value)? difficultyChanged,
     TResult? Function(ThemeChanged value)? themeChanged,
     TResult? Function(CategoryChanged value)? categoryChanged,
+    TResult? Function(SignOutRequested value)? signOutRequested,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,6 +74,7 @@ mixin _$SettingsEvent {
     TResult Function(DifficultyChanged value)? difficultyChanged,
     TResult Function(ThemeChanged value)? themeChanged,
     TResult Function(CategoryChanged value)? categoryChanged,
+    TResult Function(SignOutRequested value)? signOutRequested,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -172,6 +178,7 @@ class _$UpdateSettings implements UpdateSettings {
     required TResult Function(List<Difficulty> difficulty) difficultyChanged,
     required TResult Function(ThemeMode themeMode) themeChanged,
     required TResult Function(List<Category> category) categoryChanged,
+    required TResult Function() signOutRequested,
   }) {
     return updateSettings(settings);
   }
@@ -184,6 +191,7 @@ class _$UpdateSettings implements UpdateSettings {
     TResult? Function(List<Difficulty> difficulty)? difficultyChanged,
     TResult? Function(ThemeMode themeMode)? themeChanged,
     TResult? Function(List<Category> category)? categoryChanged,
+    TResult? Function()? signOutRequested,
   }) {
     return updateSettings?.call(settings);
   }
@@ -196,6 +204,7 @@ class _$UpdateSettings implements UpdateSettings {
     TResult Function(List<Difficulty> difficulty)? difficultyChanged,
     TResult Function(ThemeMode themeMode)? themeChanged,
     TResult Function(List<Category> category)? categoryChanged,
+    TResult Function()? signOutRequested,
     required TResult orElse(),
   }) {
     if (updateSettings != null) {
@@ -212,6 +221,7 @@ class _$UpdateSettings implements UpdateSettings {
     required TResult Function(DifficultyChanged value) difficultyChanged,
     required TResult Function(ThemeChanged value) themeChanged,
     required TResult Function(CategoryChanged value) categoryChanged,
+    required TResult Function(SignOutRequested value) signOutRequested,
   }) {
     return updateSettings(this);
   }
@@ -224,6 +234,7 @@ class _$UpdateSettings implements UpdateSettings {
     TResult? Function(DifficultyChanged value)? difficultyChanged,
     TResult? Function(ThemeChanged value)? themeChanged,
     TResult? Function(CategoryChanged value)? categoryChanged,
+    TResult? Function(SignOutRequested value)? signOutRequested,
   }) {
     return updateSettings?.call(this);
   }
@@ -236,6 +247,7 @@ class _$UpdateSettings implements UpdateSettings {
     TResult Function(DifficultyChanged value)? difficultyChanged,
     TResult Function(ThemeChanged value)? themeChanged,
     TResult Function(CategoryChanged value)? categoryChanged,
+    TResult Function(SignOutRequested value)? signOutRequested,
     required TResult orElse(),
   }) {
     if (updateSettings != null) {
@@ -298,6 +310,7 @@ class _$InitializeSettings implements InitializeSettings {
     required TResult Function(List<Difficulty> difficulty) difficultyChanged,
     required TResult Function(ThemeMode themeMode) themeChanged,
     required TResult Function(List<Category> category) categoryChanged,
+    required TResult Function() signOutRequested,
   }) {
     return intializeSettings();
   }
@@ -310,6 +323,7 @@ class _$InitializeSettings implements InitializeSettings {
     TResult? Function(List<Difficulty> difficulty)? difficultyChanged,
     TResult? Function(ThemeMode themeMode)? themeChanged,
     TResult? Function(List<Category> category)? categoryChanged,
+    TResult? Function()? signOutRequested,
   }) {
     return intializeSettings?.call();
   }
@@ -322,6 +336,7 @@ class _$InitializeSettings implements InitializeSettings {
     TResult Function(List<Difficulty> difficulty)? difficultyChanged,
     TResult Function(ThemeMode themeMode)? themeChanged,
     TResult Function(List<Category> category)? categoryChanged,
+    TResult Function()? signOutRequested,
     required TResult orElse(),
   }) {
     if (intializeSettings != null) {
@@ -338,6 +353,7 @@ class _$InitializeSettings implements InitializeSettings {
     required TResult Function(DifficultyChanged value) difficultyChanged,
     required TResult Function(ThemeChanged value) themeChanged,
     required TResult Function(CategoryChanged value) categoryChanged,
+    required TResult Function(SignOutRequested value) signOutRequested,
   }) {
     return intializeSettings(this);
   }
@@ -350,6 +366,7 @@ class _$InitializeSettings implements InitializeSettings {
     TResult? Function(DifficultyChanged value)? difficultyChanged,
     TResult? Function(ThemeChanged value)? themeChanged,
     TResult? Function(CategoryChanged value)? categoryChanged,
+    TResult? Function(SignOutRequested value)? signOutRequested,
   }) {
     return intializeSettings?.call(this);
   }
@@ -362,6 +379,7 @@ class _$InitializeSettings implements InitializeSettings {
     TResult Function(DifficultyChanged value)? difficultyChanged,
     TResult Function(ThemeChanged value)? themeChanged,
     TResult Function(CategoryChanged value)? categoryChanged,
+    TResult Function(SignOutRequested value)? signOutRequested,
     required TResult orElse(),
   }) {
     if (intializeSettings != null) {
@@ -452,6 +470,7 @@ class _$DifficultyChanged implements DifficultyChanged {
     required TResult Function(List<Difficulty> difficulty) difficultyChanged,
     required TResult Function(ThemeMode themeMode) themeChanged,
     required TResult Function(List<Category> category) categoryChanged,
+    required TResult Function() signOutRequested,
   }) {
     return difficultyChanged(difficulty);
   }
@@ -464,6 +483,7 @@ class _$DifficultyChanged implements DifficultyChanged {
     TResult? Function(List<Difficulty> difficulty)? difficultyChanged,
     TResult? Function(ThemeMode themeMode)? themeChanged,
     TResult? Function(List<Category> category)? categoryChanged,
+    TResult? Function()? signOutRequested,
   }) {
     return difficultyChanged?.call(difficulty);
   }
@@ -476,6 +496,7 @@ class _$DifficultyChanged implements DifficultyChanged {
     TResult Function(List<Difficulty> difficulty)? difficultyChanged,
     TResult Function(ThemeMode themeMode)? themeChanged,
     TResult Function(List<Category> category)? categoryChanged,
+    TResult Function()? signOutRequested,
     required TResult orElse(),
   }) {
     if (difficultyChanged != null) {
@@ -492,6 +513,7 @@ class _$DifficultyChanged implements DifficultyChanged {
     required TResult Function(DifficultyChanged value) difficultyChanged,
     required TResult Function(ThemeChanged value) themeChanged,
     required TResult Function(CategoryChanged value) categoryChanged,
+    required TResult Function(SignOutRequested value) signOutRequested,
   }) {
     return difficultyChanged(this);
   }
@@ -504,6 +526,7 @@ class _$DifficultyChanged implements DifficultyChanged {
     TResult? Function(DifficultyChanged value)? difficultyChanged,
     TResult? Function(ThemeChanged value)? themeChanged,
     TResult? Function(CategoryChanged value)? categoryChanged,
+    TResult? Function(SignOutRequested value)? signOutRequested,
   }) {
     return difficultyChanged?.call(this);
   }
@@ -516,6 +539,7 @@ class _$DifficultyChanged implements DifficultyChanged {
     TResult Function(DifficultyChanged value)? difficultyChanged,
     TResult Function(ThemeChanged value)? themeChanged,
     TResult Function(CategoryChanged value)? categoryChanged,
+    TResult Function(SignOutRequested value)? signOutRequested,
     required TResult orElse(),
   }) {
     if (difficultyChanged != null) {
@@ -605,6 +629,7 @@ class _$ThemeChanged implements ThemeChanged {
     required TResult Function(List<Difficulty> difficulty) difficultyChanged,
     required TResult Function(ThemeMode themeMode) themeChanged,
     required TResult Function(List<Category> category) categoryChanged,
+    required TResult Function() signOutRequested,
   }) {
     return themeChanged(themeMode);
   }
@@ -617,6 +642,7 @@ class _$ThemeChanged implements ThemeChanged {
     TResult? Function(List<Difficulty> difficulty)? difficultyChanged,
     TResult? Function(ThemeMode themeMode)? themeChanged,
     TResult? Function(List<Category> category)? categoryChanged,
+    TResult? Function()? signOutRequested,
   }) {
     return themeChanged?.call(themeMode);
   }
@@ -629,6 +655,7 @@ class _$ThemeChanged implements ThemeChanged {
     TResult Function(List<Difficulty> difficulty)? difficultyChanged,
     TResult Function(ThemeMode themeMode)? themeChanged,
     TResult Function(List<Category> category)? categoryChanged,
+    TResult Function()? signOutRequested,
     required TResult orElse(),
   }) {
     if (themeChanged != null) {
@@ -645,6 +672,7 @@ class _$ThemeChanged implements ThemeChanged {
     required TResult Function(DifficultyChanged value) difficultyChanged,
     required TResult Function(ThemeChanged value) themeChanged,
     required TResult Function(CategoryChanged value) categoryChanged,
+    required TResult Function(SignOutRequested value) signOutRequested,
   }) {
     return themeChanged(this);
   }
@@ -657,6 +685,7 @@ class _$ThemeChanged implements ThemeChanged {
     TResult? Function(DifficultyChanged value)? difficultyChanged,
     TResult? Function(ThemeChanged value)? themeChanged,
     TResult? Function(CategoryChanged value)? categoryChanged,
+    TResult? Function(SignOutRequested value)? signOutRequested,
   }) {
     return themeChanged?.call(this);
   }
@@ -669,6 +698,7 @@ class _$ThemeChanged implements ThemeChanged {
     TResult Function(DifficultyChanged value)? difficultyChanged,
     TResult Function(ThemeChanged value)? themeChanged,
     TResult Function(CategoryChanged value)? categoryChanged,
+    TResult Function(SignOutRequested value)? signOutRequested,
     required TResult orElse(),
   }) {
     if (themeChanged != null) {
@@ -764,6 +794,7 @@ class _$CategoryChanged implements CategoryChanged {
     required TResult Function(List<Difficulty> difficulty) difficultyChanged,
     required TResult Function(ThemeMode themeMode) themeChanged,
     required TResult Function(List<Category> category) categoryChanged,
+    required TResult Function() signOutRequested,
   }) {
     return categoryChanged(category);
   }
@@ -776,6 +807,7 @@ class _$CategoryChanged implements CategoryChanged {
     TResult? Function(List<Difficulty> difficulty)? difficultyChanged,
     TResult? Function(ThemeMode themeMode)? themeChanged,
     TResult? Function(List<Category> category)? categoryChanged,
+    TResult? Function()? signOutRequested,
   }) {
     return categoryChanged?.call(category);
   }
@@ -788,6 +820,7 @@ class _$CategoryChanged implements CategoryChanged {
     TResult Function(List<Difficulty> difficulty)? difficultyChanged,
     TResult Function(ThemeMode themeMode)? themeChanged,
     TResult Function(List<Category> category)? categoryChanged,
+    TResult Function()? signOutRequested,
     required TResult orElse(),
   }) {
     if (categoryChanged != null) {
@@ -804,6 +837,7 @@ class _$CategoryChanged implements CategoryChanged {
     required TResult Function(DifficultyChanged value) difficultyChanged,
     required TResult Function(ThemeChanged value) themeChanged,
     required TResult Function(CategoryChanged value) categoryChanged,
+    required TResult Function(SignOutRequested value) signOutRequested,
   }) {
     return categoryChanged(this);
   }
@@ -816,6 +850,7 @@ class _$CategoryChanged implements CategoryChanged {
     TResult? Function(DifficultyChanged value)? difficultyChanged,
     TResult? Function(ThemeChanged value)? themeChanged,
     TResult? Function(CategoryChanged value)? categoryChanged,
+    TResult? Function(SignOutRequested value)? signOutRequested,
   }) {
     return categoryChanged?.call(this);
   }
@@ -828,6 +863,7 @@ class _$CategoryChanged implements CategoryChanged {
     TResult Function(DifficultyChanged value)? difficultyChanged,
     TResult Function(ThemeChanged value)? themeChanged,
     TResult Function(CategoryChanged value)? categoryChanged,
+    TResult Function(SignOutRequested value)? signOutRequested,
     required TResult orElse(),
   }) {
     if (categoryChanged != null) {
@@ -845,6 +881,132 @@ abstract class CategoryChanged implements SettingsEvent {
   @JsonKey(ignore: true)
   _$$CategoryChangedCopyWith<_$CategoryChanged> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SignOutRequestedCopyWith<$Res> {
+  factory _$$SignOutRequestedCopyWith(
+          _$SignOutRequested value, $Res Function(_$SignOutRequested) then) =
+      __$$SignOutRequestedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SignOutRequestedCopyWithImpl<$Res>
+    extends _$SettingsEventCopyWithImpl<$Res, _$SignOutRequested>
+    implements _$$SignOutRequestedCopyWith<$Res> {
+  __$$SignOutRequestedCopyWithImpl(
+      _$SignOutRequested _value, $Res Function(_$SignOutRequested) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$SignOutRequested implements SignOutRequested {
+  const _$SignOutRequested();
+
+  @override
+  String toString() {
+    return 'SettingsEvent.signOutRequested()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$SignOutRequested);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Settings settings) updateSettings,
+    required TResult Function() intializeSettings,
+    required TResult Function(List<Difficulty> difficulty) difficultyChanged,
+    required TResult Function(ThemeMode themeMode) themeChanged,
+    required TResult Function(List<Category> category) categoryChanged,
+    required TResult Function() signOutRequested,
+  }) {
+    return signOutRequested();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Settings settings)? updateSettings,
+    TResult? Function()? intializeSettings,
+    TResult? Function(List<Difficulty> difficulty)? difficultyChanged,
+    TResult? Function(ThemeMode themeMode)? themeChanged,
+    TResult? Function(List<Category> category)? categoryChanged,
+    TResult? Function()? signOutRequested,
+  }) {
+    return signOutRequested?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Settings settings)? updateSettings,
+    TResult Function()? intializeSettings,
+    TResult Function(List<Difficulty> difficulty)? difficultyChanged,
+    TResult Function(ThemeMode themeMode)? themeChanged,
+    TResult Function(List<Category> category)? categoryChanged,
+    TResult Function()? signOutRequested,
+    required TResult orElse(),
+  }) {
+    if (signOutRequested != null) {
+      return signOutRequested();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(UpdateSettings value) updateSettings,
+    required TResult Function(InitializeSettings value) intializeSettings,
+    required TResult Function(DifficultyChanged value) difficultyChanged,
+    required TResult Function(ThemeChanged value) themeChanged,
+    required TResult Function(CategoryChanged value) categoryChanged,
+    required TResult Function(SignOutRequested value) signOutRequested,
+  }) {
+    return signOutRequested(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(UpdateSettings value)? updateSettings,
+    TResult? Function(InitializeSettings value)? intializeSettings,
+    TResult? Function(DifficultyChanged value)? difficultyChanged,
+    TResult? Function(ThemeChanged value)? themeChanged,
+    TResult? Function(CategoryChanged value)? categoryChanged,
+    TResult? Function(SignOutRequested value)? signOutRequested,
+  }) {
+    return signOutRequested?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(UpdateSettings value)? updateSettings,
+    TResult Function(InitializeSettings value)? intializeSettings,
+    TResult Function(DifficultyChanged value)? difficultyChanged,
+    TResult Function(ThemeChanged value)? themeChanged,
+    TResult Function(CategoryChanged value)? categoryChanged,
+    TResult Function(SignOutRequested value)? signOutRequested,
+    required TResult orElse(),
+  }) {
+    if (signOutRequested != null) {
+      return signOutRequested(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SignOutRequested implements SettingsEvent {
+  const factory SignOutRequested() = _$SignOutRequested;
 }
 
 /// @nodoc

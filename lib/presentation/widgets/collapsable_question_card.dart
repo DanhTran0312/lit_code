@@ -122,7 +122,7 @@ class _QuestionExpansionTile extends StatelessWidget {
                 Expanded(
                   child: Text(
                     question.title,
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
                 const SizedBox(
@@ -203,7 +203,7 @@ class _RateConfidenceWidget extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text('Rate your confidence', style: theme.textTheme.headline6),
+          Text('Rate your confidence', style: theme.textTheme.titleLarge),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

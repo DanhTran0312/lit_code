@@ -19,6 +19,20 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     on<DifficultyChanged>(_onDifficultyChanged);
     on<ThemeChanged>(_onThemeChanged);
     on<CategoryChanged>(_onCategoryChanged);
+    on<SignOutRequested>(_onSignOutRequested);
+  }
+
+  Future<void> _onSignOutRequested(
+    SignOutRequested event,
+    Emitter<SettingsState> emit,
+  ) async {
+    emit(state.copyWith(status: SettingStatus.loading));
+    emit(
+      state.copyWith(
+        settings: const Settings(),
+        status: SettingStatus.initial,
+      ),
+    );
   }
 
   FutureOr<void> _onInitializeSettings(
@@ -97,6 +111,10 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         ),
       );
     });
+  }
+
+  void resetSettings() {
+    add(const InitializeSettings());
   }
 
   final UserRepository _userRepository;

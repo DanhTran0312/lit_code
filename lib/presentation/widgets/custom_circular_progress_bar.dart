@@ -83,7 +83,7 @@ class _CustomInnerWidget extends StatelessWidget {
       child: Center(
         child: Text(
           '$percentage%',
-          style: theme.textTheme.headline3!.copyWith(
+          style: theme.textTheme.displaySmall!.copyWith(
             color: Colors.white,
             fontSize: size * 0.18,
             fontWeight: FontWeight.bold,

@@ -149,7 +149,7 @@ class _StatisticsProgressBars extends StatelessWidget {
         children: [
           Text(
             'Confidence',
-            style: theme.textTheme.headline6,
+            style: theme.textTheme.titleLarge,
           ),
           const SizedBox(
             height: sizeBoxExtraSmall,
@@ -166,7 +166,7 @@ class _StatisticsProgressBars extends StatelessWidget {
           ),
           Text(
             'Progress',
-            style: theme.textTheme.headline6,
+            style: theme.textTheme.titleLarge,
           ),
           const SizedBox(
             height: sizeBoxExtraSmall,
@@ -204,7 +204,7 @@ class _CategoryTitleAndProgress extends StatelessWidget {
         Expanded(
           child: Text(
             category.name,
-            style: theme.textTheme.headline4!.copyWith(
+            style: theme.textTheme.headlineMedium!.copyWith(
               fontWeight: FontWeight.w600,
             ),
           ),

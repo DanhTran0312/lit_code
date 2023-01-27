@@ -26,10 +26,10 @@ class ProgressCard extends StatelessWidget {
       aspectRatio: 3 / 4,
       child: Column(
         children: [
-          Text('Total:', style: theme.textTheme.headline5),
+          Text('Total:', style: theme.textTheme.headlineSmall),
           Text(
             '$completed/$total',
-            style: theme.textTheme.headline4,
+            style: theme.textTheme.headlineMedium,
           ),
           QuestionAndDifficulty(
             difficulty: Difficulty.easy,

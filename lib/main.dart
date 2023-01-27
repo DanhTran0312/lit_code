@@ -60,10 +60,15 @@ Future<void> main() async {
 
   final connectivity = Connectivity();
 
+  final settingsBloc = SettingsBloc(
+    userRepository: userReposiory,
+  );
+
   final appBloc = AppBloc(
     authRepository: authRepository,
     userRepository: userReposiory,
     statisticsBloc: statisticsBloc,
+    settingsBloc: settingsBloc,
   );
 
   final themeCubit = ThemeCubit();
@@ -89,10 +94,6 @@ Future<void> main() async {
   final completedQuestionCubit = CompletedQuestionCubit(
     userRepository: userReposiory,
     statisticsBloc: statisticsBloc,
-  );
-
-  final settingsBloc = SettingsBloc(
-    userRepository: userReposiory,
   );
 
   await bootstrap(
