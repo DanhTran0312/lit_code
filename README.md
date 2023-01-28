@@ -1,20 +1,21 @@
 
-# Lit Code 🔥
+# Lit Code 🔥 - (WIP)
  
-A Flutter app for practicing coding questions from various platforms.
-
-
+A Flutter app for practicing and keeping track of coding questions across platforms
 
 
 ## Features
 
 - Light/dark mode toggle
 - Onboarding screen
-- Get coding questions from various platforms (e.g. LeetCode, HackerRank)
-- Get question explanations and code solutions
+- Online/offline compatible 
+- Sync across devices
+- Top fundamental and advanced coding interview questions 
 - Rate your confidence in solving a question
 - Organize questions by categories and difficulty
-- Track your progress with pie charts
+- Track your progress 
+- Interactive learning experience
+- Set your goal and start learning
 
 
 ## Getting Started
@@ -41,14 +42,10 @@ A Flutter app for practicing coding questions from various platforms.
 
 This project is licensed under the MIT License.
 ## Screenshots
-### Version 1 - Old version
-![App Screenshot](https://iili.io/H7Ca749.png)
-![App Screenshot](https://iili.io/H7Can7s.png)
-![App Screenshot](https://iili.io/H7CaqrX.png)
-![App Screenshot](https://iili.io/H7CauQ2.png)
-
 ### Version 2 - Work in progress
-![App Screenshot](https://iili.io/H7CaKBI.png)
-![App Screenshot](https://iili.io/H7CYy7a.png)
-![App Screenshot](https://iili.io/H7CYpdg.png)
-![App Screenshot](https://iili.io/H7Ca9kJ.png)
+| Dark Theme | Light Theme |
+| ------------- | ------------- |
+| ![App Screenshot](https://iili.io/H04bzPe.png)  | ![App Screenshot](https://iili.io/H04bucb.png)  |
+| ![App Screenshot](https://iili.io/H04boo7.png) | ![App Screenshot](https://iili.io/H04bASj.png)  |
+|![App Screenshot](https://iili.io/H04bxV9.png)|![App Screenshot](https://iili.io/H04b5Hx.png)|
+
