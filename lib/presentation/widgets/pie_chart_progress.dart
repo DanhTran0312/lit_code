@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_bool_literals_in_conditional_expressions
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,8 +25,10 @@ class PieChartProgress extends StatelessWidget {
       aspectRatio: 3 / 4,
       child: BlocProvider(
         create: (context) => PieChartTouchDataCubit(),
-        child: BlocBuilder<PieChartTouchDataCubit, PieChartTouchDataState>(
-          builder: (context, state) {
+        child: BlocSelector<PieChartTouchDataCubit, PieChartTouchDataState,
+            PieChartSectionData?>(
+          selector: (state) => state.touchedSection,
+          builder: (context, touchedSection) {
             return PieChart(
               swapAnimationCurve: Curves.easeInOutCubic,
               swapAnimationDuration: const Duration(milliseconds: 160),
@@ -39,14 +43,14 @@ class PieChartProgress extends StatelessWidget {
                         pieTouchResponse.touchedSection == null) {
                       return;
                     }
-                    if (pieTouchResponse.touchedSection!.touchedSectionIndex ==
-                        state.touchedIndex) {
+                    if (pieTouchResponse.touchedSection!.touchedSection ==
+                        touchedSection) {
                       return;
                     }
                     BlocProvider.of<PieChartTouchDataCubit>(
                       context,
                     ).updateTouchData(
-                      pieTouchResponse.touchedSection!.touchedSectionIndex,
+                      pieTouchResponse.touchedSection!.touchedSection,
                     );
                   },
                 ),
@@ -55,7 +59,7 @@ class PieChartProgress extends StatelessWidget {
                   easy,
                   medium,
                   hard,
-                  state.touchedIndex,
+                  touchedSection,
                 ),
               ),
             );
@@ -71,7 +75,7 @@ List<PieChartSectionData> _sectionBuilder(
   double easy,
   double medium,
   double hard,
-  int touchedIndex,
+  PieChartSectionData? touchedSection,
 ) {
   const touchedSectionRadius = 60.0;
   const normalSectionRadius = 50.0;
@@ -89,27 +93,35 @@ List<PieChartSectionData> _sectionBuilder(
       ),
     ];
   }
+
+  final isEasyTouched =
+      touchedSection != null ? touchedSection.color == Colors.green : false;
+  final isMediumTouched =
+      touchedSection != null ? touchedSection.color == Colors.orange : false;
+  final isHardTouched =
+      touchedSection != null ? touchedSection.color == Colors.red : false;
+
   return [
     PieChartSectionData(
       color: Colors.green,
       value: easy,
-      showTitle: touchedIndex == 0,
+      showTitle: isEasyTouched,
       title: '${(easy * 100).toStringAsFixed(0)}%',
-      radius: touchedIndex == 0 ? touchedSectionRadius : normalSectionRadius,
+      radius: isEasyTouched ? touchedSectionRadius : normalSectionRadius,
     ),
     PieChartSectionData(
       color: Colors.orange,
       value: medium,
-      showTitle: touchedIndex == 1,
+      showTitle: isMediumTouched,
       title: '${(medium * 100).toStringAsFixed(0)}%',
-      radius: touchedIndex == 1 ? touchedSectionRadius : normalSectionRadius,
+      radius: isMediumTouched ? touchedSectionRadius : normalSectionRadius,
     ),
     PieChartSectionData(
       color: Colors.red,
       value: hard,
-      showTitle: touchedIndex == 2,
+      showTitle: isHardTouched,
       title: '${(hard * 100).toStringAsFixed(0)}%',
-      radius: touchedIndex == 2 ? touchedSectionRadius : normalSectionRadius,
+      radius: isHardTouched ? touchedSectionRadius : normalSectionRadius,
     ),
   ];
 }

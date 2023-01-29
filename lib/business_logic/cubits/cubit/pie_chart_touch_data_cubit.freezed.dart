@@ -16,39 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PieChartTouchDataState {
-  int get touchedIndex => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int touchedIndex) touchData,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int touchedIndex)? touchData,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int touchedIndex)? touchData,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(PieChartTouchData value) touchData,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(PieChartTouchData value)? touchData,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(PieChartTouchData value)? touchData,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  PieChartSectionData? get touchedSection => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PieChartTouchDataStateCopyWith<PieChartTouchDataState> get copyWith =>
@@ -61,7 +29,7 @@ abstract class $PieChartTouchDataStateCopyWith<$Res> {
           $Res Function(PieChartTouchDataState) then) =
       _$PieChartTouchDataStateCopyWithImpl<$Res, PieChartTouchDataState>;
   @useResult
-  $Res call({int touchedIndex});
+  $Res call({PieChartSectionData? touchedSection});
 }
 
 /// @nodoc
@@ -78,146 +46,92 @@ class _$PieChartTouchDataStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? touchedIndex = null,
+    Object? touchedSection = freezed,
   }) {
     return _then(_value.copyWith(
-      touchedIndex: null == touchedIndex
-          ? _value.touchedIndex
-          : touchedIndex // ignore: cast_nullable_to_non_nullable
-              as int,
+      touchedSection: freezed == touchedSection
+          ? _value.touchedSection
+          : touchedSection // ignore: cast_nullable_to_non_nullable
+              as PieChartSectionData?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$PieChartTouchDataCopyWith<$Res>
+abstract class _$$_PieChartTouchDataStateCopyWith<$Res>
     implements $PieChartTouchDataStateCopyWith<$Res> {
-  factory _$$PieChartTouchDataCopyWith(
-          _$PieChartTouchData value, $Res Function(_$PieChartTouchData) then) =
-      __$$PieChartTouchDataCopyWithImpl<$Res>;
+  factory _$$_PieChartTouchDataStateCopyWith(_$_PieChartTouchDataState value,
+          $Res Function(_$_PieChartTouchDataState) then) =
+      __$$_PieChartTouchDataStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int touchedIndex});
+  $Res call({PieChartSectionData? touchedSection});
 }
 
 /// @nodoc
-class __$$PieChartTouchDataCopyWithImpl<$Res>
-    extends _$PieChartTouchDataStateCopyWithImpl<$Res, _$PieChartTouchData>
-    implements _$$PieChartTouchDataCopyWith<$Res> {
-  __$$PieChartTouchDataCopyWithImpl(
-      _$PieChartTouchData _value, $Res Function(_$PieChartTouchData) _then)
+class __$$_PieChartTouchDataStateCopyWithImpl<$Res>
+    extends _$PieChartTouchDataStateCopyWithImpl<$Res,
+        _$_PieChartTouchDataState>
+    implements _$$_PieChartTouchDataStateCopyWith<$Res> {
+  __$$_PieChartTouchDataStateCopyWithImpl(_$_PieChartTouchDataState _value,
+      $Res Function(_$_PieChartTouchDataState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? touchedIndex = null,
+    Object? touchedSection = freezed,
   }) {
-    return _then(_$PieChartTouchData(
-      null == touchedIndex
-          ? _value.touchedIndex
-          : touchedIndex // ignore: cast_nullable_to_non_nullable
-              as int,
+    return _then(_$_PieChartTouchDataState(
+      freezed == touchedSection
+          ? _value.touchedSection
+          : touchedSection // ignore: cast_nullable_to_non_nullable
+              as PieChartSectionData?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$PieChartTouchData extends PieChartTouchData {
-  const _$PieChartTouchData(this.touchedIndex) : super._();
+class _$_PieChartTouchDataState implements _PieChartTouchDataState {
+  const _$_PieChartTouchDataState(this.touchedSection);
 
   @override
-  final int touchedIndex;
+  final PieChartSectionData? touchedSection;
 
   @override
   String toString() {
-    return 'PieChartTouchDataState.touchData(touchedIndex: $touchedIndex)';
+    return 'PieChartTouchDataState(touchedSection: $touchedSection)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PieChartTouchData &&
-            (identical(other.touchedIndex, touchedIndex) ||
-                other.touchedIndex == touchedIndex));
+            other is _$_PieChartTouchDataState &&
+            (identical(other.touchedSection, touchedSection) ||
+                other.touchedSection == touchedSection));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, touchedIndex);
+  int get hashCode => Object.hash(runtimeType, touchedSection);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$PieChartTouchDataCopyWith<_$PieChartTouchData> get copyWith =>
-      __$$PieChartTouchDataCopyWithImpl<_$PieChartTouchData>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int touchedIndex) touchData,
-  }) {
-    return touchData(touchedIndex);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int touchedIndex)? touchData,
-  }) {
-    return touchData?.call(touchedIndex);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int touchedIndex)? touchData,
-    required TResult orElse(),
-  }) {
-    if (touchData != null) {
-      return touchData(touchedIndex);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(PieChartTouchData value) touchData,
-  }) {
-    return touchData(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(PieChartTouchData value)? touchData,
-  }) {
-    return touchData?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(PieChartTouchData value)? touchData,
-    required TResult orElse(),
-  }) {
-    if (touchData != null) {
-      return touchData(this);
-    }
-    return orElse();
-  }
+  _$$_PieChartTouchDataStateCopyWith<_$_PieChartTouchDataState> get copyWith =>
+      __$$_PieChartTouchDataStateCopyWithImpl<_$_PieChartTouchDataState>(
+          this, _$identity);
 }
 
-abstract class PieChartTouchData extends PieChartTouchDataState {
-  const factory PieChartTouchData(final int touchedIndex) = _$PieChartTouchData;
-  const PieChartTouchData._() : super._();
+abstract class _PieChartTouchDataState implements PieChartTouchDataState {
+  const factory _PieChartTouchDataState(
+      final PieChartSectionData? touchedSection) = _$_PieChartTouchDataState;
 
   @override
-  int get touchedIndex;
+  PieChartSectionData? get touchedSection;
   @override
   @JsonKey(ignore: true)
-  _$$PieChartTouchDataCopyWith<_$PieChartTouchData> get copyWith =>
+  _$$_PieChartTouchDataStateCopyWith<_$_PieChartTouchDataState> get copyWith =>
       throw _privateConstructorUsedError;
 }
