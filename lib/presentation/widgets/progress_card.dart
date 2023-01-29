@@ -13,12 +13,12 @@ class ProgressCard extends StatelessWidget {
     required this.hard,
   });
 
-  final ThemeData theme;
-  final int total;
   final int completed;
   final int easy;
-  final int medium;
   final int hard;
+  final int medium;
+  final ThemeData theme;
+  final int total;
 
   @override
   Widget build(BuildContext context) {

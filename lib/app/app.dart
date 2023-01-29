@@ -5,6 +5,7 @@ import 'package:lit_code/business_logic/blocs/bloc/question_list_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/settings_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/statistics_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/completed_question_cubit.dart';
+import 'package:lit_code/business_logic/cubits/cubit/confetti_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/network_connection_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/theme_cubit.dart';
 import 'package:lit_code/data/models/models.dart';
@@ -26,6 +27,8 @@ class LitCodeApp extends StatefulWidget {
     required Boxes boxes,
     required StatisticsBloc statisticsBloc,
     required SettingsBloc settingsBloc,
+    required QuestionRecommendationRepository questionRecommendationRepository,
+    required ConfettiCubit confettiCubit,
   })  : _authRepository = authRepository,
         _appBloc = appBloc,
         _themeCubit = themeCubit,
@@ -36,18 +39,23 @@ class LitCodeApp extends StatefulWidget {
         _appRouter = appRouter,
         _statisticsBloc = statisticsBloc,
         _boxes = boxes,
+        _confettiCubit = confettiCubit,
+        _questionRecommendationRepository = questionRecommendationRepository,
         _settingsBloc = settingsBloc;
-  final AuthRepository _authRepository;
-  final UserRepository _userRepository;
+
   final AppBloc _appBloc;
-  final ThemeCubit _themeCubit;
+  final AppRouter _appRouter;
+  final AuthRepository _authRepository;
+  final Boxes _boxes;
+  final CompletedQuestionCubit _completedQuestionCubit;
   final NetworkConnectionCubit _networkConnectionCubit;
   final QuestionListBloc _questionListBloc;
-  final CompletedQuestionCubit _completedQuestionCubit;
-  final AppRouter _appRouter;
-  final Boxes _boxes;
-  final StatisticsBloc _statisticsBloc;
+  final QuestionRecommendationRepository _questionRecommendationRepository;
   final SettingsBloc _settingsBloc;
+  final StatisticsBloc _statisticsBloc;
+  final ThemeCubit _themeCubit;
+  final UserRepository _userRepository;
+  final ConfettiCubit _confettiCubit;
 
   @override
   State<LitCodeApp> createState() => _LitCodeAppState();
@@ -69,6 +77,9 @@ class _LitCodeAppState extends State<LitCodeApp> {
         ),
         RepositoryProvider(
           create: (context) => widget._userRepository,
+        ),
+        RepositoryProvider(
+          create: (context) => widget._questionRecommendationRepository,
         ),
       ],
       child: MultiBlocProvider(
@@ -93,6 +104,9 @@ class _LitCodeAppState extends State<LitCodeApp> {
           ),
           BlocProvider<SettingsBloc>(
             create: (context) => widget._settingsBloc,
+          ),
+          BlocProvider<ConfettiCubit>(
+            create: (context) => widget._confettiCubit,
           ),
         ],
         child: BlocListener<AppBloc, AppState>(

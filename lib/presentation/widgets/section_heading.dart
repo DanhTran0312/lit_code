@@ -10,9 +10,9 @@ class SectionHeading extends StatelessWidget {
     this.fontSize,
   });
 
-  final String title;
   final Color? color;
   final double? fontSize;
+  final String title;
 
   @override
   Widget build(BuildContext context) {

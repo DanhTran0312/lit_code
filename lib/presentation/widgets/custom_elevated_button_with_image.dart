@@ -10,8 +10,8 @@ class CustomElevatedButtonWithImage extends StatelessWidget {
     required this.image,
   });
 
-  final VoidCallback? onPressed;
   final Widget image;
+  final VoidCallback? onPressed;
   final String text;
 
   @override

@@ -22,6 +22,12 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     on<SignOutRequested>(_onSignOutRequested);
   }
 
+  final UserRepository _userRepository;
+
+  void resetSettings() {
+    add(const InitializeSettings());
+  }
+
   Future<void> _onSignOutRequested(
     SignOutRequested event,
     Emitter<SettingsState> emit,
@@ -112,10 +118,4 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       );
     });
   }
-
-  void resetSettings() {
-    add(const InitializeSettings());
-  }
-
-  final UserRepository _userRepository;
 }

@@ -24,6 +24,33 @@ class CustomBottomNavBar extends StatelessWidget {
     super.key,
   });
 
+  List<BottomNavigationBarItem> _bottomNavBarItemsBuilder(
+    BottomNavBarState state,
+  ) {
+    return [
+      CustomBottomNavigationBarItem(
+        svgIconPath: 'assets/svg/progress.svg',
+        isSelected: state.selectedIndex == 0,
+      ),
+      CustomBottomNavigationBarItem(
+        svgIconPath: 'assets/svg/study.svg',
+        isSelected: state.selectedIndex == 1,
+      ),
+      CustomBottomNavigationBarItem(
+        svgIconPath: 'assets/svg/fire_home.svg',
+        isSelected: state.selectedIndex == 2,
+      ),
+      CustomBottomNavigationBarItem(
+        svgIconPath: 'assets/svg/review.svg',
+        isSelected: state.selectedIndex == 3,
+      ),
+      CustomBottomNavigationBarItem(
+        svgIconPath: 'assets/svg/settings.svg',
+        isSelected: state.selectedIndex == 4,
+      ),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -81,33 +108,6 @@ class CustomBottomNavBar extends StatelessWidget {
         );
       },
     );
-  }
-
-  List<BottomNavigationBarItem> _bottomNavBarItemsBuilder(
-    BottomNavBarState state,
-  ) {
-    return [
-      CustomBottomNavigationBarItem(
-        svgIconPath: 'assets/svg/progress.svg',
-        isSelected: state.selectedIndex == 0,
-      ),
-      CustomBottomNavigationBarItem(
-        svgIconPath: 'assets/svg/study.svg',
-        isSelected: state.selectedIndex == 1,
-      ),
-      CustomBottomNavigationBarItem(
-        svgIconPath: 'assets/svg/fire_home.svg',
-        isSelected: state.selectedIndex == 2,
-      ),
-      CustomBottomNavigationBarItem(
-        svgIconPath: 'assets/svg/review.svg',
-        isSelected: state.selectedIndex == 3,
-      ),
-      CustomBottomNavigationBarItem(
-        svgIconPath: 'assets/svg/settings.svg',
-        isSelected: state.selectedIndex == 4,
-      ),
-    ];
   }
 }
 

@@ -14,13 +14,13 @@ class CustomTextFormField extends StatelessWidget {
     this.errorText,
   });
 
+  final void Function(String)? onChanged;
+  final String? errorText;
+  final Key fieldKey;
   final String? hintText;
+  final TextInputType? keyboardType;
   final String labelText;
   final bool? obscureText;
-  final Key fieldKey;
-  final void Function(String)? onChanged;
-  final TextInputType? keyboardType;
-  final String? errorText;
 
   @override
   Widget build(BuildContext context) {

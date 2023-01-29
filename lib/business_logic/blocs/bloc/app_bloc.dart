@@ -47,6 +47,20 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     );
   }
 
+  final AuthRepository _authRepository;
+  final SettingsBloc _settingsBloc;
+  final StatisticsBloc _statisticsBloc;
+  final UserRepository _userRepository;
+  late final StreamSubscription<User> _userSubscription;
+
+  // This code closes the StreamSubscription when the Bloc is closed.
+
+  @override
+  Future<void> close() {
+    _userSubscription.cancel();
+    return super.close();
+  }
+
   /// An event is emitted when the user is changed.
   ///
   /// If the user is not empty, the state is set to authenticated.
@@ -71,20 +85,5 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     await _userRepository.signOut();
     _statisticsBloc.add(const ResetStatistics());
     _settingsBloc.add(const SignOutRequested());
-  }
-
-  final AuthRepository _authRepository;
-  final UserRepository _userRepository;
-  final StatisticsBloc _statisticsBloc;
-  final SettingsBloc _settingsBloc;
-
-  late final StreamSubscription<User> _userSubscription;
-
-  // This code closes the StreamSubscription when the Bloc is closed.
-
-  @override
-  Future<void> close() {
-    _userSubscription.cancel();
-    return super.close();
   }
 }

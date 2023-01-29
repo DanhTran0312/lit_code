@@ -83,3 +83,24 @@ const Map<int, Color> heatMapColorSet = {
   9: Color.fromARGB(220, 2, 179, 8),
   10: Color.fromARGB(255, 2, 179, 8),
 };
+
+final Map<double, List<Category>> categoryPriorityMap = {
+  0.4: [Category.arrayAndHashing],
+  0.55: [Category.twoPointers, Category.stack],
+  0.65: [Category.binarySearch, Category.slidingWindow, Category.linkedList],
+  0.70: [Category.trees],
+  0.75: [Category.tries, Category.backtracking],
+  0.85: [
+    Category.graphs,
+    Category.dynamicProgramming,
+    Category.heapAndPriorityQueue
+  ],
+  0.97: [
+    Category.bitManipulation,
+    Category.intervals,
+    Category.greedy,
+    Category.advancedGraphs,
+    Category.advancedDynamicProgramming
+  ],
+  1.0: [Category.mathAndGeometry],
+};

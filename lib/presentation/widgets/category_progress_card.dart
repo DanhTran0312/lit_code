@@ -13,6 +13,7 @@ class CategoryProgressCard extends StatelessWidget {
   }) : _statistics = statistics;
 
   final Category category;
+
   final Statistics _statistics;
 
   @override
@@ -58,11 +59,11 @@ class _CategoryProgressContent extends StatelessWidget {
   });
 
   final Category category;
-  final ThemeData theme;
   final double completedQuestionsCount;
-  final double totalQuestionsCount;
-  final int currentStep;
   final int currentConfidenceStep;
+  final int currentStep;
+  final ThemeData theme;
+  final double totalQuestionsCount;
 
   @override
   Widget build(BuildContext context) {
@@ -101,9 +102,9 @@ class _CategoryIconAndStatistics extends StatelessWidget {
   });
 
   final Category category;
-  final ThemeData theme;
-  final int currentProgressStep;
   final int currentConfidenceStep;
+  final int currentProgressStep;
+  final ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
@@ -135,9 +136,9 @@ class _StatisticsProgressBars extends StatelessWidget {
     required this.currentConfidenceStep,
   });
 
-  final ThemeData theme;
-  final int currentProgressStep;
   final int currentConfidenceStep;
+  final int currentProgressStep;
+  final ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
@@ -193,8 +194,8 @@ class _CategoryTitleAndProgress extends StatelessWidget {
   });
 
   final Category category;
-  final ThemeData theme;
   final double completedQuestionsCount;
+  final ThemeData theme;
   final double totalQuestionsCount;
 
   @override

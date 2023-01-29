@@ -30,7 +30,7 @@ class UserAdapter extends TypeAdapter<User> {
       todayQuestions: (fields[11] as List?)?.cast<Question?>(),
       thisWeekQuestions: (fields[12] as List?)?.cast<Question?>(),
       lastQuestionGenerated: fields[13] as int?,
-      experienceLevel: fields[14] as int?,
+      experienceLevel: fields[14] as double?,
     );
   }
 
@@ -100,7 +100,9 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       questionsVersion: json['questionsVersion'] as String? ?? '',
       lastSynced: json['lastSynced'] as int?,
       streak: json['streak'] as int?,
-      experience: $enumDecodeNullable(_$ExperienceEnumMap, json['experience']),
+      experience:
+          $enumDecodeNullable(_$ExperienceEnumMap, json['experience']) ??
+              Experience.intermediate,
       todayQuestions: (json['todayQuestions'] as List<dynamic>?)
           ?.map((e) =>
               e == null ? null : Question.fromJson(e as Map<String, dynamic>))
@@ -110,7 +112,7 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
               e == null ? null : Question.fromJson(e as Map<String, dynamic>))
           .toList(),
       lastQuestionGenerated: json['lastQuestionGenerated'] as int?,
-      experienceLevel: json['experienceLevel'] as int?,
+      experienceLevel: (json['experienceLevel'] as num?)?.toDouble() ?? 5.0,
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{

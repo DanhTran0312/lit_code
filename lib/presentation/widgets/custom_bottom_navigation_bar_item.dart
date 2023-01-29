@@ -23,8 +23,10 @@ class CustomBottomNavBarIcon extends StatelessWidget {
     required this.svgIconPath,
     required this.isSelected,
   });
-  final String svgIconPath;
+
   final bool isSelected;
+  final String svgIconPath;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);

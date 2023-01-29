@@ -58,6 +58,7 @@ class _ExperienceContent extends StatefulWidget {
   }) : _experienceCubit = experienceCubit;
 
   final ThemeData theme;
+
   final ExperienceCubit _experienceCubit;
 
   @override
@@ -66,9 +67,17 @@ class _ExperienceContent extends StatefulWidget {
 
 class _ExperienceContentState extends State<_ExperienceContent>
     with TickerProviderStateMixin {
+  late final AnimationController _advancedController;
   late final AnimationController _beginnerController;
   late final AnimationController _intermediateController;
-  late final AnimationController _advancedController;
+
+  @override
+  void dispose() {
+    _beginnerController.dispose();
+    _intermediateController.dispose();
+    _advancedController.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -82,14 +91,6 @@ class _ExperienceContentState extends State<_ExperienceContent>
       vsync: this,
     );
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    _beginnerController.dispose();
-    _intermediateController.dispose();
-    _advancedController.dispose();
-    super.dispose();
   }
 
   @override
@@ -159,8 +160,9 @@ class _AdvancedRadioListTile extends StatelessWidget {
   }) : _advancedController = advancedController;
 
   final Experience groupValue;
-  final _ExperienceContent widget;
   final ThemeData theme;
+  final _ExperienceContent widget;
+
   final AnimationController _advancedController;
 
   @override
@@ -192,8 +194,9 @@ class _IntermediateRadioListTile extends StatelessWidget {
   }) : _intermediateController = intermediateController;
 
   final Experience groupValue;
-  final _ExperienceContent widget;
   final ThemeData theme;
+  final _ExperienceContent widget;
+
   final AnimationController _intermediateController;
 
   @override
@@ -225,8 +228,9 @@ class _BeginnerRadioListTile extends StatelessWidget {
   }) : _beginnerController = beginnerController;
 
   final Experience groupValue;
-  final _ExperienceContent widget;
   final ThemeData theme;
+  final _ExperienceContent widget;
+
   final AnimationController _beginnerController;
 
   @override

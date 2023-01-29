@@ -13,11 +13,11 @@ class CustomBoxedProgressBar extends StatelessWidget {
     required this.roundedEdges,
   });
 
-  final int totalSteps;
   final int currentStep;
+  final bool roundedEdges;
   final double size;
   final ThemeData theme;
-  final bool roundedEdges;
+  final int totalSteps;
 
   @override
   Widget build(BuildContext context) {

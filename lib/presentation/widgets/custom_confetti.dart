@@ -8,8 +8,8 @@ class CustomConfetti extends StatelessWidget {
     required this.confettiController,
   });
 
-  final ConfettiController confettiController;
   final double blastDirection;
+  final ConfettiController confettiController;
 
   @override
   Widget build(BuildContext context) {

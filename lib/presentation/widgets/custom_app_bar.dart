@@ -12,8 +12,8 @@ class CustomAppBar extends StatelessWidget {
     required this.theme,
   });
 
-  final String? url;
   final ThemeData theme;
+  final String? url;
 
   @override
   Widget build(BuildContext context) {

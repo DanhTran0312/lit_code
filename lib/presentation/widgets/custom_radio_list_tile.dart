@@ -14,12 +14,12 @@ class CustomRadioListTile extends StatelessWidget {
     required this.onChanged,
   });
 
-  final Experience value;
+  final Experience groupValue;
+  final Widget? leading;
+  final void Function(Experience?) onChanged;
   final String title;
   final Widget? trailing;
-  final Widget? leading;
-  final Experience groupValue;
-  final void Function(Experience?) onChanged;
+  final Experience value;
 
   @override
   Widget build(BuildContext context) {

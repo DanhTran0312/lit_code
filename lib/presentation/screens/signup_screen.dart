@@ -51,8 +51,8 @@ class _SignUpPage extends StatelessWidget {
     required this.size,
   });
 
-  final ThemeData theme;
   final Size size;
+  final ThemeData theme;
 
   @override
   Widget build(BuildContext context) {

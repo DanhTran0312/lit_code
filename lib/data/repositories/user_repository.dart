@@ -20,11 +20,11 @@ class UserRepository {
     }
   }
 
+  late final usersDatabaseReference = _firebaseDatabase.child('users');
+
+  final DatabaseReference _firebaseDatabase;
   late User _user = User.empty;
   final Box<User> _userBox;
-  final DatabaseReference _firebaseDatabase;
-
-  late final usersDatabaseReference = _firebaseDatabase.child('users');
 
   User get user => _user;
 
@@ -48,9 +48,6 @@ class UserRepository {
 
   Future<void> markQuestionAsCompleted(Question question) async {
     try {
-      if (_user.completedQuestions.any((q) => q!.id == question.id)) {
-        throw Exception('Question ${question.id} has already been completed');
-      }
       _user = _user.copyWith(
         completedQuestions: [
           ..._user.completedQuestions,
@@ -137,6 +134,24 @@ class UserRepository {
   Future<void> updateUserSettings(Settings settings) async {
     try {
       _user = _user.copyWith(settings: settings);
+      await _userBox.put('user', _user);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<void> updateUserExperience(Experience experience) async {
+    try {
+      _user = _user.copyWith(experience: experience);
+      await _userBox.put('user', _user);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<void> updateUserExperienceLevel(double experienceLevel) async {
+    try {
+      _user = _user.copyWith(experienceLevel: experienceLevel);
       await _userBox.put('user', _user);
     } catch (e) {
       throw Exception(e);

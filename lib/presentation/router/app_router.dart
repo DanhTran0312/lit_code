@@ -24,26 +24,22 @@ class AppRouter {
         _onboardingCubit = onboardingCubit,
         _experienceCubit = experienceCubit;
 
-  static const String initialRoute = '/';
-  static const String settingsRoute = '/settings';
+  static const String experienceRoute = '/experience';
   static const String homeRoute = '/home';
-  static const String studyRoute = '/study';
+  static const String initialRoute = '/';
+  static const String onboardingRoute = '/onBoarding';
+  static const String profileRoute = 'profile';
   static const String progressRoute = '/progress';
   static const String reviewRoute = '/review';
-  static const String profileRoute = 'profile';
+  static const String settingsRoute = '/settings';
   static const String signInRoute = '/signIn';
   static const String signUpRoute = '/signUp';
-  static const String onboardingRoute = '/onBoarding';
-  static const String experienceRoute = '/experience';
+  static const String studyRoute = '/study';
 
-  final _shellNavigatorKey = GlobalKey<NavigatorState>();
-  final _rootNavigatorKey = GlobalKey<NavigatorState>();
-
-  GoRouter get router => _router;
   final AppBloc _appBloc;
-  final OnBoardingCubit _onboardingCubit;
   final ExperienceCubit _experienceCubit;
-
+  final OnBoardingCubit _onboardingCubit;
+  final _rootNavigatorKey = GlobalKey<NavigatorState>();
   late final GoRouter _router = GoRouter(
     debugLogDiagnostics: true,
     initialLocation: initialRoute,
@@ -51,6 +47,10 @@ class AppRouter {
     navigatorKey: _rootNavigatorKey,
     routes: routes,
   );
+
+  final _shellNavigatorKey = GlobalKey<NavigatorState>();
+
+  GoRouter get router => _router;
 
   List<RouteBase> get routes {
     return [

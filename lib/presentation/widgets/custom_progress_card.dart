@@ -13,12 +13,12 @@ class CustomProgressCard extends StatelessWidget {
     required this.size,
   });
 
+  final int current;
+  final double size;
   final ThemeData theme;
   final String title;
-  final int totalSteps;
-  final int current;
   final int total;
-  final double size;
+  final int totalSteps;
 
   @override
   Widget build(BuildContext context) {

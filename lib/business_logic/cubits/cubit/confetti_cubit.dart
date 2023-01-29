@@ -15,9 +15,11 @@ class ConfettiCubit extends Cubit<ConfettiState> {
     duration: const Duration(seconds: 2),
   );
 
-  void startConfetti() {
+  Future<void> startConfetti() async {
     _confettiController.play();
     emit(ConfettiState.playing);
+    await Future<void>.delayed(const Duration(seconds: 2));
+    _confettiController.stop();
   }
 
   void stopConfetti() {

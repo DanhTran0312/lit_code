@@ -11,13 +11,13 @@ class QuestionRepository {
     required this.firebaseDatabase,
   });
 
-  final Box<Question> questionBox;
-  final Box<User> userBox;
-  final DatabaseReference firebaseDatabase;
-
   late final databaseReference = firebaseDatabase.child('questions');
   late final databaseVersionReference =
       firebaseDatabase.child('questions_version');
+
+  final DatabaseReference firebaseDatabase;
+  final Box<Question> questionBox;
+  final Box<User> userBox;
 
   Future<List<Question>> getAllQuestions() async {
     try {

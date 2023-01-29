@@ -42,8 +42,8 @@ class _HomeScreenContent extends StatelessWidget {
     required this.size,
   });
 
-  final ThemeData theme;
   final Size size;
+  final ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +58,8 @@ class _HomeScreenContent extends StatelessWidget {
           name = state.user.name!;
           url = state.user.photoUrl!;
         }
-        final welcomeTextStyle =
-            theme.textTheme.headlineMedium!.copyWith(fontWeight: FontWeight.w600);
+        final welcomeTextStyle = theme.textTheme.headlineMedium!
+            .copyWith(fontWeight: FontWeight.w600);
         return ListView(
           shrinkWrap: true,
           children: [

@@ -39,6 +39,7 @@ class QuestionListBloc extends Bloc<QuestionListEvent, QuestionListState> {
       }
     });
   }
+
   final QuestionRepository _questionRepository;
   final StatisticsBloc _statisticsBloc;
 }

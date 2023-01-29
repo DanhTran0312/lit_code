@@ -10,6 +10,7 @@ class SignUpForm extends StatelessWidget {
     super.key,
     required this.theme,
   });
+
   final ThemeData theme;
 
   @override

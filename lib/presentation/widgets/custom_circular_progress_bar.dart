@@ -12,10 +12,10 @@ class CustomCirCularProgressBar extends StatelessWidget {
     required this.theme,
   });
 
-  final double size;
   final double initialValue;
-  final double total;
+  final double size;
   final ThemeData theme;
+  final double total;
 
   @override
   Widget build(BuildContext context) {
@@ -67,8 +67,8 @@ class _CustomInnerWidget extends StatelessWidget {
   });
 
   final double size;
-  final double total;
   final ThemeData theme;
+  final double total;
   final double value;
 
   @override

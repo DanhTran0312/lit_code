@@ -26,8 +26,8 @@ class AuthRepository {
         _googleSignIn = googleSignIn;
 
   final firebase_auth.FirebaseAuth _firebaseAuth;
-  final UserRepository _userRepository;
   final GoogleSignIn _googleSignIn;
+  final UserRepository _userRepository;
 
   /// Returns a stream of [User]s.
   ///
@@ -233,7 +233,7 @@ class LogInWithEmailAndPasswordFailure implements Exception {
         );
       case 'wrong-password':
         return const LogInWithEmailAndPasswordFailure(
-          'Incorrect password, please try again.',
+          'Incorrect email or password combination. Please try again.',
         );
       default:
         return const LogInWithEmailAndPasswordFailure();

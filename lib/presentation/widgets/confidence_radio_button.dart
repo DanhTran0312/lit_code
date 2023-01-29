@@ -10,9 +10,9 @@ class ConfidenceRadioButton extends StatelessWidget {
     required this.confidence,
   });
 
+  final void Function(Enum?)? onChanged;
   final Confidence confidence;
   final Question question;
-  final void Function(Enum?)? onChanged;
 
   @override
   Widget build(BuildContext context) {

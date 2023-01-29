@@ -25,6 +25,7 @@ class StatisticsBloc extends Bloc<StatisticsEvent, StatisticsState> {
     on<UpdateTotalQuestions>(_onUpdateTotalQuestions);
     on<ResetStatistics>(_onResetStatistics);
   }
+
   Future<void> _onUpdateCompletedQuestions(
     UpdateCompletedQuestions event,
     Emitter<StatisticsState> emit,

@@ -12,11 +12,11 @@ class ImageContainer extends StatelessWidget {
     required this.theme,
   });
 
-  final Size size;
   final Widget child;
-  final EdgeInsetsGeometry? padding;
-  final String lightBackgroundImage;
   final String darkBackgroundImage;
+  final String lightBackgroundImage;
+  final EdgeInsetsGeometry? padding;
+  final Size size;
   final ThemeData theme;
 
   @override

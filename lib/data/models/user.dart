@@ -22,11 +22,11 @@ abstract class User with _$User {
     @HiveField(7) @Default('') String? questionsVersion,
     @HiveField(8) int? lastSynced,
     @HiveField(9) int? streak,
-    @HiveField(10) Experience? experience,
+    @HiveField(10) @Default(Experience.intermediate) Experience? experience,
     @HiveField(11) List<Question?>? todayQuestions,
     @HiveField(12) List<Question?>? thisWeekQuestions,
     @HiveField(13) int? lastQuestionGenerated,
-    @HiveField(14) int? experienceLevel,
+    @HiveField(14) @Default(5.0) double? experienceLevel,
   }) = _User;
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   const User._();

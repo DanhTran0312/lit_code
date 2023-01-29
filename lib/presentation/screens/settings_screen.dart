@@ -63,10 +63,46 @@ class _SettingScreenContent extends StatelessWidget {
     required SettingsBloc settingsBloc,
   }) : _settingsBloc = settingsBloc;
 
-  final User user;
-  final ThemeData theme;
   final Size size;
+  final ThemeData theme;
+  final User user;
+
   final SettingsBloc _settingsBloc;
+
+  Future<Set<String>?> _showCategoryDialog(BuildContext context) {
+    return showDialog<Set<String>>(
+      context: context,
+      builder: (context) => CustomMultiChipsSelectorDialog(
+        selectedItems:
+            _settingsBloc.state.settings.categories.map((e) => e.name).toSet(),
+        title: Text(
+          'Select Category',
+          style: theme.textTheme.headlineMedium,
+        ),
+        width: size.width * 0.9,
+        height: size.height * 0.35,
+        items: Category.values.map((e) => e.name).toSet(),
+      ),
+    );
+  }
+
+  Future<Set<String>?> _showDifficultyDialog(BuildContext context) {
+    return showDialog<Set<String>>(
+      context: context,
+      builder: (context) => CustomMultiChipsSelectorDialog(
+        selectedItems: _settingsBloc.state.settings.difficulties
+            .map((e) => e.name)
+            .toSet(),
+        title: Text(
+          'Select Difficulty Level',
+          style: theme.textTheme.headlineMedium,
+        ),
+        width: size.width * 0.85,
+        height: size.height * 0.15,
+        items: Difficulty.values.map((e) => e.name).toSet(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -136,41 +172,6 @@ class _SettingScreenContent extends StatelessWidget {
           child: const Text('Sign Out'),
         ),
       ],
-    );
-  }
-
-  Future<Set<String>?> _showCategoryDialog(BuildContext context) {
-    return showDialog<Set<String>>(
-      context: context,
-      builder: (context) => CustomMultiChipsSelectorDialog(
-        selectedItems:
-            _settingsBloc.state.settings.categories.map((e) => e.name).toSet(),
-        title: Text(
-          'Select Category',
-          style: theme.textTheme.headlineMedium,
-        ),
-        width: size.width * 0.9,
-        height: size.height * 0.35,
-        items: Category.values.map((e) => e.name).toSet(),
-      ),
-    );
-  }
-
-  Future<Set<String>?> _showDifficultyDialog(BuildContext context) {
-    return showDialog<Set<String>>(
-      context: context,
-      builder: (context) => CustomMultiChipsSelectorDialog(
-        selectedItems: _settingsBloc.state.settings.difficulties
-            .map((e) => e.name)
-            .toSet(),
-        title: Text(
-          'Select Difficulty Level',
-          style: theme.textTheme.headlineMedium,
-        ),
-        width: size.width * 0.85,
-        height: size.height * 0.15,
-        items: Difficulty.values.map((e) => e.name).toSet(),
-      ),
     );
   }
 }
@@ -263,11 +264,10 @@ class _CustomListTile extends StatelessWidget {
     required this.onTap,
   });
 
-  final ThemeData theme;
-
-  final Size size;
-  final String title;
   final void Function()? onTap;
+  final Size size;
+  final ThemeData theme;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -296,8 +296,8 @@ class _UserProfileCard extends StatelessWidget {
     required this.theme,
   });
 
-  final User user;
   final ThemeData theme;
+  final User user;
 
   @override
   Widget build(BuildContext context) {

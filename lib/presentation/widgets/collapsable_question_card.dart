@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/statistics_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/completed_question_cubit.dart';
-import 'package:lit_code/business_logic/cubits/cubit/confetti_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/question_expansion_cubit.dart';
 import 'package:lit_code/constants/constant.dart';
 import 'package:lit_code/constants/enums.dart';
@@ -20,10 +19,10 @@ class CollapsableQuestionCard extends StatelessWidget {
     required this.completedQuestionCubit,
   });
 
-  final Question question;
+  final CompletedQuestionCubit completedQuestionCubit;
   final QuestionExpansionCubit expansionCubit;
   final bool isTranparent;
-  final CompletedQuestionCubit completedQuestionCubit;
+  final Question question;
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +46,11 @@ class _BuildExpansionTile extends StatelessWidget {
     required this.completedQuestionCubit,
   });
 
-  final bool isTranparent;
-  final ThemeData theme;
-  final QuestionExpansionCubit expansionCubit;
-  final Question question;
   final CompletedQuestionCubit completedQuestionCubit;
+  final QuestionExpansionCubit expansionCubit;
+  final bool isTranparent;
+  final Question question;
+  final ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
@@ -93,12 +92,12 @@ class _QuestionExpansionTile extends StatelessWidget {
     required this.statisticsBloc,
   });
 
-  final QuestionExpansionCubit expansionCubit;
-  final Question question;
   final CompletedQuestionCubit completedQuestionCubit;
-  final ThemeData theme;
+  final QuestionExpansionCubit expansionCubit;
   final bool isSelected;
+  final Question question;
   final StatisticsBloc statisticsBloc;
+  final ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
@@ -156,8 +155,8 @@ class _CheckBox extends StatelessWidget {
   });
 
   final CompletedQuestionCubit completedQuestionCubit;
-  final Question question;
   final bool isSelected;
+  final Question question;
   final StatisticsBloc statisticsBloc;
 
   @override
@@ -168,7 +167,6 @@ class _CheckBox extends StatelessWidget {
       onChanged: (bool? value) {
         if (!isSelected) {
           completedQuestionCubit.markQuestionAsCompleted(question);
-          BlocProvider.of<ConfettiCubit>(context).startConfetti();
         } else {
           completedQuestionCubit.markQuestionAsUncompleted(question);
         }
@@ -184,8 +182,9 @@ class _RateConfidenceWidget extends StatelessWidget {
     required CompletedQuestionCubit completedQuestionCubit,
   }) : _completedQuestionCubit = completedQuestionCubit;
 
-  final ThemeData theme;
   final Question question;
+  final ThemeData theme;
+
   final CompletedQuestionCubit _completedQuestionCubit;
 
   @override

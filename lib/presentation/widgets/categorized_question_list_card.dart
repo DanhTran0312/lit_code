@@ -19,11 +19,27 @@ class CategorizedQuestionListCard extends StatelessWidget {
         _completedQuestions = completedQuestions,
         _completedQuestionCubit = completedQuestionCubit;
 
-  final List<Question> _questions;
   final Category _category;
-  final QuestionExpansionCubit _expansionCubit;
   final CompletedQuestionCubit _completedQuestionCubit;
   final Map<String, Question> _completedQuestions;
+  final QuestionExpansionCubit _expansionCubit;
+  final List<Question> _questions;
+
+  List<Widget> get _generateCategorizedQuestionList {
+    return [
+      ..._questions.map((question) {
+        return CollapsableQuestionCard(
+          key: Key(question.id),
+          isTranparent: true,
+          question: _completedQuestions.containsKey(question.id)
+              ? _completedQuestions[question.id]!
+              : question,
+          expansionCubit: _expansionCubit,
+          completedQuestionCubit: _completedQuestionCubit,
+        );
+      }),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,22 +61,6 @@ class CategorizedQuestionListCard extends StatelessWidget {
       ),
     );
   }
-
-  List<Widget> get _generateCategorizedQuestionList {
-    return [
-      ..._questions.map(
-        (question) => CollapsableQuestionCard(
-          key: Key(question.id),
-          isTranparent: true,
-          question: _completedQuestions.containsKey(question.id)
-              ? _completedQuestions[question.id]!
-              : question,
-          expansionCubit: _expansionCubit,
-          completedQuestionCubit: _completedQuestionCubit,
-        ),
-      ),
-    ];
-  }
 }
 
 class _CategorizedQuestionTile extends StatelessWidget {
@@ -70,6 +70,7 @@ class _CategorizedQuestionTile extends StatelessWidget {
   }) : _generateCategorizedQuestionList = generateCategorizedQuestionList;
 
   final Category category;
+
   final List<Widget> _generateCategorizedQuestionList;
 
   @override

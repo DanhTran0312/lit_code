@@ -13,8 +13,8 @@ class PieChartProgress extends StatelessWidget {
   });
 
   final double easy;
-  final double medium;
   final double hard;
+  final double medium;
 
   @override
   Widget build(BuildContext context) {

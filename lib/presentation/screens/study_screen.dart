@@ -22,54 +22,51 @@ class StudyScreen extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Scaffold(
-      body: BlocProvider(
-        create: (context) => ConfettiCubit(),
-        child: BlocConsumer<QuestionListBloc, QuestionListState>(
-          listener: (context, state) {
-            if (state is QuestionListError) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.message),
-                ),
-              );
-            } else if (state is QuestionListLoading) {
-              // If the state is QuestionListLoading, then show a circular progress indicator.
-              const CircularProgressIndicator();
-            }
-          },
-          builder: (context, state) {
-            final confettiCubit = BlocProvider.of<ConfettiCubit>(context);
-            if (state is QuestionListInitial) {
-              // If the state is QuestionListInitial, then fetch the questions.
-              BlocProvider.of<QuestionListBloc>(context).add(
-                const FetchQuestions(),
-              );
-              return const Center(child: CircularProgressIndicator());
-            } else if (state is QuestionListLoaded) {
-              // If the state is QuestionListLoaded, then show the list of questions.
-              final stateQuestion = state.questions;
-              return Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: defaultPageHorizontalPadding,
-                ),
-                child: Stack(
-                  children: [
-                    _StudyScreenBody(
-                      stateQuestion: stateQuestion,
-                      theme: theme,
-                    ),
-                    BlocBuilder<ConfettiCubit, ConfettiState>(
-                      builder: (context, state) {
-                        return _ConfettiBuilder(confettiCubit: confettiCubit);
-                      },
-                    )
-                  ],
-                ),
-              );
-            }
+      body: BlocConsumer<QuestionListBloc, QuestionListState>(
+        listener: (context, state) {
+          if (state is QuestionListError) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+              ),
+            );
+          } else if (state is QuestionListLoading) {
+            // If the state is QuestionListLoading, then show a circular progress indicator.
+            const CircularProgressIndicator();
+          }
+        },
+        builder: (context, state) {
+          final confettiCubit = BlocProvider.of<ConfettiCubit>(context);
+          if (state is QuestionListInitial) {
+            // If the state is QuestionListInitial, then fetch the questions.
+            BlocProvider.of<QuestionListBloc>(context).add(
+              const FetchQuestions(),
+            );
             return const Center(child: CircularProgressIndicator());
-          },
-        ),
+          } else if (state is QuestionListLoaded) {
+            // If the state is QuestionListLoaded, then show the list of questions.
+            final stateQuestion = state.questions;
+            return Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: defaultPageHorizontalPadding,
+              ),
+              child: Stack(
+                children: [
+                  _StudyScreenBody(
+                    stateQuestion: stateQuestion,
+                    theme: theme,
+                  ),
+                  BlocBuilder<ConfettiCubit, ConfettiState>(
+                    builder: (context, state) {
+                      return _ConfettiBuilder(confettiCubit: confettiCubit);
+                    },
+                  )
+                ],
+              ),
+            );
+          }
+          return const Center(child: CircularProgressIndicator());
+        },
       ),
     );
   }
@@ -154,9 +151,9 @@ class _CategoryList extends StatelessWidget {
         _completedQuestionCubit = completedQuestionCubit,
         _completedQuestions = completedQuestions;
 
-  final List<Question> _stateQuestion;
-  final Map<String, Question> _completedQuestions;
   final CompletedQuestionCubit _completedQuestionCubit;
+  final Map<String, Question> _completedQuestions;
+  final List<Question> _stateQuestion;
 
   @override
   Widget build(BuildContext context) {
@@ -192,8 +189,9 @@ class _ProgressSection extends StatelessWidget {
     required this.theme,
   }) : _state = state;
 
-  final StatisticsState _state;
   final ThemeData theme;
+
+  final StatisticsState _state;
 
   @override
   Widget build(BuildContext context) {

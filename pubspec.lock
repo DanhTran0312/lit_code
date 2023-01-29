@@ -37,10 +37,10 @@ packages:
     dependency: transitive
     description:
       name: archive
-      sha256: ed7cc591a948744994714375caf9a2ce89e1d82e8243997c8a2994d57181c212
+      sha256: d6347d54a2d8028e0437e3c099f66fdb8ae02c4720c1e7534c9f24c10351f85d
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.5"
+    version: "3.3.6"
   args:
     dependency: transitive
     description:
@@ -109,10 +109,10 @@ packages:
     dependency: "direct dev"
     description:
       name: build_runner
-      sha256: b0a8a7b8a76c493e85f1b84bffa0588859a06197863dba8c9036b15581fd9727
+      sha256: a3335cae313ea41f193e5637f98185e5cb37b3fde2c5c4654ac546b8164e59ac
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.3"
+    version: "2.4.0"
   build_runner_core:
     dependency: transitive
     description:
@@ -517,10 +517,10 @@ packages:
     dependency: "direct main"
     description:
       name: google_sign_in
-      sha256: dfb5bd5aaed6b910dddfc4a5db20214d691d578b9187cc8083cf6aed9ba57f82
+      sha256: "821f354c053d51a2d417b02d42532a19a6ea8057d2f9ebb8863c07d81c98aaf9"
       url: "https://pub.dev"
     source: hosted
-    version: "5.4.3"
+    version: "5.4.4"
   google_sign_in_android:
     dependency: transitive
     description:
@@ -1159,5 +1159,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.19.0 <4.0.0"
+  dart: ">=3.0.0-134.0.dev <4.0.0"
   flutter: ">=3.3.8"

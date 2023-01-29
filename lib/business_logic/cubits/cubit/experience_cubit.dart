@@ -1,19 +1,26 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:lit_code/constants/constants.dart';
+import 'package:lit_code/data/repositories/repositories.dart';
 
 part 'experience_state.dart';
 part 'experience_cubit.g.dart';
 part 'experience_cubit.freezed.dart';
 
 class ExperienceCubit extends Cubit<ExperienceState> with HydratedMixin {
-  ExperienceCubit() : super(const ExperienceState.notCompleted());
+  ExperienceCubit({
+    required UserRepository userRepository,
+  })  : _userRepository = userRepository,
+        super(const ExperienceState.notCompleted());
+
+  final UserRepository _userRepository;
 
   void updateExperience(Experience experience) {
     emit(ExperienceState.notCompleted(experience: experience));
   }
 
   void completeExperience() {
+    _userRepository.updateUserExperience(state.experience);
     emit(ExperienceState.completed(experience: state.experience));
   }
 

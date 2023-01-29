@@ -13,6 +13,7 @@ import 'package:lit_code/business_logic/blocs/bloc/question_list_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/settings_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/statistics_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/completed_question_cubit.dart';
+import 'package:lit_code/business_logic/cubits/cubit/confetti_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/experience_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/network_connection_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/on_boarding_cubit.dart';
@@ -70,6 +71,11 @@ Future<void> main() async {
     settingsBloc: settingsBloc,
   );
 
+  final questionRecommendationRepository = QuestionRecommendationRepository(
+    statisticsBloc: statisticsBloc,
+    userRepository: userReposiory,
+  );
+
   final themeCubit = ThemeCubit();
 
   final networkConnectionCubit = NetworkConnectionCubit(
@@ -82,7 +88,9 @@ Future<void> main() async {
   );
 
   final onboardingCubit = OnBoardingCubit();
-  final experienceCubit = ExperienceCubit();
+  final experienceCubit = ExperienceCubit(
+    userRepository: userReposiory,
+  );
 
   final appRouter = AppRouter(
     appBloc: appBloc,
@@ -90,9 +98,12 @@ Future<void> main() async {
     experienceCubit: experienceCubit,
   );
 
+  final confettiCubit = ConfettiCubit();
+
   final completedQuestionCubit = CompletedQuestionCubit(
     userRepository: userReposiory,
     statisticsBloc: statisticsBloc,
+    confettiCubit: confettiCubit,
   );
 
   await bootstrap(
@@ -108,6 +119,8 @@ Future<void> main() async {
       boxes: boxes,
       statisticsBloc: statisticsBloc,
       settingsBloc: settingsBloc,
+      confettiCubit: confettiCubit,
+      questionRecommendationRepository: questionRecommendationRepository,
     ),
   );
 }
