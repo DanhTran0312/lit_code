@@ -194,9 +194,25 @@ class _GoalsCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Goals 🎯',
-              style: theme.textTheme.headlineMedium,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Goals 🎯',
+                  style: theme.textTheme.headlineMedium,
+                ),
+                IconButton(
+                  onPressed: () {
+                    showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime.now().add(const Duration(days: 365)),
+                    );
+                  },
+                  icon: const Icon(Icons.calendar_month_rounded),
+                ),
+              ],
             ),
             const SizedBox(height: sizeBoxMedium),
             Row(

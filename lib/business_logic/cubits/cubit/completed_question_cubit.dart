@@ -35,7 +35,7 @@ class CompletedQuestionCubit extends Cubit<CompletedQuestionState> {
           completedQuestions: questions,
         ),
       );
-      // _confettiCubit.startConfetti();
+      // unawaited(_confettiCubit.startConfetti());
       emit(const CompletedQuestionState.synced());
     } catch (e) {
       emit(CompletedQuestionState.error(e.toString()));
@@ -64,9 +64,9 @@ class CompletedQuestionCubit extends Cubit<CompletedQuestionState> {
   ) async {
     emit(const CompletedQuestionState.syncing());
     try {
-      // if (!question.isCompleted) {
-      //   await _confettiCubit.startConfetti();
-      // }
+      if (!question.isCompleted) {
+        unawaited(_confettiCubit.startConfetti());
+      }
       await _userRepository.onQuestionConfidenceChange(question, confidence);
       final questions = await _userRepository.getCompletedQuestions();
       _statisticsBloc.add(

@@ -51,7 +51,6 @@ class _HomeScreenContent extends StatelessWidget {
       builder: (context, state) {
         var name = '';
         var url = '';
-        const dummyQuestionToday = 2;
         const dummyTotalQuestion = 20;
         const dummyCompletedQuestion = 14;
         if (state is Authenticated) {
@@ -60,6 +59,9 @@ class _HomeScreenContent extends StatelessWidget {
         }
         final welcomeTextStyle = theme.textTheme.headlineMedium!
             .copyWith(fontWeight: FontWeight.w600);
+        final todayQuestionCount = state.user.todayQuestions == null
+            ? 0
+            : state.user.todayQuestions!.length;
         return ListView(
           shrinkWrap: true,
           children: [
@@ -78,8 +80,7 @@ class _HomeScreenContent extends StatelessWidget {
                         style: welcomeTextStyle,
                       ),
                       TextSpan(
-                        // TODO: Replace with actual question count
-                        text: '$dummyQuestionToday questions',
+                        text: '$todayQuestionCount questions',
                         style: welcomeTextStyle.copyWith(
                           fontWeight: FontWeight.w800,
                           color: theme.primaryColor,

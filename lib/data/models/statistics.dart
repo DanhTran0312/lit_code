@@ -203,7 +203,6 @@ abstract class Statistics with _$Statistics {
         };
       }
     }
-    print(remainingQuestionsByCategoryAndDifficulty);
     return remainingQuestionsByCategoryAndDifficulty;
   }
 }

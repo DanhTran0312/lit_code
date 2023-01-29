@@ -46,6 +46,14 @@ class QuestionRecommendationRepository {
         break;
       }
     }
+    if (recommendedQuestions.length < amount) {
+      recommendedQuestions.addAll(
+        _statisticsBloc.state.statistics.remainingQuestions
+            .where((question) => !recommendedQuestions.contains(question))
+            .take(amount - recommendedQuestions.length)
+            .toList(),
+      );
+    }
     return recommendedQuestions;
   }
 

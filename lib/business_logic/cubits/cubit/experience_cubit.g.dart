@@ -7,7 +7,8 @@ part of 'experience_cubit.dart';
 // **************************************************************************
 
 _$ExperienceNotCompleted _$$ExperienceNotCompletedFromJson(
-        Map<String, dynamic> json) =>
+  Map<String, dynamic> json,
+) =>
     _$ExperienceNotCompleted(
       experience:
           $enumDecodeNullable(_$ExperienceEnumMap, json['experience']) ??
@@ -16,7 +17,8 @@ _$ExperienceNotCompleted _$$ExperienceNotCompletedFromJson(
     );
 
 Map<String, dynamic> _$$ExperienceNotCompletedToJson(
-        _$ExperienceNotCompleted instance) =>
+  _$ExperienceNotCompleted instance,
+) =>
     <String, dynamic>{
       'experience': _$ExperienceEnumMap[instance.experience]!,
       'runtimeType': instance.$type,
@@ -29,14 +31,16 @@ const _$ExperienceEnumMap = {
 };
 
 _$ExperienceCompleted _$$ExperienceCompletedFromJson(
-        Map<String, dynamic> json) =>
+  Map<String, dynamic> json,
+) =>
     _$ExperienceCompleted(
       experience: $enumDecode(_$ExperienceEnumMap, json['experience']),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$ExperienceCompletedToJson(
-        _$ExperienceCompleted instance) =>
+  _$ExperienceCompleted instance,
+) =>
     <String, dynamic>{
       'experience': _$ExperienceEnumMap[instance.experience]!,
       'runtimeType': instance.$type,

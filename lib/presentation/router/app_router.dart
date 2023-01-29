@@ -57,7 +57,7 @@ class AppRouter {
       GoRoute(
         path: initialRoute,
         pageBuilder: (context, state) {
-          return const MaterialPage(child: SignInScreen());
+          return MaterialPage(key: state.pageKey, child: const SignInScreen());
         },
         redirect: (context, state) {
           if (_onboardingCubit.state is OnBoardingNotCompleted) {
@@ -71,32 +71,75 @@ class AppRouter {
       GoRoute(
         name: 'signIn',
         path: signInRoute,
+        redirect: (context, state) {
+          if (_appBloc.state is Authenticated) {
+            return homeRoute;
+          }
+          return null;
+        },
         pageBuilder: (context, state) {
-          return MaterialPage(key: state.pageKey, child: const SignInScreen());
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const SignInScreen(),
+            transitionDuration: const Duration(milliseconds: 450),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: CurvedAnimation(
+                  parent: animation,
+                  curve: Curves.easeIn,
+                ),
+                child: child,
+              );
+            },
+          );
         },
       ),
       GoRoute(
         name: 'signUp',
         path: signUpRoute,
         pageBuilder: (context, state) {
-          return const MaterialPage(child: SignUpScreen());
+          return MaterialPage(key: state.pageKey, child: const SignUpScreen());
+        },
+        redirect: (context, state) {
+          if (_appBloc.state is Authenticated) {
+            return homeRoute;
+          }
+          return null;
         },
       ),
       GoRoute(
         name: 'onBoarding',
         path: onboardingRoute,
         pageBuilder: (context, state) {
-          return const MaterialPage(child: OnBoardingScreen());
+          return MaterialPage(
+            key: state.pageKey,
+            child: OnBoardingScreen(
+              onboardingCubit: _onboardingCubit,
+            ),
+          );
         },
       ),
       GoRoute(
         name: 'experience',
         path: experienceRoute,
         pageBuilder: (context, state) {
-          return MaterialPage(
+          return CustomTransitionPage(
+            key: state.pageKey,
             child: ExperienceScreen(
               experienceCubit: _experienceCubit,
             ),
+            transitionDuration: const Duration(milliseconds: 550),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: CurvedAnimation(
+                  parent: animation,
+                  curve: Curves.easeInOut,
+                ),
+                child: child,
+              );
+            },
           );
         },
       ),
@@ -114,35 +157,50 @@ class AppRouter {
             name: 'progress',
             path: progressRoute,
             pageBuilder: (context, state) {
-              return const MaterialPage(child: ProgressScreen());
+              return _defaultScreenTransition(
+                const ProgressScreen(),
+                key: state.pageKey,
+              );
             },
           ),
           GoRoute(
             name: 'review',
             path: reviewRoute,
             pageBuilder: (context, state) {
-              return const MaterialPage(child: ReviewScreen());
+              return _defaultScreenTransition(
+                const ReviewScreen(),
+                key: state.pageKey,
+              );
             },
           ),
           GoRoute(
             name: 'settings',
             path: settingsRoute,
             pageBuilder: (context, state) {
-              return const MaterialPage(child: SettingsScreen());
+              return _defaultScreenTransition(
+                const SettingsScreen(),
+                key: state.pageKey,
+              );
             },
           ),
           GoRoute(
             name: 'home',
             path: homeRoute,
             pageBuilder: (context, state) {
-              return const MaterialPage(child: HomeScreen());
+              return _defaultScreenTransition(
+                const HomeScreen(),
+                key: state.pageKey,
+              );
             },
             routes: [
               GoRoute(
                 name: 'profile',
                 path: profileRoute,
                 pageBuilder: (context, state) {
-                  return const MaterialPage(child: ProfileScreen());
+                  return _defaultScreenTransition(
+                    const ProfileScreen(),
+                    key: state.pageKey,
+                  );
                 },
               ),
             ],
@@ -157,11 +215,34 @@ class AppRouter {
             name: 'study',
             path: studyRoute,
             pageBuilder: (context, state) {
-              return const MaterialPage(child: StudyScreen());
+              return _defaultScreenTransition(
+                const StudyScreen(),
+                key: state.pageKey,
+              );
             },
           ),
         ],
       ),
     ];
+  }
+
+  CustomTransitionPage<dynamic> _defaultScreenTransition(
+    Widget child, {
+    LocalKey? key,
+  }) {
+    return CustomTransitionPage(
+      key: key,
+      child: child,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return FadeTransition(
+          opacity: CurvedAnimation(
+            parent: animation,
+            curve: Curves.easeInOut,
+          ),
+          child: child,
+        );
+      },
+      transitionDuration: const Duration(milliseconds: 350),
+    );
   }
 }

@@ -1,7 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars
 
-import 'dart:math';
-
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/question_list_bloc.dart';
@@ -84,21 +83,18 @@ class _ConfettiBuilder extends StatelessWidget {
     return Stack(
       children: [
         Align(
-          alignment: Alignment.bottomLeft,
-          child: CustomConfetti(
-            key: const Key('confetti1'),
+          child: ConfettiWidget(
             confettiController: confettiCubit.confettiController,
-            blastDirection: -pi / 2.3,
+            blastDirectionality: BlastDirectionality.explosive,
+            minBlastForce: 8,
+            maxBlastForce: 25,
+            emissionFrequency: 0.07,
+            minimumSize: const Size(7, 7),
+            maximumSize: const Size(12, 12),
+            numberOfParticles: 15,
+            gravity: 0.1,
           ),
         ),
-        Align(
-          alignment: Alignment.bottomRight,
-          child: CustomConfetti(
-            key: const Key('confetti2'),
-            blastDirection: -pi / 1.77,
-            confettiController: confettiCubit.confettiController,
-          ),
-        )
       ],
     );
   }

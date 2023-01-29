@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:lit_code/constants/constants.dart';
 import 'package:lit_code/data/models/models.dart';
 import 'package:lit_code/presentation/widgets/widgets.dart';
-import 'package:lit_code/theme/theme_utils.dart';
 
 class CategoryProgressCard extends StatelessWidget {
   const CategoryProgressCard({
@@ -31,11 +30,6 @@ class CategoryProgressCard extends StatelessWidget {
             .toInt();
     final theme = Theme.of(context);
     return Card(
-      color: ThemeUtils.getThemeColor(
-        theme,
-        lightSecondaryColor.withOpacity(0.57),
-        darkSecondaryColor.withOpacity(0.5),
-      ),
       child: _CategoryProgressContent(
         category: category,
         theme: theme,

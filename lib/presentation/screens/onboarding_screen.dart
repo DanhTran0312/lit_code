@@ -8,13 +8,17 @@ import 'package:lit_code/data/models/models.dart';
 import 'package:lit_code/theme/theme_utils.dart';
 
 class OnBoardingScreen extends StatelessWidget {
-  const OnBoardingScreen({super.key});
+  const OnBoardingScreen({super.key, required OnBoardingCubit onboardingCubit})
+      : _onBoardingCubit = onboardingCubit;
+
+  final OnBoardingCubit _onBoardingCubit;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => OnBoardingCubit(),
+      create: (context) => _onBoardingCubit,
       child: BlocConsumer<OnBoardingCubit, OnBoardingState>(
+        bloc: _onBoardingCubit,
         listener: (context, state) {
           if (state is OnBoardingCompleted) {
             context.goNamed('signIn');
