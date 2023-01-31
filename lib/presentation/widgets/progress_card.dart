@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lit_code/constants/constants.dart';
 import 'package:lit_code/presentation/widgets/widgets.dart';
+import 'package:lit_code/theme/theme_utils.dart';
 
 class ProgressCard extends StatelessWidget {
   const ProgressCard({
@@ -61,11 +62,17 @@ class QuestionAndDifficulty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Chip(
           label: Text(questionCount.toString()),
+          backgroundColor: ThemeUtils.getThemeColor(
+            theme,
+            lightChipColor,
+            Colors.pinkAccent,
+          ),
         ),
         DifficultyChip(
           difficulty: difficulty,

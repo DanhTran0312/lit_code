@@ -24,6 +24,7 @@ mixin _$SettingsEvent {
     required TResult Function(ThemeMode themeMode) themeChanged,
     required TResult Function(List<Category> category) categoryChanged,
     required TResult Function() signOutRequested,
+    required TResult Function(int goalDate) goalDateChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -34,6 +35,7 @@ mixin _$SettingsEvent {
     TResult? Function(ThemeMode themeMode)? themeChanged,
     TResult? Function(List<Category> category)? categoryChanged,
     TResult? Function()? signOutRequested,
+    TResult? Function(int goalDate)? goalDateChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,6 +46,7 @@ mixin _$SettingsEvent {
     TResult Function(ThemeMode themeMode)? themeChanged,
     TResult Function(List<Category> category)? categoryChanged,
     TResult Function()? signOutRequested,
+    TResult Function(int goalDate)? goalDateChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -55,6 +58,7 @@ mixin _$SettingsEvent {
     required TResult Function(ThemeChanged value) themeChanged,
     required TResult Function(CategoryChanged value) categoryChanged,
     required TResult Function(SignOutRequested value) signOutRequested,
+    required TResult Function(GoalDateChanged value) goalDateChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,6 +69,7 @@ mixin _$SettingsEvent {
     TResult? Function(ThemeChanged value)? themeChanged,
     TResult? Function(CategoryChanged value)? categoryChanged,
     TResult? Function(SignOutRequested value)? signOutRequested,
+    TResult? Function(GoalDateChanged value)? goalDateChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,6 +80,7 @@ mixin _$SettingsEvent {
     TResult Function(ThemeChanged value)? themeChanged,
     TResult Function(CategoryChanged value)? categoryChanged,
     TResult Function(SignOutRequested value)? signOutRequested,
+    TResult Function(GoalDateChanged value)? goalDateChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -179,6 +185,7 @@ class _$UpdateSettings implements UpdateSettings {
     required TResult Function(ThemeMode themeMode) themeChanged,
     required TResult Function(List<Category> category) categoryChanged,
     required TResult Function() signOutRequested,
+    required TResult Function(int goalDate) goalDateChanged,
   }) {
     return updateSettings(settings);
   }
@@ -192,6 +199,7 @@ class _$UpdateSettings implements UpdateSettings {
     TResult? Function(ThemeMode themeMode)? themeChanged,
     TResult? Function(List<Category> category)? categoryChanged,
     TResult? Function()? signOutRequested,
+    TResult? Function(int goalDate)? goalDateChanged,
   }) {
     return updateSettings?.call(settings);
   }
@@ -205,6 +213,7 @@ class _$UpdateSettings implements UpdateSettings {
     TResult Function(ThemeMode themeMode)? themeChanged,
     TResult Function(List<Category> category)? categoryChanged,
     TResult Function()? signOutRequested,
+    TResult Function(int goalDate)? goalDateChanged,
     required TResult orElse(),
   }) {
     if (updateSettings != null) {
@@ -222,6 +231,7 @@ class _$UpdateSettings implements UpdateSettings {
     required TResult Function(ThemeChanged value) themeChanged,
     required TResult Function(CategoryChanged value) categoryChanged,
     required TResult Function(SignOutRequested value) signOutRequested,
+    required TResult Function(GoalDateChanged value) goalDateChanged,
   }) {
     return updateSettings(this);
   }
@@ -235,6 +245,7 @@ class _$UpdateSettings implements UpdateSettings {
     TResult? Function(ThemeChanged value)? themeChanged,
     TResult? Function(CategoryChanged value)? categoryChanged,
     TResult? Function(SignOutRequested value)? signOutRequested,
+    TResult? Function(GoalDateChanged value)? goalDateChanged,
   }) {
     return updateSettings?.call(this);
   }
@@ -248,6 +259,7 @@ class _$UpdateSettings implements UpdateSettings {
     TResult Function(ThemeChanged value)? themeChanged,
     TResult Function(CategoryChanged value)? categoryChanged,
     TResult Function(SignOutRequested value)? signOutRequested,
+    TResult Function(GoalDateChanged value)? goalDateChanged,
     required TResult orElse(),
   }) {
     if (updateSettings != null) {
@@ -311,6 +323,7 @@ class _$InitializeSettings implements InitializeSettings {
     required TResult Function(ThemeMode themeMode) themeChanged,
     required TResult Function(List<Category> category) categoryChanged,
     required TResult Function() signOutRequested,
+    required TResult Function(int goalDate) goalDateChanged,
   }) {
     return intializeSettings();
   }
@@ -324,6 +337,7 @@ class _$InitializeSettings implements InitializeSettings {
     TResult? Function(ThemeMode themeMode)? themeChanged,
     TResult? Function(List<Category> category)? categoryChanged,
     TResult? Function()? signOutRequested,
+    TResult? Function(int goalDate)? goalDateChanged,
   }) {
     return intializeSettings?.call();
   }
@@ -337,6 +351,7 @@ class _$InitializeSettings implements InitializeSettings {
     TResult Function(ThemeMode themeMode)? themeChanged,
     TResult Function(List<Category> category)? categoryChanged,
     TResult Function()? signOutRequested,
+    TResult Function(int goalDate)? goalDateChanged,
     required TResult orElse(),
   }) {
     if (intializeSettings != null) {
@@ -354,6 +369,7 @@ class _$InitializeSettings implements InitializeSettings {
     required TResult Function(ThemeChanged value) themeChanged,
     required TResult Function(CategoryChanged value) categoryChanged,
     required TResult Function(SignOutRequested value) signOutRequested,
+    required TResult Function(GoalDateChanged value) goalDateChanged,
   }) {
     return intializeSettings(this);
   }
@@ -367,6 +383,7 @@ class _$InitializeSettings implements InitializeSettings {
     TResult? Function(ThemeChanged value)? themeChanged,
     TResult? Function(CategoryChanged value)? categoryChanged,
     TResult? Function(SignOutRequested value)? signOutRequested,
+    TResult? Function(GoalDateChanged value)? goalDateChanged,
   }) {
     return intializeSettings?.call(this);
   }
@@ -380,6 +397,7 @@ class _$InitializeSettings implements InitializeSettings {
     TResult Function(ThemeChanged value)? themeChanged,
     TResult Function(CategoryChanged value)? categoryChanged,
     TResult Function(SignOutRequested value)? signOutRequested,
+    TResult Function(GoalDateChanged value)? goalDateChanged,
     required TResult orElse(),
   }) {
     if (intializeSettings != null) {
@@ -471,6 +489,7 @@ class _$DifficultyChanged implements DifficultyChanged {
     required TResult Function(ThemeMode themeMode) themeChanged,
     required TResult Function(List<Category> category) categoryChanged,
     required TResult Function() signOutRequested,
+    required TResult Function(int goalDate) goalDateChanged,
   }) {
     return difficultyChanged(difficulty);
   }
@@ -484,6 +503,7 @@ class _$DifficultyChanged implements DifficultyChanged {
     TResult? Function(ThemeMode themeMode)? themeChanged,
     TResult? Function(List<Category> category)? categoryChanged,
     TResult? Function()? signOutRequested,
+    TResult? Function(int goalDate)? goalDateChanged,
   }) {
     return difficultyChanged?.call(difficulty);
   }
@@ -497,6 +517,7 @@ class _$DifficultyChanged implements DifficultyChanged {
     TResult Function(ThemeMode themeMode)? themeChanged,
     TResult Function(List<Category> category)? categoryChanged,
     TResult Function()? signOutRequested,
+    TResult Function(int goalDate)? goalDateChanged,
     required TResult orElse(),
   }) {
     if (difficultyChanged != null) {
@@ -514,6 +535,7 @@ class _$DifficultyChanged implements DifficultyChanged {
     required TResult Function(ThemeChanged value) themeChanged,
     required TResult Function(CategoryChanged value) categoryChanged,
     required TResult Function(SignOutRequested value) signOutRequested,
+    required TResult Function(GoalDateChanged value) goalDateChanged,
   }) {
     return difficultyChanged(this);
   }
@@ -527,6 +549,7 @@ class _$DifficultyChanged implements DifficultyChanged {
     TResult? Function(ThemeChanged value)? themeChanged,
     TResult? Function(CategoryChanged value)? categoryChanged,
     TResult? Function(SignOutRequested value)? signOutRequested,
+    TResult? Function(GoalDateChanged value)? goalDateChanged,
   }) {
     return difficultyChanged?.call(this);
   }
@@ -540,6 +563,7 @@ class _$DifficultyChanged implements DifficultyChanged {
     TResult Function(ThemeChanged value)? themeChanged,
     TResult Function(CategoryChanged value)? categoryChanged,
     TResult Function(SignOutRequested value)? signOutRequested,
+    TResult Function(GoalDateChanged value)? goalDateChanged,
     required TResult orElse(),
   }) {
     if (difficultyChanged != null) {
@@ -630,6 +654,7 @@ class _$ThemeChanged implements ThemeChanged {
     required TResult Function(ThemeMode themeMode) themeChanged,
     required TResult Function(List<Category> category) categoryChanged,
     required TResult Function() signOutRequested,
+    required TResult Function(int goalDate) goalDateChanged,
   }) {
     return themeChanged(themeMode);
   }
@@ -643,6 +668,7 @@ class _$ThemeChanged implements ThemeChanged {
     TResult? Function(ThemeMode themeMode)? themeChanged,
     TResult? Function(List<Category> category)? categoryChanged,
     TResult? Function()? signOutRequested,
+    TResult? Function(int goalDate)? goalDateChanged,
   }) {
     return themeChanged?.call(themeMode);
   }
@@ -656,6 +682,7 @@ class _$ThemeChanged implements ThemeChanged {
     TResult Function(ThemeMode themeMode)? themeChanged,
     TResult Function(List<Category> category)? categoryChanged,
     TResult Function()? signOutRequested,
+    TResult Function(int goalDate)? goalDateChanged,
     required TResult orElse(),
   }) {
     if (themeChanged != null) {
@@ -673,6 +700,7 @@ class _$ThemeChanged implements ThemeChanged {
     required TResult Function(ThemeChanged value) themeChanged,
     required TResult Function(CategoryChanged value) categoryChanged,
     required TResult Function(SignOutRequested value) signOutRequested,
+    required TResult Function(GoalDateChanged value) goalDateChanged,
   }) {
     return themeChanged(this);
   }
@@ -686,6 +714,7 @@ class _$ThemeChanged implements ThemeChanged {
     TResult? Function(ThemeChanged value)? themeChanged,
     TResult? Function(CategoryChanged value)? categoryChanged,
     TResult? Function(SignOutRequested value)? signOutRequested,
+    TResult? Function(GoalDateChanged value)? goalDateChanged,
   }) {
     return themeChanged?.call(this);
   }
@@ -699,6 +728,7 @@ class _$ThemeChanged implements ThemeChanged {
     TResult Function(ThemeChanged value)? themeChanged,
     TResult Function(CategoryChanged value)? categoryChanged,
     TResult Function(SignOutRequested value)? signOutRequested,
+    TResult Function(GoalDateChanged value)? goalDateChanged,
     required TResult orElse(),
   }) {
     if (themeChanged != null) {
@@ -795,6 +825,7 @@ class _$CategoryChanged implements CategoryChanged {
     required TResult Function(ThemeMode themeMode) themeChanged,
     required TResult Function(List<Category> category) categoryChanged,
     required TResult Function() signOutRequested,
+    required TResult Function(int goalDate) goalDateChanged,
   }) {
     return categoryChanged(category);
   }
@@ -808,6 +839,7 @@ class _$CategoryChanged implements CategoryChanged {
     TResult? Function(ThemeMode themeMode)? themeChanged,
     TResult? Function(List<Category> category)? categoryChanged,
     TResult? Function()? signOutRequested,
+    TResult? Function(int goalDate)? goalDateChanged,
   }) {
     return categoryChanged?.call(category);
   }
@@ -821,6 +853,7 @@ class _$CategoryChanged implements CategoryChanged {
     TResult Function(ThemeMode themeMode)? themeChanged,
     TResult Function(List<Category> category)? categoryChanged,
     TResult Function()? signOutRequested,
+    TResult Function(int goalDate)? goalDateChanged,
     required TResult orElse(),
   }) {
     if (categoryChanged != null) {
@@ -838,6 +871,7 @@ class _$CategoryChanged implements CategoryChanged {
     required TResult Function(ThemeChanged value) themeChanged,
     required TResult Function(CategoryChanged value) categoryChanged,
     required TResult Function(SignOutRequested value) signOutRequested,
+    required TResult Function(GoalDateChanged value) goalDateChanged,
   }) {
     return categoryChanged(this);
   }
@@ -851,6 +885,7 @@ class _$CategoryChanged implements CategoryChanged {
     TResult? Function(ThemeChanged value)? themeChanged,
     TResult? Function(CategoryChanged value)? categoryChanged,
     TResult? Function(SignOutRequested value)? signOutRequested,
+    TResult? Function(GoalDateChanged value)? goalDateChanged,
   }) {
     return categoryChanged?.call(this);
   }
@@ -864,6 +899,7 @@ class _$CategoryChanged implements CategoryChanged {
     TResult Function(ThemeChanged value)? themeChanged,
     TResult Function(CategoryChanged value)? categoryChanged,
     TResult Function(SignOutRequested value)? signOutRequested,
+    TResult Function(GoalDateChanged value)? goalDateChanged,
     required TResult orElse(),
   }) {
     if (categoryChanged != null) {
@@ -927,6 +963,7 @@ class _$SignOutRequested implements SignOutRequested {
     required TResult Function(ThemeMode themeMode) themeChanged,
     required TResult Function(List<Category> category) categoryChanged,
     required TResult Function() signOutRequested,
+    required TResult Function(int goalDate) goalDateChanged,
   }) {
     return signOutRequested();
   }
@@ -940,6 +977,7 @@ class _$SignOutRequested implements SignOutRequested {
     TResult? Function(ThemeMode themeMode)? themeChanged,
     TResult? Function(List<Category> category)? categoryChanged,
     TResult? Function()? signOutRequested,
+    TResult? Function(int goalDate)? goalDateChanged,
   }) {
     return signOutRequested?.call();
   }
@@ -953,6 +991,7 @@ class _$SignOutRequested implements SignOutRequested {
     TResult Function(ThemeMode themeMode)? themeChanged,
     TResult Function(List<Category> category)? categoryChanged,
     TResult Function()? signOutRequested,
+    TResult Function(int goalDate)? goalDateChanged,
     required TResult orElse(),
   }) {
     if (signOutRequested != null) {
@@ -970,6 +1009,7 @@ class _$SignOutRequested implements SignOutRequested {
     required TResult Function(ThemeChanged value) themeChanged,
     required TResult Function(CategoryChanged value) categoryChanged,
     required TResult Function(SignOutRequested value) signOutRequested,
+    required TResult Function(GoalDateChanged value) goalDateChanged,
   }) {
     return signOutRequested(this);
   }
@@ -983,6 +1023,7 @@ class _$SignOutRequested implements SignOutRequested {
     TResult? Function(ThemeChanged value)? themeChanged,
     TResult? Function(CategoryChanged value)? categoryChanged,
     TResult? Function(SignOutRequested value)? signOutRequested,
+    TResult? Function(GoalDateChanged value)? goalDateChanged,
   }) {
     return signOutRequested?.call(this);
   }
@@ -996,6 +1037,7 @@ class _$SignOutRequested implements SignOutRequested {
     TResult Function(ThemeChanged value)? themeChanged,
     TResult Function(CategoryChanged value)? categoryChanged,
     TResult Function(SignOutRequested value)? signOutRequested,
+    TResult Function(GoalDateChanged value)? goalDateChanged,
     required TResult orElse(),
   }) {
     if (signOutRequested != null) {
@@ -1007,6 +1049,171 @@ class _$SignOutRequested implements SignOutRequested {
 
 abstract class SignOutRequested implements SettingsEvent {
   const factory SignOutRequested() = _$SignOutRequested;
+}
+
+/// @nodoc
+abstract class _$$GoalDateChangedCopyWith<$Res> {
+  factory _$$GoalDateChangedCopyWith(
+          _$GoalDateChanged value, $Res Function(_$GoalDateChanged) then) =
+      __$$GoalDateChangedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int goalDate});
+}
+
+/// @nodoc
+class __$$GoalDateChangedCopyWithImpl<$Res>
+    extends _$SettingsEventCopyWithImpl<$Res, _$GoalDateChanged>
+    implements _$$GoalDateChangedCopyWith<$Res> {
+  __$$GoalDateChangedCopyWithImpl(
+      _$GoalDateChanged _value, $Res Function(_$GoalDateChanged) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? goalDate = null,
+  }) {
+    return _then(_$GoalDateChanged(
+      goalDate: null == goalDate
+          ? _value.goalDate
+          : goalDate // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GoalDateChanged implements GoalDateChanged {
+  const _$GoalDateChanged({required this.goalDate});
+
+  @override
+  final int goalDate;
+
+  @override
+  String toString() {
+    return 'SettingsEvent.goalDateChanged(goalDate: $goalDate)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GoalDateChanged &&
+            (identical(other.goalDate, goalDate) ||
+                other.goalDate == goalDate));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, goalDate);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GoalDateChangedCopyWith<_$GoalDateChanged> get copyWith =>
+      __$$GoalDateChangedCopyWithImpl<_$GoalDateChanged>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Settings settings) updateSettings,
+    required TResult Function() intializeSettings,
+    required TResult Function(List<Difficulty> difficulty) difficultyChanged,
+    required TResult Function(ThemeMode themeMode) themeChanged,
+    required TResult Function(List<Category> category) categoryChanged,
+    required TResult Function() signOutRequested,
+    required TResult Function(int goalDate) goalDateChanged,
+  }) {
+    return goalDateChanged(goalDate);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Settings settings)? updateSettings,
+    TResult? Function()? intializeSettings,
+    TResult? Function(List<Difficulty> difficulty)? difficultyChanged,
+    TResult? Function(ThemeMode themeMode)? themeChanged,
+    TResult? Function(List<Category> category)? categoryChanged,
+    TResult? Function()? signOutRequested,
+    TResult? Function(int goalDate)? goalDateChanged,
+  }) {
+    return goalDateChanged?.call(goalDate);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Settings settings)? updateSettings,
+    TResult Function()? intializeSettings,
+    TResult Function(List<Difficulty> difficulty)? difficultyChanged,
+    TResult Function(ThemeMode themeMode)? themeChanged,
+    TResult Function(List<Category> category)? categoryChanged,
+    TResult Function()? signOutRequested,
+    TResult Function(int goalDate)? goalDateChanged,
+    required TResult orElse(),
+  }) {
+    if (goalDateChanged != null) {
+      return goalDateChanged(goalDate);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(UpdateSettings value) updateSettings,
+    required TResult Function(InitializeSettings value) intializeSettings,
+    required TResult Function(DifficultyChanged value) difficultyChanged,
+    required TResult Function(ThemeChanged value) themeChanged,
+    required TResult Function(CategoryChanged value) categoryChanged,
+    required TResult Function(SignOutRequested value) signOutRequested,
+    required TResult Function(GoalDateChanged value) goalDateChanged,
+  }) {
+    return goalDateChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(UpdateSettings value)? updateSettings,
+    TResult? Function(InitializeSettings value)? intializeSettings,
+    TResult? Function(DifficultyChanged value)? difficultyChanged,
+    TResult? Function(ThemeChanged value)? themeChanged,
+    TResult? Function(CategoryChanged value)? categoryChanged,
+    TResult? Function(SignOutRequested value)? signOutRequested,
+    TResult? Function(GoalDateChanged value)? goalDateChanged,
+  }) {
+    return goalDateChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(UpdateSettings value)? updateSettings,
+    TResult Function(InitializeSettings value)? intializeSettings,
+    TResult Function(DifficultyChanged value)? difficultyChanged,
+    TResult Function(ThemeChanged value)? themeChanged,
+    TResult Function(CategoryChanged value)? categoryChanged,
+    TResult Function(SignOutRequested value)? signOutRequested,
+    TResult Function(GoalDateChanged value)? goalDateChanged,
+    required TResult orElse(),
+  }) {
+    if (goalDateChanged != null) {
+      return goalDateChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GoalDateChanged implements SettingsEvent {
+  const factory GoalDateChanged({required final int goalDate}) =
+      _$GoalDateChanged;
+
+  int get goalDate;
+  @JsonKey(ignore: true)
+  _$$GoalDateChangedCopyWith<_$GoalDateChanged> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

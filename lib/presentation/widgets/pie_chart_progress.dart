@@ -25,10 +25,8 @@ class PieChartProgress extends StatelessWidget {
       aspectRatio: 3 / 4,
       child: BlocProvider(
         create: (context) => PieChartTouchDataCubit(),
-        child: BlocSelector<PieChartTouchDataCubit, PieChartTouchDataState,
-            PieChartSectionData?>(
-          selector: (state) => state.touchedSection,
-          builder: (context, touchedSection) {
+        child: BlocBuilder<PieChartTouchDataCubit, int>(
+          builder: (context, state) {
             return PieChart(
               swapAnimationCurve: Curves.easeInOutCubic,
               swapAnimationDuration: const Duration(milliseconds: 160),
@@ -43,14 +41,9 @@ class PieChartProgress extends StatelessWidget {
                         pieTouchResponse.touchedSection == null) {
                       return;
                     }
-                    if (pieTouchResponse.touchedSection!.touchedSection ==
-                        touchedSection) {
-                      return;
-                    }
-                    BlocProvider.of<PieChartTouchDataCubit>(
-                      context,
-                    ).updateTouchData(
-                      pieTouchResponse.touchedSection!.touchedSection,
+                    BlocProvider.of<PieChartTouchDataCubit>(context)
+                        .updateTouchData(
+                      pieTouchResponse.touchedSection!.touchedSectionIndex,
                     );
                   },
                 ),
@@ -59,7 +52,7 @@ class PieChartProgress extends StatelessWidget {
                   easy,
                   medium,
                   hard,
-                  touchedSection,
+                  state,
                 ),
               ),
             );
@@ -75,7 +68,7 @@ List<PieChartSectionData> _sectionBuilder(
   double easy,
   double medium,
   double hard,
-  PieChartSectionData? touchedSection,
+  int touchedIndex,
 ) {
   const touchedSectionRadius = 60.0;
   const normalSectionRadius = 50.0;
@@ -94,12 +87,16 @@ List<PieChartSectionData> _sectionBuilder(
     ];
   }
 
-  final isEasyTouched =
-      touchedSection != null ? touchedSection.color == Colors.green : false;
+  final isEasyTouched = touchedIndex == 0;
   final isMediumTouched =
-      touchedSection != null ? touchedSection.color == Colors.orange : false;
-  final isHardTouched =
-      touchedSection != null ? touchedSection.color == Colors.red : false;
+      touchedIndex == 1 && easy != 0 || (easy == 0 && touchedIndex == 0);
+  final isHardTouched = touchedIndex == 2 ||
+      (easy == 0 && medium == 0 && touchedIndex == 0) ||
+      (medium == 0 && touchedIndex == 1) ||
+      (easy == 0 && touchedIndex == 1);
+
+  final seletedTitleTheme = theme.textTheme.titleMedium;
+  final unselectedTitleTheme = theme.textTheme.titleSmall;
 
   return [
     PieChartSectionData(
@@ -107,6 +104,7 @@ List<PieChartSectionData> _sectionBuilder(
       value: easy,
       showTitle: isEasyTouched,
       title: '${(easy * 100).toStringAsFixed(0)}%',
+      titleStyle: isEasyTouched ? seletedTitleTheme : unselectedTitleTheme,
       radius: isEasyTouched ? touchedSectionRadius : normalSectionRadius,
     ),
     PieChartSectionData(
@@ -114,6 +112,7 @@ List<PieChartSectionData> _sectionBuilder(
       value: medium,
       showTitle: isMediumTouched,
       title: '${(medium * 100).toStringAsFixed(0)}%',
+      titleStyle: isMediumTouched ? seletedTitleTheme : unselectedTitleTheme,
       radius: isMediumTouched ? touchedSectionRadius : normalSectionRadius,
     ),
     PieChartSectionData(
@@ -121,6 +120,7 @@ List<PieChartSectionData> _sectionBuilder(
       value: hard,
       showTitle: isHardTouched,
       title: '${(hard * 100).toStringAsFixed(0)}%',
+      titleStyle: isHardTouched ? seletedTitleTheme : unselectedTitleTheme,
       radius: isHardTouched ? touchedSectionRadius : normalSectionRadius,
     ),
   ];

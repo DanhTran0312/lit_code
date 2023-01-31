@@ -20,12 +20,31 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     on<ThemeChanged>(_onThemeChanged);
     on<CategoryChanged>(_onCategoryChanged);
     on<SignOutRequested>(_onSignOutRequested);
+    on<GoalDateChanged>(_onGoalDateChanged);
   }
 
   final UserRepository _userRepository;
 
   void resetSettings() {
     add(const InitializeSettings());
+  }
+
+  FutureOr<void> _onGoalDateChanged(
+    GoalDateChanged event,
+    Emitter<SettingsState> emit,
+  ) async {
+    emit(state.copyWith(status: SettingStatus.loading));
+    final updatedSettings = state.settings.copyWith(
+      goalDate: event.goalDate,
+    );
+    await _userRepository.updateUserSettings(updatedSettings).then((_) {
+      emit(
+        state.copyWith(
+          settings: updatedSettings,
+          status: SettingStatus.success,
+        ),
+      );
+    });
   }
 
   Future<void> _onSignOutRequested(

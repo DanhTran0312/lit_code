@@ -154,6 +154,7 @@ class AppRouter {
         },
         routes: [
           GoRoute(
+            parentNavigatorKey: _shellNavigatorKey,
             name: 'progress',
             path: progressRoute,
             pageBuilder: (context, state) {
@@ -164,6 +165,7 @@ class AppRouter {
             },
           ),
           GoRoute(
+            parentNavigatorKey: _shellNavigatorKey,
             name: 'review',
             path: reviewRoute,
             pageBuilder: (context, state) {
@@ -174,21 +176,12 @@ class AppRouter {
             },
           ),
           GoRoute(
+            parentNavigatorKey: _shellNavigatorKey,
             name: 'settings',
             path: settingsRoute,
             pageBuilder: (context, state) {
               return _defaultScreenTransition(
                 const SettingsScreen(),
-                key: state.pageKey,
-              );
-            },
-          ),
-          GoRoute(
-            name: 'home',
-            path: homeRoute,
-            pageBuilder: (context, state) {
-              return _defaultScreenTransition(
-                const HomeScreen(),
                 key: state.pageKey,
               );
             },
@@ -204,6 +197,17 @@ class AppRouter {
                 },
               ),
             ],
+          ),
+          GoRoute(
+            parentNavigatorKey: _shellNavigatorKey,
+            name: 'home',
+            path: homeRoute,
+            pageBuilder: (context, state) {
+              return _defaultScreenTransition(
+                const HomeScreen(),
+                key: state.pageKey,
+              );
+            },
             redirect: (context, state) {
               if (_experienceCubit.state is ExperienceNotCompleted) {
                 return experienceRoute;
@@ -212,6 +216,7 @@ class AppRouter {
             },
           ),
           GoRoute(
+            parentNavigatorKey: _shellNavigatorKey,
             name: 'study',
             path: studyRoute,
             pageBuilder: (context, state) {

@@ -21,9 +21,9 @@ class CompletedQuestionCubit extends Cubit<CompletedQuestionState> {
         _confettiCubit = confettiCubit,
         super(const CompletedQuestionState.initial());
 
-  final UserRepository _userRepository;
-  final StatisticsBloc _statisticsBloc;
   final ConfettiCubit _confettiCubit;
+  final StatisticsBloc _statisticsBloc;
+  final UserRepository _userRepository;
 
   Future<void> markQuestionAsCompleted(Question question) async {
     emit(const CompletedQuestionState.syncing());
@@ -35,7 +35,7 @@ class CompletedQuestionCubit extends Cubit<CompletedQuestionState> {
           completedQuestions: questions,
         ),
       );
-      // unawaited(_confettiCubit.startConfetti());
+      unawaited(_confettiCubit.startConfetti());
       emit(const CompletedQuestionState.synced());
     } catch (e) {
       emit(CompletedQuestionState.error(e.toString()));

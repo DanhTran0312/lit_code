@@ -24,10 +24,11 @@ class ReviewScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          questionRecommendationCubit.getRecommendedQuestions(5);
+          questionRecommendationCubit.getRecommendedQuestions(1);
         },
         child: const Icon(Icons.refresh),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

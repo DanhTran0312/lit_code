@@ -215,7 +215,7 @@ final ChipThemeData darkChipTheme = ChipThemeData(
     borderRadius: BorderRadius.circular(20),
   ),
   side: BorderSide.none,
-  backgroundColor: Colors.pinkAccent,
+  backgroundColor: darkPrimaryColor,
   padding: const EdgeInsets.symmetric(
     horizontal: chipHorizontalPadding,
     vertical: chipVerticalPadding,
@@ -225,6 +225,7 @@ final ChipThemeData darkChipTheme = ChipThemeData(
 // ---------------------------- Card ----------------------------
 const CardTheme lightCardTheme = CardTheme(
   elevation: 0,
+  color: lightSecondaryColor,
   shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.all(
       Radius.circular(questionCardBorder),

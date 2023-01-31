@@ -29,7 +29,7 @@ mixin _$Settings {
   @HiveField(3)
   List<Category> get categories => throw _privateConstructorUsedError;
   @HiveField(4)
-  DateTime? get goalDate => throw _privateConstructorUsedError;
+  int? get goalDate => throw _privateConstructorUsedError;
   @HiveField(5)
   int? get goalQuestions => throw _privateConstructorUsedError;
 
@@ -49,7 +49,7 @@ abstract class $SettingsCopyWith<$Res> {
       @HiveField(1) bool isNotificationsEnabled,
       @HiveField(2) List<Difficulty> difficulties,
       @HiveField(3) List<Category> categories,
-      @HiveField(4) DateTime? goalDate,
+      @HiveField(4) int? goalDate,
       @HiveField(5) int? goalQuestions});
 }
 
@@ -93,7 +93,7 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
       goalDate: freezed == goalDate
           ? _value.goalDate
           : goalDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as int?,
       goalQuestions: freezed == goalQuestions
           ? _value.goalQuestions
           : goalQuestions // ignore: cast_nullable_to_non_nullable
@@ -114,7 +114,7 @@ abstract class _$$_SettingsCopyWith<$Res> implements $SettingsCopyWith<$Res> {
       @HiveField(1) bool isNotificationsEnabled,
       @HiveField(2) List<Difficulty> difficulties,
       @HiveField(3) List<Category> categories,
-      @HiveField(4) DateTime? goalDate,
+      @HiveField(4) int? goalDate,
       @HiveField(5) int? goalQuestions});
 }
 
@@ -156,7 +156,7 @@ class __$$_SettingsCopyWithImpl<$Res>
       goalDate: freezed == goalDate
           ? _value.goalDate
           : goalDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as int?,
       goalQuestions: freezed == goalQuestions
           ? _value.goalQuestions
           : goalQuestions // ignore: cast_nullable_to_non_nullable
@@ -235,7 +235,7 @@ class _$_Settings extends _Settings {
 
   @override
   @HiveField(4)
-  final DateTime? goalDate;
+  final int? goalDate;
   @override
   @HiveField(5)
   final int? goalQuestions;
@@ -295,7 +295,7 @@ abstract class _Settings extends Settings {
       @HiveField(1) final bool isNotificationsEnabled,
       @HiveField(2) final List<Difficulty> difficulties,
       @HiveField(3) final List<Category> categories,
-      @HiveField(4) final DateTime? goalDate,
+      @HiveField(4) final int? goalDate,
       @HiveField(5) final int? goalQuestions}) = _$_Settings;
   const _Settings._() : super._();
 
@@ -315,7 +315,7 @@ abstract class _Settings extends Settings {
   List<Category> get categories;
   @override
   @HiveField(4)
-  DateTime? get goalDate;
+  int? get goalDate;
   @override
   @HiveField(5)
   int? get goalQuestions;

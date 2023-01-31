@@ -45,7 +45,7 @@ class Settings with _$Settings {
     @HiveField(3)
         List<Category> categories,
     @HiveField(4)
-        DateTime? goalDate,
+        int? goalDate,
     @HiveField(5)
         int? goalQuestions,
   }) = _Settings;

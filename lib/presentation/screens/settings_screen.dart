@@ -1,12 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lit_code/business_logic/blocs/bloc/app_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/settings_bloc.dart';
 import 'package:lit_code/constants/constant.dart';
 import 'package:lit_code/constants/enums.dart';
 import 'package:lit_code/data/models/user.dart';
+import 'package:lit_code/presentation/widgets/custom_date_chip.dart';
 import 'package:lit_code/presentation/widgets/widgets.dart';
+import 'package:lit_code/theme/theme_utils.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -164,13 +167,7 @@ class _SettingScreenContent extends StatelessWidget {
           },
         ),
         const SizedBox(height: sizeBoxMedium),
-        _GoalsCard(theme: theme),
-        ElevatedButton(
-          onPressed: () {
-            context.read<AppBloc>().add(const AppEvent.appLogoutRequested());
-          },
-          child: const Text('Sign Out'),
-        ),
+        _GoalsCard(theme: theme, settingsBloc: _settingsBloc),
       ],
     );
   }
@@ -179,95 +176,157 @@ class _SettingScreenContent extends StatelessWidget {
 class _GoalsCard extends StatelessWidget {
   const _GoalsCard({
     required this.theme,
-  });
+    required SettingsBloc settingsBloc,
+  }) : _settingsBloc = settingsBloc;
 
   final ThemeData theme;
 
+  final SettingsBloc _settingsBloc;
+
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final hasGoal = _settingsBloc.state.settings.goalDate != null;
+    final goalDate = hasGoal
+        ? DateTime.fromMillisecondsSinceEpoch(
+            _settingsBloc.state.settings.goalDate!,
+          )
+        : DateTime.now().add(const Duration(days: 90));
+    final roundedRectangleBorder = RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(16),
+      side: BorderSide(
+        color: ThemeUtils.getThemeColor(
+          theme,
+          inputBorderColor,
+          Colors.transparent,
+        ),
+        width: 1.5,
+      ),
+    );
     return Card(
+      color: ThemeUtils.getThemeColor(
+        theme,
+        lightSecondaryColor.withOpacity(1),
+        darkSecondaryColor.withOpacity(0.8),
+      ),
+      shape: roundedRectangleBorder,
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 16,
-          vertical: 12,
+          vertical: 14,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Goals 🎯',
-                  style: theme.textTheme.headlineMedium,
-                ),
-                IconButton(
-                  onPressed: () {
-                    showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime.now().add(const Duration(days: 365)),
-                    );
-                  },
-                  icon: const Icon(Icons.calendar_month_rounded),
-                ),
-              ],
+            _GoalCardHeading(
+              theme: theme,
+              hasGoal: hasGoal,
+              settingsBloc: _settingsBloc,
             ),
-            const SizedBox(height: sizeBoxMedium),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Column(
-                    children: [
-                      Text(
-                        'Daily',
-                        style: theme.textTheme.headlineSmall,
-                      ),
-                      const SizedBox(height: sizeBoxSmall),
-                      Text(
-                        '',
-                        style: theme.textTheme.headlineSmall,
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    children: [
-                      Text(
-                        'Weekly',
-                        style: theme.textTheme.headlineSmall,
-                      ),
-                      const SizedBox(height: sizeBoxSmall),
-                      Text(
-                        '',
-                        style: theme.textTheme.headlineSmall,
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    children: [
-                      Text(
-                        'Monthly',
-                        style: theme.textTheme.headlineSmall,
-                      ),
-                      const SizedBox(height: sizeBoxSmall),
-                      Text(
-                        '',
-                        style: theme.textTheme.headlineSmall,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            const SizedBox(height: sizeBoxSmall),
+            _QuestionAndGoalDate(theme: theme, goalDate: goalDate),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _QuestionAndGoalDate extends StatelessWidget {
+  const _QuestionAndGoalDate({
+    required this.theme,
+    required this.goalDate,
+  });
+
+  final DateTime goalDate;
+  final ThemeData theme;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Text(
+            '150 questions by',
+            style: theme.textTheme.titleMedium!.copyWith(
+              fontWeight: FontWeight.w700,
+              fontSize: 17,
+              color: ThemeUtils.getThemeColor(
+                theme,
+                Colors.black,
+                Colors.white,
+              ),
+            ),
+          ),
+        ),
+        CustomDateChip(date: goalDate),
+      ],
+    );
+  }
+}
+
+class _GoalCardHeading extends StatelessWidget {
+  const _GoalCardHeading({
+    required this.theme,
+    required this.hasGoal,
+    required SettingsBloc settingsBloc,
+  }) : _settingsBloc = settingsBloc;
+
+  final bool hasGoal;
+  final ThemeData theme;
+
+  final SettingsBloc _settingsBloc;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          'Goals 🎯',
+          style: theme.textTheme.headlineMedium,
+        ),
+        Row(
+          children: [
+            Text(
+              hasGoal ? '' : 'Select goal date',
+              style: theme.textTheme.titleSmall!.copyWith(
+                color: ThemeUtils.getThemeColor(
+                  theme,
+                  Colors.black,
+                  Colors.white,
+                ),
+              ),
+            ),
+            IconButton(
+              onPressed: () async {
+                final date = await showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime.now(),
+                  lastDate: DateTime.now().add(const Duration(days: 365)),
+                );
+                if (date != null) {
+                  _settingsBloc.add(
+                    SettingsEvent.goalDateChanged(
+                      goalDate: date.millisecondsSinceEpoch,
+                    ),
+                  );
+                }
+              },
+              icon: Icon(
+                Icons.edit_calendar_rounded,
+                size: 28,
+                color: ThemeUtils.getThemeColor(
+                  theme,
+                  Colors.black,
+                  Colors.white,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
@@ -318,10 +377,15 @@ class _UserProfileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 10,
+      color: darkSecondaryColor.withOpacity(0.15),
+      shadowColor: Colors.black12,
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 12,
+        padding: const EdgeInsets.fromLTRB(
+          16,
+          25,
+          2,
+          25,
         ),
         child: Row(
           children: [
@@ -355,9 +419,18 @@ class _UserProfileCard extends StatelessWidget {
               ),
             ),
             const SizedBox(width: sizeBoxSmall),
-            Icon(
-              Icons.arrow_forward_ios,
-              color: theme.primaryColor,
+            IconButton(
+              onPressed: () {
+                context.pushNamed('profile');
+              },
+              icon: Icon(
+                color: ThemeUtils.getThemeColor(
+                  theme,
+                  lightPrimaryColor,
+                  darkPrimaryColor,
+                ),
+                Icons.arrow_forward_ios_rounded,
+              ),
             ),
           ],
         ),

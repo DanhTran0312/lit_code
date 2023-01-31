@@ -21,7 +21,7 @@ class SettingsAdapter extends TypeAdapter<Settings> {
       isNotificationsEnabled: fields[1] as bool,
       difficulties: (fields[2] as List).cast<Difficulty>(),
       categories: (fields[3] as List).cast<Category>(),
-      goalDate: fields[4] as DateTime?,
+      goalDate: fields[4] as int?,
       goalQuestions: fields[5] as int?,
     );
   }
@@ -90,9 +90,7 @@ _$_Settings _$$_SettingsFromJson(Map<String, dynamic> json) => _$_Settings(
             Category.bitManipulation,
             Category.mathAndGeometry
           ],
-      goalDate: json['goalDate'] == null
-          ? null
-          : DateTime.parse(json['goalDate'] as String),
+      goalDate: json['goalDate'] as int?,
       goalQuestions: json['goalQuestions'] as int?,
     );
 
@@ -104,7 +102,7 @@ Map<String, dynamic> _$$_SettingsToJson(_$_Settings instance) =>
           instance.difficulties.map((e) => _$DifficultyEnumMap[e]!).toList(),
       'categories':
           instance.categories.map((e) => _$CategoryEnumMap[e]!).toList(),
-      'goalDate': instance.goalDate?.toIso8601String(),
+      'goalDate': instance.goalDate,
       'goalQuestions': instance.goalQuestions,
     };
 
