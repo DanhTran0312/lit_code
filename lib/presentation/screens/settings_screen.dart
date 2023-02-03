@@ -7,7 +7,6 @@ import 'package:lit_code/business_logic/blocs/bloc/settings_bloc.dart';
 import 'package:lit_code/constants/constant.dart';
 import 'package:lit_code/constants/enums.dart';
 import 'package:lit_code/data/models/user.dart';
-import 'package:lit_code/presentation/widgets/custom_date_chip.dart';
 import 'package:lit_code/presentation/widgets/widgets.dart';
 import 'package:lit_code/theme/theme_utils.dart';
 
@@ -376,54 +375,49 @@ class _UserProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 10,
-      color: darkSecondaryColor.withOpacity(0.15),
-      shadowColor: Colors.black12,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(
-          16,
-          25,
-          2,
-          25,
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: CircleAvatar(
-                radius: 50,
-                backgroundImage: CachedNetworkImageProvider(
-                  user.photoUrl!,
+    return GestureDetector(
+      onTap: () {
+        context.pushNamed('profile');
+      },
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 20,
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: CircleAvatar(
+                  radius: 50,
+                  backgroundImage: CachedNetworkImageProvider(
+                    user.photoUrl!,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(width: sizeBoxSmall),
-            Expanded(
-              flex: 2,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    user.name!,
-                    style: theme.textTheme.headlineSmall!.copyWith(
-                      color: theme.primaryColor,
+              const SizedBox(width: sizeBoxSmall),
+              Expanded(
+                flex: 2,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      user.name!,
+                      style: theme.textTheme.headlineSmall!.copyWith(
+                        color: theme.primaryColor,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: sizeBoxSmall),
-                  Text(
-                    user.email!,
-                    style: theme.textTheme.titleLarge,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
+                    const SizedBox(height: sizeBoxSmall),
+                    Text(
+                      user.email!,
+                      style: theme.textTheme.titleLarge,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(width: sizeBoxSmall),
-            IconButton(
-              onPressed: () {
-                context.pushNamed('profile');
-              },
-              icon: Icon(
+              const SizedBox(width: sizeBoxSmall),
+              Icon(
                 color: ThemeUtils.getThemeColor(
                   theme,
                   lightPrimaryColor,
@@ -431,8 +425,8 @@ class _UserProfileCard extends StatelessWidget {
                 ),
                 Icons.arrow_forward_ios_rounded,
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

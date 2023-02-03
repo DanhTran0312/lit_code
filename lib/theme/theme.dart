@@ -223,9 +223,8 @@ final ChipThemeData darkChipTheme = ChipThemeData(
 );
 
 // ---------------------------- Card ----------------------------
-const CardTheme lightCardTheme = CardTheme(
+CardTheme lightCardTheme = const CardTheme(
   elevation: 0,
-  color: lightSecondaryColor,
   shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.all(
       Radius.circular(questionCardBorder),

@@ -43,7 +43,7 @@ class UserRepository {
     if (_user.completedQuestions.isEmpty) {
       return <String, Question>{};
     }
-    return {for (var e in _user.completedQuestions) e!.id: e};
+    return {for (var e in _user.completedQuestions) e.id: e};
   }
 
   Future<void> markQuestionAsCompleted(Question question) async {
@@ -61,7 +61,7 @@ class UserRepository {
 
       await _userBox.put('user', _user);
       assert(
-        _user.completedQuestions.any((q) => q!.id == question.id),
+        _user.completedQuestions.any((q) => q.id == question.id),
         'Question was not added to user',
       );
     } catch (e) {
@@ -73,12 +73,12 @@ class UserRepository {
     try {
       _user = _user.copyWith(
         completedQuestions: _user.completedQuestions
-            .where((element) => element?.id != question.id)
+            .where((element) => element.id != question.id)
             .toList(),
       );
       await _userBox.put('user', _user);
       assert(
-        !_user.completedQuestions.any((q) => q!.id == question.id),
+        !_user.completedQuestions.any((q) => q.id == question.id),
         'Question was not removed from user',
       );
     } catch (e) {
@@ -91,12 +91,12 @@ class UserRepository {
     Confidence confidence,
   ) async {
     try {
-      if (_user.completedQuestions.any((q) => q!.id == question.id)) {
+      if (_user.completedQuestions.any((q) => q.id == question.id)) {
         _user = _user.copyWith(
           completedQuestions: _user.completedQuestions
               .map(
-                (q) => q?.id == question.id
-                    ? q?.copyWith(confidence: confidence, isCompleted: true)
+                (q) => q.id == question.id
+                    ? q.copyWith(confidence: confidence, isCompleted: true)
                     : q,
               )
               .toList(),
@@ -115,7 +115,7 @@ class UserRepository {
       }
       await _userBox.put('user', _user);
       assert(
-        _user.completedQuestions.any((q) => q!.id == question.id),
+        _user.completedQuestions.any((q) => q.id == question.id),
         'Question was not added to user',
       );
     } catch (e) {
@@ -152,6 +152,28 @@ class UserRepository {
   Future<void> updateUserExperienceLevel(double experienceLevel) async {
     try {
       _user = _user.copyWith(experienceLevel: experienceLevel);
+      await _userBox.put('user', _user);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<void> updateTimeSinceLastQuestionGenerated(
+    int timeSinceLastQuestionGenerated,
+  ) async {
+    try {
+      _user = _user.copyWith(
+        timeSinceLastGenerated: timeSinceLastQuestionGenerated,
+      );
+      await _userBox.put('user', _user);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<void> updateTodayQuestions(List<Question> todayQuestions) async {
+    try {
+      _user = _user.copyWith(todayQuestions: todayQuestions);
       await _userBox.put('user', _user);
     } catch (e) {
       throw Exception(e);

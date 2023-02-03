@@ -16,18 +16,29 @@ class CompletedQuestionCubit extends Cubit<CompletedQuestionState> {
     required UserRepository userRepository,
     required StatisticsBloc statisticsBloc,
     required ConfettiCubit confettiCubit,
+    // required TodayQuestionCubit todayQuestionCubit,
   })  : _userRepository = userRepository,
         _statisticsBloc = statisticsBloc,
         _confettiCubit = confettiCubit,
+        // _todayQuestionCubit = todayQuestionCubit,
         super(const CompletedQuestionState.initial());
 
   final ConfettiCubit _confettiCubit;
   final StatisticsBloc _statisticsBloc;
   final UserRepository _userRepository;
+  // final TodayQuestionCubit _todayQuestionCubit;
 
   Future<void> markQuestionAsCompleted(Question question) async {
     emit(const CompletedQuestionState.syncing());
     try {
+      // final userTodayQuestion = _userRepository.user.todayQuestions ?? [];
+      // if (userTodayQuestion.contains(question)) {
+      //   await _todayQuestionCubit.updateTodayQuestions(
+      //     userTodayQuestion
+      //         .where((element) => element.id != question.id)
+      //         .toList(),
+      //   );
+      // }
       await _userRepository.markQuestionAsCompleted(question);
       final questions = await _userRepository.getCompletedQuestions();
       _statisticsBloc.add(
@@ -45,6 +56,11 @@ class CompletedQuestionCubit extends Cubit<CompletedQuestionState> {
   Future<void> markQuestionAsUncompleted(Question question) async {
     emit(const CompletedQuestionState.syncing());
     try {
+      // final userTodayQuestion = _userRepository.user.todayQuestions ?? [];
+      // if (userTodayQuestion.any((element) => element.id == question.id)) {
+      //   await _todayQuestionCubit
+      //       .updateTodayQuestions(userTodayQuestion..add(question));
+      // }
       await _userRepository.markQuestionAsUncompleted(question);
       final questions = await _userRepository.getCompletedQuestions();
       _statisticsBloc.add(

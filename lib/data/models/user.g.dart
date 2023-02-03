@@ -22,22 +22,23 @@ class UserAdapter extends TypeAdapter<User> {
       email: fields[3] as String?,
       photoUrl: fields[4] as String?,
       settings: fields[5] as Settings?,
-      completedQuestions: (fields[6] as List).cast<Question?>(),
+      completedQuestions: (fields[6] as List).cast<Question>(),
       questionsVersion: fields[7] as String?,
       lastSynced: fields[8] as int?,
       streak: fields[9] as int?,
       experience: fields[10] as Experience?,
-      todayQuestions: (fields[11] as List?)?.cast<Question?>(),
-      thisWeekQuestions: (fields[12] as List?)?.cast<Question?>(),
-      lastQuestionGenerated: fields[13] as int?,
+      todayQuestions: (fields[11] as List?)?.cast<Question>(),
+      weeklyQuestionCount: fields[12] as int?,
+      timeSinceLastGenerated: fields[13] as int?,
       experienceLevel: fields[14] as double?,
+      dailyQuestionCount: fields[15] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, User obj) {
     writer
-      ..writeByte(14)
+      ..writeByte(15)
       ..writeByte(1)
       ..write(obj.id)
       ..writeByte(2)
@@ -61,11 +62,13 @@ class UserAdapter extends TypeAdapter<User> {
       ..writeByte(11)
       ..write(obj.todayQuestions)
       ..writeByte(12)
-      ..write(obj.thisWeekQuestions)
+      ..write(obj.weeklyQuestionCount)
       ..writeByte(13)
-      ..write(obj.lastQuestionGenerated)
+      ..write(obj.timeSinceLastGenerated)
       ..writeByte(14)
-      ..write(obj.experienceLevel);
+      ..write(obj.experienceLevel)
+      ..writeByte(15)
+      ..write(obj.dailyQuestionCount);
   }
 
   @override
@@ -92,9 +95,7 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
           ? const Settings()
           : Settings.fromJson(json['settings'] as Map<String, dynamic>),
       completedQuestions: (json['completedQuestions'] as List<dynamic>?)
-              ?.map((e) => e == null
-                  ? null
-                  : Question.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => Question.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       questionsVersion: json['questionsVersion'] as String? ?? '',
@@ -104,15 +105,12 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
           $enumDecodeNullable(_$ExperienceEnumMap, json['experience']) ??
               Experience.intermediate,
       todayQuestions: (json['todayQuestions'] as List<dynamic>?)
-          ?.map((e) =>
-              e == null ? null : Question.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => Question.fromJson(e as Map<String, dynamic>))
           .toList(),
-      thisWeekQuestions: (json['thisWeekQuestions'] as List<dynamic>?)
-          ?.map((e) =>
-              e == null ? null : Question.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      lastQuestionGenerated: json['lastQuestionGenerated'] as int?,
+      weeklyQuestionCount: json['weeklyQuestionCount'] as int?,
+      timeSinceLastGenerated: json['timeSinceLastGenerated'] as int?,
       experienceLevel: (json['experienceLevel'] as num?)?.toDouble() ?? 5.0,
+      dailyQuestionCount: json['dailyQuestionCount'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
@@ -127,9 +125,10 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'streak': instance.streak,
       'experience': _$ExperienceEnumMap[instance.experience],
       'todayQuestions': instance.todayQuestions,
-      'thisWeekQuestions': instance.thisWeekQuestions,
-      'lastQuestionGenerated': instance.lastQuestionGenerated,
+      'weeklyQuestionCount': instance.weeklyQuestionCount,
+      'timeSinceLastGenerated': instance.timeSinceLastGenerated,
       'experienceLevel': instance.experienceLevel,
+      'dailyQuestionCount': instance.dailyQuestionCount,
     };
 
 const _$ExperienceEnumMap = {

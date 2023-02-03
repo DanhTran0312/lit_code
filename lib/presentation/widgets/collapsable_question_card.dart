@@ -17,12 +17,14 @@ class CollapsableQuestionCard extends StatelessWidget {
     required this.isTranparent,
     required this.question,
     required this.completedQuestionCubit,
+    this.rounded = false,
   });
 
   final CompletedQuestionCubit completedQuestionCubit;
   final QuestionExpansionCubit expansionCubit;
   final bool isTranparent;
   final Question question;
+  final bool rounded;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,7 @@ class CollapsableQuestionCard extends StatelessWidget {
       expansionCubit: expansionCubit,
       question: question,
       completedQuestionCubit: completedQuestionCubit,
+      rounded: rounded,
     );
   }
 }
@@ -44,6 +47,7 @@ class _BuildExpansionTile extends StatelessWidget {
     required this.expansionCubit,
     required this.question,
     required this.completedQuestionCubit,
+    required this.rounded,
   });
 
   final CompletedQuestionCubit completedQuestionCubit;
@@ -51,14 +55,18 @@ class _BuildExpansionTile extends StatelessWidget {
   final bool isTranparent;
   final Question question;
   final ThemeData theme;
+  final bool rounded;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       color:
           isTranparent ? Colors.transparent : theme.cardColor.withOpacity(0.57),
-      shape: const RoundedRectangleBorder(),
-      margin: const EdgeInsets.all(0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(rounded ? questionCardBorder : 0),
+        ),
+      ),
       clipBehavior: Clip.hardEdge,
       child: Theme(
         data: theme.copyWith(
@@ -106,6 +114,10 @@ class _QuestionExpansionTile extends StatelessWidget {
       onExpansionChanged: (isExpanded) {
         expansionCubit.toggleQuestion(question.id);
       },
+      childrenPadding: const EdgeInsets.symmetric(
+        horizontal: 10,
+        vertical: 2,
+      ),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

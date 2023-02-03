@@ -31,7 +31,7 @@ mixin _$User {
   @HiveField(5)
   Settings? get settings => throw _privateConstructorUsedError;
   @HiveField(6)
-  List<Question?> get completedQuestions => throw _privateConstructorUsedError;
+  List<Question> get completedQuestions => throw _privateConstructorUsedError;
   @HiveField(7)
   String? get questionsVersion => throw _privateConstructorUsedError;
   @HiveField(8)
@@ -41,13 +41,15 @@ mixin _$User {
   @HiveField(10)
   Experience? get experience => throw _privateConstructorUsedError;
   @HiveField(11)
-  List<Question?>? get todayQuestions => throw _privateConstructorUsedError;
+  List<Question>? get todayQuestions => throw _privateConstructorUsedError;
   @HiveField(12)
-  List<Question?>? get thisWeekQuestions => throw _privateConstructorUsedError;
+  int? get weeklyQuestionCount => throw _privateConstructorUsedError;
   @HiveField(13)
-  int? get lastQuestionGenerated => throw _privateConstructorUsedError;
+  int? get timeSinceLastGenerated => throw _privateConstructorUsedError;
   @HiveField(14)
   double? get experienceLevel => throw _privateConstructorUsedError;
+  @HiveField(15)
+  int? get dailyQuestionCount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -65,15 +67,16 @@ abstract class $UserCopyWith<$Res> {
       @HiveField(3) String? email,
       @HiveField(4) String? photoUrl,
       @HiveField(5) Settings? settings,
-      @HiveField(6) List<Question?> completedQuestions,
+      @HiveField(6) List<Question> completedQuestions,
       @HiveField(7) String? questionsVersion,
       @HiveField(8) int? lastSynced,
       @HiveField(9) int? streak,
       @HiveField(10) Experience? experience,
-      @HiveField(11) List<Question?>? todayQuestions,
-      @HiveField(12) List<Question?>? thisWeekQuestions,
-      @HiveField(13) int? lastQuestionGenerated,
-      @HiveField(14) double? experienceLevel});
+      @HiveField(11) List<Question>? todayQuestions,
+      @HiveField(12) int? weeklyQuestionCount,
+      @HiveField(13) int? timeSinceLastGenerated,
+      @HiveField(14) double? experienceLevel,
+      @HiveField(15) int? dailyQuestionCount});
 
   $SettingsCopyWith<$Res>? get settings;
 }
@@ -102,9 +105,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? streak = freezed,
     Object? experience = freezed,
     Object? todayQuestions = freezed,
-    Object? thisWeekQuestions = freezed,
-    Object? lastQuestionGenerated = freezed,
+    Object? weeklyQuestionCount = freezed,
+    Object? timeSinceLastGenerated = freezed,
     Object? experienceLevel = freezed,
+    Object? dailyQuestionCount = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -130,7 +134,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       completedQuestions: null == completedQuestions
           ? _value.completedQuestions
           : completedQuestions // ignore: cast_nullable_to_non_nullable
-              as List<Question?>,
+              as List<Question>,
       questionsVersion: freezed == questionsVersion
           ? _value.questionsVersion
           : questionsVersion // ignore: cast_nullable_to_non_nullable
@@ -150,19 +154,23 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       todayQuestions: freezed == todayQuestions
           ? _value.todayQuestions
           : todayQuestions // ignore: cast_nullable_to_non_nullable
-              as List<Question?>?,
-      thisWeekQuestions: freezed == thisWeekQuestions
-          ? _value.thisWeekQuestions
-          : thisWeekQuestions // ignore: cast_nullable_to_non_nullable
-              as List<Question?>?,
-      lastQuestionGenerated: freezed == lastQuestionGenerated
-          ? _value.lastQuestionGenerated
-          : lastQuestionGenerated // ignore: cast_nullable_to_non_nullable
+              as List<Question>?,
+      weeklyQuestionCount: freezed == weeklyQuestionCount
+          ? _value.weeklyQuestionCount
+          : weeklyQuestionCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      timeSinceLastGenerated: freezed == timeSinceLastGenerated
+          ? _value.timeSinceLastGenerated
+          : timeSinceLastGenerated // ignore: cast_nullable_to_non_nullable
               as int?,
       experienceLevel: freezed == experienceLevel
           ? _value.experienceLevel
           : experienceLevel // ignore: cast_nullable_to_non_nullable
               as double?,
+      dailyQuestionCount: freezed == dailyQuestionCount
+          ? _value.dailyQuestionCount
+          : dailyQuestionCount // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 
@@ -191,15 +199,16 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       @HiveField(3) String? email,
       @HiveField(4) String? photoUrl,
       @HiveField(5) Settings? settings,
-      @HiveField(6) List<Question?> completedQuestions,
+      @HiveField(6) List<Question> completedQuestions,
       @HiveField(7) String? questionsVersion,
       @HiveField(8) int? lastSynced,
       @HiveField(9) int? streak,
       @HiveField(10) Experience? experience,
-      @HiveField(11) List<Question?>? todayQuestions,
-      @HiveField(12) List<Question?>? thisWeekQuestions,
-      @HiveField(13) int? lastQuestionGenerated,
-      @HiveField(14) double? experienceLevel});
+      @HiveField(11) List<Question>? todayQuestions,
+      @HiveField(12) int? weeklyQuestionCount,
+      @HiveField(13) int? timeSinceLastGenerated,
+      @HiveField(14) double? experienceLevel,
+      @HiveField(15) int? dailyQuestionCount});
 
   @override
   $SettingsCopyWith<$Res>? get settings;
@@ -225,9 +234,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? streak = freezed,
     Object? experience = freezed,
     Object? todayQuestions = freezed,
-    Object? thisWeekQuestions = freezed,
-    Object? lastQuestionGenerated = freezed,
+    Object? weeklyQuestionCount = freezed,
+    Object? timeSinceLastGenerated = freezed,
     Object? experienceLevel = freezed,
+    Object? dailyQuestionCount = freezed,
   }) {
     return _then(_$_User(
       id: null == id
@@ -253,7 +263,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
       completedQuestions: null == completedQuestions
           ? _value._completedQuestions
           : completedQuestions // ignore: cast_nullable_to_non_nullable
-              as List<Question?>,
+              as List<Question>,
       questionsVersion: freezed == questionsVersion
           ? _value.questionsVersion
           : questionsVersion // ignore: cast_nullable_to_non_nullable
@@ -273,19 +283,23 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
       todayQuestions: freezed == todayQuestions
           ? _value._todayQuestions
           : todayQuestions // ignore: cast_nullable_to_non_nullable
-              as List<Question?>?,
-      thisWeekQuestions: freezed == thisWeekQuestions
-          ? _value._thisWeekQuestions
-          : thisWeekQuestions // ignore: cast_nullable_to_non_nullable
-              as List<Question?>?,
-      lastQuestionGenerated: freezed == lastQuestionGenerated
-          ? _value.lastQuestionGenerated
-          : lastQuestionGenerated // ignore: cast_nullable_to_non_nullable
+              as List<Question>?,
+      weeklyQuestionCount: freezed == weeklyQuestionCount
+          ? _value.weeklyQuestionCount
+          : weeklyQuestionCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      timeSinceLastGenerated: freezed == timeSinceLastGenerated
+          ? _value.timeSinceLastGenerated
+          : timeSinceLastGenerated // ignore: cast_nullable_to_non_nullable
               as int?,
       experienceLevel: freezed == experienceLevel
           ? _value.experienceLevel
           : experienceLevel // ignore: cast_nullable_to_non_nullable
               as double?,
+      dailyQuestionCount: freezed == dailyQuestionCount
+          ? _value.dailyQuestionCount
+          : dailyQuestionCount // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -299,18 +313,18 @@ class _$_User extends _User {
       @HiveField(3) this.email,
       @HiveField(4) this.photoUrl,
       @HiveField(5) this.settings = const Settings(),
-      @HiveField(6) final List<Question?> completedQuestions = const [],
+      @HiveField(6) final List<Question> completedQuestions = const [],
       @HiveField(7) this.questionsVersion = '',
       @HiveField(8) this.lastSynced,
       @HiveField(9) this.streak,
       @HiveField(10) this.experience = Experience.intermediate,
-      @HiveField(11) final List<Question?>? todayQuestions,
-      @HiveField(12) final List<Question?>? thisWeekQuestions,
-      @HiveField(13) this.lastQuestionGenerated,
-      @HiveField(14) this.experienceLevel = 5.0})
+      @HiveField(11) final List<Question>? todayQuestions,
+      @HiveField(12) this.weeklyQuestionCount,
+      @HiveField(13) this.timeSinceLastGenerated,
+      @HiveField(14) this.experienceLevel = 5.0,
+      @HiveField(15) this.dailyQuestionCount = 0})
       : _completedQuestions = completedQuestions,
         _todayQuestions = todayQuestions,
-        _thisWeekQuestions = thisWeekQuestions,
         super._();
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
@@ -331,11 +345,11 @@ class _$_User extends _User {
   @JsonKey()
   @HiveField(5)
   final Settings? settings;
-  final List<Question?> _completedQuestions;
+  final List<Question> _completedQuestions;
   @override
   @JsonKey()
   @HiveField(6)
-  List<Question?> get completedQuestions {
+  List<Question> get completedQuestions {
     if (_completedQuestions is EqualUnmodifiableListView)
       return _completedQuestions;
     // ignore: implicit_dynamic_type
@@ -356,10 +370,10 @@ class _$_User extends _User {
   @JsonKey()
   @HiveField(10)
   final Experience? experience;
-  final List<Question?>? _todayQuestions;
+  final List<Question>? _todayQuestions;
   @override
   @HiveField(11)
-  List<Question?>? get todayQuestions {
+  List<Question>? get todayQuestions {
     final value = _todayQuestions;
     if (value == null) return null;
     if (_todayQuestions is EqualUnmodifiableListView) return _todayQuestions;
@@ -367,29 +381,24 @@ class _$_User extends _User {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<Question?>? _thisWeekQuestions;
   @override
   @HiveField(12)
-  List<Question?>? get thisWeekQuestions {
-    final value = _thisWeekQuestions;
-    if (value == null) return null;
-    if (_thisWeekQuestions is EqualUnmodifiableListView)
-      return _thisWeekQuestions;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
+  final int? weeklyQuestionCount;
   @override
   @HiveField(13)
-  final int? lastQuestionGenerated;
+  final int? timeSinceLastGenerated;
   @override
   @JsonKey()
   @HiveField(14)
   final double? experienceLevel;
+  @override
+  @JsonKey()
+  @HiveField(15)
+  final int? dailyQuestionCount;
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, email: $email, photoUrl: $photoUrl, settings: $settings, completedQuestions: $completedQuestions, questionsVersion: $questionsVersion, lastSynced: $lastSynced, streak: $streak, experience: $experience, todayQuestions: $todayQuestions, thisWeekQuestions: $thisWeekQuestions, lastQuestionGenerated: $lastQuestionGenerated, experienceLevel: $experienceLevel)';
+    return 'User(id: $id, name: $name, email: $email, photoUrl: $photoUrl, settings: $settings, completedQuestions: $completedQuestions, questionsVersion: $questionsVersion, lastSynced: $lastSynced, streak: $streak, experience: $experience, todayQuestions: $todayQuestions, weeklyQuestionCount: $weeklyQuestionCount, timeSinceLastGenerated: $timeSinceLastGenerated, experienceLevel: $experienceLevel, dailyQuestionCount: $dailyQuestionCount)';
   }
 
   @override
@@ -415,12 +424,14 @@ class _$_User extends _User {
                 other.experience == experience) &&
             const DeepCollectionEquality()
                 .equals(other._todayQuestions, _todayQuestions) &&
-            const DeepCollectionEquality()
-                .equals(other._thisWeekQuestions, _thisWeekQuestions) &&
-            (identical(other.lastQuestionGenerated, lastQuestionGenerated) ||
-                other.lastQuestionGenerated == lastQuestionGenerated) &&
+            (identical(other.weeklyQuestionCount, weeklyQuestionCount) ||
+                other.weeklyQuestionCount == weeklyQuestionCount) &&
+            (identical(other.timeSinceLastGenerated, timeSinceLastGenerated) ||
+                other.timeSinceLastGenerated == timeSinceLastGenerated) &&
             (identical(other.experienceLevel, experienceLevel) ||
-                other.experienceLevel == experienceLevel));
+                other.experienceLevel == experienceLevel) &&
+            (identical(other.dailyQuestionCount, dailyQuestionCount) ||
+                other.dailyQuestionCount == dailyQuestionCount));
   }
 
   @JsonKey(ignore: true)
@@ -438,9 +449,10 @@ class _$_User extends _User {
       streak,
       experience,
       const DeepCollectionEquality().hash(_todayQuestions),
-      const DeepCollectionEquality().hash(_thisWeekQuestions),
-      lastQuestionGenerated,
-      experienceLevel);
+      weeklyQuestionCount,
+      timeSinceLastGenerated,
+      experienceLevel,
+      dailyQuestionCount);
 
   @JsonKey(ignore: true)
   @override
@@ -463,15 +475,16 @@ abstract class _User extends User {
       @HiveField(3) final String? email,
       @HiveField(4) final String? photoUrl,
       @HiveField(5) final Settings? settings,
-      @HiveField(6) final List<Question?> completedQuestions,
+      @HiveField(6) final List<Question> completedQuestions,
       @HiveField(7) final String? questionsVersion,
       @HiveField(8) final int? lastSynced,
       @HiveField(9) final int? streak,
       @HiveField(10) final Experience? experience,
-      @HiveField(11) final List<Question?>? todayQuestions,
-      @HiveField(12) final List<Question?>? thisWeekQuestions,
-      @HiveField(13) final int? lastQuestionGenerated,
-      @HiveField(14) final double? experienceLevel}) = _$_User;
+      @HiveField(11) final List<Question>? todayQuestions,
+      @HiveField(12) final int? weeklyQuestionCount,
+      @HiveField(13) final int? timeSinceLastGenerated,
+      @HiveField(14) final double? experienceLevel,
+      @HiveField(15) final int? dailyQuestionCount}) = _$_User;
   const _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
@@ -493,7 +506,7 @@ abstract class _User extends User {
   Settings? get settings;
   @override
   @HiveField(6)
-  List<Question?> get completedQuestions;
+  List<Question> get completedQuestions;
   @override
   @HiveField(7)
   String? get questionsVersion;
@@ -508,16 +521,19 @@ abstract class _User extends User {
   Experience? get experience;
   @override
   @HiveField(11)
-  List<Question?>? get todayQuestions;
+  List<Question>? get todayQuestions;
   @override
   @HiveField(12)
-  List<Question?>? get thisWeekQuestions;
+  int? get weeklyQuestionCount;
   @override
   @HiveField(13)
-  int? get lastQuestionGenerated;
+  int? get timeSinceLastGenerated;
   @override
   @HiveField(14)
   double? get experienceLevel;
+  @override
+  @HiveField(15)
+  int? get dailyQuestionCount;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

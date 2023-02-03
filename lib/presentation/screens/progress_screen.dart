@@ -97,18 +97,7 @@ class _HeatMapCalendar extends StatelessWidget {
       builder: (context, state) {
         final questions = state.completedQuestions.values.toList();
 
-        final datasets = <DateTime, int>{
-          // TODO: Remove this dummy data
-          DateTime(2023): 3,
-          DateTime(2023, 1, 2): 2,
-          DateTime(2023, 1, 3): 1,
-          DateTime(2023, 1, 4): 2,
-          DateTime(2023, 1, 5): 3,
-          DateTime(2023, 1, 6): 4,
-          DateTime(2023, 1, 7): 5,
-          DateTime(2023, 1, 8): 6,
-          DateTime(2023, 1, 9): 7,
-        };
+        final datasets = <DateTime, int>{};
         for (var i = 0; i < questions.length; i++) {
           final date = DateUtils.dateOnly(
             DateTime.fromMillisecondsSinceEpoch(
@@ -117,41 +106,56 @@ class _HeatMapCalendar extends StatelessWidget {
           );
           datasets[date] = 1 + (datasets[date] ?? 0);
         }
-        return HeatMapCalendar(
-          flexible: true,
-          monthTextStyle: theme.textTheme.headlineMedium!.copyWith(
-            color: ThemeUtils.getThemeColor(
-              theme,
-              Colors.black,
-              Colors.white,
-            ),
-            fontSize: 27,
-          ),
-          weekTextStyle: theme.textTheme.titleLarge!.copyWith(
-            color: Colors.amber,
-            fontSize: 14,
-          ),
-          weekFontSize: 14,
-          monthFontSize: 25,
-          margin: const EdgeInsets.symmetric(
-            horizontal: 5.8,
-            vertical: 1.5,
-          ),
-          size: 37,
-          showColorTip: false,
-          textColor: ThemeUtils.getThemeColor(
-            theme,
-            Colors.black,
-            Colors.white,
-          ),
-          fontSize: 15,
-          weekTextColor: Colors.white,
-          borderRadius: 12,
-          defaultColor: Colors.transparent,
-          datasets: datasets,
-          colorsets: heatMapColorSet,
-        );
+        return _CustomHeatMapCalendar(theme: theme, datasets: datasets);
       },
+    );
+  }
+}
+
+class _CustomHeatMapCalendar extends StatelessWidget {
+  const _CustomHeatMapCalendar({
+    required this.theme,
+    required this.datasets,
+  });
+
+  final ThemeData theme;
+  final Map<DateTime, int> datasets;
+
+  @override
+  Widget build(BuildContext context) {
+    return HeatMapCalendar(
+      flexible: true,
+      monthTextStyle: theme.textTheme.headlineMedium!.copyWith(
+        color: ThemeUtils.getThemeColor(
+          theme,
+          Colors.black,
+          Colors.white,
+        ),
+        fontSize: 27,
+      ),
+      weekTextStyle: theme.textTheme.titleLarge!.copyWith(
+        color: darkPrimaryColor,
+        fontSize: 14,
+      ),
+      weekFontSize: 14,
+      monthFontSize: 25,
+      margin: const EdgeInsets.symmetric(
+        horizontal: 5.8,
+        vertical: 1.5,
+      ),
+      size: 37,
+      showColorTip: false,
+      textColor: ThemeUtils.getThemeColor(
+        theme,
+        Colors.black,
+        Colors.white,
+      ),
+      fontSize: 15,
+      weekTextColor: Colors.white,
+      borderRadius: 12,
+      defaultColor: Colors.transparent,
+      datasets: datasets,
+      colorsets: heatMapColorSet,
     );
   }
 }

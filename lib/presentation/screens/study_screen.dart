@@ -1,6 +1,5 @@
 // ignore_for_file: lines_longer_than_80_chars
 
-import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/question_list_bloc.dart';
@@ -8,8 +7,10 @@ import 'package:lit_code/business_logic/blocs/bloc/statistics_bloc.dart';
 import 'package:lit_code/business_logic/cubits/cubit/completed_question_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/confetti_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/question_expansion_cubit.dart';
+import 'package:lit_code/business_logic/cubits/cubit/today_question_cubit.dart';
 import 'package:lit_code/constants/constants.dart';
 import 'package:lit_code/data/models/question.dart';
+import 'package:lit_code/data/repositories/repositories.dart';
 import 'package:lit_code/presentation/widgets/widgets.dart';
 import 'package:lit_code/theme/theme_utils.dart';
 
@@ -19,6 +20,12 @@ class StudyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final confettiCubit = ConfettiCubit();
+    final completedQuestionCubit = CompletedQuestionCubit(
+      userRepository: context.read<UserRepository>(),
+      statisticsBloc: context.read<StatisticsBloc>(),
+      confettiCubit: confettiCubit,
+    );
 
     return Scaffold(
       body: BlocConsumer<QuestionListBloc, QuestionListState>(
@@ -35,7 +42,6 @@ class StudyScreen extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          final confettiCubit = BlocProvider.of<ConfettiCubit>(context);
           if (state is QuestionListInitial) {
             // If the state is QuestionListInitial, then fetch the questions.
             BlocProvider.of<QuestionListBloc>(context).add(
@@ -54,11 +60,15 @@ class StudyScreen extends StatelessWidget {
                   _StudyScreenBody(
                     stateQuestion: stateQuestion,
                     theme: theme,
+                    completedQuestionCubit: completedQuestionCubit,
                   ),
-                  BlocBuilder<ConfettiCubit, ConfettiState>(
-                    builder: (context, state) {
-                      return _ConfettiBuilder(confettiCubit: confettiCubit);
-                    },
+                  BlocProvider(
+                    create: (context) => confettiCubit,
+                    child: BlocBuilder<ConfettiCubit, ConfettiState>(
+                      builder: (context, state) {
+                        return ConfettiBuilder(confettiCubit: confettiCubit);
+                      },
+                    ),
                   )
                 ],
               ),
@@ -71,43 +81,16 @@ class StudyScreen extends StatelessWidget {
   }
 }
 
-class _ConfettiBuilder extends StatelessWidget {
-  const _ConfettiBuilder({
-    required this.confettiCubit,
-  });
-
-  final ConfettiCubit confettiCubit;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Align(
-          child: ConfettiWidget(
-            confettiController: confettiCubit.confettiController,
-            blastDirectionality: BlastDirectionality.explosive,
-            minBlastForce: 8,
-            maxBlastForce: 25,
-            emissionFrequency: 0.07,
-            minimumSize: const Size(7, 7),
-            maximumSize: const Size(12, 12),
-            numberOfParticles: 15,
-            gravity: 0.1,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
 class _StudyScreenBody extends StatelessWidget {
   const _StudyScreenBody({
     required this.stateQuestion,
     required this.theme,
-  });
+    required CompletedQuestionCubit completedQuestionCubit,
+  }) : _completedQuestionCubit = completedQuestionCubit;
 
   final List<Question> stateQuestion;
   final ThemeData theme;
+  final CompletedQuestionCubit _completedQuestionCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -130,8 +113,7 @@ class _StudyScreenBody extends StatelessWidget {
           stateQuestion: stateQuestion,
           completedQuestions:
               BlocProvider.of<StatisticsBloc>(context).state.completedQuestions,
-          completedQuestionCubit:
-              BlocProvider.of<CompletedQuestionCubit>(context),
+          completedQuestionCubit: _completedQuestionCubit,
         ),
       ],
     );

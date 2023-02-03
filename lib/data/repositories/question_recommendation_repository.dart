@@ -24,8 +24,12 @@ class QuestionRecommendationRepository {
     final averageConfidenceLevelByCategory =
         _statisticsBloc.state.statistics.averageConfidenceByCategory;
     final userExperienceLevel = _userRepository.user.experienceLevel;
-    final randomCategories = _getRandomCategoriesByPriority();
+    final userSettings = _userRepository.user.settings;
+    final randomCategories = _getRandomCategoriesByPriority(
+      userSettings!.categories,
+    );
     var i = 0;
+
     while (recommendedQuestions.length < amount) {
       if (i < randomCategories.length) {
         final category = randomCategories[i];
@@ -37,7 +41,9 @@ class QuestionRecommendationRepository {
           );
           final questions =
               remainingQuestionsByCategoryAndDifficulty[category]![difficulty];
+
           if (questions != null && questions.isNotEmpty) {
+            questions.shuffle();
             recommendedQuestions.add(questions.first);
           }
         }
@@ -49,7 +55,11 @@ class QuestionRecommendationRepository {
     if (recommendedQuestions.length < amount) {
       recommendedQuestions.addAll(
         _statisticsBloc.state.statistics.remainingQuestions
-            .where((question) => !recommendedQuestions.contains(question))
+            .where(
+              (question) =>
+                  !recommendedQuestions.contains(question) &&
+                  randomCategories.contains(question.category),
+            )
             .take(amount - recommendedQuestions.length)
             .toList(),
       );
@@ -57,7 +67,7 @@ class QuestionRecommendationRepository {
     return recommendedQuestions;
   }
 
-  List<Category> _getRandomCategoriesByPriority() {
+  List<Category> _getRandomCategoriesByPriority(List<Category> categories) {
     final random = Random(DateTime.now().millisecondsSinceEpoch);
     final result = <Category>[];
     final categoryPriorityMapKeys = categoryPriorityMap.keys.toList();
@@ -67,7 +77,11 @@ class QuestionRecommendationRepository {
       for (var i = 0; i < categoryPriorityMapKeys.length; i++) {
         if (randomValue <= categoryPriorityMapKeys[i]) {
           categoryPriorityMapValues[i].shuffle();
-          result.addAll(categoryPriorityMapValues[i]);
+          result.addAll(
+            categoryPriorityMapValues[i]
+                .where((element) => categories.contains(element))
+                .toList(),
+          );
           categoryPriorityMapValues.removeAt(i);
           categoryPriorityMapKeys.removeAt(i);
           break;

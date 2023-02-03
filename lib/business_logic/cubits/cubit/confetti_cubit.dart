@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:confetti/confetti.dart';
 
-enum ConfettiState { initial, playing, stopped }
+enum ConfettiState { playing, stopped }
 
 class ConfettiCubit extends Cubit<ConfettiState> {
-  ConfettiCubit() : super(ConfettiState.initial) {
+  ConfettiCubit() : super(ConfettiState.stopped) {
     _confettiController.addListener(() {
       if (_confettiController.state == ConfettiControllerState.stopped) {
         emit(ConfettiState.stopped);

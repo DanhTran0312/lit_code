@@ -265,9 +265,11 @@ class _HeadingWithIcon extends StatelessWidget {
     return Row(
       children: [
         CachedNetworkImage(
-          imageUrl: 'https://iili.io/HlyHtCx.png',
-          width: 52,
+          imageUrl: 'https://i.imgur.com/iH1Gjkv.png',
+          width: 50,
           fit: BoxFit.contain,
+          errorWidget: (context, url, error) =>
+              const Icon(Icons.rocket_launch_outlined),
         ),
         const SizedBox(width: sizeBoxSmall),
         Text(

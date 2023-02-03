@@ -18,15 +18,16 @@ abstract class User with _$User {
     @HiveField(3) String? email,
     @HiveField(4) String? photoUrl,
     @HiveField(5) @Default(Settings()) Settings? settings,
-    @HiveField(6) @Default([]) List<Question?> completedQuestions,
+    @HiveField(6) @Default([]) List<Question> completedQuestions,
     @HiveField(7) @Default('') String? questionsVersion,
     @HiveField(8) int? lastSynced,
     @HiveField(9) int? streak,
     @HiveField(10) @Default(Experience.intermediate) Experience? experience,
-    @HiveField(11) List<Question?>? todayQuestions,
-    @HiveField(12) List<Question?>? thisWeekQuestions,
-    @HiveField(13) int? lastQuestionGenerated,
+    @HiveField(11) List<Question>? todayQuestions,
+    @HiveField(12) int? weeklyQuestionCount,
+    @HiveField(13) int? timeSinceLastGenerated,
     @HiveField(14) @Default(5.0) double? experienceLevel,
+    @HiveField(15) @Default(0) int? dailyQuestionCount,
   }) = _User;
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   const User._();

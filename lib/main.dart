@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -12,7 +13,6 @@ import 'package:lit_code/business_logic/blocs/bloc/app_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/question_list_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/settings_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/statistics_bloc.dart';
-import 'package:lit_code/business_logic/cubits/cubit/completed_question_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/confetti_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/experience_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/network_connection_cubit.dart';
@@ -27,6 +27,12 @@ import 'package:path_provider/path_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.manual,
+    overlays: [
+      SystemUiOverlay.bottom, //This line is used for showing the bottom bar
+    ],
+  );
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
   );
@@ -98,20 +104,13 @@ Future<void> main() async {
     experienceCubit: experienceCubit,
   );
 
-  final confettiCubit = ConfettiCubit();
-
-  final completedQuestionCubit = CompletedQuestionCubit(
-    userRepository: userReposiory,
-    statisticsBloc: statisticsBloc,
-    confettiCubit: confettiCubit,
-  );
+  final homeScreenConfettiCubit = ConfettiCubit();
 
   await bootstrap(
     () => LitCodeApp(
       appBloc: appBloc,
       themeCubit: themeCubit,
       networkConnectionCubit: networkConnectionCubit,
-      completedQuestionCubit: completedQuestionCubit,
       questionListBloc: questionListBloc,
       authRepository: authRepository,
       userRepository: userReposiory,
@@ -119,8 +118,8 @@ Future<void> main() async {
       boxes: boxes,
       statisticsBloc: statisticsBloc,
       settingsBloc: settingsBloc,
-      confettiCubit: confettiCubit,
       questionRecommendationRepository: questionRecommendationRepository,
+      homeScreenConfettiCubit: homeScreenConfettiCubit,
     ),
   );
 }

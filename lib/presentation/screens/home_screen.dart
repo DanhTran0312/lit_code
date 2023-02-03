@@ -3,9 +3,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lit_code/business_logic/blocs/bloc/app_bloc.dart';
+import 'package:lit_code/business_logic/blocs/bloc/statistics_bloc.dart';
+import 'package:lit_code/business_logic/cubits/cubit/completed_question_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/completion_toggle_cubit.dart';
+import 'package:lit_code/business_logic/cubits/cubit/confetti_cubit.dart';
+import 'package:lit_code/business_logic/cubits/cubit/question_expansion_cubit.dart';
 import 'package:lit_code/business_logic/cubits/cubit/theme_cubit.dart';
+import 'package:lit_code/business_logic/cubits/cubit/today_question_cubit.dart';
 import 'package:lit_code/constants/constant.dart';
+import 'package:lit_code/data/repositories/repositories.dart';
 import 'package:lit_code/presentation/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,20 +23,66 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final theme = Theme.of(context);
-    return Scaffold(
-      body: BlocBuilder<ThemeCubit, ThemeState>(
-        builder: (context, state) {
-          return ImageContainer(
-            size: size,
-            darkBackgroundImage: 'assets/images/dark_home_background.png',
-            lightBackgroundImage: 'assets/images/light_home_background.png',
-            theme: theme,
-            padding: const EdgeInsets.symmetric(
-              horizontal: defaultPageHorizontalPadding,
-            ),
-            child: _HomeScreenContent(theme: theme, size: size),
-          );
-        },
+    final confettiCubit = context.read<ConfettiCubit>();
+    final completedQuestionCubit = CompletedQuestionCubit(
+      userRepository: context.read<UserRepository>(),
+      statisticsBloc: context.read<StatisticsBloc>(),
+      confettiCubit: confettiCubit,
+    );
+    final todayQuestionCubit = TodayQuestionCubit(
+      userRepository: context.read<UserRepository>(),
+      questionRecommendationRepository:
+          context.read<QuestionRecommendationRepository>(),
+    );
+    final completionToggleCubit = CompletionToggleCubit();
+    final questionExpansionCubit = QuestionExpansionCubit();
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => completedQuestionCubit,
+        ),
+        BlocProvider(
+          create: (context) => todayQuestionCubit..fetchTodayQuestion(),
+        ),
+        BlocProvider(
+          create: (context) => completionToggleCubit,
+        ),
+        BlocProvider(
+          create: (context) => questionExpansionCubit,
+        ),
+      ],
+      child: Scaffold(
+        body: BlocBuilder<ThemeCubit, ThemeState>(
+          builder: (context, state) {
+            return ImageContainer(
+              size: size,
+              darkBackgroundImage: 'assets/images/dark_home_background.png',
+              lightBackgroundImage: 'assets/images/light_home_background.png',
+              theme: theme,
+              padding: const EdgeInsets.symmetric(
+                horizontal: defaultPageHorizontalPadding,
+              ),
+              child: Stack(
+                children: [
+                  _HomeScreenContent(
+                    theme: theme,
+                    size: size,
+                    completedQuestionCubit: completedQuestionCubit,
+                    todayQuestionCubit: todayQuestionCubit,
+                  ),
+                  BlocBuilder<ConfettiCubit, ConfettiState>(
+                    bloc: confettiCubit,
+                    builder: (context, state) {
+                      return ConfettiBuilder(
+                        confettiCubit: confettiCubit,
+                      );
+                    },
+                  )
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
@@ -40,10 +92,16 @@ class _HomeScreenContent extends StatelessWidget {
   const _HomeScreenContent({
     required this.theme,
     required this.size,
-  });
+    required CompletedQuestionCubit completedQuestionCubit,
+    required TodayQuestionCubit todayQuestionCubit,
+  })  : _todayQuestionCubit = todayQuestionCubit,
+        _completedQuestionCubit = completedQuestionCubit;
 
   final Size size;
   final ThemeData theme;
+
+  final CompletedQuestionCubit _completedQuestionCubit;
+  final TodayQuestionCubit _todayQuestionCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +109,6 @@ class _HomeScreenContent extends StatelessWidget {
       builder: (context, state) {
         var name = '';
         var url = '';
-        const dummyTotalQuestion = 20;
         const dummyCompletedQuestion = 14;
         if (state is Authenticated) {
           name = state.user.name!;
@@ -59,9 +116,7 @@ class _HomeScreenContent extends StatelessWidget {
         }
         final welcomeTextStyle = theme.textTheme.headlineMedium!
             .copyWith(fontWeight: FontWeight.w600);
-        final todayQuestionCount = state.user.todayQuestions == null
-            ? 0
-            : state.user.todayQuestions!.length;
+
         return ListView(
           shrinkWrap: true,
           children: [
@@ -70,28 +125,41 @@ class _HomeScreenContent extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                RichText(
-                  text: TextSpan(
-                    text: 'Hi ${name.split(' ').first}',
-                    style: welcomeTextStyle,
-                    children: [
-                      TextSpan(
-                        text: ', Today you have ',
-                        style: welcomeTextStyle,
-                      ),
-                      TextSpan(
-                        text: '$todayQuestionCount questions',
-                        style: welcomeTextStyle.copyWith(
-                          fontWeight: FontWeight.w800,
-                          color: theme.primaryColor,
+                BlocBuilder<TodayQuestionCubit, TodayQuestionState>(
+                  builder: (context, state) {
+                    if (state is TodayQuestionLoading) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (state is TodayQuestionLoaded) {
+                      final todayQuestions = state.questions;
+                      return RichText(
+                        text: TextSpan(
+                          text: 'Hi ${name.split(' ').first}',
+                          style: welcomeTextStyle,
+                          children: [
+                            TextSpan(
+                              text: ', Today you have ',
+                              style: welcomeTextStyle,
+                            ),
+                            TextSpan(
+                              text: '${todayQuestions.length} questions',
+                              style: welcomeTextStyle.copyWith(
+                                fontWeight: FontWeight.w800,
+                                color: theme.primaryColor,
+                              ),
+                            ),
+                            TextSpan(
+                              text: ' to complete 🔥',
+                              style: welcomeTextStyle,
+                            ),
+                          ],
                         ),
-                      ),
-                      TextSpan(
-                        text: ' to complete 🔥',
-                        style: welcomeTextStyle,
-                      ),
-                    ],
-                  ),
+                      );
+                    } else {
+                      return const Text('Something went wrong');
+                    }
+                  },
                 ),
                 const SizedBox(height: sizeBoxSmall),
                 Align(
@@ -113,7 +181,7 @@ class _HomeScreenContent extends StatelessWidget {
                           ),
                           children: [
                             TextSpan(
-                              text: '/$dummyTotalQuestion',
+                              text: '/',
                               style: welcomeTextStyle,
                             ),
                           ],
@@ -129,40 +197,49 @@ class _HomeScreenContent extends StatelessWidget {
                 const SizedBox(height: sizeBoxSmall),
                 _ProgressCardsRow(theme: theme),
                 const SizedBox(height: sizeBoxMedium),
-                BlocProvider(
-                  create: (context) => CompletionToggleCubit(),
-                  child: Builder(
-                    builder: (context) {
-                      return BlocBuilder<CompletionToggleCubit, int>(
-                        builder: (contex, state) {
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const SectionHeading(title: 'Today'),
-                              AnimatedComplettionToggleSwitch(
-                                completionToggleCubit:
-                                    context.read<CompletionToggleCubit>(),
-                              ),
-                            ],
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    SectionHeading(title: 'Today'),
+                    // BlocBuilder<CompletionToggleCubit, int>(
+                    //   builder: (context, state) {
+                    //     return AnimatedComplettionToggleSwitch(
+                    //       completionToggleCubit:
+                    //           context.read<CompletionToggleCubit>(),
+                    //     );
+                    //   },
+                    // ),
+                  ],
+                ),
+                const SizedBox(height: sizeBoxMedium),
+                BlocBuilder<TodayQuestionCubit, TodayQuestionState>(
+                  builder: (context, state) {
+                    if (state is TodayQuestionLoading) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (state is TodayQuestionLoaded) {
+                      final todayQuestions = state.questions;
+                      return ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: todayQuestions.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return CollapsableQuestionCard(
+                            key: key,
+                            rounded: true,
+                            question: todayQuestions[index],
+                            isTranparent: false,
+                            completedQuestionCubit: _completedQuestionCubit,
+                            expansionCubit:
+                                context.read<QuestionExpansionCubit>(),
                           );
                         },
                       );
-                    },
-                  ),
-                ),
-                const SizedBox(height: sizeBoxSmall),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: defaultPageHorizontalPadding,
-                    vertical: defaultPageVerticalPadding,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: inputBorderColor,
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const SizedBox.shrink(),
+                    } else {
+                      return const Text('Something went wrong');
+                    }
+                  },
                 ),
               ],
             ),
