@@ -45,7 +45,7 @@ This project is licensed under the MIT License.
 ### Version 2 - Work in progress
 | Dark Theme | Light Theme |
 | ------------- | ------------- |
-| ![App Screenshot](https://iili.io/H04bzPe.png)  | ![App Screenshot](https://iili.io/H04bucb.png)  |
-| ![App Screenshot](https://iili.io/H04boo7.png) | ![App Screenshot](https://iili.io/H04bASj.png)  |
-|![App Screenshot](https://iili.io/H04bxV9.png)|![App Screenshot](https://iili.io/H04b5Hx.png)|
+| ![App Screenshot](https://i.imgur.com/668wAGk.png)  | ![App Screenshot](https://i.imgur.com/Swmw9Q6.png)  |
+| ![App Screenshot](https://i.imgur.com/R5vegHT.png) | ![App Screenshot](https://i.imgur.com/c12HsSL.png)  |
+|![App Screenshot](https://i.imgur.com/PhdSYng.png)|![App Screenshot](https://i.imgur.com/FRwotIL.png)|
 
